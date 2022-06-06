@@ -1,5 +1,6 @@
 package com.awtar.myapp.repository;
 
+import com.awtar.myapp.domain.Family;
 import com.awtar.myapp.domain.Profile;
 import java.util.List;
 import java.util.Optional;
@@ -39,4 +40,14 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
         "select profile from Profile profile left join fetch profile.birthPlace left join fetch profile.placeOfResidence where profile.id =:id"
     )
     Optional<Profile> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query(
+        "select distinct profile from Profile profile left join fetch profile.birthPlace left join fetch profile.placeOfResidence where profile.parent.family = :family"
+    )
+    List<Profile> findParentsOfOneFamily(@Param("family") Family family);
+
+    @Query(
+        "select distinct profile from Profile profile left join fetch profile.birthPlace left join fetch profile.placeOfResidence where profile.child.family = :family"
+    )
+    List<Profile> findChildrenOfOneFamily(@Param("family") Family family);
 }

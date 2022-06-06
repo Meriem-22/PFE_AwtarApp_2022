@@ -189,4 +189,24 @@ public class ParentResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * {@code POST  /parents} : Create a new parent.
+     *
+     * @param parentDTO the parentDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new parentDTO, or with status {@code 400 (Bad Request)} if the parent has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/parents/add")
+    public ResponseEntity<ParentDTO> createParentAllDetails(@Valid @RequestBody ParentDTO parentDTO) throws URISyntaxException {
+        log.debug("REST request to save Parent : {}", parentDTO);
+        if (parentDTO.getId() != null) {
+            throw new BadRequestAlertException("A new parent cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        ParentDTO result = parentService.saveParentAllDetails(parentDTO);
+        return ResponseEntity
+            .created(new URI("/api/parents/add/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
 }

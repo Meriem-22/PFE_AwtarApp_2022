@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -186,5 +187,25 @@ public class ChildResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    /**
+     * {@code POST  /children} : Create a new child.
+     *
+     * @param childDTO the childDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new childDTO, or with status {@code 400 (Bad Request)} if the child has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/children/add")
+    public ResponseEntity<ChildDTO> createChildAllDetails(@Valid @RequestBody ChildDTO childDTO) throws URISyntaxException {
+        log.debug("REST request to save Child : {}", childDTO);
+        if (childDTO.getId() != null) {
+            throw new BadRequestAlertException("A new child cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        ChildDTO result = childService.saveChildAllDetails(childDTO);
+        return ResponseEntity
+            .created(new URI("/api/children/add/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
     }
 }

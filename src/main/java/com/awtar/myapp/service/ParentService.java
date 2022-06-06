@@ -62,4 +62,12 @@ public interface ParentService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Save a parent.
+     *
+     * @param parentDTO the entity to save.
+     * @return the persisted entity.
+     */
+    ParentDTO saveParentAllDetails(ParentDTO parentDTO);
 }
