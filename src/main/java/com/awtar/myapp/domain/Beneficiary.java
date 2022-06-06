@@ -25,12 +25,12 @@ public class Beneficiary implements Serializable {
     private Long id;
 
     @Column(name = "beneficiary_reference", unique = true)
-    private String beneficiaryReference;
+    protected String beneficiaryReference;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "beneficiary_type", nullable = false)
-    private Beneficiaries beneficiaryType;
+    protected Beneficiaries beneficiaryType;
 
     @Column(name = "archivated")
     private Boolean archivated;

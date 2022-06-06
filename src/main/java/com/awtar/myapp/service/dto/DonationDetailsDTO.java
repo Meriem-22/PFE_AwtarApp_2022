@@ -22,6 +22,8 @@ public class DonationDetailsDTO implements Serializable {
 
     private BeneficiaryDTO beneficiary;
 
+    private DonationItemDetailsDTO donationItemDetails;
+
     public Long getId() {
         return id;
     }
@@ -68,6 +70,14 @@ public class DonationDetailsDTO implements Serializable {
 
     public void setBeneficiary(BeneficiaryDTO beneficiary) {
         this.beneficiary = beneficiary;
+    }
+
+    public DonationItemDetailsDTO getDonationItemDetails() {
+        return donationItemDetails;
+    }
+
+    public void setDonationItemDetails(DonationItemDetailsDTO donationItemDetails) {
+        this.donationItemDetails = donationItemDetails;
     }
 
     @Override

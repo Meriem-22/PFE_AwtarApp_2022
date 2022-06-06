@@ -12,6 +12,8 @@ public class ChildDTO implements Serializable {
 
     private FamilyDTO family;
 
+    private ProfileDTO profile;
+
     public Long getId() {
         return id;
     }
@@ -26,6 +28,14 @@ public class ChildDTO implements Serializable {
 
     public void setFamily(FamilyDTO family) {
         this.family = family;
+    }
+
+    public ProfileDTO getProfile() {
+        return profile;
+    }
+
+    public void setProfile(ProfileDTO profile) {
+        this.profile = profile;
     }
 
     @Override

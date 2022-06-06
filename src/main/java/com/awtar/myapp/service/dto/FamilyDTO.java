@@ -25,6 +25,10 @@ public class FamilyDTO implements Serializable {
 
     private Boolean archivated;
 
+    private ParentDTO parentsDetails[];
+
+    private ChildDTO childrenDetails[];
+
     public Long getId() {
         return id;
     }
@@ -79,6 +83,22 @@ public class FamilyDTO implements Serializable {
 
     public void setArchivated(Boolean archivated) {
         this.archivated = archivated;
+    }
+
+    public ParentDTO[] getParentsDetails() {
+        return parentsDetails;
+    }
+
+    public void setParentsDetails(ParentDTO[] parentsDetails) {
+        this.parentsDetails = parentsDetails;
+    }
+
+    public ChildDTO[] getChildrenDetails() {
+        return childrenDetails;
+    }
+
+    public void setChildrenDetails(ChildDTO[] childrenDetails) {
+        this.childrenDetails = childrenDetails;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.awtar.myapp.domain;
 
+import com.awtar.myapp.domain.enumeration.Beneficiaries;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.HashSet;
