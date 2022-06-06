@@ -1,0 +1,662 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Prata&display=swap');
+:root {
+  --color-primary: #b667ff;
+  --color-secondary: #3a0070;
+  --color-tertiary: #f999fe;
+  --color-light: #fff;
+  /* --color-primary-dash: #7380ec;*/
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #7d8da1;
+  --color-info-light: #dce1eb;
+
+  --color-dark: #363949;
+  --color-light-dash: rgba(132, 139, 200, 0.18);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #eeeef2cb;
+
+  --card-border-redius: 2rem;
+  --border-redius-1: 0.4rem;
+  --border-redius-2: 0.8rem;
+  --border-redius-3: 1.2rem;
+
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
+
+  --box-shadow: 0 2rem 3rem #fff;
+}
+
+html {
+  font-size: 14px;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  appearance: none;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: poppins, sans-serif;
+  font-size: 0.88rem;
+  background: var(--color-background);
+  user-select: none;
+  overflow-x: hidden;
+  color: var(--color-dark);
+  overflow: hidden;
+}
+
+.container {
+  margin-top: 0px;
+  display: grid;
+  width: 96%;
+  gap: 6rem;
+  grid-template-columns: 14rem auto 23rem;
+}
+
+a {
+  color: #f5f9f8;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 1.8rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+h3 {
+  font-size: 0.8rem;
+}
+
+h4 {
+  font-size: 0.8rem;
+}
+
+h5 {
+  font-size: 0.77rem;
+}
+
+small {
+  font-size: 0.75rem;
+}
+
+.profile-photo {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  overflow-x: hidden;
+}
+
+.text-muted {
+  color: black;
+}
+
+p {
+  color: var(--color-dark-variant);
+}
+
+b {
+  color: var(--color-dark);
+}
+
+.primary {
+  color: var(--color-primary);
+}
+
+.danger {
+  color: var(--color-danger);
+}
+
+.success {
+  color: var(--color-success);
+}
+
+.warning {
+  color: var(--color-warning);
+}
+
+aside {
+  height: 100vh;
+  background-color: #14a446;
+  width: 17rem;
+}
+
+aside .top {
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+aside .logo {
+  display: flex;
+  gap: 0.8rem;
+}
+
+aside .close {
+  display: none;
+}
+
+aside .sidebar {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  position: relative;
+  top: 1rem;
+}
+
+aside h3 {
+  font-weight: 500;
+}
+
+aside .sidebar a {
+  display: flex;
+  color: rgb(8, 8, 8);
+  margin: 0rem;
+  margin-left: 2rem;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  height: 3.7rem;
+  transition: all 300ms ease;
+  text-decoration: none;
+}
+
+aside .sidebar a span {
+  font-size: 1.5rem;
+  transition: all 300ms ease;
+}
+
+aside .sidebar a.active {
+  background: #111112;
+  color: white;
+  margin-left: 0;
+}
+
+aside .sidebar a.active:before {
+  content: '';
+  width: 6px;
+  height: 100%;
+  background: #064919;
+}
+
+aside .sidebar a.active span {
+  color: #fdfdfd;
+  margin-left: calc(1rem - 3px);
+}
+
+aside .sidebar a:hover {
+  color: white;
+}
+
+aside .sidebar a:hover span {
+  margin-left: 1rem;
+}
+
+aside .sidebar .message-count {
+  background: red;
+  color: white;
+  padding: 2px 10px;
+  font-size: 11px;
+  border-radius: 0.4;
+}
+
+main {
+  margin-top: 0.4rem;
+}
+
+main .date {
+  display: inline-block;
+  background: wheat;
+  border-radius: 0.4;
+  margin-top: 1rem;
+  padding: 0.5rem 0.6rem;
+}
+
+main .date input[type='date'] {
+  background: transparent;
+  color: var(--color-dark);
+}
+
+main .insights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+main .insights > div {
+  background: #9a9ea5;
+  padding: 1rem;
+  border-radius: 2rem;
+  margin-top: 0.1rem;
+  box-shadow: 0 2rem 3rem rgb(40, 32, 32);
+  transition: all 300ms ease;
+}
+
+main .insights > div:hover {
+  box-shadow: none;
+}
+
+main .insights > div span {
+  background: #1eea80;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: #141d1a;
+  font-size: 2rem;
+}
+
+main .insights > div.expanses span {
+  background: red;
+}
+
+main .insights > div.income span {
+  background: rgb(216, 239, 14);
+}
+
+main .insights > div .middle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+main .insights h3 {
+  margin: 1rem 0 0.6rem;
+  font-size: 1rem;
+}
+
+main .insights .progress {
+  position: relative;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  margin-top: 2rem;
+  margin-left: 0.5rem;
+}
+
+main .insights svg {
+  width: 7rem;
+  height: 7rem;
+}
+
+main .insights svg circle {
+  fill: none;
+  stroke: #111e88;
+  stroke-width: 14;
+  stroke-linecap: round;
+  transform: translate(5px, 5px);
+}
+
+main .insights .sales svg circle {
+  stroke-dashoffset: -30;
+  stroke-dasharray: 200;
+}
+
+main .insights .expanses svg circle {
+  stroke-dashoffset: 20;
+  stroke-dasharray: 80;
+}
+
+main .insights .income svg circle {
+  stroke-dashoffset: 35;
+  stroke-dasharray: 110;
+}
+
+main .insights .progress .number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0dae4;
+}
+
+main .insights small {
+  margin-top: 1.3rem;
+  display: block;
+}
+
+main .recent-dons {
+  margin-top: 3rem;
+}
+
+main .recent-dons h2 {
+  margin-bottom: 0.8rem;
+}
+
+main .recent-dons table {
+  background: rgb(226, 224, 223);
+  width: 100%;
+  border-radius: 1rem;
+  padding: 2.8rem;
+  text-align: center;
+  box-shadow: 0 2rem 3rem rgb(40, 32, 32);
+  transition: all 300ms ease;
+}
+
+main .recent-dons table:hover {
+  box-shadow: none;
+}
+
+main table tbody td {
+  height: 3rem;
+  border-bottom: 1px solid rgb(43, 42, 39);
+  color: #363949;
+}
+
+main table tbody tr:last-child td {
+  border: none;
+}
+
+main .recent-dons a {
+  text-align: center;
+  display: block;
+  margin: 1rem auto;
+  color: #1eea80;
+}
+
+.right {
+  justify-content: end;
+}
+
+.right .top {
+  display: flex;
+  justify-content: end;
+  gap: 1.5rem;
+}
+
+.right .top button {
+  display: none;
+}
+
+.right .theme-toggler {
+  background: #1eea80;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 1.6rem;
+  width: 4.2rem;
+  cursor: pointer;
+  border-radius: 0.4;
+}
+
+.right .theme-toggler span {
+  font-size: 1.2rem;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right .theme-toggler span.active {
+  background: #03361b;
+  color: white;
+  border-radius: 0.4;
+}
+
+.right .top .profile {
+  display: flex;
+  text-align: right;
+}
+
+.right .recent-updates {
+  margin-top: 1rem;
+}
+
+.right .recent-updates h2 {
+  margin-bottom: 0.8rem;
+}
+
+.right .recent-updates .updates {
+  background: rgb(226, 224, 223);
+  padding: 1.8rem;
+  border-radius: 2rem;
+  box-shadow: 0 2rem 3rem rgb(170, 164, 164);
+  transition: all 300ms ease;
+}
+
+.right .recent-updates .updates .update {
+  display: grid;
+  grid-template-columns: 2.6rem auto;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.right .dons-analytics .add-product {
+  background: transparent;
+  border: #085c30 2px dashed;
+  color: #085c30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6rem;
+  padding: 1.8rem;
+}
+
+.right .dons-analytics .add-product:hover {
+  background: #085c30;
+  color: white;
+}
+
+.right .dons-analytics .add-product div {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.right .dons-analytics .add-product div h3 {
+  font-weight: 600;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 94%;
+    grid-template-columns: 7rem auto 23rem;
+  }
+
+  aside .logo h2 {
+    display: none;
+  }
+
+  aside .sidebar h3 {
+    display: none;
+  }
+
+  aside .sidebar a {
+    width: 5.6rem;
+  }
+
+  aside .sidebar a:last-child {
+    position: relative;
+    margin-top: 1.8rem;
+  }
+
+  main .insights {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  main .recent-dons {
+    width: 94%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    margin: 2rem 0 0 8.8rem;
+  }
+
+  main .recent-dons table {
+    width: 83vw;
+  }
+
+  main table thead tr th:last-child,
+  main table thead tr th:first-child {
+    display: none;
+  }
+  main table tbody tr td:last-child,
+  main table tbody tr td:first-child {
+    display: none;
+  }
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #085c30;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #085c30;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  aside {
+    position: fixed;
+    left: -100%;
+    background: white;
+    width: 18rem;
+    z-index: 3;
+    box-shadow: 1rem 3rem 4rem black;
+    height: 100vh;
+    padding-right: 1.8rem;
+    display: none;
+    animation: showMenu 400ms ease forwards;
+  }
+
+  @keyframes showMenu {
+    to {
+      left: 0;
+    }
+  }
+
+  aside .logo {
+    margin-left: 1rem;
+  }
+
+  aside .logo h2 {
+    display: inline;
+  }
+
+  aside .sidebar h3 {
+    display: inline;
+  }
+
+  aside .sidebar a {
+    width: 100%;
+    height: 3.4rem;
+  }
+
+  aside .sidebar a:last-child {
+    position: absolute;
+    bottom: 5rem;
+  }
+
+  aside .close {
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  main {
+    margin-top: 8rem;
+    padding-top: 0 1rem;
+  }
+
+  main .recent-dons {
+    position: relative;
+    margin: 3rem 0 0 0;
+    width: 100%;
+  }
+
+  main .recent-dons table {
+    width: 100%;
+    margin: 0;
+  }
+
+  .right {
+    width: 94%;
+    margin: 0 auto 4rem;
+  }
+
+  .right .top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    align-items: center;
+    padding: 0 0.8rem;
+    height: 4.6rem;
+    background: #41f1b6;
+    width: 100%;
+    margin: 0;
+    z-index: 2;
+    box-shadow: 0 1rem 1rem black;
+  }
+
+  .right .top .theme-toggler {
+    width: 4.4rem;
+    position: absolute;
+    left: 66%;
+  }
+
+  .right .profile .info {
+    display: none;
+  }
+
+  .right .top button {
+    display: inline-block;
+    background: transparent;
+    cursor: pointer;
+    color: black;
+    position: absolute;
+    left: 1rem;
+  }
+
+  .right .top button span {
+    font-size: 2rem;
+  }
+}
+#toggle {
+  appearance: none;
+}

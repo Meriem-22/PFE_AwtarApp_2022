@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive dashboard</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
+    <link ref="stylesheet" href="./dashboard.component.css" />
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        <div class="top">
+          <div class="close" id="close-btn">
+            <span class="material-icons-sharp">close</span>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <a href="dashboard" class="active">
+            <span class="material-icons-sharp">grid_view</span>
+            <h3>Tableau de bord</h3>
+          </a>
+
+          <li class="mb-1">
+            <button
+              class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#orders-collapse"
+              aria-expanded="false"
+            >
+              <a>
+                <span class="material-icons-sharp">person_outline</span>
+                <h3>Bénéficiaires</h3>
+                <span class="material-icons-sharp">arrow_right</span>
+              </a>
+            </button>
+            <div class="collapse" id="orders-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>
+                  <span class="material-icons-sharp">holiday_village</span>
+                  <a href="/establishment" class="link-dark d-inline-flex text-decoration-none rounded">Établissement</a>
+                </li>
+                <li>
+                  <span class="material-icons-sharp">family_restroom</span>
+                  <a href="/family" class="link-dark d-inline-flex text-decoration-none rounded">Famille</a>
+                </li>
+                <li>
+                  <span class="material-icons-sharp">girl</span>
+                  <a href="/child" class="link-dark d-inline-flex text-decoration-none rounded">Enfant</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <a href="/donations-issued">
+            <span class="material-icons-sharp">inventory</span>
+            <h3>Dons Emis</h3>
+          </a>
+
+          <a class="dropdown">
+            <span class="material-icons-sharp">volunteer_activism</span>
+            <p class="dropbtn">Modèles dons</p>
+            <div class="dropdown-content">
+              <a href="#">Dons divers</a>
+              <a href="#"> Dons rentrée scolaire</a>
+              <a href="/item">Articles dons</a>
+            </div>
+          </a>
+
+          <a href="#">
+            <span class="material-icons-sharp">visibility</span>
+            <h3>Dons non validé</h3>
+            <span class="message-count">26</span>
+          </a>
+          <a href="/donations-received">
+            <span class="material-icons-sharp">inventory</span>
+            <h3>Dons reçus</h3>
+          </a>
+          <a href="#">
+            <span class="material-icons-sharp">report_gmailerrorred</span>
+            <h3>Rapports</h3>
+          </a>
+
+          <a class="dropdown">
+            <span class="material-icons-sharp">settings</span>
+            <p class="dropbtn">Paramétrage divers</p>
+            <div class="dropdown-content">
+              <a href="/establishment-type">Édition types établissements</a>
+              <a href="/nature"> Édition nature don</a>
+              <a href="/health-status-category">Édition catégories états santé</a>
+              <a href="/city">Édition villes</a>
+            </div>
+          </a>
+
+          <a class="dropdown">
+            <span class="material-icons-sharp">settings</span>
+            <p class="dropbtn">
+              Paramétrage suivi <br />
+              scolarité enfants
+            </p>
+            <div class="dropdown-content">
+              <a href="/school-level">Édition niveau scolaire</a>
+              <a href="/teaching-curriculum"> Édition cursus enseignement</a>
+              <a href="/educational-institution">Édition établissements scolaires</a>
+            </div>
+          </a>
+        </div>
+      </aside>
+
+      <main>
+        <input type="checkbox" id="toggle" />
+        <h1><span class="danger">Awtar Analytique</span></h1>
+
+        <div class="insights">
+          <div class="sales">
+            <span class="material-icons-sharp">analytics</span>
+            <div class="middle">
+              <div class="left">
+                <h3>Dons emis</h3>
+
+                <h1>95</h1>
+              </div>
+
+              <div class="progress">
+                <div class="number">
+                  <h1>81%</h1>
+                </div>
+              </div>
+            </div>
+            <small class="text_muted">Le mois dernier</small>
+          </div>
+          <div class="expanses">
+            <span class="material-icons-sharp">bar_chart</span>
+            <div class="middle">
+              <div class="left">
+                <h3>Dons requis</h3>
+                <h1>135</h1>
+              </div>
+
+              <div class="progress">
+                <div class="number">
+                  <h1>62%</h1>
+                </div>
+              </div>
+            </div>
+            <small class="text_muted">Le mois dernier </small>
+          </div>
+          <div class="income">
+            <span class="material-icons-sharp">stacked_line_chart</span>
+            <div class="middle">
+              <div class="left">
+                <h3>Revenus totaux</h3>
+                <h1>10,154 dt</h1>
+              </div>
+
+              <div class="progress">
+                <div class="number">
+                  <h1>44%</h1>
+                </div>
+              </div>
+            </div>
+            <small class="text_muted">Le mois dernier</small>
+          </div>
+        </div>
+
+        <div class="recent-dons">
+          <h2>Dons emis récents</h2>
+          <table style="padding: 2rem">
+            <thead>
+              <tr>
+                <th>Modèle</th>
+                <th>Date de validation</th>
+                <th>Date de Dons</th>
+                <th>Dons récurrents</th>
+                <th>Périodicité</th>
+                <th>Recurrence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let donationsIssued of donations">
+                <td>{{ donationsIssued.model }}</td>
+                <td>{{ donationsIssued.validationDate }}</td>
+                <td>{{ donationsIssued.donationsDate }}</td>
+                <td>{{ donationsIssued.recurringDonations }}</td>
+                <td>{{ donationsIssued.periodicity }}</td>
+                <td>{{ donationsIssued.recurrence }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+      <div class="right">
+        <input type="checkbox" id="toggle" />
+        <div class="top">
+          <button id="menu-btn">
+            <span class="material-icons-sharp">menu</span>
+          </button>
+          <div class="theme-toggler">
+            <span class="material-icons-sharp active">light_mode</span>
+            <span class="material-icons-sharp">dark_mode</span>
+          </div>
+          <div class="profile">
+            <div class="info">
+              <p>Hey, <b>Daniel</b></p>
+              <small class="text-muted"> Admin</small>
+            </div>
+            <div class="profile-photo">
+              <img src="https://a7m9t6t7.rocketcdn.me/wp-content/uploads/2018/08/01-Portrait-Corporate-Vincent-Zobler-2-686x800.jpg" />
+            </div>
+          </div>
+        </div>
+        <div class="recent-updates">
+          <h2>Dons reçus récents</h2>
+          <div class="updates">
+            <div class="update">
+              <div class="profile-photo">
+                <img src="https://maphotoportrait.fr/854-large_default/photographe-professionnel-linkedin-cv-reseaux-sociaux.jpg" />
+              </div>
+              <div class="message">
+                <p><b>Mike Tyson</b>received his order of Night lion tech GPS drone</p>
+                <small class="test-muted"> 2 Minutes Ago</small>
+              </div>
+            </div>
+            <div class="update">
+              <div class="profile-photo">
+                <img src="https://www.portraitprofessionnel.fr/wp-content/uploads/2022/02/Studio_Photo_Paris.jpg" />
+              </div>
+              <div class="message">
+                <p><b>Mike Tyson</b>received his order of Night lion tech GPS drone</p>
+                <small class="test-muted"> 2 Minutes Ago</small>
+              </div>
+            </div>
+            <div class="update">
+              <div class="profile-photo">
+                <img src="https://photo-cv.com/img/portfolio/15.jpg" />
+              </div>
+              <div class="message">
+                <p><b>Mike Tyson</b>received his order of Night lion tech GPS drone</p>
+                <small class="test-muted"> 2 Minutes Ago</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dons-analytics">
+          <div class="item add-product">
+            <div>
+              <span class="material-icons-sharp">add</span>
+              <h3>Ajouter don</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="benef"></div>
+    </div>
+
+    <script src="./file.js"></script>
+  </body>
+</html>

@@ -7,6 +7,8 @@ import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { Authority } from 'app/config/authority.constants';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
+import { DASHBOARD_ROUTE } from './dashbord/dashboard.route';
+import { DashboardComponent } from './dashbord/dashbord.component';
 
 @NgModule({
   imports: [
@@ -32,7 +34,12 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
           path: '',
           loadChildren: () => import(`./entities/entity-routing.module`).then(m => m.EntityRoutingModule),
         },
+        {
+          path: 'dashbord',
+          component: DashboardComponent,
+        },
         navbarRoute,
+        DASHBOARD_ROUTE,
         ...errorRoute,
       ],
       { enableTracing: DEBUG_INFO_ENABLED }

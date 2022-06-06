@@ -35,6 +35,9 @@ export class DonationsIssuedService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  getAllValidatedDonationsIssued(): Observable<EntityArrayResponseType> {
+    return this.http.get<IDonationsIssued[]>(this.resourceUrl + '/validated', { observe: 'response' });
+  }
   partialUpdate(donationsIssued: IDonationsIssued): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(donationsIssued);
     return this.http
