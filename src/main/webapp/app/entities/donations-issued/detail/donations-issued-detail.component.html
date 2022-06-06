@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="donationsIssued">
+      <h2 data-cy="donationsIssuedDetailsHeading"><span jhiTranslate="awtarApp.donationsIssued.detail.title">Donations Issued</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ donationsIssued.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.model">Model</span></dt>
+        <dd>
+          <span>{{ donationsIssued.model }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.isValidated">Is Validated</span></dt>
+        <dd>
+          <span>{{ donationsIssued.isValidated }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.validationDate">Validation Date</span></dt>
+        <dd>
+          <span>{{ donationsIssued.validationDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.validationUser">Validation User</span></dt>
+        <dd>
+          <span>{{ donationsIssued.validationUser }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span></dt>
+        <dd>
+          <span>{{ donationsIssued.donationsDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.canceledDonations">Canceled Donations</span></dt>
+        <dd>
+          <span>{{ donationsIssued.canceledDonations }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.canceledOn">Canceled On</span></dt>
+        <dd>
+          <span>{{ donationsIssued.canceledOn | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.canceledBy">Canceled By</span></dt>
+        <dd>
+          <span>{{ donationsIssued.canceledBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.cancellationReason">Cancellation Reason</span></dt>
+        <dd>
+          <span>{{ donationsIssued.cancellationReason }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.recurringDonations">Recurring Donations</span></dt>
+        <dd>
+          <span>{{ donationsIssued.recurringDonations }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.periodicity">Periodicity</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'awtarApp.Period.' + donationsIssued.periodicity }}">{{ donationsIssued.periodicity }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.recurrence">Recurrence</span></dt>
+        <dd>
+          <span>{{ donationsIssued.recurrence }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsIssued.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ donationsIssued.archivated }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/donations-issued', donationsIssued.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

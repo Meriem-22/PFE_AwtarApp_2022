@@ -1,0 +1,42 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114550",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "tutor",
+  "fields": [
+    {
+      "fieldName": "activity",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "manager",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "managerCin",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Tutor",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "beneficiary",
+      "otherEntityRelationshipName": "tutor",
+      "relationshipName": "beneficiary",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "tutor",
+      "ownerSide": false,
+      "relationshipName": "tutorProfile",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

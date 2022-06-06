@@ -1,0 +1,26 @@
+{
+  "awtarApp": {
+    "healthStatusCategory": {
+      "home": {
+        "title": "Health Status Categories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Health Status Category",
+        "createOrEditLabel": "Create or edit a Health Status Category",
+        "notFound": "No Health Status Categories found"
+      },
+      "created": "A new Health Status Category is created with identifier {{ param }}",
+      "updated": "A Health Status Category is updated with identifier {{ param }}",
+      "deleted": "A Health Status Category is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Health Status Category {{ id }}?"
+      },
+      "detail": {
+        "title": "Health Status Category"
+      },
+      "id": "ID",
+      "name": "Name",
+      "archivated": "Archivated",
+      "stateOfHealth": "State Of Health"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="teachingCurriculum">
+      <h2 data-cy="teachingCurriculumDetailsHeading">
+        <span jhiTranslate="awtarApp.teachingCurriculum.detail.title">Teaching Curriculum</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ teachingCurriculum.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.teachingCurriculum.beginningYear">Beginning Year</span></dt>
+        <dd>
+          <span>{{ teachingCurriculum.beginningYear }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.teachingCurriculum.endYear">End Year</span></dt>
+        <dd>
+          <span>{{ teachingCurriculum.endYear }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.teachingCurriculum.annualResult">Annual Result</span></dt>
+        <dd>
+          <span>{{ teachingCurriculum.annualResult }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.teachingCurriculum.result">Result</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'awtarApp.Status.' + teachingCurriculum.result }}">{{ teachingCurriculum.result }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.teachingCurriculum.remarks">Remarks</span></dt>
+        <dd>
+          <span>{{ teachingCurriculum.remarks }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.teachingCurriculum.attachedFile">Attached File</span></dt>
+        <dd>
+          <div *ngIf="teachingCurriculum.attachedFile">
+            <a
+              (click)="openFile(teachingCurriculum.attachedFile, teachingCurriculum.attachedFileContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ teachingCurriculum.attachedFileContentType }}, {{ byteSize(teachingCurriculum.attachedFile) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.teachingCurriculum.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ teachingCurriculum.archivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.teachingCurriculum.schoolLevel">School Level</span></dt>
+        <dd>
+          <div *ngIf="teachingCurriculum.schoolLevel">
+            <a [routerLink]="['/school-level', teachingCurriculum.schoolLevel?.id, 'view']">{{
+              teachingCurriculum.schoolLevel?.schoolLevel
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.teachingCurriculum.child">Child</span></dt>
+        <dd>
+          <div *ngIf="teachingCurriculum.child">
+            <a [routerLink]="['/child', teachingCurriculum.child?.id, 'view']">{{ teachingCurriculum.child?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.teachingCurriculum.educationalInstitution">Educational Institution</span></dt>
+        <dd>
+          <div *ngIf="teachingCurriculum.educationalInstitution">
+            <a [routerLink]="['/educational-institution', teachingCurriculum.educationalInstitution?.id, 'view']">{{
+              teachingCurriculum.educationalInstitution?.name
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/teaching-curriculum', teachingCurriculum.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

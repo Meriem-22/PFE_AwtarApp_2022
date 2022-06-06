@@ -1,0 +1,28 @@
+{
+  "awtarApp": {
+    "statusOfHealth": {
+      "home": {
+        "title": "Status Of Healths",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Status Of Health",
+        "createOrEditLabel": "Create or edit a Status Of Health",
+        "notFound": "No Status Of Healths found"
+      },
+      "created": "A new Status Of Health is created with identifier {{ param }}",
+      "updated": "A Status Of Health is updated with identifier {{ param }}",
+      "deleted": "A Status Of Health is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Status Of Health {{ id }}?"
+      },
+      "detail": {
+        "title": "Status Of Health"
+      },
+      "id": "ID",
+      "healthStatusDate": "Health Status Date",
+      "urlDetailsAttached": "Url Details Attached",
+      "archivated": "Archivated",
+      "person": "Person",
+      "healthStatusCategory": "Health Status Category"
+    }
+  }
+}

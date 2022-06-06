@@ -1,0 +1,28 @@
+{
+  "awtarApp": {
+    "schoolLevelItem": {
+      "home": {
+        "title": "School Level Items",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new School Level Item",
+        "createOrEditLabel": "Create or edit a School Level Item",
+        "notFound": "No School Level Items found"
+      },
+      "created": "A new School Level Item is created with identifier {{ param }}",
+      "updated": "A School Level Item is updated with identifier {{ param }}",
+      "deleted": "A School Level Item is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete School Level Item {{ id }}?"
+      },
+      "detail": {
+        "title": "School Level Item"
+      },
+      "id": "ID",
+      "isSchoolItem": "Is School Item",
+      "quantityNeeded": "Quantity Needed",
+      "archivated": "Archivated",
+      "item": "Item",
+      "schoolLevel": "School Level"
+    }
+  }
+}

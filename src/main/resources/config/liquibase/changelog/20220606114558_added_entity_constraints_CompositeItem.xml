@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity CompositeItem.
+    -->
+    <changeSet id="20220606114558-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="composant_id"
+                                 baseTableName="composite_item"
+                                 constraintName="fk_composite_item__composant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="item"/>
+
+        <addForeignKeyConstraint baseColumnNames="composer_id"
+                                 baseTableName="composite_item"
+                                 constraintName="fk_composite_item__composer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="item"/>
+    </changeSet>
+</databaseChangeLog>

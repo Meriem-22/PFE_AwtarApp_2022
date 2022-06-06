@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="itemValue">
+      <h2 data-cy="itemValueDetailsHeading"><span jhiTranslate="awtarApp.itemValue.detail.title">Item Value</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ itemValue.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.itemValue.price">Price</span></dt>
+        <dd>
+          <span>{{ itemValue.price }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.itemValue.priceDate">Price Date</span></dt>
+        <dd>
+          <span>{{ itemValue.priceDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.itemValue.availableStockQuantity">Available Stock Quantity</span></dt>
+        <dd>
+          <span>{{ itemValue.availableStockQuantity }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.itemValue.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ itemValue.archivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.itemValue.item">Item</span></dt>
+        <dd>
+          <div *ngIf="itemValue.item">
+            <a [routerLink]="['/item', itemValue.item?.id, 'view']">{{ itemValue.item?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/item-value', itemValue.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

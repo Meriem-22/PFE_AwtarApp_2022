@@ -1,0 +1,46 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114541",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "status_of_health",
+  "fields": [
+    {
+      "fieldName": "healthStatusDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "urlDetailsAttached",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "StatusOfHealth",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "statusOfHealth",
+      "relationshipName": "person",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "healthStatusCategory",
+      "otherEntityRelationshipName": "stateOfHealth",
+      "relationshipName": "healthStatusCategory",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,28 @@
+{
+  "awtarApp": {
+    "itemValue": {
+      "home": {
+        "title": "ItemValues",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Item Value",
+        "createOrEditLabel": "Créer ou éditer un Item Value",
+        "notFound": "Aucun Item Value trouvé"
+      },
+      "created": "Un nouveau Item Value a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Item Value avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Item Value avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Item Value {{ id }} ?"
+      },
+      "detail": {
+        "title": "Item Value"
+      },
+      "id": "ID",
+      "price": "Price",
+      "priceDate": "Price Date",
+      "availableStockQuantity": "Available Stock Quantity",
+      "archivated": "Archivated",
+      "item": "Item"
+    }
+  }
+}

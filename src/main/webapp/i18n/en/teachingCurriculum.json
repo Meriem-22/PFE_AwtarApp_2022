@@ -1,0 +1,33 @@
+{
+  "awtarApp": {
+    "teachingCurriculum": {
+      "home": {
+        "title": "Teaching Curricula",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Teaching Curriculum",
+        "createOrEditLabel": "Create or edit a Teaching Curriculum",
+        "notFound": "No Teaching Curricula found"
+      },
+      "created": "A new Teaching Curriculum is created with identifier {{ param }}",
+      "updated": "A Teaching Curriculum is updated with identifier {{ param }}",
+      "deleted": "A Teaching Curriculum is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Teaching Curriculum {{ id }}?"
+      },
+      "detail": {
+        "title": "Teaching Curriculum"
+      },
+      "id": "ID",
+      "beginningYear": "Beginning Year",
+      "endYear": "End Year",
+      "annualResult": "Annual Result",
+      "result": "Result",
+      "remarks": "Remarks",
+      "attachedFile": "Attached File",
+      "archivated": "Archivated",
+      "schoolLevel": "School Level",
+      "child": "Child",
+      "educationalInstitution": "Educational Institution"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+id;model;is_validated;validation_date;validation_user;donations_date;canceled_donations;canceled_on;canceled_by;cancellation_reason;recurring_donations;periodicity;recurrence;archivated
+1;portals COM;false;2022-06-06;13604;2022-06-05;true;2022-06-06;14169;system;true;PER_WEEK;90624;false
+2;mesh;false;2022-06-05;59963;2022-06-05;false;2022-06-05;93367;mint payment Rhône-Alpes;false;PER_YEAR;69229;false
+3;c Ingenieur Coordinateur;false;2022-06-05;87506;2022-06-05;true;2022-06-06;48948;Chypre;false;PER_YEAR;28951;true
+4;Chicken mobile;true;2022-06-05;88355;2022-06-05;false;2022-06-05;63533;d'Assas Account Libye;false;PER_MONTH;68857;true
+5;holistic;false;2022-06-06;24570;2022-06-06;false;2022-06-06;27937;state payment a;true;PER_WEEK;74195;true
+6;revolutionize program;true;2022-06-05;6802;2022-06-05;false;2022-06-06;88222;compressing;false;PER_YEAR;49474;false
+7;c overriding;true;2022-06-06;87467;2022-06-06;true;2022-06-05;72041;Adolphe a Open-source;true;PER_YEAR;85326;true
+8;Account users;false;2022-06-06;36073;2022-06-05;true;2022-06-06;64952;yellow;false;PER_YEAR;82438;false
+9;Koruna copy;false;2022-06-05;38208;2022-06-06;false;2022-06-05;43501;Dinar Concrete Grocery;true;PER_YEAR;77852;false
+10;Borders state Sri;false;2022-06-05;87250;2022-06-06;true;2022-06-05;66429;Licensed;true;PER_YEAR;92475;true

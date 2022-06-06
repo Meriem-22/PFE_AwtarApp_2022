@@ -1,0 +1,56 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114532",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "donation_details",
+  "fields": [
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DonationDetails",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "donationsIssued",
+      "otherEntityRelationshipName": "donationsDetails",
+      "relationshipName": "donationsIssued",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "nature",
+      "otherEntityRelationshipName": "donationdetails",
+      "relationshipName": "nature",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "beneficiaryReference",
+      "otherEntityName": "beneficiary",
+      "otherEntityRelationshipName": "donationdetails",
+      "relationshipName": "beneficiary",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "donationItemDetails",
+      "otherEntityRelationshipName": "donationDetails",
+      "relationshipName": "item",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

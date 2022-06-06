@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114555",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "school_level_item",
+  "fields": [
+    {
+      "fieldName": "isSchoolItem",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "quantityNeeded",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "SchoolLevelItem",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "item",
+      "otherEntityRelationshipName": "schoolLevel",
+      "relationshipName": "item",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "schoolLevel",
+      "otherEntityName": "schoolLevel",
+      "otherEntityRelationshipName": "item",
+      "relationshipName": "schoolLevel",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

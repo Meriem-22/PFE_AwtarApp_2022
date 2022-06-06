@@ -1,0 +1,172 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-establishment-heading"
+        data-cy="EstablishmentCreateUpdateHeading"
+        jhiTranslate="awtarApp.establishment.home.createOrEditLabel"
+      >
+        Create or edit a Establishment
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.activity" for="field_activity">Activity</label>
+          <input type="text" class="form-control" name="activity" id="field_activity" data-cy="activity" formControlName="activity" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.manager" for="field_manager">Manager</label>
+          <input type="text" class="form-control" name="manager" id="field_manager" data-cy="manager" formControlName="manager" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.managerCin" for="field_managerCin">Manager Cin</label>
+          <input
+            type="text"
+            class="form-control"
+            name="managerCin"
+            id="field_managerCin"
+            data-cy="managerCin"
+            formControlName="managerCin"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.contact" for="field_contact">Contact</label>
+          <input type="text" class="form-control" name="contact" id="field_contact" data-cy="contact" formControlName="contact" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.adress" for="field_adress">Adress</label>
+          <input type="text" class="form-control" name="adress" id="field_adress" data-cy="adress" formControlName="adress" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.cp" for="field_cp">Cp</label>
+          <input type="text" class="form-control" name="cp" id="field_cp" data-cy="cp" formControlName="cp" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.region" for="field_region">Region</label>
+          <input type="text" class="form-control" name="region" id="field_region" data-cy="region" formControlName="region" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.phone" for="field_phone">Phone</label>
+          <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.fax" for="field_fax">Fax</label>
+          <input type="text" class="form-control" name="fax" id="field_fax" data-cy="fax" formControlName="fax" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.site" for="field_site">Site</label>
+          <input type="text" class="form-control" name="site" id="field_site" data-cy="site" formControlName="site" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.remark" for="field_remark">Remark</label>
+          <input type="text" class="form-control" name="remark" id="field_remark" data-cy="remark" formControlName="remark" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.establishmentType" for="field_establishmentType"
+            >Establishment Type</label
+          >
+          <select
+            class="form-control"
+            id="field_establishmentType"
+            data-cy="establishmentType"
+            name="establishmentType"
+            formControlName="establishmentType"
+          >
+            <option *ngIf="!editForm.get('establishmentType')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                establishmentTypeOption.id === editForm.get('establishmentType')!.value?.id
+                  ? editForm.get('establishmentType')!.value
+                  : establishmentTypeOption
+              "
+              *ngFor="let establishmentTypeOption of establishmentTypesSharedCollection; trackBy: trackEstablishmentTypeById"
+            >
+              {{ establishmentTypeOption.typeName }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="
+            editForm.get(['establishmentType'])!.invalid &&
+            (editForm.get(['establishmentType'])!.dirty || editForm.get(['establishmentType'])!.touched)
+          "
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['establishmentType'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.establishment.city" for="field_city">City</label>
+          <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city">
+            <option *ngIf="!editForm.get('city')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="cityOption.id === editForm.get('city')!.value?.id ? editForm.get('city')!.value : cityOption"
+              *ngFor="let cityOption of citiesSharedCollection; trackBy: trackCityById"
+            >
+              {{ cityOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['city'])!.invalid && (editForm.get(['city'])!.dirty || editForm.get(['city'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['city'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

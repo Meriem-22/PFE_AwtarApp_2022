@@ -1,0 +1,28 @@
+{
+  "awtarApp": {
+    "educationalInstitution": {
+      "home": {
+        "title": "EducationalInstitutions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Educational Institution",
+        "createOrEditLabel": "Créer ou éditer un Educational Institution",
+        "notFound": "Aucun Educational Institution trouvé"
+      },
+      "created": "Un nouveau Educational Institution a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Educational Institution avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Educational Institution avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Educational Institution {{ id }} ?"
+      },
+      "detail": {
+        "title": "Educational Institution"
+      },
+      "id": "ID",
+      "name": "Name",
+      "adress": "Adress",
+      "archivated": "Archivated",
+      "teachingCurriculum": "Teaching Curriculum",
+      "city": "City"
+    }
+  }
+}

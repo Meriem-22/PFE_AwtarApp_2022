@@ -1,0 +1,39 @@
+{
+  "awtarApp": {
+    "establishment": {
+      "home": {
+        "title": "Establishments",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Establishment",
+        "createOrEditLabel": "Créer ou éditer un Establishment",
+        "notFound": "Aucun Establishment trouvé"
+      },
+      "created": "Un nouveau Establishment a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Establishment avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Establishment avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Establishment {{ id }} ?"
+      },
+      "detail": {
+        "title": "Establishment"
+      },
+      "id": "ID",
+      "name": "Name",
+      "activity": "Activity",
+      "manager": "Manager",
+      "managerCin": "Manager Cin",
+      "contact": "Contact",
+      "adress": "Adress",
+      "cp": "Cp",
+      "region": "Region",
+      "phone": "Phone",
+      "fax": "Fax",
+      "email": "Email",
+      "site": "Site",
+      "remark": "Remark",
+      "report": "Report",
+      "establishmentType": "Establishment Type",
+      "city": "City"
+    }
+  }
+}

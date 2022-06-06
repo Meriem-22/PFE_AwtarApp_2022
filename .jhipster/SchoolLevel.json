@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114544",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "school_level",
+  "fields": [
+    {
+      "fieldName": "schoolLevel",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "required"]
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "SchoolLevel",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "teachingCurriculum",
+      "otherEntityRelationshipName": "schoolLevel",
+      "relationshipName": "teachingCurriculum",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "schoolLevelItem",
+      "otherEntityRelationshipName": "schoolLevel",
+      "relationshipName": "item",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

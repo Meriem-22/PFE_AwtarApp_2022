@@ -1,0 +1,27 @@
+{
+  "awtarApp": {
+    "compositeItem": {
+      "home": {
+        "title": "Composite Items",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Composite Item",
+        "createOrEditLabel": "Create or edit a Composite Item",
+        "notFound": "No Composite Items found"
+      },
+      "created": "A new Composite Item is created with identifier {{ param }}",
+      "updated": "A Composite Item is updated with identifier {{ param }}",
+      "deleted": "A Composite Item is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Composite Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Composite Item"
+      },
+      "id": "ID",
+      "quantity": "Quantity",
+      "archivated": "Archivated",
+      "composant": "Composant",
+      "composer": "Composer"
+    }
+  }
+}

@@ -1,0 +1,156 @@
+<div>
+  <h2 id="page-heading" data-cy="EstablishmentHeading">
+    <span jhiTranslate="awtarApp.establishment.home.title">Establishments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="awtarApp.establishment.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-establishment"
+        [routerLink]="['/establishment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="awtarApp.establishment.home.createLabel"> Create a new Establishment </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="establishments?.length === 0">
+    <span jhiTranslate="awtarApp.establishment.home.notFound">No establishments found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="establishments && establishments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name"><span jhiTranslate="awtarApp.establishment.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="activity">
+            <span jhiTranslate="awtarApp.establishment.activity">Activity</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="manager">
+            <span jhiTranslate="awtarApp.establishment.manager">Manager</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="managerCin">
+            <span jhiTranslate="awtarApp.establishment.managerCin">Manager Cin</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="contact">
+            <span jhiTranslate="awtarApp.establishment.contact">Contact</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="adress">
+            <span jhiTranslate="awtarApp.establishment.adress">Adress</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cp"><span jhiTranslate="awtarApp.establishment.cp">Cp</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="region">
+            <span jhiTranslate="awtarApp.establishment.region">Region</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="phone">
+            <span jhiTranslate="awtarApp.establishment.phone">Phone</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="fax"><span jhiTranslate="awtarApp.establishment.fax">Fax</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="email">
+            <span jhiTranslate="awtarApp.establishment.email">Email</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="site"><span jhiTranslate="awtarApp.establishment.site">Site</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="remark">
+            <span jhiTranslate="awtarApp.establishment.remark">Remark</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="establishmentType.typeName">
+            <span jhiTranslate="awtarApp.establishment.establishmentType">Establishment Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="city.name">
+            <span jhiTranslate="awtarApp.establishment.city">City</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let establishment of establishments; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/establishment', establishment.id, 'view']">{{ establishment.id }}</a>
+          </td>
+          <td>{{ establishment.name }}</td>
+          <td>{{ establishment.activity }}</td>
+          <td>{{ establishment.manager }}</td>
+          <td>{{ establishment.managerCin }}</td>
+          <td>{{ establishment.contact }}</td>
+          <td>{{ establishment.adress }}</td>
+          <td>{{ establishment.cp }}</td>
+          <td>{{ establishment.region }}</td>
+          <td>{{ establishment.phone }}</td>
+          <td>{{ establishment.fax }}</td>
+          <td>{{ establishment.email }}</td>
+          <td>{{ establishment.site }}</td>
+          <td>{{ establishment.remark }}</td>
+          <td>
+            <div *ngIf="establishment.establishmentType">
+              <a [routerLink]="['/establishment-type', establishment.establishmentType?.id, 'view']">{{
+                establishment.establishmentType?.typeName
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="establishment.city">
+              <a [routerLink]="['/city', establishment.city?.id, 'view']">{{ establishment.city?.name }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/establishment', establishment.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/establishment', establishment.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(establishment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="establishments && establishments.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

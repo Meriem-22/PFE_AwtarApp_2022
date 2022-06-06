@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="report">
+      <h2 data-cy="reportDetailsHeading"><span jhiTranslate="awtarApp.report.detail.title">Report</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ report.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.report.nature">Nature</span></dt>
+        <dd>
+          <span>{{ report.nature }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.report.date">Date</span></dt>
+        <dd>
+          <span>{{ report.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.report.urlEnclosed">Url Enclosed</span></dt>
+        <dd>
+          <div *ngIf="report.urlEnclosed">
+            <a (click)="openFile(report.urlEnclosed, report.urlEnclosedContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ report.urlEnclosedContentType }}, {{ byteSize(report.urlEnclosed) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.report.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ report.archivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.report.establishment">Establishment</span></dt>
+        <dd>
+          <div *ngIf="report.establishment">
+            <a [routerLink]="['/establishment', report.establishment?.id, 'view']">{{ report.establishment?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/report', report.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Profile.
+    -->
+    <changeSet id="20220606114547-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="profile"
+                                 constraintName="fk_profile__parent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="parent"/>
+
+        <addForeignKeyConstraint baseColumnNames="child_id"
+                                 baseTableName="profile"
+                                 constraintName="fk_profile__child_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="child"/>
+
+        <addForeignKeyConstraint baseColumnNames="authorizing_officer_id"
+                                 baseTableName="profile"
+                                 constraintName="fk_profile__authorizing_officer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="authorizing_officer"/>
+
+        <addForeignKeyConstraint baseColumnNames="tutor_id"
+                                 baseTableName="profile"
+                                 constraintName="fk_profile__tutor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tutor"/>
+
+        <addForeignKeyConstraint baseColumnNames="birth_place_id"
+                                 baseTableName="profile"
+                                 constraintName="fk_profile__birth_place_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="city"/>
+
+        <addForeignKeyConstraint baseColumnNames="place_of_residence_id"
+                                 baseTableName="profile"
+                                 constraintName="fk_profile__place_of_residence_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="city"/>
+    </changeSet>
+</databaseChangeLog>

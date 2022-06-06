@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="compositeItem">
+      <h2 data-cy="compositeItemDetailsHeading"><span jhiTranslate="awtarApp.compositeItem.detail.title">Composite Item</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ compositeItem.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.compositeItem.quantity">Quantity</span></dt>
+        <dd>
+          <span>{{ compositeItem.quantity }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.compositeItem.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ compositeItem.archivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.compositeItem.composant">Composant</span></dt>
+        <dd>
+          <div *ngIf="compositeItem.composant">
+            <a [routerLink]="['/item', compositeItem.composant?.id, 'view']">{{ compositeItem.composant?.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.compositeItem.composer">Composer</span></dt>
+        <dd>
+          <div *ngIf="compositeItem.composer">
+            <a [routerLink]="['/item', compositeItem.composer?.id, 'view']">{{ compositeItem.composer?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/composite-item', compositeItem.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

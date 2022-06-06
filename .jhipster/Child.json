@@ -1,0 +1,35 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114538",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "child",
+  "fields": [],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Child",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "teachingCurriculum",
+      "otherEntityRelationshipName": "child",
+      "relationshipName": "teachingCurriculum",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "child",
+      "ownerSide": false,
+      "relationshipName": "childProfile",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "family",
+      "otherEntityRelationshipName": "child",
+      "relationshipName": "family",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

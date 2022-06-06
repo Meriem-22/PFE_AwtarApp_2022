@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="donationDetails">
+      <h2 data-cy="donationDetailsDetailsHeading"><span jhiTranslate="awtarApp.donationDetails.detail.title">Donation Details</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ donationDetails.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationDetails.description">Description</span></dt>
+        <dd>
+          <span>{{ donationDetails.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationDetails.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ donationDetails.archivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationDetails.donationsIssued">Donations Issued</span></dt>
+        <dd>
+          <div *ngIf="donationDetails.donationsIssued">
+            <a [routerLink]="['/donations-issued', donationDetails.donationsIssued?.id, 'view']">{{
+              donationDetails.donationsIssued?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationDetails.nature">Nature</span></dt>
+        <dd>
+          <div *ngIf="donationDetails.nature">
+            <a [routerLink]="['/nature', donationDetails.nature?.id, 'view']">{{ donationDetails.nature?.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationDetails.beneficiary">Beneficiary</span></dt>
+        <dd>
+          <div *ngIf="donationDetails.beneficiary">
+            <a [routerLink]="['/beneficiary', donationDetails.beneficiary?.id, 'view']">{{
+              donationDetails.beneficiary?.beneficiaryReference
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/donation-details', donationDetails.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

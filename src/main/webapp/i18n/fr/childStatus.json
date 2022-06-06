@@ -1,0 +1,26 @@
+{
+  "awtarApp": {
+    "childStatus": {
+      "home": {
+        "title": "ChildStatuses",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Child Status",
+        "createOrEditLabel": "Créer ou éditer un Child Status",
+        "notFound": "Aucun Child Status trouvé"
+      },
+      "created": "Un nouveau Child Status a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Child Status avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Child Status avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Child Status {{ id }} ?"
+      },
+      "detail": {
+        "title": "Child Status"
+      },
+      "id": "ID",
+      "staus": "Staus",
+      "archivated": "Archivated",
+      "item": "Item"
+    }
+  }
+}

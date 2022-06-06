@@ -1,0 +1,27 @@
+{
+  "awtarApp": {
+    "childStatusItem": {
+      "home": {
+        "title": "Child Status Items",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Child Status Item",
+        "createOrEditLabel": "Create or edit a Child Status Item",
+        "notFound": "No Child Status Items found"
+      },
+      "created": "A new Child Status Item is created with identifier {{ param }}",
+      "updated": "A Child Status Item is updated with identifier {{ param }}",
+      "deleted": "A Child Status Item is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Child Status Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Child Status Item"
+      },
+      "id": "ID",
+      "affected": "Affected",
+      "archivated": "Archivated",
+      "item": "Item",
+      "childStatus": "Child Status"
+    }
+  }
+}

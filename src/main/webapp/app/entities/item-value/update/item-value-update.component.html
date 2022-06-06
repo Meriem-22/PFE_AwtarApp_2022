@@ -1,0 +1,117 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-item-value-heading" data-cy="ItemValueCreateUpdateHeading" jhiTranslate="awtarApp.itemValue.home.createOrEditLabel">
+        Create or edit a Item Value
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.itemValue.price" for="field_price">Price</label>
+          <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
+          <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('price')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('price')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.itemValue.priceDate" for="field_priceDate">Price Date</label>
+          <div class="input-group">
+            <input
+              id="field_priceDate"
+              data-cy="priceDate"
+              type="text"
+              class="form-control"
+              name="priceDate"
+              ngbDatepicker
+              #priceDateDp="ngbDatepicker"
+              formControlName="priceDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="priceDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          <div *ngIf="editForm.get('priceDate')!.invalid && (editForm.get('priceDate')!.dirty || editForm.get('priceDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('priceDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.itemValue.availableStockQuantity" for="field_availableStockQuantity"
+            >Available Stock Quantity</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="availableStockQuantity"
+            id="field_availableStockQuantity"
+            data-cy="availableStockQuantity"
+            formControlName="availableStockQuantity"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.itemValue.archivated" for="field_archivated">Archivated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="archivated"
+            id="field_archivated"
+            data-cy="archivated"
+            formControlName="archivated"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.itemValue.item" for="field_item">Item</label>
+          <select class="form-control" id="field_item" data-cy="item" name="item" formControlName="item">
+            <option *ngIf="!editForm.get('item')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="itemOption.id === editForm.get('item')!.value?.id ? editForm.get('item')!.value : itemOption"
+              *ngFor="let itemOption of itemsSharedCollection; trackBy: trackItemById"
+            >
+              {{ itemOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['item'])!.invalid && (editForm.get(['item'])!.dirty || editForm.get(['item'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['item'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

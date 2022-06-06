@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="parent">
+      <h2 data-cy="parentDetailsHeading"><span jhiTranslate="awtarApp.parent.detail.title">Parent</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ parent.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.parent.annualRevenue">Annual Revenue</span></dt>
+        <dd>
+          <span>{{ parent.annualRevenue }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.parent.cnss">Cnss</span></dt>
+        <dd>
+          <span>{{ parent.cnss }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.parent.maritalStatus">Marital Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'awtarApp.MaritalStatus.' + parent.maritalStatus }}">{{ parent.maritalStatus }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.parent.occupation">Occupation</span></dt>
+        <dd>
+          <span>{{ parent.occupation }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.parent.deceased">Deceased</span></dt>
+        <dd>
+          <span>{{ parent.deceased }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.parent.dateOfDeath">Date Of Death</span></dt>
+        <dd>
+          <span>{{ parent.dateOfDeath | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.parent.familyHead">Family Head</span></dt>
+        <dd>
+          <div *ngIf="parent.familyHead">
+            <a [routerLink]="['/family', parent.familyHead?.id, 'view']">{{ parent.familyHead?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.parent.family">Family</span></dt>
+        <dd>
+          <div *ngIf="parent.family">
+            <a [routerLink]="['/family', parent.family?.id, 'view']">{{ parent.family?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/parent', parent.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

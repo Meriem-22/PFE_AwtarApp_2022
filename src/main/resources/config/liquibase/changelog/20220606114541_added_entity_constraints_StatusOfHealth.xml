@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity StatusOfHealth.
+    -->
+    <changeSet id="20220606114541-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="status_of_health"
+                                 constraintName="fk_status_of_health__person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile"/>
+
+        <addForeignKeyConstraint baseColumnNames="health_status_category_id"
+                                 baseTableName="status_of_health"
+                                 constraintName="fk_status_of_health__health_status_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="health_status_category"/>
+    </changeSet>
+</databaseChangeLog>

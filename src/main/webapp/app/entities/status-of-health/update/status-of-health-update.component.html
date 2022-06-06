@@ -1,0 +1,190 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-status-of-health-heading"
+        data-cy="StatusOfHealthCreateUpdateHeading"
+        jhiTranslate="awtarApp.statusOfHealth.home.createOrEditLabel"
+      >
+        Create or edit a Status Of Health
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.statusOfHealth.healthStatusDate" for="field_healthStatusDate"
+            >Health Status Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_healthStatusDate"
+              data-cy="healthStatusDate"
+              type="text"
+              class="form-control"
+              name="healthStatusDate"
+              ngbDatepicker
+              #healthStatusDateDp="ngbDatepicker"
+              formControlName="healthStatusDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="healthStatusDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="
+              editForm.get('healthStatusDate')!.invalid &&
+              (editForm.get('healthStatusDate')!.dirty || editForm.get('healthStatusDate')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('healthStatusDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.statusOfHealth.urlDetailsAttached" for="field_urlDetailsAttached"
+            >Url Details Attached</label
+          >
+          <div>
+            <div *ngIf="editForm.get('urlDetailsAttached')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('urlDetailsAttached')!.value, editForm.get('urlDetailsAttachedContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('urlDetailsAttachedContentType')!.value }}, {{ byteSize(editForm.get('urlDetailsAttached')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ urlDetailsAttached: null }); editForm.patchValue({ urlDetailsAttachedContentType: null })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_urlDetailsAttached"
+              data-cy="urlDetailsAttached"
+              (change)="setFileData($event, 'urlDetailsAttached', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="urlDetailsAttached"
+            id="field_urlDetailsAttached"
+            data-cy="urlDetailsAttached"
+            formControlName="urlDetailsAttached"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="urlDetailsAttachedContentType"
+            id="field_urlDetailsAttachedContentType"
+            formControlName="urlDetailsAttachedContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.statusOfHealth.archivated" for="field_archivated">Archivated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="archivated"
+            id="field_archivated"
+            data-cy="archivated"
+            formControlName="archivated"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.statusOfHealth.person" for="field_person">Person</label>
+          <select class="form-control" id="field_person" data-cy="person" name="person" formControlName="person">
+            <option *ngIf="!editForm.get('person')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="profileOption.id === editForm.get('person')!.value?.id ? editForm.get('person')!.value : profileOption"
+              *ngFor="let profileOption of profilesSharedCollection; trackBy: trackProfileById"
+            >
+              {{ profileOption.id }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['person'])!.invalid && (editForm.get(['person'])!.dirty || editForm.get(['person'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['person'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.statusOfHealth.healthStatusCategory" for="field_healthStatusCategory"
+            >Health Status Category</label
+          >
+          <select
+            class="form-control"
+            id="field_healthStatusCategory"
+            data-cy="healthStatusCategory"
+            name="healthStatusCategory"
+            formControlName="healthStatusCategory"
+          >
+            <option *ngIf="!editForm.get('healthStatusCategory')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                healthStatusCategoryOption.id === editForm.get('healthStatusCategory')!.value?.id
+                  ? editForm.get('healthStatusCategory')!.value
+                  : healthStatusCategoryOption
+              "
+              *ngFor="let healthStatusCategoryOption of healthStatusCategoriesSharedCollection; trackBy: trackHealthStatusCategoryById"
+            >
+              {{ healthStatusCategoryOption.name }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="
+            editForm.get(['healthStatusCategory'])!.invalid &&
+            (editForm.get(['healthStatusCategory'])!.dirty || editForm.get(['healthStatusCategory'])!.touched)
+          "
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['healthStatusCategory'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

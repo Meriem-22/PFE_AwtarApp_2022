@@ -1,0 +1,62 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114542",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "family",
+  "fields": [
+    {
+      "fieldName": "familyName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "dwelling",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "area",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "notebookOfPoverty",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "notebookOfHandicap",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Family",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "parent",
+      "otherEntityRelationshipName": "family",
+      "relationshipName": "parent",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "child",
+      "otherEntityRelationshipName": "family",
+      "relationshipName": "child",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "parent",
+      "otherEntityRelationshipName": "familyHead",
+      "ownerSide": false,
+      "relationshipName": "head",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

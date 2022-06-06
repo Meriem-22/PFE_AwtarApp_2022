@@ -1,0 +1,28 @@
+{
+  "awtarApp": {
+    "statusOfHealth": {
+      "home": {
+        "title": "StatusOfHealths",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Status Of Health",
+        "createOrEditLabel": "Créer ou éditer un Status Of Health",
+        "notFound": "Aucun Status Of Health trouvé"
+      },
+      "created": "Un nouveau Status Of Health a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Status Of Health avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Status Of Health avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Status Of Health {{ id }} ?"
+      },
+      "detail": {
+        "title": "Status Of Health"
+      },
+      "id": "ID",
+      "healthStatusDate": "Health Status Date",
+      "urlDetailsAttached": "Url Details Attached",
+      "archivated": "Archivated",
+      "person": "Person",
+      "healthStatusCategory": "Health Status Category"
+    }
+  }
+}

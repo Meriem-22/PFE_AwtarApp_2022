@@ -1,0 +1,11 @@
+id;staus;archivated
+1;ADMITTED;true
+2;ADMITTED;false
+3;REPEATING;false
+4;ADMITTED;true
+5;NEW;false
+6;ADMITTED;false
+7;REPEATING;true
+8;ADMITTED;true
+9;ADMITTED;true
+10;NEW;true

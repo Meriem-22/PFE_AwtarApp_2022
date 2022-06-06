@@ -1,0 +1,124 @@
+<div>
+  <h2 id="page-heading" data-cy="DonationsReceivedItemHeading">
+    <span jhiTranslate="awtarApp.donationsReceivedItem.home.title">Donations Received Items</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="awtarApp.donationsReceivedItem.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-donations-received-item"
+        [routerLink]="['/donations-received-item/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="awtarApp.donationsReceivedItem.home.createLabel"> Create a new Donations Received Item </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="donationsReceivedItems?.length === 0">
+    <span jhiTranslate="awtarApp.donationsReceivedItem.home.notFound">No donationsReceivedItems found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="donationsReceivedItems && donationsReceivedItems.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="quantity">
+            <span jhiTranslate="awtarApp.donationsReceivedItem.quantity">Quantity</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <span jhiTranslate="awtarApp.donationsReceivedItem.date">Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="archivated">
+            <span jhiTranslate="awtarApp.donationsReceivedItem.archivated">Archivated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="item.name">
+            <span jhiTranslate="awtarApp.donationsReceivedItem.item">Item</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="donationsReceived.id">
+            <span jhiTranslate="awtarApp.donationsReceivedItem.donationsReceived">Donations Received</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let donationsReceivedItem of donationsReceivedItems; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/donations-received-item', donationsReceivedItem.id, 'view']">{{ donationsReceivedItem.id }}</a>
+          </td>
+          <td>{{ donationsReceivedItem.quantity }}</td>
+          <td>{{ donationsReceivedItem.date | formatMediumDate }}</td>
+          <td>{{ donationsReceivedItem.archivated }}</td>
+          <td>
+            <div *ngIf="donationsReceivedItem.item">
+              <a [routerLink]="['/item', donationsReceivedItem.item?.id, 'view']">{{ donationsReceivedItem.item?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="donationsReceivedItem.donationsReceived">
+              <a [routerLink]="['/donations-received', donationsReceivedItem.donationsReceived?.id, 'view']">{{
+                donationsReceivedItem.donationsReceived?.id
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/donations-received-item', donationsReceivedItem.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/donations-received-item', donationsReceivedItem.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(donationsReceivedItem)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="donationsReceivedItems && donationsReceivedItems.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

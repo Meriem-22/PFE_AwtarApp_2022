@@ -1,0 +1,27 @@
+{
+  "awtarApp": {
+    "donationsReceived": {
+      "home": {
+        "title": "Donations Receiveds",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Donations Received",
+        "createOrEditLabel": "Create or edit a Donations Received",
+        "notFound": "No Donations Receiveds found"
+      },
+      "created": "A new Donations Received is created with identifier {{ param }}",
+      "updated": "A Donations Received is updated with identifier {{ param }}",
+      "deleted": "A Donations Received is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Donations Received {{ id }}?"
+      },
+      "detail": {
+        "title": "Donations Received"
+      },
+      "id": "ID",
+      "urlPhoto": "Url Photo",
+      "archivated": "Archivated",
+      "authorizingOfficer": "Authorizing Officer",
+      "item": "Item"
+    }
+  }
+}

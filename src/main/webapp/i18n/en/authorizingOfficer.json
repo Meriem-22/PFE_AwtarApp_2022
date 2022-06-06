@@ -1,0 +1,30 @@
+{
+  "awtarApp": {
+    "authorizingOfficer": {
+      "home": {
+        "title": "Authorizing Officers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Authorizing Officer",
+        "createOrEditLabel": "Create or edit a Authorizing Officer",
+        "notFound": "No Authorizing Officers found"
+      },
+      "created": "A new Authorizing Officer is created with identifier {{ param }}",
+      "updated": "A Authorizing Officer is updated with identifier {{ param }}",
+      "deleted": "A Authorizing Officer is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Authorizing Officer {{ id }}?"
+      },
+      "detail": {
+        "title": "Authorizing Officer"
+      },
+      "id": "ID",
+      "abbreviation": "Abbreviation",
+      "activity": "Activity",
+      "manager": "Manager",
+      "managerCin": "Manager Cin",
+      "donations": "Donations",
+      "beneficiary": "Beneficiary",
+      "authorizingOfficerProfile": "Authorizing Officer Profile"
+    }
+  }
+}

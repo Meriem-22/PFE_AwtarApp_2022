@@ -1,0 +1,134 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-item-heading" data-cy="ItemCreateUpdateHeading" jhiTranslate="awtarApp.item.home.createOrEditLabel">
+        Create or edit a Item
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.item.urlPhoto" for="field_urlPhoto">Url Photo</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('urlPhotoContentType')!.value + ';base64,' + editForm.get('urlPhoto')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('urlPhoto')!.value"
+              alt="item image"
+            />
+            <div *ngIf="editForm.get('urlPhoto')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('urlPhotoContentType')!.value }}, {{ byteSize(editForm.get('urlPhoto')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('urlPhoto', 'urlPhotoContentType', 'file_urlPhoto')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_urlPhoto"
+              data-cy="urlPhoto"
+              (change)="setFileData($event, 'urlPhoto', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="urlPhoto" id="field_urlPhoto" data-cy="urlPhoto" formControlName="urlPhoto" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="urlPhotoContentType"
+            id="field_urlPhotoContentType"
+            formControlName="urlPhotoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.item.gender" for="field_gender">Gender</label>
+          <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
+            <option [ngValue]="null">{{ 'awtarApp.ItemGender.null' | translate }}</option>
+            <option *ngFor="let itemGender of itemGenderValues" [value]="itemGender">
+              {{ 'awtarApp.ItemGender.' + itemGender | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('gender')!.invalid && (editForm.get('gender')!.dirty || editForm.get('gender')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('gender')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.item.composed" for="field_composed">Composed</label>
+          <input type="checkbox" class="form-check" name="composed" id="field_composed" data-cy="composed" formControlName="composed" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.item.archivated" for="field_archivated">Archivated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="archivated"
+            id="field_archivated"
+            data-cy="archivated"
+            formControlName="archivated"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.item.nature" for="field_nature">Nature</label>
+          <select class="form-control" id="field_nature" data-cy="nature" name="nature" formControlName="nature">
+            <option *ngIf="!editForm.get('nature')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="natureOption.id === editForm.get('nature')!.value?.id ? editForm.get('nature')!.value : natureOption"
+              *ngFor="let natureOption of naturesSharedCollection; trackBy: trackNatureById"
+            >
+              {{ natureOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['nature'])!.invalid && (editForm.get(['nature'])!.dirty || editForm.get(['nature'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['nature'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

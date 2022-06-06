@@ -1,0 +1,217 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-donations-issued-heading"
+        data-cy="DonationsIssuedCreateUpdateHeading"
+        jhiTranslate="awtarApp.donationsIssued.home.createOrEditLabel"
+      >
+        Create or edit a Donations Issued
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.model" for="field_model">Model</label>
+          <input type="text" class="form-control" name="model" id="field_model" data-cy="model" formControlName="model" />
+          <div *ngIf="editForm.get('model')!.invalid && (editForm.get('model')!.dirty || editForm.get('model')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('model')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.isValidated" for="field_isValidated">Is Validated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isValidated"
+            id="field_isValidated"
+            data-cy="isValidated"
+            formControlName="isValidated"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.validationDate" for="field_validationDate"
+            >Validation Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_validationDate"
+              data-cy="validationDate"
+              type="text"
+              class="form-control"
+              name="validationDate"
+              ngbDatepicker
+              #validationDateDp="ngbDatepicker"
+              formControlName="validationDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="validationDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.validationUser" for="field_validationUser"
+            >Validation User</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="validationUser"
+            id="field_validationUser"
+            data-cy="validationUser"
+            formControlName="validationUser"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.donationsDate" for="field_donationsDate">Donations Date</label>
+          <div class="input-group">
+            <input
+              id="field_donationsDate"
+              data-cy="donationsDate"
+              type="text"
+              class="form-control"
+              name="donationsDate"
+              ngbDatepicker
+              #donationsDateDp="ngbDatepicker"
+              formControlName="donationsDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="donationsDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.canceledDonations" for="field_canceledDonations"
+            >Canceled Donations</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="canceledDonations"
+            id="field_canceledDonations"
+            data-cy="canceledDonations"
+            formControlName="canceledDonations"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.canceledOn" for="field_canceledOn">Canceled On</label>
+          <div class="input-group">
+            <input
+              id="field_canceledOn"
+              data-cy="canceledOn"
+              type="text"
+              class="form-control"
+              name="canceledOn"
+              ngbDatepicker
+              #canceledOnDp="ngbDatepicker"
+              formControlName="canceledOn"
+            />
+            <button type="button" class="btn btn-secondary" (click)="canceledOnDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.canceledBy" for="field_canceledBy">Canceled By</label>
+          <input
+            type="number"
+            class="form-control"
+            name="canceledBy"
+            id="field_canceledBy"
+            data-cy="canceledBy"
+            formControlName="canceledBy"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.cancellationReason" for="field_cancellationReason"
+            >Cancellation Reason</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="cancellationReason"
+            id="field_cancellationReason"
+            data-cy="cancellationReason"
+            formControlName="cancellationReason"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.recurringDonations" for="field_recurringDonations"
+            >Recurring Donations</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="recurringDonations"
+            id="field_recurringDonations"
+            data-cy="recurringDonations"
+            formControlName="recurringDonations"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.periodicity" for="field_periodicity">Periodicity</label>
+          <select class="form-control" name="periodicity" formControlName="periodicity" id="field_periodicity" data-cy="periodicity">
+            <option [ngValue]="null">{{ 'awtarApp.Period.null' | translate }}</option>
+            <option *ngFor="let period of periodValues" [value]="period">{{ 'awtarApp.Period.' + period | translate }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.recurrence" for="field_recurrence">Recurrence</label>
+          <input
+            type="number"
+            class="form-control"
+            name="recurrence"
+            id="field_recurrence"
+            data-cy="recurrence"
+            formControlName="recurrence"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.archivated" for="field_archivated">Archivated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="archivated"
+            id="field_archivated"
+            data-cy="archivated"
+            formControlName="archivated"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

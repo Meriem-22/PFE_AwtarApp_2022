@@ -1,0 +1,124 @@
+<div>
+  <h2 id="page-heading" data-cy="SchoolLevelItemHeading">
+    <span jhiTranslate="awtarApp.schoolLevelItem.home.title">School Level Items</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="awtarApp.schoolLevelItem.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-school-level-item"
+        [routerLink]="['/school-level-item/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="awtarApp.schoolLevelItem.home.createLabel"> Create a new School Level Item </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="schoolLevelItems?.length === 0">
+    <span jhiTranslate="awtarApp.schoolLevelItem.home.notFound">No schoolLevelItems found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="schoolLevelItems && schoolLevelItems.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="isSchoolItem">
+            <span jhiTranslate="awtarApp.schoolLevelItem.isSchoolItem">Is School Item</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="quantityNeeded">
+            <span jhiTranslate="awtarApp.schoolLevelItem.quantityNeeded">Quantity Needed</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="archivated">
+            <span jhiTranslate="awtarApp.schoolLevelItem.archivated">Archivated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="item.name">
+            <span jhiTranslate="awtarApp.schoolLevelItem.item">Item</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="schoolLevel.schoolLevel">
+            <span jhiTranslate="awtarApp.schoolLevelItem.schoolLevel">School Level</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let schoolLevelItem of schoolLevelItems; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/school-level-item', schoolLevelItem.id, 'view']">{{ schoolLevelItem.id }}</a>
+          </td>
+          <td>{{ schoolLevelItem.isSchoolItem }}</td>
+          <td>{{ schoolLevelItem.quantityNeeded }}</td>
+          <td>{{ schoolLevelItem.archivated }}</td>
+          <td>
+            <div *ngIf="schoolLevelItem.item">
+              <a [routerLink]="['/item', schoolLevelItem.item?.id, 'view']">{{ schoolLevelItem.item?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="schoolLevelItem.schoolLevel">
+              <a [routerLink]="['/school-level', schoolLevelItem.schoolLevel?.id, 'view']">{{
+                schoolLevelItem.schoolLevel?.schoolLevel
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/school-level-item', schoolLevelItem.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/school-level-item', schoolLevelItem.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(schoolLevelItem)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="schoolLevelItems && schoolLevelItems.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

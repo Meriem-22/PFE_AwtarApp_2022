@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="establishment">
+      <h2 data-cy="establishmentDetailsHeading"><span jhiTranslate="awtarApp.establishment.detail.title">Establishment</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ establishment.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.name">Name</span></dt>
+        <dd>
+          <span>{{ establishment.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.activity">Activity</span></dt>
+        <dd>
+          <span>{{ establishment.activity }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.manager">Manager</span></dt>
+        <dd>
+          <span>{{ establishment.manager }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.managerCin">Manager Cin</span></dt>
+        <dd>
+          <span>{{ establishment.managerCin }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.contact">Contact</span></dt>
+        <dd>
+          <span>{{ establishment.contact }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.adress">Adress</span></dt>
+        <dd>
+          <span>{{ establishment.adress }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.cp">Cp</span></dt>
+        <dd>
+          <span>{{ establishment.cp }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.region">Region</span></dt>
+        <dd>
+          <span>{{ establishment.region }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.phone">Phone</span></dt>
+        <dd>
+          <span>{{ establishment.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.fax">Fax</span></dt>
+        <dd>
+          <span>{{ establishment.fax }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.email">Email</span></dt>
+        <dd>
+          <span>{{ establishment.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.site">Site</span></dt>
+        <dd>
+          <span>{{ establishment.site }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.remark">Remark</span></dt>
+        <dd>
+          <span>{{ establishment.remark }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.establishmentType">Establishment Type</span></dt>
+        <dd>
+          <div *ngIf="establishment.establishmentType">
+            <a [routerLink]="['/establishment-type', establishment.establishmentType?.id, 'view']">{{
+              establishment.establishmentType?.typeName
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.establishment.city">City</span></dt>
+        <dd>
+          <div *ngIf="establishment.city">
+            <a [routerLink]="['/city', establishment.city?.id, 'view']">{{ establishment.city?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/establishment', establishment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

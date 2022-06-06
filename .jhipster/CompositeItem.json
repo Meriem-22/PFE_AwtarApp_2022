@@ -1,0 +1,42 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114558",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "composite_item",
+  "fields": [
+    {
+      "fieldName": "quantity",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CompositeItem",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "item",
+      "otherEntityRelationshipName": "composer",
+      "relationshipName": "composant",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "item",
+      "otherEntityRelationshipName": "composant",
+      "relationshipName": "composer",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,11 @@
+{
+  "awtarApp": {
+    "Beneficiaries": {
+      "null": "",
+      "FAMILY": "FAMILY",
+      "ESTABLISHMENT": "ESTABLISHMENT",
+      "CHILD": "CHILD",
+      "COMMMON": "COMMMON"
+    }
+  }
+}

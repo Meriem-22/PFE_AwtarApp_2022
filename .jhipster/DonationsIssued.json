@@ -1,0 +1,77 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114531",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "donations_issued",
+  "fields": [
+    {
+      "fieldName": "model",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isValidated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "validationDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "validationUser",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "donationsDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "canceledDonations",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "canceledOn",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "canceledBy",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "cancellationReason",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "recurringDonations",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "periodicity",
+      "fieldType": "Period",
+      "fieldValues": "PER_WEEK,PER_MONTH,PER_YEAR"
+    },
+    {
+      "fieldName": "recurrence",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DonationsIssued",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "donationDetails",
+      "otherEntityRelationshipName": "donationsIssued",
+      "relationshipName": "donationsDetails",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

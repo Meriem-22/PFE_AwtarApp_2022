@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="city">
+      <h2 data-cy="cityDetailsHeading"><span jhiTranslate="awtarApp.city.detail.title">City</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ city.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.city.name">Name</span></dt>
+        <dd>
+          <span>{{ city.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.city.governorate">Governorate</span></dt>
+        <dd>
+          <span>{{ city.governorate }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.city.isGovernorate">Is Governorate</span></dt>
+        <dd>
+          <span>{{ city.isGovernorate }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.city.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ city.archivated }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/city', city.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

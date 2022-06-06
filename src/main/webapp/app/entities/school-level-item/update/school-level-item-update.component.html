@@ -1,0 +1,120 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-school-level-item-heading"
+        data-cy="SchoolLevelItemCreateUpdateHeading"
+        jhiTranslate="awtarApp.schoolLevelItem.home.createOrEditLabel"
+      >
+        Create or edit a School Level Item
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.schoolLevelItem.isSchoolItem" for="field_isSchoolItem">Is School Item</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isSchoolItem"
+            id="field_isSchoolItem"
+            data-cy="isSchoolItem"
+            formControlName="isSchoolItem"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.schoolLevelItem.quantityNeeded" for="field_quantityNeeded"
+            >Quantity Needed</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="quantityNeeded"
+            id="field_quantityNeeded"
+            data-cy="quantityNeeded"
+            formControlName="quantityNeeded"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.schoolLevelItem.archivated" for="field_archivated">Archivated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="archivated"
+            id="field_archivated"
+            data-cy="archivated"
+            formControlName="archivated"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.schoolLevelItem.item" for="field_item">Item</label>
+          <select class="form-control" id="field_item" data-cy="item" name="item" formControlName="item">
+            <option *ngIf="!editForm.get('item')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="itemOption.id === editForm.get('item')!.value?.id ? editForm.get('item')!.value : itemOption"
+              *ngFor="let itemOption of itemsSharedCollection; trackBy: trackItemById"
+            >
+              {{ itemOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['item'])!.invalid && (editForm.get(['item'])!.dirty || editForm.get(['item'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['item'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.schoolLevelItem.schoolLevel" for="field_schoolLevel">School Level</label>
+          <select class="form-control" id="field_schoolLevel" data-cy="schoolLevel" name="schoolLevel" formControlName="schoolLevel">
+            <option *ngIf="!editForm.get('schoolLevel')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                schoolLevelOption.id === editForm.get('schoolLevel')!.value?.id ? editForm.get('schoolLevel')!.value : schoolLevelOption
+              "
+              *ngFor="let schoolLevelOption of schoolLevelsSharedCollection; trackBy: trackSchoolLevelById"
+            >
+              {{ schoolLevelOption.schoolLevel }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['schoolLevel'])!.invalid && (editForm.get(['schoolLevel'])!.dirty || editForm.get(['schoolLevel'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['schoolLevel'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

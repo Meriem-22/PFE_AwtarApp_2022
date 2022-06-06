@@ -1,0 +1,32 @@
+{
+  "awtarApp": {
+    "parent": {
+      "home": {
+        "title": "Parents",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Parent",
+        "createOrEditLabel": "Créer ou éditer un Parent",
+        "notFound": "Aucun Parent trouvé"
+      },
+      "created": "Un nouveau Parent a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Parent avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Parent avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Parent {{ id }} ?"
+      },
+      "detail": {
+        "title": "Parent"
+      },
+      "id": "ID",
+      "annualRevenue": "Annual Revenue",
+      "cnss": "Cnss",
+      "maritalStatus": "Marital Status",
+      "occupation": "Occupation",
+      "deceased": "Deceased",
+      "dateOfDeath": "Date Of Death",
+      "familyHead": "Family Head",
+      "parentProfile": "Parent Profile",
+      "family": "Family"
+    }
+  }
+}

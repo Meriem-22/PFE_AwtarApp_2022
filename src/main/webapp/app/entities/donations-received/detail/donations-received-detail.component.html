@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="donationsReceived">
+      <h2 data-cy="donationsReceivedDetailsHeading">
+        <span jhiTranslate="awtarApp.donationsReceived.detail.title">Donations Received</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ donationsReceived.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsReceived.urlPhoto">Url Photo</span></dt>
+        <dd>
+          <div *ngIf="donationsReceived.urlPhoto">
+            <a (click)="openFile(donationsReceived.urlPhoto, donationsReceived.urlPhotoContentType)">
+              <img
+                [src]="'data:' + donationsReceived.urlPhotoContentType + ';base64,' + donationsReceived.urlPhoto"
+                style="max-width: 100%"
+                alt="donationsReceived image"
+              />
+            </a>
+            {{ donationsReceived.urlPhotoContentType }}, {{ byteSize(donationsReceived.urlPhoto) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsReceived.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ donationsReceived.archivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationsReceived.authorizingOfficer">Authorizing Officer</span></dt>
+        <dd>
+          <div *ngIf="donationsReceived.authorizingOfficer">
+            <a [routerLink]="['/authorizing-officer', donationsReceived.authorizingOfficer?.id, 'view']">{{
+              donationsReceived.authorizingOfficer?.abbreviation
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/donations-received', donationsReceived.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

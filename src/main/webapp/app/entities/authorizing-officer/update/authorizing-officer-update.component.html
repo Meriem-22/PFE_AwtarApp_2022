@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-authorizing-officer-heading"
+        data-cy="AuthorizingOfficerCreateUpdateHeading"
+        jhiTranslate="awtarApp.authorizingOfficer.home.createOrEditLabel"
+      >
+        Create or edit a Authorizing Officer
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.authorizingOfficer.abbreviation" for="field_abbreviation">Abbreviation</label>
+          <input
+            type="text"
+            class="form-control"
+            name="abbreviation"
+            id="field_abbreviation"
+            data-cy="abbreviation"
+            formControlName="abbreviation"
+          />
+          <div
+            *ngIf="editForm.get('abbreviation')!.invalid && (editForm.get('abbreviation')!.dirty || editForm.get('abbreviation')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('abbreviation')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.authorizingOfficer.activity" for="field_activity">Activity</label>
+          <input type="text" class="form-control" name="activity" id="field_activity" data-cy="activity" formControlName="activity" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.authorizingOfficer.manager" for="field_manager">Manager</label>
+          <input type="text" class="form-control" name="manager" id="field_manager" data-cy="manager" formControlName="manager" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.authorizingOfficer.managerCin" for="field_managerCin">Manager Cin</label>
+          <input
+            type="text"
+            class="form-control"
+            name="managerCin"
+            id="field_managerCin"
+            data-cy="managerCin"
+            formControlName="managerCin"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+{
+  "awtarApp": {
+    "item": {
+      "home": {
+        "title": "Items",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Item",
+        "createOrEditLabel": "Créer ou éditer un Item",
+        "notFound": "Aucun Item trouvé"
+      },
+      "created": "Un nouveau Item a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Item avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Item avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Item {{ id }} ?"
+      },
+      "detail": {
+        "title": "Item"
+      },
+      "id": "ID",
+      "name": "Name",
+      "urlPhoto": "Url Photo",
+      "gender": "Gender",
+      "composed": "Composed",
+      "archivated": "Archivated",
+      "itemValue": "Item Value",
+      "nature": "Nature",
+      "donationDetails": "Donation Details",
+      "composer": "Composer",
+      "composant": "Composant",
+      "donationsReceived": "Donations Received",
+      "childStatus": "Child Status",
+      "schoolLevel": "School Level"
+    }
+  }
+}

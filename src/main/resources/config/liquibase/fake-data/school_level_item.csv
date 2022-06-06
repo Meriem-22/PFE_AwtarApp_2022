@@ -1,0 +1,11 @@
+id;is_school_item;quantity_needed;archivated;item_id;school_level_id
+1;false;95310;true;1;1
+2;true;83026;true;2;2
+3;false;1965;false;3;3
+4;false;61950;false;4;4
+5;false;8266;true;5;5
+6;true;75048;true;6;6
+7;true;27350;false;7;7
+8;false;52767;false;8;8
+9;true;73270;false;9;9
+10;false;1644;false;10;10

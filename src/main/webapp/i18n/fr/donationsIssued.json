@@ -1,0 +1,37 @@
+{
+  "awtarApp": {
+    "donationsIssued": {
+      "home": {
+        "title": "DonationsIssueds",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Donations Issued",
+        "createOrEditLabel": "Créer ou éditer un Donations Issued",
+        "notFound": "Aucun Donations Issued trouvé"
+      },
+      "created": "Un nouveau Donations Issued a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Donations Issued avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Donations Issued avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Donations Issued {{ id }} ?"
+      },
+      "detail": {
+        "title": "Donations Issued"
+      },
+      "id": "ID",
+      "model": "Model",
+      "isValidated": "Is Validated",
+      "validationDate": "Validation Date",
+      "validationUser": "Validation User",
+      "donationsDate": "Donations Date",
+      "canceledDonations": "Canceled Donations",
+      "canceledOn": "Canceled On",
+      "canceledBy": "Canceled By",
+      "cancellationReason": "Cancellation Reason",
+      "recurringDonations": "Recurring Donations",
+      "periodicity": "Periodicity",
+      "recurrence": "Recurrence",
+      "archivated": "Archivated",
+      "donationsDetails": "Donations Details"
+    }
+  }
+}

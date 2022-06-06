@@ -1,0 +1,177 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-visit-heading" data-cy="VisitCreateUpdateHeading" jhiTranslate="awtarApp.visit.home.createOrEditLabel">
+        Create or edit a Visit
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.visit.visitDate" for="field_visitDate">Visit Date</label>
+          <div class="input-group">
+            <input
+              id="field_visitDate"
+              data-cy="visitDate"
+              type="text"
+              class="form-control"
+              name="visitDate"
+              ngbDatepicker
+              #visitDateDp="ngbDatepicker"
+              formControlName="visitDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="visitDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          <div *ngIf="editForm.get('visitDate')!.invalid && (editForm.get('visitDate')!.dirty || editForm.get('visitDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('visitDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.visit.realizedBy" for="field_realizedBy">Realized By</label>
+          <input
+            type="number"
+            class="form-control"
+            name="realizedBy"
+            id="field_realizedBy"
+            data-cy="realizedBy"
+            formControlName="realizedBy"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.visit.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.visit.attachedFile" for="field_attachedFile">Attached File</label>
+          <div>
+            <div *ngIf="editForm.get('attachedFile')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('attachedFile')!.value, editForm.get('attachedFileContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('attachedFileContentType')!.value }}, {{ byteSize(editForm.get('attachedFile')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ attachedFile: null }); editForm.patchValue({ attachedFileContentType: null })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_attachedFile"
+              data-cy="attachedFile"
+              (change)="setFileData($event, 'attachedFile', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="attachedFile"
+            id="field_attachedFile"
+            data-cy="attachedFile"
+            formControlName="attachedFile"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="attachedFileContentType"
+            id="field_attachedFileContentType"
+            formControlName="attachedFileContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.visit.archivated" for="field_archivated">Archivated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="archivated"
+            id="field_archivated"
+            data-cy="archivated"
+            formControlName="archivated"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.visit.beneficiary" for="field_beneficiary">Beneficiary</label>
+          <select class="form-control" id="field_beneficiary" data-cy="beneficiary" name="beneficiary" formControlName="beneficiary">
+            <option *ngIf="!editForm.get('beneficiary')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                beneficiaryOption.id === editForm.get('beneficiary')!.value?.id ? editForm.get('beneficiary')!.value : beneficiaryOption
+              "
+              *ngFor="let beneficiaryOption of beneficiariesSharedCollection; trackBy: trackBeneficiaryById"
+            >
+              {{ beneficiaryOption.beneficiaryReference }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['beneficiary'])!.invalid && (editForm.get(['beneficiary'])!.dirty || editForm.get(['beneficiary'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['beneficiary'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

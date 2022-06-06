@@ -1,0 +1,57 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114534",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "beneficiary",
+  "fields": [
+    {
+      "fieldName": "beneficiaryReference",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "beneficiaryType",
+      "fieldType": "Beneficiaries",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "FAMILY,ESTABLISHMENT,CHILD,COMMMON"
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Beneficiary",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "donationDetails",
+      "otherEntityRelationshipName": "beneficiary",
+      "relationshipName": "donationdetails",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "visit",
+      "otherEntityRelationshipName": "beneficiary",
+      "relationshipName": "visit",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "abbreviation",
+      "otherEntityName": "authorizingOfficer",
+      "otherEntityRelationshipName": "beneficiary",
+      "relationshipName": "authorizingOfficer",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "tutor",
+      "otherEntityRelationshipName": "beneficiary",
+      "relationshipName": "tutor",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

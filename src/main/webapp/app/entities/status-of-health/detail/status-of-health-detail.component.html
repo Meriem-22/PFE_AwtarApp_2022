@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="statusOfHealth">
+      <h2 data-cy="statusOfHealthDetailsHeading"><span jhiTranslate="awtarApp.statusOfHealth.detail.title">Status Of Health</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ statusOfHealth.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.statusOfHealth.healthStatusDate">Health Status Date</span></dt>
+        <dd>
+          <span>{{ statusOfHealth.healthStatusDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.statusOfHealth.urlDetailsAttached">Url Details Attached</span></dt>
+        <dd>
+          <div *ngIf="statusOfHealth.urlDetailsAttached">
+            <a
+              (click)="openFile(statusOfHealth.urlDetailsAttached, statusOfHealth.urlDetailsAttachedContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ statusOfHealth.urlDetailsAttachedContentType }}, {{ byteSize(statusOfHealth.urlDetailsAttached) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.statusOfHealth.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ statusOfHealth.archivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.statusOfHealth.person">Person</span></dt>
+        <dd>
+          <div *ngIf="statusOfHealth.person">
+            <a [routerLink]="['/profile', statusOfHealth.person?.id, 'view']">{{ statusOfHealth.person?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.statusOfHealth.healthStatusCategory">Health Status Category</span></dt>
+        <dd>
+          <div *ngIf="statusOfHealth.healthStatusCategory">
+            <a [routerLink]="['/health-status-category', statusOfHealth.healthStatusCategory?.id, 'view']">{{
+              statusOfHealth.healthStatusCategory?.name
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/status-of-health', statusOfHealth.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="donationItemDetails">
+      <h2 data-cy="donationItemDetailsDetailsHeading">
+        <span jhiTranslate="awtarApp.donationItemDetails.detail.title">Donation Item Details</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ donationItemDetails.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationItemDetails.quantity">Quantity</span></dt>
+        <dd>
+          <span>{{ donationItemDetails.quantity }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationItemDetails.date">Date</span></dt>
+        <dd>
+          <span>{{ donationItemDetails.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationItemDetails.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ donationItemDetails.archivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationItemDetails.donationDetails">Donation Details</span></dt>
+        <dd>
+          <div *ngIf="donationItemDetails.donationDetails">
+            <a [routerLink]="['/donation-details', donationItemDetails.donationDetails?.id, 'view']">{{
+              donationItemDetails.donationDetails?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.donationItemDetails.item">Item</span></dt>
+        <dd>
+          <div *ngIf="donationItemDetails.item">
+            <a [routerLink]="['/item', donationItemDetails.item?.id, 'view']">{{ donationItemDetails.item?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/donation-item-details', donationItemDetails.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

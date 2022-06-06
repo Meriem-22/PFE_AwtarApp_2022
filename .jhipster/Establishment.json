@@ -1,0 +1,92 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114539",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "establishment",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "activity",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "manager",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "managerCin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contact",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cp",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "region",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fax",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "site",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "remark",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Establishment",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "report",
+      "otherEntityRelationshipName": "establishment",
+      "relationshipName": "report",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "typeName",
+      "otherEntityName": "establishmentType",
+      "otherEntityRelationshipName": "establishment",
+      "relationshipName": "establishmentType",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "city",
+      "otherEntityRelationshipName": "establishment",
+      "relationshipName": "city",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,99 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-child-status-item-heading"
+        data-cy="ChildStatusItemCreateUpdateHeading"
+        jhiTranslate="awtarApp.childStatusItem.home.createOrEditLabel"
+      >
+        Create or edit a Child Status Item
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.childStatusItem.affected" for="field_affected">Affected</label>
+          <input type="checkbox" class="form-check" name="affected" id="field_affected" data-cy="affected" formControlName="affected" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.childStatusItem.archivated" for="field_archivated">Archivated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="archivated"
+            id="field_archivated"
+            data-cy="archivated"
+            formControlName="archivated"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.childStatusItem.item" for="field_item">Item</label>
+          <select class="form-control" id="field_item" data-cy="item" name="item" formControlName="item">
+            <option *ngIf="!editForm.get('item')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="itemOption.id === editForm.get('item')!.value?.id ? editForm.get('item')!.value : itemOption"
+              *ngFor="let itemOption of itemsSharedCollection; trackBy: trackItemById"
+            >
+              {{ itemOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['item'])!.invalid && (editForm.get(['item'])!.dirty || editForm.get(['item'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['item'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.childStatusItem.childStatus" for="field_childStatus">Child Status</label>
+          <select class="form-control" id="field_childStatus" data-cy="childStatus" name="childStatus" formControlName="childStatus">
+            <option *ngIf="!editForm.get('childStatus')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                childStatusOption.id === editForm.get('childStatus')!.value?.id ? editForm.get('childStatus')!.value : childStatusOption
+              "
+              *ngFor="let childStatusOption of childStatusesSharedCollection; trackBy: trackChildStatusById"
+            >
+              {{ childStatusOption.staus }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['childStatus'])!.invalid && (editForm.get(['childStatus'])!.dirty || editForm.get(['childStatus'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['childStatus'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

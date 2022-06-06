@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="educationalInstitution">
+      <h2 data-cy="educationalInstitutionDetailsHeading">
+        <span jhiTranslate="awtarApp.educationalInstitution.detail.title">Educational Institution</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ educationalInstitution.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.educationalInstitution.name">Name</span></dt>
+        <dd>
+          <span>{{ educationalInstitution.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.educationalInstitution.adress">Adress</span></dt>
+        <dd>
+          <span>{{ educationalInstitution.adress }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.educationalInstitution.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ educationalInstitution.archivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.educationalInstitution.city">City</span></dt>
+        <dd>
+          <div *ngIf="educationalInstitution.city">
+            <a [routerLink]="['/city', educationalInstitution.city?.id, 'view']">{{ educationalInstitution.city?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/educational-institution', educationalInstitution.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

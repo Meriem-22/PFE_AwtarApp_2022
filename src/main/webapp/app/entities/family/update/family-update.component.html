@@ -1,0 +1,114 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-family-heading" data-cy="FamilyCreateUpdateHeading" jhiTranslate="awtarApp.family.home.createOrEditLabel">
+        Create or edit a Family
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.family.familyName" for="field_familyName">Family Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="familyName"
+            id="field_familyName"
+            data-cy="familyName"
+            formControlName="familyName"
+          />
+          <div *ngIf="editForm.get('familyName')!.invalid && (editForm.get('familyName')!.dirty || editForm.get('familyName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('familyName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.family.dwelling" for="field_dwelling">Dwelling</label>
+          <input type="text" class="form-control" name="dwelling" id="field_dwelling" data-cy="dwelling" formControlName="dwelling" />
+          <div *ngIf="editForm.get('dwelling')!.invalid && (editForm.get('dwelling')!.dirty || editForm.get('dwelling')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dwelling')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.family.area" for="field_area">Area</label>
+          <input type="text" class="form-control" name="area" id="field_area" data-cy="area" formControlName="area" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.family.notebookOfPoverty" for="field_notebookOfPoverty"
+            >Notebook Of Poverty</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="notebookOfPoverty"
+            id="field_notebookOfPoverty"
+            data-cy="notebookOfPoverty"
+            formControlName="notebookOfPoverty"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.family.notebookOfHandicap" for="field_notebookOfHandicap"
+            >Notebook Of Handicap</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="notebookOfHandicap"
+            id="field_notebookOfHandicap"
+            data-cy="notebookOfHandicap"
+            formControlName="notebookOfHandicap"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.family.archivated" for="field_archivated">Archivated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="archivated"
+            id="field_archivated"
+            data-cy="archivated"
+            formControlName="archivated"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

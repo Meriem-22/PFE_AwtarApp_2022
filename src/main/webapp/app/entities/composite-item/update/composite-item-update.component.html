@@ -1,0 +1,115 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-composite-item-heading"
+        data-cy="CompositeItemCreateUpdateHeading"
+        jhiTranslate="awtarApp.compositeItem.home.createOrEditLabel"
+      >
+        Create or edit a Composite Item
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.compositeItem.quantity" for="field_quantity">Quantity</label>
+          <input type="number" class="form-control" name="quantity" id="field_quantity" data-cy="quantity" formControlName="quantity" />
+          <div *ngIf="editForm.get('quantity')!.invalid && (editForm.get('quantity')!.dirty || editForm.get('quantity')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('quantity')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('quantity')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.compositeItem.archivated" for="field_archivated">Archivated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="archivated"
+            id="field_archivated"
+            data-cy="archivated"
+            formControlName="archivated"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.compositeItem.composant" for="field_composant">Composant</label>
+          <select class="form-control" id="field_composant" data-cy="composant" name="composant" formControlName="composant">
+            <option *ngIf="!editForm.get('composant')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="itemOption.id === editForm.get('composant')!.value?.id ? editForm.get('composant')!.value : itemOption"
+              *ngFor="let itemOption of itemsSharedCollection; trackBy: trackItemById"
+            >
+              {{ itemOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['composant'])!.invalid && (editForm.get(['composant'])!.dirty || editForm.get(['composant'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['composant'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.compositeItem.composer" for="field_composer">Composer</label>
+          <select class="form-control" id="field_composer" data-cy="composer" name="composer" formControlName="composer">
+            <option *ngIf="!editForm.get('composer')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="itemOption.id === editForm.get('composer')!.value?.id ? editForm.get('composer')!.value : itemOption"
+              *ngFor="let itemOption of itemsSharedCollection; trackBy: trackItemById"
+            >
+              {{ itemOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['composer'])!.invalid && (editForm.get(['composer'])!.dirty || editForm.get(['composer'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['composer'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

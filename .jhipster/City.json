@@ -1,0 +1,58 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114553",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "city",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "required"]
+    },
+    {
+      "fieldName": "governorate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isGovernorate",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "City",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "birthPlace",
+      "relationshipName": "personbirthPlace",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "placeOfResidence",
+      "relationshipName": "personplaceOfResidence",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "establishment",
+      "otherEntityRelationshipName": "city",
+      "relationshipName": "establishment",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "educationalInstitution",
+      "otherEntityRelationshipName": "city",
+      "relationshipName": "educationalInstitution",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,29 @@
+{
+  "awtarApp": {
+    "donationDetails": {
+      "home": {
+        "title": "Donation Details",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Donation Details",
+        "createOrEditLabel": "Create or edit a Donation Details",
+        "notFound": "No Donation Details found"
+      },
+      "created": "A new Donation Details is created with identifier {{ param }}",
+      "updated": "A Donation Details is updated with identifier {{ param }}",
+      "deleted": "A Donation Details is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Donation Details {{ id }}?"
+      },
+      "detail": {
+        "title": "Donation Details"
+      },
+      "id": "ID",
+      "description": "Description",
+      "archivated": "Archivated",
+      "donationsIssued": "Donations Issued",
+      "nature": "Nature",
+      "beneficiary": "Beneficiary",
+      "item": "Item"
+    }
+  }
+}

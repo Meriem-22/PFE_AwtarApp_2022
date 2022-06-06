@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114551",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "establishment_type",
+  "fields": [
+    {
+      "fieldName": "typeName",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "required"]
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "EstablishmentType",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "establishment",
+      "otherEntityRelationshipName": "establishmentType",
+      "relationshipName": "establishment",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

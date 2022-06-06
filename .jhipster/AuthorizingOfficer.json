@@ -1,0 +1,53 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114545",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "authorizing_officer",
+  "fields": [
+    {
+      "fieldName": "abbreviation",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "required"]
+    },
+    {
+      "fieldName": "activity",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "manager",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "managerCin",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AuthorizingOfficer",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "donationsReceived",
+      "otherEntityRelationshipName": "authorizingOfficer",
+      "relationshipName": "donations",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "beneficiary",
+      "otherEntityRelationshipName": "authorizingOfficer",
+      "relationshipName": "beneficiary",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "authorizingOfficer",
+      "ownerSide": false,
+      "relationshipName": "authorizingOfficerProfile",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

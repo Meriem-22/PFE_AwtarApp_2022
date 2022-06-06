@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity DonationItemDetails.
+    -->
+    <changeSet id="20220606114559-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="donation_details_id"
+                                 baseTableName="donation_item_details"
+                                 constraintName="fk_donation_item_details__donation_details_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="donation_details"/>
+
+        <addForeignKeyConstraint baseColumnNames="item_id"
+                                 baseTableName="donation_item_details"
+                                 constraintName="fk_donation_item_details__item_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="item"/>
+    </changeSet>
+</databaseChangeLog>

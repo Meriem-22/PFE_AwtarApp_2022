@@ -1,0 +1,10 @@
+{
+  "awtarApp": {
+    "ItemGender": {
+      "null": "",
+      "FEMININE": "FEMININE",
+      "MALE": "MALE",
+      "COMMMON": "COMMMON"
+    }
+  }
+}

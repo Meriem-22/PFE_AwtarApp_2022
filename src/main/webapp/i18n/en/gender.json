@@ -1,0 +1,9 @@
+{
+  "awtarApp": {
+    "Gender": {
+      "null": "",
+      "WOMAN": "WOMAN",
+      "MAN": "MAN"
+    }
+  }
+}

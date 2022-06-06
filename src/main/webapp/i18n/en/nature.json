@@ -1,0 +1,29 @@
+{
+  "awtarApp": {
+    "nature": {
+      "home": {
+        "title": "Natures",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Nature",
+        "createOrEditLabel": "Create or edit a Nature",
+        "notFound": "No Natures found"
+      },
+      "created": "A new Nature is created with identifier {{ param }}",
+      "updated": "A Nature is updated with identifier {{ param }}",
+      "deleted": "A Nature is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Nature {{ id }}?"
+      },
+      "detail": {
+        "title": "Nature"
+      },
+      "id": "ID",
+      "name": "Name",
+      "destinedTo": "Destined To",
+      "necessityValue": "Necessity Value",
+      "archivated": "Archivated",
+      "item": "Item",
+      "donationdetails": "Donationdetails"
+    }
+  }
+}

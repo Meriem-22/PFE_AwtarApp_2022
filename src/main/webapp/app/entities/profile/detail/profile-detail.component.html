@@ -1,0 +1,134 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="profile">
+      <h2 data-cy="profileDetailsHeading"><span jhiTranslate="awtarApp.profile.detail.title">Profile</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ profile.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.firstName">First Name</span></dt>
+        <dd>
+          <span>{{ profile.firstName }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.lastName">Last Name</span></dt>
+        <dd>
+          <span>{{ profile.lastName }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.firstNameArabic">First Name Arabic</span></dt>
+        <dd>
+          <span>{{ profile.firstNameArabic }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.lastNameArabic">Last Name Arabic</span></dt>
+        <dd>
+          <span>{{ profile.lastNameArabic }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.gender">Gender</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'awtarApp.Gender.' + profile.gender }}">{{ profile.gender }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.dateOfBirth">Date Of Birth</span></dt>
+        <dd>
+          <span>{{ profile.dateOfBirth | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.cin">Cin</span></dt>
+        <dd>
+          <span>{{ profile.cin }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.urlPhoto">Url Photo</span></dt>
+        <dd>
+          <div *ngIf="profile.urlPhoto">
+            <a (click)="openFile(profile.urlPhoto, profile.urlPhotoContentType)">
+              <img
+                [src]="'data:' + profile.urlPhotoContentType + ';base64,' + profile.urlPhoto"
+                style="max-width: 100%"
+                alt="profile image"
+              />
+            </a>
+            {{ profile.urlPhotoContentType }}, {{ byteSize(profile.urlPhoto) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.address">Address</span></dt>
+        <dd>
+          <span>{{ profile.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.phone">Phone</span></dt>
+        <dd>
+          <span>{{ profile.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.email">Email</span></dt>
+        <dd>
+          <span>{{ profile.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.urlCinAttached">Url Cin Attached</span></dt>
+        <dd>
+          <div *ngIf="profile.urlCinAttached">
+            <a (click)="openFile(profile.urlCinAttached, profile.urlCinAttachedContentType)">
+              <img
+                [src]="'data:' + profile.urlCinAttachedContentType + ';base64,' + profile.urlCinAttached"
+                style="max-width: 100%"
+                alt="profile image"
+              />
+            </a>
+            {{ profile.urlCinAttachedContentType }}, {{ byteSize(profile.urlCinAttached) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ profile.archivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.parent">Parent</span></dt>
+        <dd>
+          <div *ngIf="profile.parent">
+            <a [routerLink]="['/parent', profile.parent?.id, 'view']">{{ profile.parent?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.child">Child</span></dt>
+        <dd>
+          <div *ngIf="profile.child">
+            <a [routerLink]="['/child', profile.child?.id, 'view']">{{ profile.child?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.authorizingOfficer">Authorizing Officer</span></dt>
+        <dd>
+          <div *ngIf="profile.authorizingOfficer">
+            <a [routerLink]="['/authorizing-officer', profile.authorizingOfficer?.id, 'view']">{{ profile.authorizingOfficer?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.tutor">Tutor</span></dt>
+        <dd>
+          <div *ngIf="profile.tutor">
+            <a [routerLink]="['/tutor', profile.tutor?.id, 'view']">{{ profile.tutor?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.birthPlace">Birth Place</span></dt>
+        <dd>
+          <div *ngIf="profile.birthPlace">
+            <a [routerLink]="['/city', profile.birthPlace?.id, 'view']">{{ profile.birthPlace?.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.profile.placeOfResidence">Place Of Residence</span></dt>
+        <dd>
+          <div *ngIf="profile.placeOfResidence">
+            <a [routerLink]="['/city', profile.placeOfResidence?.id, 'view']">{{ profile.placeOfResidence?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/profile', profile.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

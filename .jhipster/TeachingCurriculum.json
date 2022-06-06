@@ -1,0 +1,73 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114536",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "teaching_curriculum",
+  "fields": [
+    {
+      "fieldName": "beginningYear",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endYear",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "annualResult",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "result",
+      "fieldType": "Status",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ADMITTED,REPEATING,NEW"
+    },
+    {
+      "fieldName": "remarks",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "attachedFile",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TeachingCurriculum",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "schoolLevel",
+      "otherEntityName": "schoolLevel",
+      "otherEntityRelationshipName": "teachingCurriculum",
+      "relationshipName": "schoolLevel",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "child",
+      "otherEntityRelationshipName": "teachingCurriculum",
+      "relationshipName": "child",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "educationalInstitution",
+      "otherEntityRelationshipName": "teachingCurriculum",
+      "relationshipName": "educationalInstitution",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

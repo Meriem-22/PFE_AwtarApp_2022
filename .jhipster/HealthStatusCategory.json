@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114535",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "health_status_category",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "required"]
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "HealthStatusCategory",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "statusOfHealth",
+      "otherEntityRelationshipName": "healthStatusCategory",
+      "relationshipName": "stateOfHealth",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

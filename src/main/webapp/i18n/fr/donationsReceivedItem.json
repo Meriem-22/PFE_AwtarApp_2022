@@ -1,0 +1,28 @@
+{
+  "awtarApp": {
+    "donationsReceivedItem": {
+      "home": {
+        "title": "DonationsReceivedItems",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Donations Received Item",
+        "createOrEditLabel": "Créer ou éditer un Donations Received Item",
+        "notFound": "Aucun Donations Received Item trouvé"
+      },
+      "created": "Un nouveau Donations Received Item a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Donations Received Item avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Donations Received Item avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Donations Received Item {{ id }} ?"
+      },
+      "detail": {
+        "title": "Donations Received Item"
+      },
+      "id": "ID",
+      "quantity": "Quantity",
+      "date": "Date",
+      "archivated": "Archivated",
+      "item": "Item",
+      "donationsReceived": "Donations Received"
+    }
+  }
+}

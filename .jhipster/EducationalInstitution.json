@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114540",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "educational_institution",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "adress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "EducationalInstitution",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "teachingCurriculum",
+      "otherEntityRelationshipName": "educationalInstitution",
+      "relationshipName": "teachingCurriculum",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "city",
+      "otherEntityRelationshipName": "educationalInstitution",
+      "relationshipName": "city",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

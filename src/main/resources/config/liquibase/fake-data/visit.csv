@@ -1,0 +1,11 @@
+id;visit_date;realized_by;description;attached_file;attached_file_content_type;archivated;beneficiary_id
+1;2022-06-06;85709;Wooden Cambridgeshire;../fake-data/blob/hipster.png;image/png;true;1
+2;2022-06-06;71634;a deposit;../fake-data/blob/hipster.png;image/png;false;2
+3;2022-06-05;73078;Gloves a program;../fake-data/blob/hipster.png;image/png;false;3
+4;2022-06-06;12030;Aruban;../fake-data/blob/hipster.png;image/png;false;4
+5;2022-06-06;92818;turquoise;../fake-data/blob/hipster.png;image/png;false;5
+6;2022-06-05;78838;instruction;../fake-data/blob/hipster.png;image/png;false;6
+7;2022-06-06;78984;neural Géorgie;../fake-data/blob/hipster.png;image/png;true;7
+8;2022-06-05;19675;Euro;../fake-data/blob/hipster.png;image/png;true;8
+9;2022-06-06;58664;incentivize;../fake-data/blob/hipster.png;image/png;false;9
+10;2022-06-06;59317;Customer-focused Real;../fake-data/blob/hipster.png;image/png;true;10

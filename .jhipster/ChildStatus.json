@@ -1,0 +1,34 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114549",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "child_status",
+  "fields": [
+    {
+      "fieldName": "staus",
+      "fieldType": "Status",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ADMITTED,REPEATING,NEW"
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ChildStatus",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "childStatusItem",
+      "otherEntityRelationshipName": "childStatus",
+      "relationshipName": "item",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

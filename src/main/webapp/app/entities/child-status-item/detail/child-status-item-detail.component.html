@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="childStatusItem">
+      <h2 data-cy="childStatusItemDetailsHeading"><span jhiTranslate="awtarApp.childStatusItem.detail.title">Child Status Item</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ childStatusItem.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.childStatusItem.affected">Affected</span></dt>
+        <dd>
+          <span>{{ childStatusItem.affected }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.childStatusItem.archivated">Archivated</span></dt>
+        <dd>
+          <span>{{ childStatusItem.archivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.childStatusItem.item">Item</span></dt>
+        <dd>
+          <div *ngIf="childStatusItem.item">
+            <a [routerLink]="['/item', childStatusItem.item?.id, 'view']">{{ childStatusItem.item?.name }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.childStatusItem.childStatus">Child Status</span></dt>
+        <dd>
+          <div *ngIf="childStatusItem.childStatus">
+            <a [routerLink]="['/child-status', childStatusItem.childStatus?.id, 'view']">{{ childStatusItem.childStatus?.staus }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/child-status-item', childStatusItem.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114537",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "donations_received",
+  "fields": [
+    {
+      "fieldName": "urlPhoto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DonationsReceived",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "abbreviation",
+      "otherEntityName": "authorizingOfficer",
+      "otherEntityRelationshipName": "donations",
+      "relationshipName": "authorizingOfficer",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "donationsReceivedItem",
+      "otherEntityRelationshipName": "donationsReceived",
+      "relationshipName": "item",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

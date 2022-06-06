@@ -1,0 +1,200 @@
+<div>
+  <h2 id="page-heading" data-cy="ProfileHeading">
+    <span jhiTranslate="awtarApp.profile.home.title">Profiles</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="awtarApp.profile.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-profile"
+        [routerLink]="['/profile/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="awtarApp.profile.home.createLabel"> Create a new Profile </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="profiles?.length === 0">
+    <span jhiTranslate="awtarApp.profile.home.notFound">No profiles found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="profiles && profiles.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="firstName">
+            <span jhiTranslate="awtarApp.profile.firstName">First Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastName">
+            <span jhiTranslate="awtarApp.profile.lastName">Last Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="firstNameArabic">
+            <span jhiTranslate="awtarApp.profile.firstNameArabic">First Name Arabic</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastNameArabic">
+            <span jhiTranslate="awtarApp.profile.lastNameArabic">Last Name Arabic</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="gender"><span jhiTranslate="awtarApp.profile.gender">Gender</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dateOfBirth">
+            <span jhiTranslate="awtarApp.profile.dateOfBirth">Date Of Birth</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cin"><span jhiTranslate="awtarApp.profile.cin">Cin</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="urlPhoto">
+            <span jhiTranslate="awtarApp.profile.urlPhoto">Url Photo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="address">
+            <span jhiTranslate="awtarApp.profile.address">Address</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="phone"><span jhiTranslate="awtarApp.profile.phone">Phone</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="email"><span jhiTranslate="awtarApp.profile.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="urlCinAttached">
+            <span jhiTranslate="awtarApp.profile.urlCinAttached">Url Cin Attached</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="archivated">
+            <span jhiTranslate="awtarApp.profile.archivated">Archivated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="parent.id">
+            <span jhiTranslate="awtarApp.profile.parent">Parent</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="child.id"><span jhiTranslate="awtarApp.profile.child">Child</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="authorizingOfficer.id">
+            <span jhiTranslate="awtarApp.profile.authorizingOfficer">Authorizing Officer</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="tutor.id"><span jhiTranslate="awtarApp.profile.tutor">Tutor</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="birthPlace.name">
+            <span jhiTranslate="awtarApp.profile.birthPlace">Birth Place</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="placeOfResidence.name">
+            <span jhiTranslate="awtarApp.profile.placeOfResidence">Place Of Residence</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let profile of profiles; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/profile', profile.id, 'view']">{{ profile.id }}</a>
+          </td>
+          <td>{{ profile.firstName }}</td>
+          <td>{{ profile.lastName }}</td>
+          <td>{{ profile.firstNameArabic }}</td>
+          <td>{{ profile.lastNameArabic }}</td>
+          <td jhiTranslate="{{ 'awtarApp.Gender.' + profile.gender }}">{{ profile.gender }}</td>
+          <td>{{ profile.dateOfBirth | formatMediumDate }}</td>
+          <td>{{ profile.cin }}</td>
+          <td>
+            <a *ngIf="profile.urlPhoto" (click)="openFile(profile.urlPhoto, profile.urlPhotoContentType)">
+              <img
+                [src]="'data:' + profile.urlPhotoContentType + ';base64,' + profile.urlPhoto"
+                style="max-height: 30px"
+                alt="profile image"
+              />
+            </a>
+            <span *ngIf="profile.urlPhoto">{{ profile.urlPhotoContentType }}, {{ byteSize(profile.urlPhoto) }}</span>
+          </td>
+          <td>{{ profile.address }}</td>
+          <td>{{ profile.phone }}</td>
+          <td>{{ profile.email }}</td>
+          <td>
+            <a *ngIf="profile.urlCinAttached" (click)="openFile(profile.urlCinAttached, profile.urlCinAttachedContentType)">
+              <img
+                [src]="'data:' + profile.urlCinAttachedContentType + ';base64,' + profile.urlCinAttached"
+                style="max-height: 30px"
+                alt="profile image"
+              />
+            </a>
+            <span *ngIf="profile.urlCinAttached">{{ profile.urlCinAttachedContentType }}, {{ byteSize(profile.urlCinAttached) }}</span>
+          </td>
+          <td>{{ profile.archivated }}</td>
+          <td>
+            <div *ngIf="profile.parent">
+              <a [routerLink]="['/parent', profile.parent?.id, 'view']">{{ profile.parent?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="profile.child">
+              <a [routerLink]="['/child', profile.child?.id, 'view']">{{ profile.child?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="profile.authorizingOfficer">
+              <a [routerLink]="['/authorizing-officer', profile.authorizingOfficer?.id, 'view']">{{ profile.authorizingOfficer?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="profile.tutor">
+              <a [routerLink]="['/tutor', profile.tutor?.id, 'view']">{{ profile.tutor?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="profile.birthPlace">
+              <a [routerLink]="['/city', profile.birthPlace?.id, 'view']">{{ profile.birthPlace?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="profile.placeOfResidence">
+              <a [routerLink]="['/city', profile.placeOfResidence?.id, 'view']">{{ profile.placeOfResidence?.name }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/profile', profile.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/profile', profile.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(profile)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="profiles && profiles.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

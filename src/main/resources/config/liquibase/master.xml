@@ -15,7 +15,55 @@
     <property name="datetimeType" value="datetime" dbms="oracle, mssql, postgresql, h2"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114531_added_entity_DonationsIssued.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114532_added_entity_DonationDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114533_added_entity_Item.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114534_added_entity_Beneficiary.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114535_added_entity_HealthStatusCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114536_added_entity_TeachingCurriculum.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114537_added_entity_DonationsReceived.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114538_added_entity_Child.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114539_added_entity_Establishment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114540_added_entity_EducationalInstitution.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114541_added_entity_StatusOfHealth.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114542_added_entity_Family.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114543_added_entity_Nature.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114544_added_entity_SchoolLevel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114545_added_entity_AuthorizingOfficer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114546_added_entity_Parent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114547_added_entity_Profile.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114548_added_entity_Report.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114549_added_entity_ChildStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114550_added_entity_Tutor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114551_added_entity_EstablishmentType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114552_added_entity_ItemValue.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114553_added_entity_City.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114554_added_entity_Visit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114555_added_entity_SchoolLevelItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114556_added_entity_ChildStatusItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114557_added_entity_DonationsReceivedItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114558_added_entity_CompositeItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114559_added_entity_DonationItemDetails.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20220606114532_added_entity_constraints_DonationDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114533_added_entity_constraints_Item.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114534_added_entity_constraints_Beneficiary.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114536_added_entity_constraints_TeachingCurriculum.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114537_added_entity_constraints_DonationsReceived.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114538_added_entity_constraints_Child.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114539_added_entity_constraints_Establishment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114540_added_entity_constraints_EducationalInstitution.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114541_added_entity_constraints_StatusOfHealth.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114546_added_entity_constraints_Parent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114547_added_entity_constraints_Profile.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114548_added_entity_constraints_Report.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114552_added_entity_constraints_ItemValue.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114554_added_entity_constraints_Visit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114555_added_entity_constraints_SchoolLevelItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114556_added_entity_constraints_ChildStatusItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114557_added_entity_constraints_DonationsReceivedItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114558_added_entity_constraints_CompositeItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220606114559_added_entity_constraints_DonationItemDetails.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

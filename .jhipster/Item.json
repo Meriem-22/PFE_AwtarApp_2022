@@ -1,0 +1,95 @@
+{
+  "applications": "*",
+  "changelogDate": "20220606114533",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "item",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "required"]
+    },
+    {
+      "fieldName": "urlPhoto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "ItemGender",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "FEMININE,MALE,COMMMON"
+    },
+    {
+      "fieldName": "composed",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "archivated",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Item",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "itemValue",
+      "otherEntityRelationshipName": "item",
+      "relationshipName": "itemValue",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "nature",
+      "otherEntityRelationshipName": "item",
+      "relationshipName": "nature",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "donationItemDetails",
+      "otherEntityRelationshipName": "item",
+      "relationshipName": "donationDetails",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "compositeItem",
+      "otherEntityRelationshipName": "composant",
+      "relationshipName": "composer",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "compositeItem",
+      "otherEntityRelationshipName": "composer",
+      "relationshipName": "composant",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "donationsReceivedItem",
+      "otherEntityRelationshipName": "item",
+      "relationshipName": "donationsReceived",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "staus",
+      "otherEntityName": "childStatusItem",
+      "otherEntityRelationshipName": "item",
+      "relationshipName": "childStatus",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "schoolLevel",
+      "otherEntityName": "schoolLevelItem",
+      "otherEntityRelationshipName": "item",
+      "relationshipName": "schoolLevel",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

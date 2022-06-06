@@ -1,0 +1,11 @@
+id;health_status_date;url_details_attached;url_details_attached_content_type;archivated;person_id;health_status_category_id
+1;2022-06-05;../fake-data/blob/hipster.png;image/png;true;1;1
+2;2022-06-06;../fake-data/blob/hipster.png;image/png;true;2;2
+3;2022-06-05;../fake-data/blob/hipster.png;image/png;false;3;3
+4;2022-06-05;../fake-data/blob/hipster.png;image/png;false;4;4
+5;2022-06-05;../fake-data/blob/hipster.png;image/png;true;5;5
+6;2022-06-06;../fake-data/blob/hipster.png;image/png;false;6;6
+7;2022-06-06;../fake-data/blob/hipster.png;image/png;true;7;7
+8;2022-06-06;../fake-data/blob/hipster.png;image/png;false;8;8
+9;2022-06-05;../fake-data/blob/hipster.png;image/png;false;9;9
+10;2022-06-05;../fake-data/blob/hipster.png;image/png;false;10;10

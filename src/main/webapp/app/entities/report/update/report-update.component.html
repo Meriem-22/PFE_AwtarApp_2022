@@ -1,0 +1,169 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-report-heading" data-cy="ReportCreateUpdateHeading" jhiTranslate="awtarApp.report.home.createOrEditLabel">
+        Create or edit a Report
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.report.nature" for="field_nature">Nature</label>
+          <input type="text" class="form-control" name="nature" id="field_nature" data-cy="nature" formControlName="nature" />
+          <div *ngIf="editForm.get('nature')!.invalid && (editForm.get('nature')!.dirty || editForm.get('nature')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('nature')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.report.date" for="field_date">Date</label>
+          <div class="input-group">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="text"
+              class="form-control"
+              name="date"
+              ngbDatepicker
+              #dateDp="ngbDatepicker"
+              formControlName="date"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('date')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.report.urlEnclosed" for="field_urlEnclosed">Url Enclosed</label>
+          <div>
+            <div *ngIf="editForm.get('urlEnclosed')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('urlEnclosed')!.value, editForm.get('urlEnclosedContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('urlEnclosedContentType')!.value }}, {{ byteSize(editForm.get('urlEnclosed')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ urlEnclosed: null }); editForm.patchValue({ urlEnclosedContentType: null })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_urlEnclosed"
+              data-cy="urlEnclosed"
+              (change)="setFileData($event, 'urlEnclosed', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="urlEnclosed"
+            id="field_urlEnclosed"
+            data-cy="urlEnclosed"
+            formControlName="urlEnclosed"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="urlEnclosedContentType"
+            id="field_urlEnclosedContentType"
+            formControlName="urlEnclosedContentType"
+          />
+          <div *ngIf="editForm.get('urlEnclosed')!.invalid && (editForm.get('urlEnclosed')!.dirty || editForm.get('urlEnclosed')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('urlEnclosed')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.report.archivated" for="field_archivated">Archivated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="archivated"
+            id="field_archivated"
+            data-cy="archivated"
+            formControlName="archivated"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.report.establishment" for="field_establishment">Establishment</label>
+          <select
+            class="form-control"
+            id="field_establishment"
+            data-cy="establishment"
+            name="establishment"
+            formControlName="establishment"
+          >
+            <option *ngIf="!editForm.get('establishment')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                establishmentOption.id === editForm.get('establishment')!.value?.id
+                  ? editForm.get('establishment')!.value
+                  : establishmentOption
+              "
+              *ngFor="let establishmentOption of establishmentsSharedCollection; trackBy: trackEstablishmentById"
+            >
+              {{ establishmentOption.name }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="
+            editForm.get(['establishment'])!.invalid && (editForm.get(['establishment'])!.dirty || editForm.get(['establishment'])!.touched)
+          "
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['establishment'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

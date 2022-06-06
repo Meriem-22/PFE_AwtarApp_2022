@@ -1,0 +1,29 @@
+{
+  "awtarApp": {
+    "visit": {
+      "home": {
+        "title": "Visits",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Visit",
+        "createOrEditLabel": "Créer ou éditer un Visit",
+        "notFound": "Aucun Visit trouvé"
+      },
+      "created": "Un nouveau Visit a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Visit avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Visit avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Visit {{ id }} ?"
+      },
+      "detail": {
+        "title": "Visit"
+      },
+      "id": "ID",
+      "visitDate": "Visit Date",
+      "realizedBy": "Realized By",
+      "description": "Description",
+      "attachedFile": "Attached File",
+      "archivated": "Archivated",
+      "beneficiary": "Beneficiary"
+    }
+  }
+}

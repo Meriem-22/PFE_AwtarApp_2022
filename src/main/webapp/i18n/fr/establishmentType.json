@@ -1,0 +1,26 @@
+{
+  "awtarApp": {
+    "establishmentType": {
+      "home": {
+        "title": "EstablishmentTypes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Establishment Type",
+        "createOrEditLabel": "Créer ou éditer un Establishment Type",
+        "notFound": "Aucun Establishment Type trouvé"
+      },
+      "created": "Un nouveau Establishment Type a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Establishment Type avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Establishment Type avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Establishment Type {{ id }} ?"
+      },
+      "detail": {
+        "title": "Establishment Type"
+      },
+      "id": "ID",
+      "typeName": "Type Name",
+      "archivated": "Archivated",
+      "establishment": "Establishment"
+    }
+  }
+}

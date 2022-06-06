@@ -1,0 +1,11 @@
+id;name;url_photo;url_photo_content_type;gender;composed;archivated;nature_id
+1;Superviseur Berkshire;../fake-data/blob/hipster.png;image/png;FEMININE;false;true;1
+2;Up-sized cyan;../fake-data/blob/hipster.png;image/png;MALE;false;true;2
+3;Bedfordshire Tuna;../fake-data/blob/hipster.png;image/png;MALE;false;false;3
+4;killer drive haptic;../fake-data/blob/hipster.png;image/png;COMMMON;false;false;4
+5;systemic portal;../fake-data/blob/hipster.png;image/png;FEMININE;true;false;5
+6;UAE Basse-Normandie;../fake-data/blob/hipster.png;image/png;FEMININE;false;false;6
+7;innovate purple;../fake-data/blob/hipster.png;image/png;COMMMON;false;false;7
+8;Pizza b intermediate;../fake-data/blob/hipster.png;image/png;FEMININE;false;false;8
+9;virtual Assistant;../fake-data/blob/hipster.png;image/png;MALE;true;true;9
+10;a array;../fake-data/blob/hipster.png;image/png;MALE;false;true;10

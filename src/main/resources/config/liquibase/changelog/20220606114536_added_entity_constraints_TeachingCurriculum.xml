@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity TeachingCurriculum.
+    -->
+    <changeSet id="20220606114536-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="school_level_id"
+                                 baseTableName="teaching_curriculum"
+                                 constraintName="fk_teaching_curriculum__school_level_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_level"/>
+
+        <addForeignKeyConstraint baseColumnNames="child_id"
+                                 baseTableName="teaching_curriculum"
+                                 constraintName="fk_teaching_curriculum__child_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="child"/>
+
+        <addForeignKeyConstraint baseColumnNames="educational_institution_id"
+                                 baseTableName="teaching_curriculum"
+                                 constraintName="fk_teaching_curriculum__educational_institution_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="educational_institution"/>
+    </changeSet>
+</databaseChangeLog>

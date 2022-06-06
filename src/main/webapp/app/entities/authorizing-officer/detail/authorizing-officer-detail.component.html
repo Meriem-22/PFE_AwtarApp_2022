@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="authorizingOfficer">
+      <h2 data-cy="authorizingOfficerDetailsHeading">
+        <span jhiTranslate="awtarApp.authorizingOfficer.detail.title">Authorizing Officer</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ authorizingOfficer.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.authorizingOfficer.abbreviation">Abbreviation</span></dt>
+        <dd>
+          <span>{{ authorizingOfficer.abbreviation }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.authorizingOfficer.activity">Activity</span></dt>
+        <dd>
+          <span>{{ authorizingOfficer.activity }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.authorizingOfficer.manager">Manager</span></dt>
+        <dd>
+          <span>{{ authorizingOfficer.manager }}</span>
+        </dd>
+        <dt><span jhiTranslate="awtarApp.authorizingOfficer.managerCin">Manager Cin</span></dt>
+        <dd>
+          <span>{{ authorizingOfficer.managerCin }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/authorizing-officer', authorizingOfficer.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
