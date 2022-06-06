@@ -13,6 +13,7 @@ import javax.validation.constraints.*;
  */
 @Entity
 @Table(name = "beneficiary")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Beneficiary implements Serializable {
 
     private static final long serialVersionUID = 1L;

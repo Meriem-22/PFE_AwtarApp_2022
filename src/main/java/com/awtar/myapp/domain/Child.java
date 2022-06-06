@@ -11,15 +11,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "child")
-public class Child implements Serializable {
+@PrimaryKeyJoinColumn(name = "id")
+public class Child extends Beneficiary implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id")
-    private Long id;
 
     @OneToMany(mappedBy = "child")
     @JsonIgnoreProperties(value = { "schoolLevel", "child", "educationalInstitution" }, allowSetters = true)
@@ -39,16 +34,16 @@ public class Child implements Serializable {
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
-        return this.id;
+        return super.getId();
     }
 
     public Child id(Long id) {
-        this.setId(id);
+        super.setId(id);
         return this;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        super.setId(id);
     }
 
     public Set<TeachingCurriculum> getTeachingCurricula() {
@@ -124,7 +119,7 @@ public class Child implements Serializable {
         if (!(o instanceof Child)) {
             return false;
         }
-        return id != null && id.equals(((Child) o).id);
+        return getId() != null && getId().equals(((Child) o).getId());
     }
 
     @Override

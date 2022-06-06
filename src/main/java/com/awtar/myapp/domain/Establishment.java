@@ -12,15 +12,10 @@ import javax.validation.constraints.*;
  */
 @Entity
 @Table(name = "establishment")
-public class Establishment implements Serializable {
+@PrimaryKeyJoinColumn(name = "id")
+public class Establishment extends Beneficiary implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id")
-    private Long id;
 
     @NotNull
     @Column(name = "name", nullable = false)
@@ -82,16 +77,16 @@ public class Establishment implements Serializable {
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
-        return this.id;
+        return super.getId();
     }
 
     public Establishment id(Long id) {
-        this.setId(id);
+        super.setId(id);
         return this;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        super.setId(id);
     }
 
     public String getName() {
@@ -330,7 +325,7 @@ public class Establishment implements Serializable {
         if (!(o instanceof Establishment)) {
             return false;
         }
-        return id != null && id.equals(((Establishment) o).id);
+        return getId() != null && getId().equals(((Child) o).getId());
     }
 
     @Override
