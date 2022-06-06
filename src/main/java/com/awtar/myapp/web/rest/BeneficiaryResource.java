@@ -189,4 +189,29 @@ public class BeneficiaryResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @PutMapping("/beneficiaries/calcul-reference/{id}")
+    public ResponseEntity<BeneficiaryDTO> CalculbeneficiaryReference(
+        @PathVariable(value = "id", required = false) final Long id,
+        @Valid @RequestBody BeneficiaryDTO beneficiaryDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to calcul Beneficiary Reference: : {}, {}", id, beneficiaryDTO);
+        if (beneficiaryDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, beneficiaryDTO.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!beneficiaryRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        BeneficiaryDTO result = beneficiaryService.calculReference(beneficiaryDTO);
+
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, beneficiaryDTO.getId().toString()))
+            .body(result);
+    }
 }

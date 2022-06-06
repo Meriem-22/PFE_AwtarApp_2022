@@ -63,4 +63,12 @@ public interface BeneficiaryService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Calcul of the  the beneficiary Reference.
+     *
+     * @param beneficiaryDTO the entity to update.
+     * @return the persisted entity.
+     */
+    BeneficiaryDTO calculReference(BeneficiaryDTO beneficiaryDTO);
 }

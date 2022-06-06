@@ -1,5 +1,6 @@
 package com.awtar.myapp.service.impl;
 
+import com.awtar.myapp.domain.AuthorizingOfficer;
 import com.awtar.myapp.domain.Beneficiary;
 import com.awtar.myapp.repository.BeneficiaryRepository;
 import com.awtar.myapp.service.BeneficiaryService;
@@ -84,5 +85,17 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
     public void delete(Long id) {
         log.debug("Request to delete Beneficiary : {}", id);
         beneficiaryRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public BeneficiaryDTO calculReference(BeneficiaryDTO beneficiaryDTO) {
+        log.debug("Request to calcul Beneficiary Reference : {}", beneficiaryDTO);
+        Beneficiary beneficiary = beneficiaryMapper.toEntity(beneficiaryDTO);
+        AuthorizingOfficer authorizingOfficer = beneficiary.getAuthorizingOfficer();
+        String reference = "Ref-" + authorizingOfficer.getAbbreviation() + "-" + beneficiary.getId().toString();
+        Long id = beneficiary.getId();
+        beneficiaryRepository.setBeneficiaryReference(id, reference, authorizingOfficer);
+        return beneficiaryMapper.toDto(beneficiary);
     }
 }

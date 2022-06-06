@@ -1,6 +1,8 @@
 package com.awtar.myapp.repository;
 
+import com.awtar.myapp.domain.AuthorizingOfficer;
 import com.awtar.myapp.domain.Beneficiary;
+import com.awtar.myapp.domain.Tutor;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -37,4 +39,16 @@ public interface BeneficiaryRepository extends JpaRepository<Beneficiary, Long> 
 
     @Query("select beneficiary from Beneficiary beneficiary left join fetch beneficiary.authorizingOfficer where beneficiary.id =:id")
     Optional<Beneficiary> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Modifying
+    @Query("update Beneficiary set beneficiaryReference= :reference, authorizingOfficer= :authorizingOfficer  where id= :id")
+    void setBeneficiaryReference(
+        @Param("id") Long id,
+        @Param("reference") String reference,
+        @Param("authorizingOfficer") AuthorizingOfficer authorizingOfficer
+    );
+
+    @Modifying
+    @Query("update Beneficiary set authorizingOfficer= :authorizingOfficer, tutor= :tutor  where id= :id")
+    void updateInfo(@Param("id") Long id, @Param("authorizingOfficer") AuthorizingOfficer authorizingOfficer, @Param("tutor") Tutor tutor);
 }
