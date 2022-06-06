@@ -189,4 +189,24 @@ public class FamilyResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * {@code POST  /families} : Create a new family.
+     *
+     * @param familyDTO the familyDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new familyDTO, or with status {@code 400 (Bad Request)} if the family has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/families/add")
+    public ResponseEntity<FamilyDTO> saveCompletedFamily(@Valid @RequestBody FamilyDTO familyDTO) throws URISyntaxException {
+        log.debug("REST request to save completed Family : {}", familyDTO);
+        if (familyDTO.getId() != null) {
+            throw new BadRequestAlertException("A new family cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        FamilyDTO result = familyService.saveCompletedFamily(familyDTO);
+        return ResponseEntity
+            .created(new URI("/api/families/add/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
 }

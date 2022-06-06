@@ -62,4 +62,13 @@ public interface FamilyService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Save a family.
+     *
+     *
+     * @param familyDTO the entity to save.
+     * @return the persisted entity.
+     */
+    FamilyDTO saveCompletedFamily(FamilyDTO familyDTO);
 }

@@ -189,11 +189,4 @@ public class ProfileResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
-    /**
-     * {@code GET  /profiles/:id} : get the "id" profile.
-     *
-     * @param id the id of the profileDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profileDTO, or with status {@code 404 (Not Found)}.
-     */
-
 }
