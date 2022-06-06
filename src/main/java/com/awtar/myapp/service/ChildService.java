@@ -62,4 +62,12 @@ public interface ChildService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Save a child.
+     *
+     * @param childDTO the entity to save.
+     * @return the persisted entity.
+     */
+    ChildDTO saveChildAllDetails(ChildDTO childDTO);
 }

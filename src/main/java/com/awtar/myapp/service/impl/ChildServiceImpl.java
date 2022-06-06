@@ -1,10 +1,17 @@
 package com.awtar.myapp.service.impl;
 
 import com.awtar.myapp.domain.Child;
+import com.awtar.myapp.domain.Family;
+import com.awtar.myapp.domain.Profile;
 import com.awtar.myapp.repository.ChildRepository;
+import com.awtar.myapp.repository.ProfileRepository;
 import com.awtar.myapp.service.ChildService;
 import com.awtar.myapp.service.dto.ChildDTO;
+import com.awtar.myapp.service.dto.FamilyDTO;
+import com.awtar.myapp.service.dto.ProfileDTO;
 import com.awtar.myapp.service.mapper.ChildMapper;
+import com.awtar.myapp.service.mapper.FamilyMapper;
+import com.awtar.myapp.service.mapper.ProfileMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -30,9 +37,24 @@ public class ChildServiceImpl implements ChildService {
 
     private final ChildMapper childMapper;
 
-    public ChildServiceImpl(ChildRepository childRepository, ChildMapper childMapper) {
+    private final ProfileMapper profileMapper;
+
+    private final ProfileRepository profileRepository;
+
+    private final FamilyMapper familyMapper;
+
+    public ChildServiceImpl(
+        ChildRepository childRepository,
+        ChildMapper childMapper,
+        ProfileMapper profileMapper,
+        ProfileRepository profileRepository,
+        FamilyMapper familyMapper
+    ) {
         this.childRepository = childRepository;
         this.childMapper = childMapper;
+        this.profileMapper = profileMapper;
+        this.profileRepository = profileRepository;
+        this.familyMapper = familyMapper;
     }
 
     @Override
@@ -98,5 +120,19 @@ public class ChildServiceImpl implements ChildService {
     public void delete(Long id) {
         log.debug("Request to delete Child : {}", id);
         childRepository.deleteById(id);
+    }
+
+    @Override
+    public ChildDTO saveChildAllDetails(ChildDTO childDTO) {
+        ProfileDTO profiledto = childDTO.getProfile();
+        FamilyDTO family = childDTO.getFamily();
+        Family f = familyMapper.toEntity(family);
+        Profile profile = profileMapper.toEntity(profiledto);
+        Child child = childMapper.toEntity(childDTO);
+        child.setFamily(f);
+        child = childRepository.save(child);
+        profile.setChild(child);
+        profileRepository.save(profile);
+        return childMapper.toDto(child);
     }
 }
