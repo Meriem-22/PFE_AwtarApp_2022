@@ -8,7 +8,7 @@ import { isPresent } from 'app/core/util/operators';
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IParent, getParentIdentifier } from '../parent.model';
+import { IParent, getParentIdentifier, IParentAllDetails } from '../parent.model';
 
 export type EntityResponseType = HttpResponse<IParent>;
 export type EntityArrayResponseType = HttpResponse<IParent[]>;
@@ -55,6 +55,10 @@ export class ParentService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  addParent(parent: IParentAllDetails): Observable<EntityResponseType> {
+    return this.http.post<IParentAllDetails>(this.resourceUrl + '/add', parent, { observe: 'response' });
   }
 
   addParentToCollectionIfMissing(parentCollection: IParent[], ...parentsToCheck: (IParent | null | undefined)[]): IParent[] {

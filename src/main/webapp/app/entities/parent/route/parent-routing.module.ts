@@ -6,6 +6,7 @@ import { ParentComponent } from '../list/parent.component';
 import { ParentDetailComponent } from '../detail/parent-detail.component';
 import { ParentUpdateComponent } from '../update/parent-update.component';
 import { ParentRoutingResolveService } from './parent-routing-resolve.service';
+import { AddParentComponent } from '../add-parent/add-parent.component';
 
 const parentRoute: Routes = [
   {
@@ -35,6 +36,14 @@ const parentRoute: Routes = [
   {
     path: ':id/edit',
     component: ParentUpdateComponent,
+    resolve: {
+      parent: ParentRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'add',
+    component: AddParentComponent,
     resolve: {
       parent: ParentRoutingResolveService,
     },
