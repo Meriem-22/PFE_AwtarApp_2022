@@ -1,10 +1,13 @@
 package com.awtar.myapp.service.impl;
 
+import com.awtar.myapp.domain.Family;
 import com.awtar.myapp.domain.Profile;
+import com.awtar.myapp.repository.FamilyRepository;
 import com.awtar.myapp.repository.ProfileRepository;
 import com.awtar.myapp.service.ProfileService;
 import com.awtar.myapp.service.dto.ProfileDTO;
 import com.awtar.myapp.service.mapper.ProfileMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +29,12 @@ public class ProfileServiceImpl implements ProfileService {
 
     private final ProfileMapper profileMapper;
 
-    public ProfileServiceImpl(ProfileRepository profileRepository, ProfileMapper profileMapper) {
+    private final FamilyRepository familyRepository;
+
+    public ProfileServiceImpl(ProfileRepository profileRepository, ProfileMapper profileMapper, FamilyRepository familyRepository) {
         this.profileRepository = profileRepository;
         this.profileMapper = profileMapper;
+        this.familyRepository = familyRepository;
     }
 
     @Override
@@ -84,5 +90,21 @@ public class ProfileServiceImpl implements ProfileService {
     public void delete(Long id) {
         log.debug("Request to delete Profile : {}", id);
         profileRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ProfileDTO> findFamilyParents(Long id) {
+        Family family = familyRepository.getById(id);
+        List<Profile> parents = profileRepository.findParentsOfOneFamily(family);
+
+        return profileMapper.toDto(parents);
+    }
+
+    @Override
+    public List<ProfileDTO> findFamilyChildren(Long id) {
+        Family family = familyRepository.getById(id);
+        List<Profile> children = profileRepository.findChildrenOfOneFamily(family);
+
+        return profileMapper.toDto(children);
     }
 }

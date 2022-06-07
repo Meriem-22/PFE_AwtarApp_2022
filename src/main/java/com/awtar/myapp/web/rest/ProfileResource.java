@@ -189,4 +189,30 @@ public class ProfileResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * {@code GET  /profiles/:id} : get the "id" profile.
+     *
+     * @param id the id of the profileDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profileDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/profiles/parents/{id}")
+    public ResponseEntity<List<ProfileDTO>> getParentsProfile(@PathVariable Long id) {
+        log.debug("REST request to get Profile : {}", id);
+        List<ProfileDTO> profileDTO = profileService.findFamilyParents(id);
+        return ResponseEntity.ok().body(profileDTO);
+    }
+
+    /**
+     * {@code GET  /profiles/:id} : get the "id" profile.
+     *
+     * @param id the id of the profileDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profileDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/profiles/children/{id}")
+    public ResponseEntity<List<ProfileDTO>> getChildrenProfile(@PathVariable Long id) {
+        log.debug("REST request to get Profile : {}", id);
+        List<ProfileDTO> profileDTOC = profileService.findFamilyChildren(id);
+        return ResponseEntity.ok().body(profileDTOC);
+    }
 }

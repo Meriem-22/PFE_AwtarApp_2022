@@ -1,6 +1,7 @@
 package com.awtar.myapp.service;
 
 import com.awtar.myapp.service.dto.ProfileDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -63,4 +64,20 @@ public interface ProfileService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get the "id" profile.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    List<ProfileDTO> findFamilyParents(Long id);
+
+    /**
+     * Get the "id" profile.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    List<ProfileDTO> findFamilyChildren(Long id);
 }
