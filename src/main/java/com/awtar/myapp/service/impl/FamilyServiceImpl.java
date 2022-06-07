@@ -5,6 +5,7 @@ import com.awtar.myapp.domain.Child;
 import com.awtar.myapp.domain.Family;
 import com.awtar.myapp.domain.Parent;
 import com.awtar.myapp.domain.Profile;
+import com.awtar.myapp.domain.enumeration.Beneficiaries;
 import com.awtar.myapp.repository.BeneficiaryRepository;
 import com.awtar.myapp.repository.ChildRepository;
 import com.awtar.myapp.repository.FamilyRepository;
@@ -154,8 +155,10 @@ public class FamilyServiceImpl implements FamilyService {
         Family family = familyMapper.toEntity(familyDTO);
         BeneficiaryDTO beneficiarydto = familyDTO.getBeneficiary();
         Beneficiary beneficiary = beneficiaryMapper.toEntity(beneficiarydto);
+        family.setBeneficiaryType(Beneficiaries.FAMILY);
+        family.setAuthorizingOfficer(beneficiary.getAuthorizingOfficer());
+        family.setTutor(beneficiary.getTutor());
         family = familyRepository.save(family);
-        beneficiaryRepository.updateInfo(family.getId(), beneficiary.getAuthorizingOfficer(), beneficiary.getTutor());
 
         ParentDTO[] parentCollection;
         parentCollection = familyDTO.getParentsDetails();
@@ -180,6 +183,9 @@ public class FamilyServiceImpl implements FamilyService {
             Profile profile = profileMapper.toEntity(profiledto);
             Child child = childMapper.toEntity(childdto);
             child.setFamily(family);
+            child.setAuthorizingOfficer(beneficiary.getAuthorizingOfficer());
+            child.setTutor(beneficiary.getTutor());
+            child.setBeneficiaryType(Beneficiaries.CHILD);
             child = childRepository.save(child);
             profile.setChild(child);
             profileRepository.save(profile);

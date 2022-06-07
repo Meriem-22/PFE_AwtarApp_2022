@@ -1,6 +1,7 @@
 package com.awtar.myapp.service.impl;
 
 import com.awtar.myapp.domain.Establishment;
+import com.awtar.myapp.domain.enumeration.Beneficiaries;
 import com.awtar.myapp.repository.EstablishmentRepository;
 import com.awtar.myapp.service.EstablishmentService;
 import com.awtar.myapp.service.dto.EstablishmentDTO;
@@ -35,6 +36,7 @@ public class EstablishmentServiceImpl implements EstablishmentService {
     public EstablishmentDTO save(EstablishmentDTO establishmentDTO) {
         log.debug("Request to save Establishment : {}", establishmentDTO);
         Establishment establishment = establishmentMapper.toEntity(establishmentDTO);
+        establishment.setBeneficiaryType(Beneficiaries.ESTABLISHMENT);
         establishment = establishmentRepository.save(establishment);
         return establishmentMapper.toDto(establishment);
     }

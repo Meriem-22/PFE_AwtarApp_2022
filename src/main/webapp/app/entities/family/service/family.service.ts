@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IFamily, getFamilyIdentifier } from '../family.model';
+import { IFamily, getFamilyIdentifier, IFamilyAllDetails, getFamilyAllDetailsIdentifier } from '../family.model';
 
 export type EntityResponseType = HttpResponse<IFamily>;
 export type EntityArrayResponseType = HttpResponse<IFamily[]>;
+export type EntityResponse = HttpResponse<IFamilyAllDetails>;
 
 @Injectable({ providedIn: 'root' })
 export class FamilyService {
@@ -16,37 +17,42 @@ export class FamilyService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(family: IFamily): Observable<EntityResponseType> {
-    return this.http.post<IFamily>(this.resourceUrl, family, { observe: 'response' });
+  create(family: IFamilyAllDetails): Observable<EntityResponse> {
+    return this.http.post<IFamilyAllDetails>(this.resourceUrl, family, { observe: 'response' });
   }
 
-  update(family: IFamily): Observable<EntityResponseType> {
-    return this.http.put<IFamily>(`${this.resourceUrl}/${getFamilyIdentifier(family) as number}`, family, { observe: 'response' });
+  update(family: IFamilyAllDetails): Observable<EntityResponse> {
+    return this.http.put<IFamilyAllDetails>(`${this.resourceUrl}/${getFamilyIdentifier(family) as number}`, family, {
+      observe: 'response',
+    });
   }
 
-  partialUpdate(family: IFamily): Observable<EntityResponseType> {
+  partialUpdate(family: IFamilyAllDetails): Observable<EntityResponse> {
     return this.http.patch<IFamily>(`${this.resourceUrl}/${getFamilyIdentifier(family) as number}`, family, { observe: 'response' });
   }
 
-  find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IFamily>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  find(id: number): Observable<EntityResponse> {
+    return this.http.get<IFamilyAllDetails>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IFamily[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<IFamilyAllDetails[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  addFamilyToCollectionIfMissing(familyCollection: IFamily[], ...familiesToCheck: (IFamily | null | undefined)[]): IFamily[] {
-    const families: IFamily[] = familiesToCheck.filter(isPresent);
+  addFamilyToCollectionIfMissing(
+    familyCollection: IFamilyAllDetails[],
+    ...familiesToCheck: (IFamilyAllDetails | null | undefined)[]
+  ): IFamilyAllDetails[] {
+    const families: IFamilyAllDetails[] = familiesToCheck.filter(isPresent);
     if (families.length > 0) {
-      const familyCollectionIdentifiers = familyCollection.map(familyItem => getFamilyIdentifier(familyItem)!);
+      const familyCollectionIdentifiers = familyCollection.map(familyItem => getFamilyAllDetailsIdentifier(familyItem)!);
       const familiesToAdd = families.filter(familyItem => {
-        const familyIdentifier = getFamilyIdentifier(familyItem);
+        const familyIdentifier = getFamilyAllDetailsIdentifier(familyItem);
         if (familyIdentifier == null || familyCollectionIdentifiers.includes(familyIdentifier)) {
           return false;
         }
@@ -56,5 +62,9 @@ export class FamilyService {
       return [...familiesToAdd, ...familyCollection];
     }
     return familyCollection;
+  }
+
+  createFromFormFamily(family: IFamilyAllDetails): Observable<EntityResponse> {
+    return this.http.post<IFamilyAllDetails>(this.resourceUrl + '/add', family, { observe: 'response' });
   }
 }
