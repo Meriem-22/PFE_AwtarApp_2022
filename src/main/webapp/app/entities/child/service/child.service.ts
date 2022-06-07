@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IChild, getChildIdentifier } from '../child.model';
+import { IChild, getChildIdentifier, IChildAllDetails } from '../child.model';
 
 export type EntityResponseType = HttpResponse<IChild>;
 export type EntityArrayResponseType = HttpResponse<IChild[]>;
+export type EntityResponse = HttpResponse<IChildAllDetails>;
 
 @Injectable({ providedIn: 'root' })
 export class ChildService {
@@ -39,6 +40,10 @@ export class ChildService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  addchild(child: IChildAllDetails): Observable<EntityResponse> {
+    return this.http.post<IChildAllDetails>(this.resourceUrl + '/add', child, { observe: 'response' });
   }
 
   addChildToCollectionIfMissing(childCollection: IChild[], ...childrenToCheck: (IChild | null | undefined)[]): IChild[] {

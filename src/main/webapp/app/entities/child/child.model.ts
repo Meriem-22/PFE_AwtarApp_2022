@@ -18,6 +18,24 @@ export class Child implements IChild {
   ) {}
 }
 
+export interface IChildAllDetails {
+  id?: number;
+  teachingCurricula?: ITeachingCurriculum[] | null;
+  childProfile?: IProfile | null;
+  family?: IFamily | null;
+  profile?: IProfile;
+}
+
+export class ChildAllDetails implements IChildAllDetails {
+  constructor(
+    public id?: number,
+    public teachingCurricula?: ITeachingCurriculum[] | null,
+    public childProfile?: IProfile | null,
+    public family?: IFamily | null,
+    public profile?: IProfile
+  ) {}
+}
+
 export function getChildIdentifier(child: IChild): number | undefined {
   return child.id;
 }
