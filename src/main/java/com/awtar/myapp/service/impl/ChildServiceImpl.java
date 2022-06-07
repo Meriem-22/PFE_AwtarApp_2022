@@ -3,6 +3,7 @@ package com.awtar.myapp.service.impl;
 import com.awtar.myapp.domain.Child;
 import com.awtar.myapp.domain.Family;
 import com.awtar.myapp.domain.Profile;
+import com.awtar.myapp.domain.enumeration.Beneficiaries;
 import com.awtar.myapp.repository.ChildRepository;
 import com.awtar.myapp.repository.ProfileRepository;
 import com.awtar.myapp.service.ChildService;
@@ -130,6 +131,7 @@ public class ChildServiceImpl implements ChildService {
         Profile profile = profileMapper.toEntity(profiledto);
         Child child = childMapper.toEntity(childDTO);
         child.setFamily(f);
+        child.setBeneficiaryType(Beneficiaries.CHILD);
         child = childRepository.save(child);
         profile.setChild(child);
         profileRepository.save(profile);

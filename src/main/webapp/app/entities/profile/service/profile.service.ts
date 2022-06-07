@@ -16,6 +16,8 @@ export type EntityArrayResponseType = HttpResponse<IProfile[]>;
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/profiles');
+  protected Url = this.applicationConfigService.getEndpointFor('api/profiles/parents');
+  protected UrlChildren = this.applicationConfigService.getEndpointFor('api/profiles/children');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -55,6 +57,18 @@ export class ProfileService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  getAllParentsProfile(id: number): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IProfile[]>(`${this.Url}/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  getAllChildrenProfile(id: number): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IProfile[]>(`${this.UrlChildren}/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
   addProfileToCollectionIfMissing(profileCollection: IProfile[], ...profilesToCheck: (IProfile | null | undefined)[]): IProfile[] {
