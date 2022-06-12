@@ -193,4 +193,10 @@ public class FamilyServiceImpl implements FamilyService {
 
         return familyMapper.toDto(family);
     }
+
+    @Override
+    public List<FamilyDTO> findFamilys() {
+        List<Family> family = familyRepository.findAllFamilyNotArchivated();
+        return familyMapper.toDto(family);
+    }
 }

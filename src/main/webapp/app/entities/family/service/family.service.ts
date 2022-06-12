@@ -35,6 +35,10 @@ export class FamilyService {
     return this.http.get<IFamilyAllDetails>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findFamily(): Observable<EntityArrayResponseType> {
+    return this.http.get<IFamily[]>(this.resourceUrl + '/all', { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IFamilyAllDetails[]>(this.resourceUrl, { params: options, observe: 'response' });

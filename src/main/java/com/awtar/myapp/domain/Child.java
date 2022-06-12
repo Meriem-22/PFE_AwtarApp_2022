@@ -16,7 +16,7 @@ public class Child extends Beneficiary implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @OneToMany(mappedBy = "child")
+    @OneToMany(mappedBy = "child", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "schoolLevel", "child", "educationalInstitution" }, allowSetters = true)
     private Set<TeachingCurriculum> teachingCurricula = new HashSet<>();
 

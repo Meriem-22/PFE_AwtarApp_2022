@@ -2,9 +2,9 @@
   "awtarApp": {
     "Period": {
       "null": "",
-      "PER_WEEK": "PER_WEEK",
-      "PER_MONTH": "PER_MONTH",
-      "PER_YEAR": "PER_YEAR"
+      "PER_WEEK": "PAR SEMAINE",
+      "PER_MONTH": "PAR MOIS",
+      "PER_YEAR": "PAR AN"
     }
   }
 }

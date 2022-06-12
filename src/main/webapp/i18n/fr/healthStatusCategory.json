@@ -2,25 +2,25 @@
   "awtarApp": {
     "healthStatusCategory": {
       "home": {
-        "title": "HealthStatusCategories",
+        "title": "Catégories d'état de santé",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Health Status Category",
-        "createOrEditLabel": "Créer ou éditer un Health Status Category",
-        "notFound": "Aucun Health Status Category trouvé"
+        "createLabel": "Créer un nouveau catégories d'état de santé",
+        "createOrEditLabel": "Créer ou éditer une catégories d'état de santé",
+        "notFound": "Aucune catégorie d'état de santé trouvé"
       },
-      "created": "Un nouveau Health Status Category a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Health Status Category avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Health Status Category avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouveau catégories d'état de santé a été créé avec l'identifiant {{ param }}",
+      "updated": "La catégories d'état de santé avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La catégories d'état de santé avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Health Status Category {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer la catégories d'état de santé {{ id }} ?"
       },
       "detail": {
-        "title": "Health Status Category"
+        "title": "Catégorie d'état de santé"
       },
       "id": "ID",
-      "name": "Name",
-      "archivated": "Archivated",
-      "stateOfHealth": "State Of Health"
+      "name": "Nom",
+      "archivated": "Archivé",
+      "stateOfHealth": "État de santé"
     }
   }
 }

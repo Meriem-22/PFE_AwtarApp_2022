@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * A Beneficiary.
@@ -35,11 +37,11 @@ public class Beneficiary implements Serializable {
     @Column(name = "archivated")
     private Boolean archivated;
 
-    @OneToMany(mappedBy = "beneficiary")
+    @OneToMany(mappedBy = "beneficiary", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "donationsIssued", "nature", "beneficiary", "items" }, allowSetters = true)
     private Set<DonationDetails> donationdetails = new HashSet<>();
 
-    @OneToMany(mappedBy = "beneficiary")
+    @OneToMany(mappedBy = "beneficiary", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "beneficiary" }, allowSetters = true)
     private Set<Visit> visits = new HashSet<>();
 

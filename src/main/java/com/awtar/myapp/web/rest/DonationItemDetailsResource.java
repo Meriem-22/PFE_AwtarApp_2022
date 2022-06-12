@@ -194,4 +194,17 @@ public class DonationItemDetailsResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * {@code GET  /donation-item-details/:id} : get the "id" donationItemDetails.
+     *
+     * @param id the id of the donationItemDetailsDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationItemDetailsDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donation-item-details/donation-issued/{id}")
+    public ResponseEntity<List<DonationItemDetailsDTO>> getAllDonationItemDetails(@PathVariable Long id) {
+        log.debug("REST request to get DonationItemDetails : {}", id);
+        List<DonationItemDetailsDTO> donationItemDetailsDTO = donationItemDetailsService.findAllOfOneDonation(id);
+        return ResponseEntity.ok().body(donationItemDetailsDTO);
+    }
 }

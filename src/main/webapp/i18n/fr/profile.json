@@ -2,42 +2,42 @@
   "awtarApp": {
     "profile": {
       "home": {
-        "title": "Profiles",
+        "title": "Profils",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Profile",
-        "createOrEditLabel": "Créer ou éditer un Profile",
-        "notFound": "Aucun Profile trouvé"
+        "createLabel": "Créer un nouveau Profil",
+        "createOrEditLabel": "Créer ou éditer un Profil",
+        "notFound": "Aucun Profil trouvé"
       },
-      "created": "Un nouveau Profile a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Profile avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Profile avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Profil a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Profil avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Profil avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Profile {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Profil {{ id }} ?"
       },
       "detail": {
-        "title": "Profile"
+        "title": "Profil"
       },
       "id": "ID",
-      "firstName": "First Name",
-      "lastName": "Last Name",
-      "firstNameArabic": "First Name Arabic",
-      "lastNameArabic": "Last Name Arabic",
-      "gender": "Gender",
-      "dateOfBirth": "Date Of Birth",
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "firstNameArabic": "الاسم",
+      "lastNameArabic": "الكنية",
+      "gender": "Sexe",
+      "dateOfBirth": "Date de naissance",
       "cin": "Cin",
-      "urlPhoto": "Url Photo",
-      "address": "Address",
-      "phone": "Phone",
+      "urlPhoto": "Photo de profil",
+      "address": "Addresse",
+      "phone": "Numéro de téléphone",
       "email": "Email",
-      "urlCinAttached": "Url Cin Attached",
-      "archivated": "Archivated",
+      "urlCinAttached": "CIN Photo jointe",
+      "archivated": "Archivé",
       "parent": "Parent",
-      "child": "Child",
-      "authorizingOfficer": "Authorizing Officer",
-      "tutor": "Tutor",
-      "statusOfHealth": "Status Of Health",
-      "birthPlace": "Birth Place",
-      "placeOfResidence": "Place Of Residence"
+      "child": "Enfant",
+      "authorizingOfficer": "Ordonnateur",
+      "tutor": "Tuteur",
+      "statusOfHealth": "État de santé",
+      "birthPlace": "Lieu de naissance",
+      "placeOfResidence": "Lieu de résidence"
     }
   }
 }

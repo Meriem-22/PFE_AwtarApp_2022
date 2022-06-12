@@ -6,6 +6,7 @@ import com.awtar.myapp.repository.EstablishmentRepository;
 import com.awtar.myapp.service.EstablishmentService;
 import com.awtar.myapp.service.dto.EstablishmentDTO;
 import com.awtar.myapp.service.mapper.EstablishmentMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,5 +87,11 @@ public class EstablishmentServiceImpl implements EstablishmentService {
     public void delete(Long id) {
         log.debug("Request to delete Establishment : {}", id);
         establishmentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<EstablishmentDTO> findEstablishments() {
+        List<Establishment> establishments = establishmentRepository.findAllWithToOneRelationships();
+        return establishmentMapper.toDto(establishments);
     }
 }

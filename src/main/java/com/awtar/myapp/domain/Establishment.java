@@ -57,7 +57,7 @@ public class Establishment extends Beneficiary implements Serializable {
     @Column(name = "remark")
     private String remark;
 
-    @OneToMany(mappedBy = "establishment")
+    @OneToMany(mappedBy = "establishment", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "establishment" }, allowSetters = true)
     private Set<Report> reports = new HashSet<>();
 

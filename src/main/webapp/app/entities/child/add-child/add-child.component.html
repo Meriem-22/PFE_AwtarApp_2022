@@ -1,6 +1,5 @@
 <style>
   #msform {
-    text-align: center;
     position: relative;
     margin-top: 30px;
     color: red;
@@ -12,8 +11,8 @@
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
     padding: 20px 30px;
     box-sizing: border-box;
-    width: 40%;
-    margin: 0 10% 20% 30%;
+    width: 80%;
+    margin: 10% 10% 10% 10%;
     /*stacking fieldsets above each other*/
     position: relative;
   }
@@ -25,7 +24,7 @@
   #msform input,
   #msform textarea {
     padding: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(119, 41, 175);
     border-radius: 0px;
     margin-bottom: 10px;
     width: 100%;
@@ -87,6 +86,12 @@
     cursor: pointer;
     padding: 10px 5px;
     margin: 10px 5px;
+    text-align: center;
+  }
+
+  .botton {
+    align-items: center;
+    margin-left: 50rem;
   }
 
   #msform .action-button-add {
@@ -99,15 +104,16 @@
     cursor: pointer;
     padding: 10px 5px;
     margin: 10px 5px;
+    text-align: center;
   }
 
   #msform .action-button-add:hover,
   #msform .action-button-add:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px purple;
+    box-shadow: 0 0 0 3px rgb(30, 28, 28), 0 0 0 3px purple;
   }
   #msform .action-button:hover,
   #msform .action-button:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #b667ff;
+    box-shadow: 0 0 0 3px rgb(27, 25, 25), 0 0 0 3px #b667ff;
   }
 
   #msform .action-button-previous {
@@ -120,6 +126,7 @@
     cursor: pointer;
     padding: 10px 5px;
     margin: 10px 5px;
+    text-align: center;
   }
   #msform .action-button-previous:hover,
   #msform .action-button-previous:focus {
@@ -254,7 +261,7 @@
 
 <form [formGroup]="ChildDetails" id="msform">
   <fieldset>
-    <h2 class="fs-title" style="margin-bottom: 4rem">Children Details</h2>
+    <h1 class="fs-title" style="margin-bottom: 4rem; text-align: center; color: #b667ff">Ajouter un enfant</h1>
 
     <div class="row mb-3">
       <label class="form-label" jhiTranslate="awtarApp.profile.urlPhoto" for="field_urlPhoto">Url Photo</label>
@@ -297,15 +304,9 @@
     </div>
 
     <div class="info1">
-      <input
-        type="text"
-        class="form-control"
-        name="firstName"
-        id="field_firstName"
-        data-cy="firstName"
-        formControlName="firstName"
-        placeholder="First Name"
-      />
+      <label class="form-label" jhiTranslate="awtarApp.profile.firstName" for="field_firstName">First Name</label>
+
+      <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
       <div
         *ngIf="ChildDetails.get('firstName')!.invalid && (ChildDetails.get('firstName')!.dirty || ChildDetails.get('firstName')!.touched)"
       >
@@ -318,15 +319,9 @@
         </small>
       </div>
 
-      <input
-        type="text"
-        class="form-control"
-        name="lastName"
-        id="field_lastName"
-        data-cy="lastName"
-        formControlName="lastName"
-        placeholder="Last Name"
-      />
+      <label class="form-label" jhiTranslate="awtarApp.profile.lastName" for="field_lastName">Last Name</label>
+
+      <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
       <div *ngIf="ChildDetails.get('lastName')!.invalid && (ChildDetails.get('lastName')!.dirty || ChildDetails.get('lastName')!.touched)">
         <small
           class="form-text text-danger"
@@ -337,6 +332,14 @@
         </small>
       </div>
 
+      <label
+        class="form-label"
+        style="text-align: right; margin-left: 70rem"
+        jhiTranslate="awtarApp.profile.firstNameArabic"
+        for="field_firstNameArabic"
+        >First Name Arabic</label
+      >
+
       <input
         type="text"
         class="form-control"
@@ -344,8 +347,16 @@
         id="field_firstNameArabic"
         data-cy="firstNameArabic"
         formControlName="firstNameArabic"
-        placeholder="First Name Arabic"
+        style="text-align: right"
       />
+
+      <label
+        class="form-label"
+        style="text-align: right; margin-left: 70rem"
+        jhiTranslate="awtarApp.profile.lastNameArabic"
+        for="field_lastNameArabic"
+        >Last Name Arabic</label
+      >
 
       <input
         type="text"
@@ -354,7 +365,7 @@
         id="field_lastNameArabic"
         data-cy="lastNameArabic"
         formControlName="lastNameArabic"
-        placeholder="Last Name Arabic"
+        style="text-align: right"
       />
     </div>
     <div class="info2">
@@ -370,6 +381,8 @@
       </div>
 
       <div class="input-group">
+        <label class="form-label" jhiTranslate="awtarApp.profile.dateOfBirth" for="field_dateOfBirth">Date Of Birth</label>
+
         <input
           id="field_dateOfBirth"
           data-cy="dateOfBirth"
@@ -379,7 +392,6 @@
           ngbDatepicker
           #dateOfBirthDp="ngbDatepicker"
           formControlName="dateOfBirth"
-          placeholder="Date Of Birth"
         />
 
         <button type="button" class="btn btn-secondary" (click)="dateOfBirthDp.toggle()">
@@ -426,8 +438,9 @@
           This field is required.
         </small>
       </div>
+      <label class="form-label" jhiTranslate="awtarApp.profile.cin" for="field_cin">Cin</label>
 
-      <input type="text" class="form-control" name="cin" id="field_cin" data-cy="cin" formControlName="cin" placeholder="CIN" />
+      <input type="text" class="form-control" name="cin" id="field_cin" data-cy="cin" formControlName="cin" />
     </div>
 
     <div class="info3">
@@ -465,27 +478,26 @@
         </small>
       </div>
 
-      <input
-        type="text"
-        class="form-control"
-        name="address"
-        id="field_address"
-        data-cy="address"
-        formControlName="address"
-        placeholder="Adress"
-      />
+      <label class="form-label" jhiTranslate="awtarApp.profile.address" for="field_address">Address</label>
 
-      <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" placeholder="Phone" />
+      <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
 
-      <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" placeholder="Email" />
+      <label class="form-label" jhiTranslate="awtarApp.profile.phone" for="field_phone">Phone</label>
+
+      <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+
+      <label class="form-label" jhiTranslate="awtarApp.profile.email" for="field_email">Email</label>
+
+      <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
 
       <label class="form-label" jhiTranslate="awtarApp.profile.archivated" for="field_archivated">Archivated</label>
       <input type="checkbox" class="form-check" name="archivated" id="field_archivated" data-cy="archivated" formControlName="archivated" />
     </div>
-
-    <button type="submit" (click)="previousState()" class="submit action-button" data-cy="entityDetailsBackButton">
-      <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-    </button>
-    <input (click)="submit()" type="button" name="add" class="add action-button-add" value="Add" />
+    <div class="botton">
+      <button type="submit" (click)="previousState()" class="submit action-button" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+      <input (click)="submit()" type="button" name="add" class="add action-button-add" value="Ajouter" />
+    </div>
   </fieldset>
 </form>

@@ -1,6 +1,7 @@
 package com.awtar.myapp.service;
 
 import com.awtar.myapp.service.dto.ItemDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -63,4 +64,12 @@ public interface ItemService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get the "id" item.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    List<ItemDTO> findItemsWithNature(Long id);
 }

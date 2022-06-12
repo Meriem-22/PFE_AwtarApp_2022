@@ -2,35 +2,35 @@
   "awtarApp": {
     "item": {
       "home": {
-        "title": "Items",
+        "title": "Articles",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Item",
-        "createOrEditLabel": "Créer ou éditer un Item",
-        "notFound": "Aucun Item trouvé"
+        "createLabel": "Créer un nouveau article",
+        "createOrEditLabel": "Créer ou éditer un article",
+        "notFound": "Aucun article trouvé"
       },
-      "created": "Un nouveau Item a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Item avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Item avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau article a été créé avec l'identifiant {{ param }}",
+      "updated": "L'article avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'article avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Item {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer L'article {{ id }} ?"
       },
       "detail": {
-        "title": "Item"
+        "title": "Article"
       },
       "id": "ID",
-      "name": "Name",
-      "urlPhoto": "Url Photo",
-      "gender": "Gender",
-      "composed": "Composed",
-      "archivated": "Archivated",
-      "itemValue": "Item Value",
+      "name": "Nom",
+      "urlPhoto": "Photo d'article",
+      "gender": "Genre",
+      "composed": "Composé",
+      "archivated": "Archivé",
+      "itemValue": "Valeur de l'article",
       "nature": "Nature",
-      "donationDetails": "Donation Details",
-      "composer": "Composer",
+      "donationDetails": "Détails du don",
+      "composer": "Composé",
       "composant": "Composant",
-      "donationsReceived": "Donations Received",
-      "childStatus": "Child Status",
-      "schoolLevel": "School Level"
+      "donationsReceived": "Dons reçus",
+      "childStatus": "Statut d'enfant",
+      "schoolLevel": "Niveau scolaire"
     }
   }
 }

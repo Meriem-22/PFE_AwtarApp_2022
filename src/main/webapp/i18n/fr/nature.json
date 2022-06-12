@@ -4,26 +4,26 @@
       "home": {
         "title": "Natures",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Nature",
-        "createOrEditLabel": "Créer ou éditer un Nature",
-        "notFound": "Aucun Nature trouvé"
+        "createLabel": "Créer une nouvelle nature",
+        "createOrEditLabel": "Créer ou éditer une nature",
+        "notFound": "Aucune nature trouvé"
       },
-      "created": "Un nouveau Nature a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Nature avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Nature avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle nature a été créé avec l'identifiant {{ param }}",
+      "updated": "La Nature avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La Nature avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Nature {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer la Nature {{ id }} ?"
       },
       "detail": {
         "title": "Nature"
       },
       "id": "ID",
-      "name": "Name",
-      "destinedTo": "Destined To",
-      "necessityValue": "Necessity Value",
-      "archivated": "Archivated",
-      "item": "Item",
-      "donationdetails": "Donationdetails"
+      "name": "Nom",
+      "destinedTo": "Destiné à",
+      "necessityValue": "Valeur de nécessité",
+      "archivated": "Archivé",
+      "item": "Article",
+      "donationdetails": "Détails du don"
     }
   }
 }

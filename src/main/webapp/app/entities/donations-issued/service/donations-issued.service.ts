@@ -35,6 +35,10 @@ export class DonationsIssuedService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  createDons(donationsIssued: IDonationsIssued): Observable<EntityResponseType> {
+    return this.http.post<IDonationsIssued>(this.resourceUrl + '/add', donationsIssued, { observe: 'response' });
+  }
+
   getAllValidatedDonationsIssued(): Observable<EntityArrayResponseType> {
     return this.http.get<IDonationsIssued[]>(this.resourceUrl + '/validated', { observe: 'response' });
   }

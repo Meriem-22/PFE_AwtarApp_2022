@@ -1,6 +1,7 @@
 package com.awtar.myapp.repository;
 
 import com.awtar.myapp.domain.DonationItemDetails;
+import com.awtar.myapp.domain.DonationsIssued;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -39,4 +40,9 @@ public interface DonationItemDetailsRepository extends JpaRepository<DonationIte
         "select donationItemDetails from DonationItemDetails donationItemDetails left join fetch donationItemDetails.item where donationItemDetails.id =:id"
     )
     Optional<DonationItemDetails> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query(
+        "select donationItemDetails from DonationItemDetails donationItemDetails left join fetch donationItemDetails.item where donationItemDetails.donationDetails.donationsIssued  = :donationsIssued"
+    )
+    List<DonationItemDetails> findAllDetailsItemDonations(@Param("donationsIssued") DonationsIssued donationsIssued);
 }

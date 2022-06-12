@@ -36,4 +36,6 @@ public interface DonationDetailsMapper extends EntityMapper<DonationDetailsDTO, 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "beneficiaryReference", source = "beneficiaryReference")
     BeneficiaryDTO toDtoBeneficiaryBeneficiaryReference(Beneficiary beneficiary);
+
+    DonationDetails toEntity(DonationDetailsDTO donationDetailsDTO);
 }

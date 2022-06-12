@@ -18,15 +18,15 @@
         "title": "Parent"
       },
       "id": "ID",
-      "annualRevenue": "Annual Revenue",
+      "annualRevenue": "Revenu annuel",
       "cnss": "Cnss",
-      "maritalStatus": "Marital Status",
-      "occupation": "Occupation",
-      "deceased": "Deceased",
-      "dateOfDeath": "Date Of Death",
-      "familyHead": "Family Head",
-      "parentProfile": "Parent Profile",
-      "family": "Family"
+      "maritalStatus": "État civil",
+      "occupation": "Profession",
+      "deceased": "Défunt",
+      "dateOfDeath": "Date de décès",
+      "familyHead": "Chef de famille",
+      "parentProfile": "Profil des parents",
+      "family": "Famille"
     }
   }
 }

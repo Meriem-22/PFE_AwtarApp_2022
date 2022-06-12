@@ -2,27 +2,27 @@
   "awtarApp": {
     "tutor": {
       "home": {
-        "title": "Tutors",
+        "title": "Tuteurs",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Tutor",
-        "createOrEditLabel": "Créer ou éditer un Tutor",
-        "notFound": "Aucun Tutor trouvé"
+        "createLabel": "Créer un nouveau Tuteur",
+        "createOrEditLabel": "Créer ou éditer un Tuteur",
+        "notFound": "Aucun Tuteur trouvé"
       },
-      "created": "Un nouveau Tutor a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Tutor avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Tutor avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Tuteur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Tuteur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Tuteur avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Tutor {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Tuteur {{ id }} ?"
       },
       "detail": {
-        "title": "Tutor"
+        "title": "Tuteur"
       },
       "id": "ID",
-      "activity": "Activity",
-      "manager": "Manager",
-      "managerCin": "Manager Cin",
+      "activity": "Activité",
+      "manager": "Gérant",
+      "managerCin": "CIN Gérant",
       "beneficiary": "Beneficiary",
-      "tutorProfile": "Tutor Profile"
+      "tutorProfile": "Profil du tuteur"
     }
   }
 }

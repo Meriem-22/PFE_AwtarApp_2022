@@ -215,4 +215,17 @@ public class ProfileResource {
         List<ProfileDTO> profileDTOC = profileService.findFamilyChildren(id);
         return ResponseEntity.ok().body(profileDTOC);
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profileDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/profiles/children")
+    public ResponseEntity<List<ProfileDTO>> getAllChildrenProfile() {
+        log.debug("REST request to get  all Profile : {}");
+        List<ProfileDTO> profileDTOC = profileService.findProfileChildren();
+        return ResponseEntity.ok().body(profileDTOC);
+    }
 }

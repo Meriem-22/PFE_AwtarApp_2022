@@ -209,4 +209,18 @@ public class FamilyResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+    /**
+     * {@code GET  /families} : get all the families.
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of families in body.
+     */
+    @GetMapping("/families/all")
+    public ResponseEntity<List<FamilyDTO>> getAllFamilies() {
+        log.debug("REST request to get Families");
+        List<FamilyDTO> familyDto = familyService.findFamilys();
+        return ResponseEntity.ok().body(familyDto);
+    }
 }

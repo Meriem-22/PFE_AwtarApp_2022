@@ -36,6 +36,10 @@ export class EstablishmentService {
     return this.http.get<IEstablishment>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findEstablishments(): Observable<EntityArrayResponseType> {
+    return this.http.get<IEstablishment[]>(this.resourceUrl + '/all', { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IEstablishment[]>(this.resourceUrl, { params: options, observe: 'response' });

@@ -64,7 +64,7 @@ body {
 }
 
 a {
-  color: #f5f9f8;
+  color: #141d1a;
 }
 
 img {
@@ -135,7 +135,7 @@ b {
 
 aside {
   height: 100vh;
-  background-color: #14a446;
+  background-color: #b667ff;
   width: 17rem;
 }
 
@@ -195,7 +195,7 @@ aside .sidebar a.active:before {
   content: '';
   width: 6px;
   height: 100%;
-  background: #064919;
+  background: #7a13db;
 }
 
 aside .sidebar a.active span {
@@ -256,7 +256,7 @@ main .insights > div:hover {
 }
 
 main .insights > div span {
-  background: #1eea80;
+  background: #b667ff;
   padding: 0.5rem;
   border-radius: 50%;
   color: #141d1a;
@@ -348,7 +348,7 @@ main .recent-dons table {
   background: rgb(226, 224, 223);
   width: 100%;
   border-radius: 1rem;
-  padding: 2.8rem;
+  padding: 4rem;
   text-align: center;
   box-shadow: 0 2rem 3rem rgb(40, 32, 32);
   transition: all 300ms ease;
@@ -362,6 +362,7 @@ main table tbody td {
   height: 3rem;
   border-bottom: 1px solid rgb(43, 42, 39);
   color: #363949;
+  margin-right: 0.5rem;
 }
 
 main table tbody tr:last-child td {
@@ -372,7 +373,7 @@ main .recent-dons a {
   text-align: center;
   display: block;
   margin: 1rem auto;
-  color: #1eea80;
+  color: #b667ff;
 }
 
 .right {
@@ -390,7 +391,7 @@ main .recent-dons a {
 }
 
 .right .theme-toggler {
-  background: #1eea80;
+  background: #b667ff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -410,7 +411,7 @@ main .recent-dons a {
 }
 
 .right .theme-toggler span.active {
-  background: #03361b;
+  background: #111e88;
   color: white;
   border-radius: 0.4;
 }
@@ -445,8 +446,8 @@ main .recent-dons a {
 
 .right .dons-analytics .add-product {
   background: transparent;
-  border: #085c30 2px dashed;
-  color: #085c30;
+  border: #b667ff 2px dashed;
+  color: #b667ff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -455,7 +456,7 @@ main .recent-dons a {
 }
 
 .right .dons-analytics .add-product:hover {
-  background: #085c30;
+  background: #b667ff;
   color: white;
 }
 
@@ -536,7 +537,7 @@ main .recent-dons a {
 }
 
 .dropdown-content a:hover {
-  background-color: #085c30;
+  background-color: rgb(99, 60, 145);
 }
 
 .dropdown:hover .dropdown-content {
@@ -544,7 +545,7 @@ main .recent-dons a {
 }
 
 .dropdown:hover .dropbtn {
-  background-color: #085c30;
+  background-color: rgb(99, 60, 145);
 }
 
 @media screen and (max-width: 768px) {

@@ -1,7 +1,9 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="donationDetails">
-      <h2 data-cy="donationDetailsDetailsHeading"><span jhiTranslate="awtarApp.donationDetails.detail.title">Donation Details</span></h2>
+      <h2 style="margin-top: 4rem; margin-bottom: 2rem" data-cy="donationDetailsDetailsHeading">
+        <span jhiTranslate="awtarApp.donationDetails.detail.title">Donation Details</span>
+      </h2>
 
       <hr />
 
@@ -39,9 +41,7 @@
         <dt><span jhiTranslate="awtarApp.donationDetails.beneficiary">Beneficiary</span></dt>
         <dd>
           <div *ngIf="donationDetails.beneficiary">
-            <a [routerLink]="['/beneficiary', donationDetails.beneficiary?.id, 'view']">{{
-              donationDetails.beneficiary?.beneficiaryReference
-            }}</a>
+            <a [routerLink]="['/beneficiary', donationDetails.beneficiary?.id, 'view']">{{ donationDetails.beneficiary?.id }}</a>
           </div>
         </dd>
       </dl>

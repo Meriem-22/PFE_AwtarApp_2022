@@ -71,4 +71,11 @@ public interface FamilyService {
      * @return the persisted entity.
      */
     FamilyDTO saveCompletedFamily(FamilyDTO familyDTO);
+
+    /**
+     *
+     *
+     * @return the {@link List} of entities.
+     */
+    List<FamilyDTO> findFamilys();
 }

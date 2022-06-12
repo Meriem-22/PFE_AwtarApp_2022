@@ -22,7 +22,7 @@ public class DonationDetailsDTO implements Serializable {
 
     private BeneficiaryDTO beneficiary;
 
-    private DonationItemDetailsDTO donationItemDetails;
+    private DonationItemDetailsDTO donationItemDetails[];
 
     public Long getId() {
         return id;
@@ -72,11 +72,11 @@ public class DonationDetailsDTO implements Serializable {
         this.beneficiary = beneficiary;
     }
 
-    public DonationItemDetailsDTO getDonationItemDetails() {
+    public DonationItemDetailsDTO[] getDonationItemDetails() {
         return donationItemDetails;
     }
 
-    public void setDonationItemDetails(DonationItemDetailsDTO donationItemDetails) {
+    public void setDonationItemDetails(DonationItemDetailsDTO[] donationItemDetails) {
         this.donationItemDetails = donationItemDetails;
     }
 

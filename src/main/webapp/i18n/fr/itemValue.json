@@ -2,27 +2,27 @@
   "awtarApp": {
     "itemValue": {
       "home": {
-        "title": "ItemValues",
+        "title": "Valeurs de l'article",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Item Value",
-        "createOrEditLabel": "Créer ou éditer un Item Value",
-        "notFound": "Aucun Item Value trouvé"
+        "createLabel": "Créer un nouveau valeur d'article",
+        "createOrEditLabel": "Créer ou éditer un valeur d'article",
+        "notFound": "Aucun valeur d'article trouvé"
       },
-      "created": "Un nouveau Item Value a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Item Value avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Item Value avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau valeur d'article a été créé avec l'identifiant {{ param }}",
+      "updated": "Le valeur d'article avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le valeur d'article avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Item Value {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le valeur d'article {{ id }} ?"
       },
       "detail": {
-        "title": "Item Value"
+        "title": "valeur d'article"
       },
       "id": "ID",
-      "price": "Price",
-      "priceDate": "Price Date",
-      "availableStockQuantity": "Available Stock Quantity",
-      "archivated": "Archivated",
-      "item": "Item"
+      "price": "Prix",
+      "priceDate": "Date du prix",
+      "availableStockQuantity": "Quantité de stock disponible",
+      "archivated": "Archivé",
+      "item": "Article"
     }
   }
 }

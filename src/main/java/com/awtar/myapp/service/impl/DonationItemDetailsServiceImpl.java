@@ -1,10 +1,13 @@
 package com.awtar.myapp.service.impl;
 
 import com.awtar.myapp.domain.DonationItemDetails;
+import com.awtar.myapp.domain.DonationsIssued;
 import com.awtar.myapp.repository.DonationItemDetailsRepository;
+import com.awtar.myapp.repository.DonationsIssuedRepository;
 import com.awtar.myapp.service.DonationItemDetailsService;
 import com.awtar.myapp.service.dto.DonationItemDetailsDTO;
 import com.awtar.myapp.service.mapper.DonationItemDetailsMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,12 +29,16 @@ public class DonationItemDetailsServiceImpl implements DonationItemDetailsServic
 
     private final DonationItemDetailsMapper donationItemDetailsMapper;
 
+    private final DonationsIssuedRepository donationsIssuedRepository;
+
     public DonationItemDetailsServiceImpl(
         DonationItemDetailsRepository donationItemDetailsRepository,
-        DonationItemDetailsMapper donationItemDetailsMapper
+        DonationItemDetailsMapper donationItemDetailsMapper,
+        DonationsIssuedRepository donationsIssuedRepository
     ) {
         this.donationItemDetailsRepository = donationItemDetailsRepository;
         this.donationItemDetailsMapper = donationItemDetailsMapper;
+        this.donationsIssuedRepository = donationsIssuedRepository;
     }
 
     @Override
@@ -87,5 +94,13 @@ public class DonationItemDetailsServiceImpl implements DonationItemDetailsServic
     public void delete(Long id) {
         log.debug("Request to delete DonationItemDetails : {}", id);
         donationItemDetailsRepository.deleteById(id);
+    }
+
+    @Override
+    public List<DonationItemDetailsDTO> findAllOfOneDonation(Long id) {
+        DonationsIssued donation = donationsIssuedRepository.getById(id);
+        List<DonationItemDetails> donationsItem = donationItemDetailsRepository.findAllDetailsItemDonations(donation);
+
+        return donationItemDetailsMapper.toDto(donationsItem);
     }
 }

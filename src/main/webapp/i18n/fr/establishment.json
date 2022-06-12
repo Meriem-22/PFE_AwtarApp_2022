@@ -2,38 +2,38 @@
   "awtarApp": {
     "establishment": {
       "home": {
-        "title": "Establishments",
+        "title": "Établissements",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Establishment",
-        "createOrEditLabel": "Créer ou éditer un Establishment",
-        "notFound": "Aucun Establishment trouvé"
+        "createLabel": "Créer un nouveau établissement",
+        "createOrEditLabel": "Créer ou éditer un établissement",
+        "notFound": "Aucun établissement trouvé"
       },
-      "created": "Un nouveau Establishment a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Establishment avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Establishment avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau établissement a été créé avec l'identifiant {{ param }}",
+      "updated": "L'établissement avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'établissement avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Establishment {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer L'établissement {{ id }} ?"
       },
       "detail": {
-        "title": "Establishment"
+        "title": "Établissement"
       },
       "id": "ID",
-      "name": "Name",
-      "activity": "Activity",
-      "manager": "Manager",
-      "managerCin": "Manager Cin",
+      "name": "Nom",
+      "activity": "Activité",
+      "manager": "Gérant",
+      "managerCin": "Cin Gérant",
       "contact": "Contact",
-      "adress": "Adress",
+      "adress": "Adresse",
       "cp": "Cp",
-      "region": "Region",
-      "phone": "Phone",
+      "region": "Région",
+      "phone": "Numéro de téléphone",
       "fax": "Fax",
       "email": "Email",
       "site": "Site",
-      "remark": "Remark",
-      "report": "Report",
-      "establishmentType": "Establishment Type",
-      "city": "City"
+      "remark": "Remarque",
+      "report": "Rapport",
+      "establishmentType": "Type d'établissement",
+      "city": "Ville"
     }
   }
 }

@@ -2,9 +2,9 @@
   "awtarApp": {
     "MaritalStatus": {
       "null": "",
-      "MARRIED": "MARRIED",
-      "DIVORCED": "DIVORCED",
-      "CELIBATOR": "CELIBATOR"
+      "MARRIED": "MARIÉ",
+      "DIVORCED": "DIVORCÉ",
+      "CELIBATOR": "CELIBATEUR"
     }
   }
 }

@@ -2,27 +2,27 @@
   "awtarApp": {
     "donationItemDetails": {
       "home": {
-        "title": "DonationItemDetails",
+        "title": "Détails de l'article du don",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Donation Item Details",
-        "createOrEditLabel": "Créer ou éditer un Donation Item Details",
-        "notFound": "Aucun Donation Item Details trouvé"
+        "createLabel": "Créer un nouveau détails de l'article du don",
+        "createOrEditLabel": "Créer ou éditer un détails de l'article du don",
+        "notFound": "Aucun détails de l'article du don trouvé"
       },
-      "created": "Un nouveau Donation Item Details a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Donation Item Details avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Donation Item Details avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau détails de l'article du don a été créé avec l'identifiant {{ param }}",
+      "updated": "Le détails de l'article du don avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le détails de l'article du don avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Donation Item Details {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le détails de l'article du don {{ id }} ?"
       },
       "detail": {
-        "title": "Donation Item Details"
+        "title": "Détails de l'article du don"
       },
       "id": "ID",
-      "quantity": "Quantity",
+      "quantity": "Quantité",
       "date": "Date",
-      "archivated": "Archivated",
-      "donationDetails": "Donation Details",
-      "item": "Item"
+      "archivated": "Archivé",
+      "donationDetails": "Détails du don",
+      "item": "Article"
     }
   }
 }

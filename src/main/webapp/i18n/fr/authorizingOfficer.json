@@ -2,29 +2,29 @@
   "awtarApp": {
     "authorizingOfficer": {
       "home": {
-        "title": "AuthorizingOfficers",
+        "title": "Ordonnateurs",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Authorizing Officer",
-        "createOrEditLabel": "Créer ou éditer un Authorizing Officer",
-        "notFound": "Aucun Authorizing Officer trouvé"
+        "createLabel": "Créer un nouveau Ordonnateur",
+        "createOrEditLabel": "Créer ou éditer un Ordonnateur",
+        "notFound": "Aucun Ordonnateur trouvé"
       },
-      "created": "Un nouveau Authorizing Officer a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Authorizing Officer avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Authorizing Officer avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Ordonnateur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Ordonnateur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Ordonnateur avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Authorizing Officer {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Ordonnateur {{ id }} ?"
       },
       "detail": {
-        "title": "Authorizing Officer"
+        "title": "Ordonnateur"
       },
       "id": "ID",
-      "abbreviation": "Abbreviation",
-      "activity": "Activity",
-      "manager": "Manager",
-      "managerCin": "Manager Cin",
-      "donations": "Donations",
-      "beneficiary": "Beneficiary",
-      "authorizingOfficerProfile": "Authorizing Officer Profile"
+      "abbreviation": "Abréviation",
+      "activity": "Activité",
+      "manager": "Gérant",
+      "managerCin": "Cin Gérant",
+      "donations": "Dons",
+      "beneficiary": "Bénéficiaire",
+      "authorizingOfficerProfile": "Profil de l'ordonnateur"
     }
   }
 }

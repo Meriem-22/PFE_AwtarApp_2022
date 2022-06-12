@@ -50,4 +50,9 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
         "select distinct profile from Profile profile left join fetch profile.birthPlace left join fetch profile.placeOfResidence where profile.child.family = :family"
     )
     List<Profile> findChildrenOfOneFamily(@Param("family") Family family);
+
+    @Query(
+        "select distinct profile from Profile profile left join fetch profile.birthPlace left join fetch profile.placeOfResidence where profile.child IS NOT NULL"
+    )
+    List<Profile> findAllProfileChild();
 }

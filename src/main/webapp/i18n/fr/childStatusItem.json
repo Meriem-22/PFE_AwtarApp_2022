@@ -2,26 +2,26 @@
   "awtarApp": {
     "childStatusItem": {
       "home": {
-        "title": "ChildStatusItems",
+        "title": "Articles de statut enfant",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Child Status Item",
-        "createOrEditLabel": "Créer ou éditer un Child Status Item",
-        "notFound": "Aucun Child Status Item trouvé"
+        "createLabel": "Créer un nouveau article de statut enfant",
+        "createOrEditLabel": "Créer ou éditer un article de statut enfant",
+        "notFound": "Aucun article de statut enfant Item trouvé"
       },
-      "created": "Un nouveau Child Status Item a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Child Status Item avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Child Status Item avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau article de statut enfant a été créé avec l'identifiant {{ param }}",
+      "updated": "L'article de statut enfant avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'article de statut enfant avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Child Status Item {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer L'article de statut enfant {{ id }} ?"
       },
       "detail": {
-        "title": "Child Status Item"
+        "title": "Article de statut enfant"
       },
       "id": "ID",
-      "affected": "Affected",
-      "archivated": "Archivated",
-      "item": "Item",
-      "childStatus": "Child Status"
+      "affected": "Affecté",
+      "archivated": "Archivé",
+      "item": "Article",
+      "childStatus": "Statut enfant"
     }
   }
 }

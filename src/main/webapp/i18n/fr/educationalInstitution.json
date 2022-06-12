@@ -2,27 +2,27 @@
   "awtarApp": {
     "educationalInstitution": {
       "home": {
-        "title": "EducationalInstitutions",
+        "title": "Les établissements d'enseignement",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Educational Institution",
-        "createOrEditLabel": "Créer ou éditer un Educational Institution",
-        "notFound": "Aucun Educational Institution trouvé"
+        "createLabel": "Créer un nouveau établissement d'enseignement",
+        "createOrEditLabel": "Créer ou éditer un établissement d'enseignement",
+        "notFound": "Aucun établissement d'enseignement trouvé"
       },
-      "created": "Un nouveau Educational Institution a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Educational Institution avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Educational Institution avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau établissement d'enseignement a été créé avec l'identifiant {{ param }}",
+      "updated": "L'établissement d'enseignement avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'établissement d'enseignement avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Educational Institution {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer L'établissement d'enseignement {{ id }} ?"
       },
       "detail": {
-        "title": "Educational Institution"
+        "title": "Établissement d'enseignement"
       },
       "id": "ID",
-      "name": "Name",
-      "adress": "Adress",
-      "archivated": "Archivated",
-      "teachingCurriculum": "Teaching Curriculum",
-      "city": "City"
+      "name": "Nom",
+      "adress": "Adresse",
+      "archivated": "Archivé",
+      "teachingCurriculum": "Cursus d'enseignement",
+      "city": "Ville"
     }
   }
 }

@@ -2,27 +2,27 @@
   "awtarApp": {
     "donationsReceivedItem": {
       "home": {
-        "title": "DonationsReceivedItems",
+        "title": "Dons reçus Articles",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Donations Received Item",
-        "createOrEditLabel": "Créer ou éditer un Donations Received Item",
-        "notFound": "Aucun Donations Received Item trouvé"
+        "createLabel": "Créer un nouveau don reçu article",
+        "createOrEditLabel": "Créer ou éditer un don reçu article",
+        "notFound": "Aucun don reçu article Item trouvé"
       },
-      "created": "Un nouveau Donations Received Item a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Donations Received Item avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Donations Received Item avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau don reçu article a été créé avec l'identifiant {{ param }}",
+      "updated": "Le don reçu article avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le don reçu article avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Donations Received Item {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le don reçu article {{ id }} ?"
       },
       "detail": {
-        "title": "Donations Received Item"
+        "title": "Don reçu article"
       },
       "id": "ID",
-      "quantity": "Quantity",
+      "quantity": "Quantité",
       "date": "Date",
-      "archivated": "Archivated",
-      "item": "Item",
-      "donationsReceived": "Donations Received"
+      "archivated": "Archivé",
+      "item": "Article",
+      "donationsReceived": "Don reçu"
     }
   }
 }

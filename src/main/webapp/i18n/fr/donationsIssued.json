@@ -2,36 +2,36 @@
   "awtarApp": {
     "donationsIssued": {
       "home": {
-        "title": "DonationsIssueds",
+        "title": "Dons émis",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Donations Issued",
-        "createOrEditLabel": "Créer ou éditer un Donations Issued",
-        "notFound": "Aucun Donations Issued trouvé"
+        "createLabel": "Créer un nouveau don émis",
+        "createOrEditLabel": "Créer ou éditer un don émis",
+        "notFound": "Aucun don émis trouvé"
       },
-      "created": "Un nouveau Donations Issued a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Donations Issued avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Donations Issued avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau don émis a été créé avec l'identifiant {{ param }}",
+      "updated": "Le don émis avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le don émis avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Donations Issued {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le don émis {{ id }} ?"
       },
       "detail": {
-        "title": "Donations Issued"
+        "title": "Don émis"
       },
       "id": "ID",
-      "model": "Model",
-      "isValidated": "Is Validated",
-      "validationDate": "Validation Date",
-      "validationUser": "Validation User",
-      "donationsDate": "Donations Date",
-      "canceledDonations": "Canceled Donations",
-      "canceledOn": "Canceled On",
-      "canceledBy": "Canceled By",
-      "cancellationReason": "Cancellation Reason",
-      "recurringDonations": "Recurring Donations",
-      "periodicity": "Periodicity",
-      "recurrence": "Recurrence",
-      "archivated": "Archivated",
-      "donationsDetails": "Donations Details"
+      "model": "Modèle",
+      "isValidated": "Est validé",
+      "validationDate": "Date de validation",
+      "validationUser": "Utilisateur de validation",
+      "donationsDate": "Date de don",
+      "canceledDonations": "Don annulé",
+      "canceledOn": "Annulé le",
+      "canceledBy": "Annulé par",
+      "cancellationReason": "Raison d'annulation",
+      "recurringDonations": "Don récurrent",
+      "periodicity": "Périodicité",
+      "recurrence": "Récurrence",
+      "archivated": "Archivé",
+      "donationsDetails": "Détails des dons"
     }
   }
 }

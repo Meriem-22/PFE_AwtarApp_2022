@@ -6,6 +6,7 @@ import { DonationsIssuedComponent } from '../list/donations-issued.component';
 import { DonationsIssuedDetailComponent } from '../detail/donations-issued-detail.component';
 import { DonationsIssuedUpdateComponent } from '../update/donations-issued-update.component';
 import { DonationsIssuedRoutingResolveService } from './donations-issued-routing-resolve.service';
+import { AddDonationsIssuedComponent } from '../add-donations-issued/add-donations-issued.component';
 
 const donationsIssuedRoute: Routes = [
   {
@@ -35,6 +36,14 @@ const donationsIssuedRoute: Routes = [
   {
     path: ':id/edit',
     component: DonationsIssuedUpdateComponent,
+    resolve: {
+      donationsIssued: DonationsIssuedRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'add',
+    component: AddDonationsIssuedComponent,
     resolve: {
       donationsIssued: DonationsIssuedRoutingResolveService,
     },

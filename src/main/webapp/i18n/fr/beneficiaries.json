@@ -2,10 +2,10 @@
   "awtarApp": {
     "Beneficiaries": {
       "null": "",
-      "FAMILY": "FAMILY",
-      "ESTABLISHMENT": "ESTABLISHMENT",
-      "CHILD": "CHILD",
-      "COMMMON": "COMMMON"
+      "FAMILY": "FAMILLE",
+      "ESTABLISHMENT": "ÉTABLISSEMENT",
+      "CHILD": "ENFANT",
+      "COMMMON": "COMMUN"
     }
   }
 }

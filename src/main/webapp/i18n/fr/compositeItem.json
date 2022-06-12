@@ -2,26 +2,26 @@
   "awtarApp": {
     "compositeItem": {
       "home": {
-        "title": "CompositeItems",
+        "title": "Articles composés",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Composite Item",
-        "createOrEditLabel": "Créer ou éditer un Composite Item",
-        "notFound": "Aucun Composite Item trouvé"
+        "createLabel": "Créer un nouveau article composé",
+        "createOrEditLabel": "Créer ou éditer un article composé",
+        "notFound": "Aucun article composé trouvé"
       },
-      "created": "Un nouveau Composite Item a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Composite Item avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Composite Item avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau article composé a été créé avec l'identifiant {{ param }}",
+      "updated": "L'article composé avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'article composé avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Composite Item {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer L'article composé {{ id }} ?"
       },
       "detail": {
-        "title": "Composite Item"
+        "title": "Article composé"
       },
       "id": "ID",
-      "quantity": "Quantity",
-      "archivated": "Archivated",
+      "quantity": "Quantité",
+      "archivated": "Archivé",
       "composant": "Composant",
-      "composer": "Composer"
+      "composer": "Compositeur"
     }
   }
 }

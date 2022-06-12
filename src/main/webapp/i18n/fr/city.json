@@ -2,30 +2,30 @@
   "awtarApp": {
     "city": {
       "home": {
-        "title": "Cities",
+        "title": "Villes",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau City",
-        "createOrEditLabel": "Créer ou éditer un City",
-        "notFound": "Aucun City trouvé"
+        "createLabel": "Créer un nouveau ville",
+        "createOrEditLabel": "Créer ou éditer une ville",
+        "notFound": "Aucun ville trouvé"
       },
-      "created": "Un nouveau City a été créé avec l'identifiant {{ param }}",
-      "updated": "Le City avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le City avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau ville a été créé avec l'identifiant {{ param }}",
+      "updated": "La ville avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La ville avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le City {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer La ville {{ id }} ?"
       },
       "detail": {
-        "title": "City"
+        "title": "Ville"
       },
       "id": "ID",
-      "name": "Name",
-      "governorate": "Governorate",
-      "isGovernorate": "Is Governorate",
-      "archivated": "Archivated",
-      "personbirthPlace": "Personbirth Place",
-      "personplaceOfResidence": "Personplace Of Residence",
-      "establishment": "Establishment",
-      "educationalInstitution": "Educational Institution"
+      "name": "Nom",
+      "governorate": "Gouvernorat",
+      "isGovernorate": "Est le gouvernorat",
+      "archivated": "Archivé",
+      "personbirthPlace": "Lieu de naissance",
+      "personplaceOfResidence": "Lieu de résidence",
+      "establishment": "Établissement",
+      "educationalInstitution": "Établissement d'enseignement"
     }
   }
 }

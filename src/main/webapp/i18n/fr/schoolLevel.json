@@ -2,26 +2,26 @@
   "awtarApp": {
     "schoolLevel": {
       "home": {
-        "title": "SchoolLevels",
+        "title": "Niveaux scolaires",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau School Level",
-        "createOrEditLabel": "Créer ou éditer un School Level",
-        "notFound": "Aucun School Level trouvé"
+        "createLabel": "Créer un nouveau niveau scolaire",
+        "createOrEditLabel": "Créer ou éditer un niveau scolaire",
+        "notFound": "Aucun niveau scolaire trouvé"
       },
-      "created": "Un nouveau School Level a été créé avec l'identifiant {{ param }}",
-      "updated": "Le School Level avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le School Level avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau niveau scolaire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le niveau scolaire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le niveau scolaire avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le School Level {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le niveau scolaire {{ id }} ?"
       },
       "detail": {
-        "title": "School Level"
+        "title": "Niveau Scolaire"
       },
       "id": "ID",
-      "schoolLevel": "School Level",
-      "archivated": "Archivated",
-      "teachingCurriculum": "Teaching Curriculum",
-      "item": "Item"
+      "schoolLevel": "niveau scolaire",
+      "archivated": "Archivé",
+      "teachingCurriculum": "Cursus d'enseignement",
+      "item": "Article"
     }
   }
 }

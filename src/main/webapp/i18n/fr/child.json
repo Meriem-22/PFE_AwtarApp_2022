@@ -2,25 +2,25 @@
   "awtarApp": {
     "child": {
       "home": {
-        "title": "Children",
+        "title": "Enfants",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Child",
-        "createOrEditLabel": "Créer ou éditer un Child",
-        "notFound": "Aucun Child trouvé"
+        "createLabel": "Créer un nouveau Enfant",
+        "createOrEditLabel": "Créer ou éditer un Enfant",
+        "notFound": "Aucun Enfant trouvé"
       },
-      "created": "Un nouveau Child a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Child avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Child avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Enfant a été créé avec l'identifiant {{ param }}",
+      "updated": "L'ennfant avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'ennfant avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Child {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer l'enfant' {{ id }} ?"
       },
       "detail": {
-        "title": "Child"
+        "title": "Enfant"
       },
       "id": "ID",
-      "teachingCurriculum": "Teaching Curriculum",
-      "childProfile": "Child Profile",
-      "family": "Family"
+      "teachingCurriculum": "Cursus d'enseignement",
+      "childProfile": "Profil de l'enfant",
+      "family": "Famille"
     }
   }
 }

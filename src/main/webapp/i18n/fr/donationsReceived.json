@@ -2,26 +2,26 @@
   "awtarApp": {
     "donationsReceived": {
       "home": {
-        "title": "DonationsReceiveds",
+        "title": "Dons reçus",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Donations Received",
-        "createOrEditLabel": "Créer ou éditer un Donations Received",
-        "notFound": "Aucun Donations Received trouvé"
+        "createLabel": "Créer un nouveau don reçu",
+        "createOrEditLabel": "Créer ou éditer un don reçu",
+        "notFound": "Aucun don reçu trouvé"
       },
-      "created": "Un nouveau Donations Received a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Donations Received avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Donations Received avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau don reçu a été créé avec l'identifiant {{ param }}",
+      "updated": "Le don reçu avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le don reçu avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Donations Received {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le don reçu {{ id }} ?"
       },
       "detail": {
-        "title": "Donations Received"
+        "title": "Don reçu"
       },
       "id": "ID",
-      "urlPhoto": "Url Photo",
-      "archivated": "Archivated",
-      "authorizingOfficer": "Authorizing Officer",
-      "item": "Item"
+      "urlPhoto": "Photo de profil",
+      "archivated": "Archivé",
+      "authorizingOfficer": "Ordonnateur",
+      "item": "Article"
     }
   }
 }

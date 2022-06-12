@@ -2,9 +2,9 @@
   "awtarApp": {
     "Status": {
       "null": "",
-      "ADMITTED": "ADMITTED",
-      "REPEATING": "REPEATING",
-      "NEW": "NEW"
+      "ADMITTED": "ADMIS",
+      "REPEATING": "REDOUBLANT",
+      "NEW": "NOUVEAU"
     }
   }
 }

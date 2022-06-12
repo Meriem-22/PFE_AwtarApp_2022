@@ -16,6 +16,7 @@ export type EntityArrayResponseType = HttpResponse<IDonationItemDetails[]>;
 @Injectable({ providedIn: 'root' })
 export class DonationItemDetailsService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/donation-item-details');
+  protected Url = this.applicationConfigService.getEndpointFor('api/donation-item-details/donation-issued');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -42,6 +43,12 @@ export class DonationItemDetailsService {
         observe: 'response',
       })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  getAllDonationItemDetails(id: number): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IDonationItemDetails[]>(`${this.Url}/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {

@@ -48,6 +48,10 @@ export class ProfileService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  findProfiles(): Observable<EntityArrayResponseType> {
+    return this.http.get<IProfile[]>(this.resourceUrl + '/children', { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http

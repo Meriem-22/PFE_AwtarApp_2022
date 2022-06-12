@@ -190,4 +190,18 @@ public class EstablishmentResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * {@code GET  /establishments} : get all the establishments.
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of establishments in body.
+     */
+    @GetMapping("/establishments/all")
+    public ResponseEntity<List<EstablishmentDTO>> getAllEstablishments() {
+        log.debug("REST request to get Establishments");
+        List<EstablishmentDTO> estabDTOC = establishmentService.findEstablishments();
+        return ResponseEntity.ok().body(estabDTOC);
+    }
 }

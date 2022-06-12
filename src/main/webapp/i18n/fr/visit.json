@@ -2,28 +2,28 @@
   "awtarApp": {
     "visit": {
       "home": {
-        "title": "Visits",
+        "title": "Visites",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Visit",
-        "createOrEditLabel": "Créer ou éditer un Visit",
-        "notFound": "Aucun Visit trouvé"
+        "createLabel": "Créer une nouvelle visite",
+        "createOrEditLabel": "Créer ou éditer une Visite",
+        "notFound": "Aucun Visite trouvé"
       },
-      "created": "Un nouveau Visit a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Visit avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Visit avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Visite a été créé avec l'identifiant {{ param }}",
+      "updated": "La Visite avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La Visite avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Visit {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer la Visite {{ id }} ?"
       },
       "detail": {
-        "title": "Visit"
+        "title": "Visite"
       },
       "id": "ID",
-      "visitDate": "Visit Date",
-      "realizedBy": "Realized By",
+      "visitDate": "Date de visite",
+      "realizedBy": "Réalisé par",
       "description": "Description",
-      "attachedFile": "Attached File",
-      "archivated": "Archivated",
-      "beneficiary": "Beneficiary"
+      "attachedFile": "Pièce jointe",
+      "archivated": "Archivé",
+      "beneficiary": "Bénéficiaire"
     }
   }
 }

@@ -2,27 +2,27 @@
   "awtarApp": {
     "statusOfHealth": {
       "home": {
-        "title": "StatusOfHealths",
+        "title": "État des santés",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Status Of Health",
-        "createOrEditLabel": "Créer ou éditer un Status Of Health",
-        "notFound": "Aucun Status Of Health trouvé"
+        "createLabel": "Créer un nouvel état de santé",
+        "createOrEditLabel": "Créer ou éditer un état de santé",
+        "notFound": "Aucun état de santé trouvé"
       },
-      "created": "Un nouveau Status Of Health a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Status Of Health avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Status Of Health avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau état de santé a été créé avec l'identifiant {{ param }}",
+      "updated": "L'état de santé avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'état de santé avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Status Of Health {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer l'état de santé {{ id }} ?"
       },
       "detail": {
-        "title": "Status Of Health"
+        "title": "État de santé"
       },
       "id": "ID",
-      "healthStatusDate": "Health Status Date",
-      "urlDetailsAttached": "Url Details Attached",
-      "archivated": "Archivated",
-      "person": "Person",
-      "healthStatusCategory": "Health Status Category"
+      "healthStatusDate": "Date de l'état de santé",
+      "urlDetailsAttached": "Détails joints",
+      "archivated": "Archivé",
+      "person": "Personne",
+      "healthStatusCategory": "Catégorie d'état de santé"
     }
   }
 }

@@ -183,4 +183,38 @@ public class DonationsIssuedResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * {@code POST  /donations-issueds} : Create a new donationsIssued.
+     *
+     * @param donationsIssuedDTO the donationsIssuedDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new donationsIssuedDTO, or with status {@code 400 (Bad Request)} if the donationsIssued has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/donations-issueds/add")
+    public ResponseEntity<DonationsIssuedDTO> createCompletedDonationsIssued(@Valid @RequestBody DonationsIssuedDTO donationsIssuedDTO)
+        throws URISyntaxException {
+        log.debug("REST request to save DonationsIssued : {}", donationsIssuedDTO);
+        if (donationsIssuedDTO.getId() != null) {
+            throw new BadRequestAlertException("A new donationsIssued cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        DonationsIssuedDTO result = donationsIssuedService.saveCompletedDonationsIssued(donationsIssuedDTO);
+        return ResponseEntity
+            .created(new URI("/api/donations-issueds/add" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * {@code GET  /donations-issueds/validated} : get the  donationsIssued.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationsIssuedDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donations-issueds/validated")
+    public ResponseEntity<List<DonationsIssuedDTO>> getValidatedDonationsIssued() {
+        log.debug("REST request to get DonationsIssued : {}");
+        List<DonationsIssuedDTO> donationsIssuedDTO = donationsIssuedService.getLastValidatedDonations();
+        return ResponseEntity.ok().body(donationsIssuedDTO);
+    }
 }

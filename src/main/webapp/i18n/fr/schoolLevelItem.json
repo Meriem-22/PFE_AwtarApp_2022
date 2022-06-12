@@ -2,27 +2,27 @@
   "awtarApp": {
     "schoolLevelItem": {
       "home": {
-        "title": "SchoolLevelItems",
+        "title": "Articles de niveau scolaire",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau School Level Item",
-        "createOrEditLabel": "Créer ou éditer un School Level Item",
-        "notFound": "Aucun School Level Item trouvé"
+        "createLabel": "Créer un nouveau articles de niveau scolaire",
+        "createOrEditLabel": "Créer ou éditer un articles de niveau scolaire",
+        "notFound": "Aucun articles de niveau scolaire trouvé"
       },
-      "created": "Un nouveau School Level Item a été créé avec l'identifiant {{ param }}",
-      "updated": "Le School Level Item avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le School Level Item avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau articles de niveau scolaire a été créé avec l'identifiant {{ param }}",
+      "updated": "L'articles de niveau scolaire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'articles de niveau scolaire avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le School Level Item {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer l'articles de niveau scolaire {{ id }} ?"
       },
       "detail": {
-        "title": "School Level Item"
+        "title": "Article de niveau scolaire"
       },
       "id": "ID",
-      "isSchoolItem": "Is School Item",
-      "quantityNeeded": "Quantity Needed",
-      "archivated": "Archivated",
-      "item": "Item",
-      "schoolLevel": "School Level"
+      "isSchoolItem": "Est l'article de l'école",
+      "quantityNeeded": "quantité requise",
+      "archivated": "Archivé",
+      "item": "Article",
+      "schoolLevel": "niveau scolaire"
     }
   }
 }

@@ -1,6 +1,7 @@
 package com.awtar.myapp.service;
 
 import com.awtar.myapp.service.dto.DonationsIssuedDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,4 +56,20 @@ public interface DonationsIssuedService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Save a donationsIssued.
+     *
+     * @param donationsIssuedDTO the entity to save.
+     * @return the persisted entity.
+     */
+    DonationsIssuedDTO saveCompletedDonationsIssued(DonationsIssuedDTO donationsIssuedDTO);
+
+    /**
+     *
+     *
+     *
+     * @return the persisted entity.
+     */
+    List<DonationsIssuedDTO> getLastValidatedDonations();
 }

@@ -47,7 +47,7 @@ public class Family extends Beneficiary implements Serializable {
     private Set<Child> children = new HashSet<>();
 
     @JsonIgnoreProperties(value = { "familyHead", "parentProfile", "family" }, allowSetters = true)
-    @OneToOne(mappedBy = "familyHead")
+    @OneToOne(mappedBy = "familyHead", cascade = CascadeType.ALL)
     private Parent head;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

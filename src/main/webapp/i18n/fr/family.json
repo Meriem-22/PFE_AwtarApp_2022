@@ -2,31 +2,31 @@
   "awtarApp": {
     "family": {
       "home": {
-        "title": "Families",
+        "title": "Familles",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Family",
-        "createOrEditLabel": "Créer ou éditer un Family",
-        "notFound": "Aucun Family trouvé"
+        "createLabel": "Créer un nouveau famille",
+        "createOrEditLabel": "Créer ou éditer un famille",
+        "notFound": "Aucun famille trouvé"
       },
-      "created": "Un nouveau Family a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Family avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Family avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau famille a été créé avec l'identifiant {{ param }}",
+      "updated": "Le famille avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le famille avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Family {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le famille {{ id }} ?"
       },
       "detail": {
-        "title": "Family"
+        "title": "Famille"
       },
       "id": "ID",
-      "familyName": "Family Name",
-      "dwelling": "Dwelling",
-      "area": "Area",
-      "notebookOfPoverty": "Notebook Of Poverty",
-      "notebookOfHandicap": "Notebook Of Handicap",
-      "archivated": "Archivated",
+      "familyName": "Nom de famille",
+      "dwelling": "Habitation",
+      "area": "Superficie",
+      "notebookOfPoverty": "Carnet De Pauvreté",
+      "notebookOfHandicap": "Carnet De Handicap",
+      "archivated": "Archivé",
       "parent": "Parent",
-      "child": "Child",
-      "head": "Head"
+      "child": "Enfant",
+      "head": "Chef"
     }
   }
 }

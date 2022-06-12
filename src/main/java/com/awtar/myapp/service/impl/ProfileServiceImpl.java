@@ -107,4 +107,10 @@ public class ProfileServiceImpl implements ProfileService {
 
         return profileMapper.toDto(children);
     }
+
+    @Override
+    public List<ProfileDTO> findProfileChildren() {
+        List<Profile> profile = profileRepository.findAllProfileChild();
+        return profileMapper.toDto(profile);
+    }
 }

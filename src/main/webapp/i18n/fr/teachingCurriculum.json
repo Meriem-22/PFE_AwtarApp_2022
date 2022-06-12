@@ -2,32 +2,32 @@
   "awtarApp": {
     "teachingCurriculum": {
       "home": {
-        "title": "TeachingCurricula",
+        "title": "Cursus d'enseignement",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Teaching Curriculum",
-        "createOrEditLabel": "Créer ou éditer un Teaching Curriculum",
-        "notFound": "Aucun Teaching Curriculum trouvé"
+        "createLabel": "Créer un nouveau Cursus d'enseignement",
+        "createOrEditLabel": "Créer ou éditer un Cursus d'enseignement",
+        "notFound": "Aucun Cursus d'enseignement trouvé"
       },
-      "created": "Un nouveau Teaching Curriculum a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Teaching Curriculum avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Teaching Curriculum avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Cursus d'enseignement a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Cursus d'enseignement avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Cursus d'enseignement avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Teaching Curriculum {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Cursus d'enseignement {{ id }} ?"
       },
       "detail": {
-        "title": "Teaching Curriculum"
+        "title": "Cursus d'enseignement"
       },
       "id": "ID",
-      "beginningYear": "Beginning Year",
-      "endYear": "End Year",
-      "annualResult": "Annual Result",
-      "result": "Result",
-      "remarks": "Remarks",
-      "attachedFile": "Attached File",
-      "archivated": "Archivated",
-      "schoolLevel": "School Level",
-      "child": "Child",
-      "educationalInstitution": "Educational Institution"
+      "beginningYear": "Année de début",
+      "endYear": "Fin d'année",
+      "annualResult": "Résultat annuel",
+      "result": "Résultat",
+      "remarks": "Remarques",
+      "attachedFile": "Pièce jointe",
+      "archivated": "Archivaté",
+      "schoolLevel": "Niveau scolaire",
+      "child": "Enfant",
+      "educationalInstitution": "Établissement d'enseignement"
     }
   }
 }

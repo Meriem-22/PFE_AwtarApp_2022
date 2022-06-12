@@ -2,29 +2,29 @@
   "awtarApp": {
     "beneficiary": {
       "home": {
-        "title": "Beneficiaries",
+        "title": "Les bénéficiaires",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Beneficiary",
-        "createOrEditLabel": "Créer ou éditer un Beneficiary",
-        "notFound": "Aucun Beneficiary trouvé"
+        "createLabel": "Créer un nouveau Bénéficiaire",
+        "createOrEditLabel": "Créer ou éditer un Bénéficiaire",
+        "notFound": "Aucun Bénéficiaire trouvé"
       },
-      "created": "Un nouveau Beneficiary a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Beneficiary avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Beneficiary avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Bénéficiaire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Bénéficiaire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Bénéficiaire avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Beneficiary {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Bénéficiaire {{ id }} ?"
       },
       "detail": {
-        "title": "Beneficiary"
+        "title": "Bénéficiaire"
       },
       "id": "ID",
-      "beneficiaryReference": "Beneficiary Reference",
-      "beneficiaryType": "Beneficiary Type",
-      "archivated": "Archivated",
-      "donationdetails": "Donationdetails",
-      "visit": "Visit",
-      "authorizingOfficer": "Authorizing Officer",
-      "tutor": "Tutor"
+      "beneficiaryReference": "Bénéficiaire Référence",
+      "beneficiaryType": "Type de bénéficiaire",
+      "archivated": "Archivé",
+      "donationdetails": "Détails du don",
+      "visit": "Visite",
+      "authorizingOfficer": "Ordonnateur",
+      "tutor": "Tuteur"
     }
   }
 }

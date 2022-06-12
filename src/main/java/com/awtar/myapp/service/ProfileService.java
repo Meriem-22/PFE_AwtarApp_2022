@@ -80,4 +80,12 @@ public interface ProfileService {
      * @return the entity.
      */
     List<ProfileDTO> findFamilyChildren(Long id);
+
+    /**
+     *
+     *
+     *
+     * @return the entity.
+     */
+    List<ProfileDTO> findProfileChildren();
 }

@@ -2,28 +2,28 @@
   "awtarApp": {
     "donationDetails": {
       "home": {
-        "title": "DonationDetails",
+        "title": "Détails du don",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Donation Details",
-        "createOrEditLabel": "Créer ou éditer un Donation Details",
-        "notFound": "Aucun Donation Details trouvé"
+        "createLabel": "Créer un nouveau détails du don",
+        "createOrEditLabel": "Créer ou éditer un détails du don",
+        "notFound": "Aucun détails du don trouvé"
       },
-      "created": "Un nouveau Donation Details a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Donation Details avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Donation Details avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau détails du don a été créé avec l'identifiant {{ param }}",
+      "updated": "Le détails du don avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le détails du don avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Donation Details {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le détails du don {{ id }} ?"
       },
       "detail": {
-        "title": "Donation Details"
+        "title": "Détails du don"
       },
       "id": "ID",
       "description": "Description",
-      "archivated": "Archivated",
-      "donationsIssued": "Donations Issued",
+      "archivated": "Archivé",
+      "donationsIssued": "Dons émis",
       "nature": "Nature",
-      "beneficiary": "Beneficiary",
-      "item": "Item"
+      "beneficiary": "Bénéficiaire",
+      "item": "Article"
     }
   }
 }

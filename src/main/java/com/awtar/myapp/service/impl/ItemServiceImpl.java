@@ -5,6 +5,7 @@ import com.awtar.myapp.repository.ItemRepository;
 import com.awtar.myapp.service.ItemService;
 import com.awtar.myapp.service.dto.ItemDTO;
 import com.awtar.myapp.service.mapper.ItemMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,5 +85,11 @@ public class ItemServiceImpl implements ItemService {
     public void delete(Long id) {
         log.debug("Request to delete Item : {}", id);
         itemRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ItemDTO> findItemsWithNature(Long id) {
+        List<Item> items = itemRepository.findItemsWithNature(id);
+        return itemMapper.toDto(items);
     }
 }

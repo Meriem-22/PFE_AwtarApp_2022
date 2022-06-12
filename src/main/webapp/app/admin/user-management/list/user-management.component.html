@@ -1,5 +1,5 @@
 <div>
-  <h2>
+  <h2 style="margin-top: 4rem; margin-bottom: 2rem">
     <span id="user-management-page-heading" jhiTranslate="userManagement.home.title" data-cy="userManagementPageHeading">Users</span>
 
     <div class="d-flex justify-content-end">
@@ -104,7 +104,7 @@
     </table>
   </div>
 
-  <div *ngIf="users">
+  <div *ngIf="users" style="margin-bottom: 5rem">
     <div class="d-flex justify-content-center">
       <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
     </div>

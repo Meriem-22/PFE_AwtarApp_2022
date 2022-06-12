@@ -2,25 +2,25 @@
   "awtarApp": {
     "establishmentType": {
       "home": {
-        "title": "EstablishmentTypes",
+        "title": "Types d'établissement",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Establishment Type",
-        "createOrEditLabel": "Créer ou éditer un Establishment Type",
-        "notFound": "Aucun Establishment Type trouvé"
+        "createLabel": "Créer un nouveau type d'établissement",
+        "createOrEditLabel": "Créer ou éditer un type d'établissement",
+        "notFound": "Aucun type d'établissement trouvé"
       },
-      "created": "Un nouveau Establishment Type a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Establishment Type avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Establishment Type avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau type d'établissement a été créé avec l'identifiant {{ param }}",
+      "updated": "Le type d'établissement avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le type d'établissement avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Establishment Type {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le type d'établissement {{ id }} ?"
       },
       "detail": {
-        "title": "Establishment Type"
+        "title": "Type d'établissement"
       },
       "id": "ID",
-      "typeName": "Type Name",
-      "archivated": "Archivated",
-      "establishment": "Establishment"
+      "typeName": "Nom de type",
+      "archivated": "Archivé",
+      "establishment": "Établissement"
     }
   }
 }
