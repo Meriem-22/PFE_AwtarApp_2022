@@ -18,7 +18,7 @@
         "title": "Beneficiary"
       },
       "id": "ID",
-      "beneficiaryReference": "Beneficiary Reference",
+      "beneficiaryReference": "Reference",
       "beneficiaryType": "Beneficiary Type",
       "archivated": "Archivated",
       "donationdetails": "Donationdetails",

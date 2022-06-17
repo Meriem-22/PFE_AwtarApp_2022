@@ -2,7 +2,7 @@
   "awtarApp": {
     "family": {
       "home": {
-        "title": "Families",
+        "title": " List Of Families ",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Family",
         "createOrEditLabel": "Create or edit a Family",

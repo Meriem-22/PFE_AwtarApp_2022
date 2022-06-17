@@ -37,7 +37,7 @@
               </a>
             </button>
             <div class="collapse" id="orders-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" style="margin-left: 2rem">
                 <li>
                   <span class="material-icons-sharp">holiday_village</span>
                   <a href="/establishment" class="link-dark d-inline-flex text-decoration-none rounded">Établissement</a>
@@ -78,10 +78,6 @@
             <span class="material-icons-sharp">inventory</span>
             <h3>Dons reçus</h3>
           </a>
-          <a href="#">
-            <span class="material-icons-sharp">report_gmailerrorred</span>
-            <h3>Rapports</h3>
-          </a>
 
           <a class="dropdown">
             <span class="material-icons-sharp">settings</span>
@@ -111,8 +107,12 @@
 
       <main>
         <input type="checkbox" id="toggle" />
-        <h1><span class="danger">Awtar Analytique</span></h1>
-
+        <div style="display: flex">
+          <h1><span class="danger">Awtar Analytique</span></h1>
+          <div class="date" style="margin-top: -0.3rem; margin-left: 2rem; margin-bottom: 1.2rem">
+            <input type="date" />
+          </div>
+        </div>
         <div class="insights">
           <div class="sales">
             <span class="material-icons-sharp">analytics</span>
@@ -165,30 +165,55 @@
           </div>
         </div>
 
-        <div class="recent-dons">
-          <h2>Dons emis récents</h2>
-          <table style="padding: 2rem">
-            <thead>
-              <tr>
-                <th>Modèle</th>
-                <th>Date de validation</th>
-                <th>Date de Dons</th>
-                <th>Dons récurrents</th>
-                <th>Périodicité</th>
-                <th>Recurrence</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let donationsIssued of donations">
-                <td>{{ donationsIssued.model }}</td>
-                <td>{{ donationsIssued.validationDate }}</td>
-                <td>{{ donationsIssued.donationsDate }}</td>
-                <td>{{ donationsIssued.recurringDonations }}</td>
-                <td>{{ donationsIssued.periodicity }}</td>
-                <td>{{ donationsIssued.recurrence }}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="recent-dons" style="width: 720px">
+          <h2 style="margin-bottom: 1rem">Dons emis récents</h2>
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="width: 740px">
+            <div class="col" style="width: 740px">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <table class="table table-striped" aria-describedby="page-heading">
+                    <thead>
+                      <tr>
+                        <th><span jhiTranslate="awtarApp.donationsIssued.model">Model</span></th>
+
+                        <th><span jhiTranslate="awtarApp.donationsIssued.validationDate">Validation Date</span></th>
+
+                        <th><span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span></th>
+
+                        <th><span jhiTranslate="awtarApp.donationsIssued.recurringDonations">Recurring Donations</span></th>
+
+                        <th><span jhiTranslate="awtarApp.donationsIssued.periodicity">Periodicity</span></th>
+
+                        <th><span jhiTranslate="awtarApp.donationsIssued.recurrence">Recurrence</span></th>
+
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let donationsIssued of donations">
+                        <td>{{ donationsIssued.model }}</td>
+                        <td>{{ donationsIssued.validationDate }}</td>
+                        <td>{{ donationsIssued.donationsDate }}</td>
+                        <td>{{ donationsIssued.recurringDonations }}</td>
+                        <td>{{ donationsIssued.periodicity }}</td>
+                        <td>{{ donationsIssued.recurrence }}</td>
+                        <button
+                          type="submit"
+                          [routerLink]="['/donations-issued', donationsIssued.id, 'view']"
+                          class="btn btn-warning"
+                          data-cy="entityDetailsButton"
+                          style="margin-top: 0.2rem"
+                        >
+                          <fa-icon icon="eye"></fa-icon>
+                        </button>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
       <div class="right">
@@ -197,19 +222,6 @@
           <button id="menu-btn">
             <span class="material-icons-sharp">menu</span>
           </button>
-          <div class="theme-toggler">
-            <span class="material-icons-sharp active">light_mode</span>
-            <span class="material-icons-sharp">dark_mode</span>
-          </div>
-          <div class="profile">
-            <div class="info">
-              <p>Hey, <b>Daniel</b></p>
-              <small class="text-muted"> Admin</small>
-            </div>
-            <div class="profile-photo">
-              <img src="https://a7m9t6t7.rocketcdn.me/wp-content/uploads/2018/08/01-Portrait-Corporate-Vincent-Zobler-2-686x800.jpg" />
-            </div>
-          </div>
         </div>
         <div class="recent-updates">
           <h2>Dons reçus récents</h2>

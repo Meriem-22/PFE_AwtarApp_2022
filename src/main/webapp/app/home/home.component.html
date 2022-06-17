@@ -36,8 +36,7 @@
       }
 
       body {
-        background: url('../../content/images/awtar.jpg') no-repeat center center/cover;
-        width: 100vw;
+        background: -webkit-linear-gradient(left, #7579ff, #b224ef);
         height: 100vh;
         overflow: hidden;
       }
@@ -73,30 +72,50 @@
 
       .container {
         width: 100vw;
-        height: 90.2vh;
+        height: 90.9vh;
       }
 
       p {
         font-size: 5.125rem;
         margin-top: -0.7rem;
       }
-    </style>
 
-    <!-- Custom styles for this template -->
-    <link href="home.component.css" rel="stylesheet" />
+      button {
+        display: block;
+        margin: 0 auto;
+        width: 260px;
+        height: 36px;
+        border-radius: 30px;
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+        border-color: white;
+      }
+
+      .submit {
+        margin-top: 40px;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-family: 'Nunito', sans-serif;
+        background: -webkit-linear-gradient(left, #7579ff, #b224ef);
+      }
+
+      .submit:hover {
+        background: -webkit-linear-gradient(left, #b224ef, #7579ff);
+      }
+    </style>
   </head>
   <body class="d-flex h-100 text-center text-white bg-dark">
     <div class="container">
       <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <main class="px-3">
-          <h1 style="font-size: 5.125rem; margin-bottom: -0.5rem; font-size: 7.125rem; margin-top: -15rem">Awtar</h1>
-          <p class="lead" style="margin-right: -30rem; font-size: 4.125rem">La charité est notre mission</p>
+          <h1 style="font-size: 5.125rem; margin-bottom: -0.5rem; font-size: 7.125rem; margin-top: -9rem">Awtar</h1>
+          <p class="lead" style="font-size: 4.125rem">La charité est notre mission</p>
           <p class="lead"></p>
+          <a href="/login"> <button class="submit" type="submit" jhiTranslate="login.form.button" data-cy="submit">Sign in</button></a>
         </main>
       </div>
     </div>
   </body>
-  <a href="#" class="btn btn-lg btn-secondary fw-bold border-white" style="display: block; margin-top: 3rem; text-align: center"
-    ><span>À propos de nous</span></a
-  >
 </html>

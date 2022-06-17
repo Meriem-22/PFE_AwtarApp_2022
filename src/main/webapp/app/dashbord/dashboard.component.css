@@ -1,33 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Prata&display=swap');
-:root {
-  --color-primary: #b667ff;
-  --color-secondary: #3a0070;
-  --color-tertiary: #f999fe;
-  --color-light: #fff;
-  /* --color-primary-dash: #7380ec;*/
-  --color-danger: #ff7782;
-  --color-success: #41f1b6;
-  --color-warning: #ffbb55;
-  --color-white: #fff;
-  --color-info-dark: #7d8da1;
-  --color-info-light: #dce1eb;
-
-  --color-dark: #363949;
-  --color-light-dash: rgba(132, 139, 200, 0.18);
-  --color-primary-variant: #111e88;
-  --color-dark-variant: #677483;
-  --color-background: #eeeef2cb;
-
-  --card-border-redius: 2rem;
-  --border-redius-1: 0.4rem;
-  --border-redius-2: 0.8rem;
-  --border-redius-3: 1.2rem;
-
-  --card-padding: 1.8rem;
-  --padding-1: 1.2rem;
-
-  --box-shadow: 0 2rem 3rem #fff;
-}
 
 html {
   font-size: 14px;
@@ -46,7 +17,7 @@ html {
 body {
   width: 100vw;
   height: 100vh;
-  font-family: poppins, sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 0.88rem;
   background: var(--color-background);
   user-select: none;
@@ -135,7 +106,7 @@ b {
 
 aside {
   height: 100vh;
-  background-color: #b667ff;
+  background-color: #f7f7fc;
   width: 17rem;
 }
 
@@ -199,12 +170,12 @@ aside .sidebar a.active:before {
 }
 
 aside .sidebar a.active span {
-  color: #fdfdfd;
+  color: white;
   margin-left: calc(1rem - 3px);
 }
 
 aside .sidebar a:hover {
-  color: white;
+  color: rgb(13, 7, 7);
 }
 
 aside .sidebar a:hover span {
@@ -225,7 +196,7 @@ main {
 
 main .date {
   display: inline-block;
-  background: wheat;
+  background: rgb(233, 229, 229);
   border-radius: 0.4;
   margin-top: 1rem;
   padding: 0.5rem 0.6rem;
@@ -243,7 +214,7 @@ main .insights {
 }
 
 main .insights > div {
-  background: #9a9ea5;
+  background: -webkit-linear-gradient(left, #7579ff, #b224ef);
   padding: 1rem;
   border-radius: 2rem;
   margin-top: 0.1rem;
@@ -256,7 +227,7 @@ main .insights > div:hover {
 }
 
 main .insights > div span {
-  background: #b667ff;
+  background: #67ff71;
   padding: 0.5rem;
   border-radius: 50%;
   color: #141d1a;
@@ -345,12 +316,10 @@ main .recent-dons h2 {
 }
 
 main .recent-dons table {
-  background: rgb(226, 224, 223);
   width: 100%;
-  border-radius: 1rem;
   padding: 4rem;
   text-align: center;
-  box-shadow: 0 2rem 3rem rgb(40, 32, 32);
+  box-shadow: 0 1rem 1rem rgb(204, 196, 196);
   transition: all 300ms ease;
 }
 
@@ -430,7 +399,6 @@ main .recent-dons a {
 }
 
 .right .recent-updates .updates {
-  background: rgb(226, 224, 223);
   padding: 1.8rem;
   border-radius: 2rem;
   box-shadow: 0 2rem 3rem rgb(170, 164, 164);
@@ -446,8 +414,8 @@ main .recent-dons a {
 
 .right .dons-analytics .add-product {
   background: transparent;
-  border: #b667ff 2px dashed;
-  color: #b667ff;
+  border: #7579ff 2px dashed;
+  color: #7579ff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -456,7 +424,7 @@ main .recent-dons a {
 }
 
 .right .dons-analytics .add-product:hover {
-  background: #b667ff;
+  background: -webkit-linear-gradient(left, #7579ff, #b224ef);
   color: white;
 }
 
@@ -537,7 +505,7 @@ main .recent-dons a {
 }
 
 .dropdown-content a:hover {
-  background-color: rgb(99, 60, 145);
+  background: -webkit-linear-gradient(left, #7579ff, #b224ef);
 }
 
 .dropdown:hover .dropdown-content {
@@ -545,7 +513,7 @@ main .recent-dons a {
 }
 
 .dropdown:hover .dropbtn {
-  background-color: rgb(99, 60, 145);
+  background: -webkit-linear-gradient(left, #7579ff, #b224ef);
 }
 
 @media screen and (max-width: 768px) {

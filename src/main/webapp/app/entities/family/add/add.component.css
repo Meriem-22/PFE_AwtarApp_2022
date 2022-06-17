@@ -1,8 +1,28 @@
+body {
+  background: #f7f7ff;
+  margin-top: 20px;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0 solid transparent;
+  border-radius: 0.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+}
+.me-2 {
+  margin-right: 0.5rem !important;
+}
+
 #msform {
   text-align: center;
   position: relative;
   margin-top: 30px;
-  color: red;
 }
 #msform fieldset {
   background: white;
@@ -21,18 +41,6 @@
   display: none;
 }
 /*inputs*/
-#msform input,
-#msform textarea {
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 0px;
-  margin-bottom: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  font-family: montserrat;
-  color: #2c3e50;
-  font-size: 18px;
-}
 
 #msform input:focus,
 #msform textarea:focus {
@@ -49,7 +57,6 @@
 
 #msform .chek {
   display: flex;
-  padding: 2rem;
 }
 
 #msform .photo img {
@@ -77,7 +84,7 @@
 /*buttons*/
 #msform .action-button {
   width: 100px;
-  background: #b667ff;
+  background: #b224ef;
   font-weight: bold;
   color: white;
   border: 0 none;
@@ -89,7 +96,7 @@
 
 #msform .action-button-add {
   width: 100px;
-  background: purple;
+  background: #7579ff;
   font-weight: bold;
   color: white;
   border: 0 none;
@@ -187,7 +194,7 @@
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,
 #progressbar li.active:after {
-  background: #b667ff;
+  background: -webkit-linear-gradient(left, #7579ff, #b224ef);
   color: white;
 }
 #progressbar li.inactive:before {

@@ -2,7 +2,7 @@
   "awtarApp": {
     "family": {
       "home": {
-        "title": "Familles",
+        "title": "Liste des Familles",
         "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau famille",
         "createOrEditLabel": "Créer ou éditer un famille",
@@ -15,7 +15,7 @@
         "question": "Êtes-vous certain de vouloir supprimer le famille {{ id }} ?"
       },
       "detail": {
-        "title": "Famille"
+        "title": " Détails Famille"
       },
       "id": "ID",
       "familyName": "Nom de famille",
