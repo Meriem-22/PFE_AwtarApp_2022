@@ -193,4 +193,25 @@ public class AuthorizingOfficerResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * {@code POST  /authorizing-officers} : Create a new authorizingOfficer with profile info.
+     *
+     * @param authorizingOfficerDTO the authorizingOfficerDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new authorizingOfficerDTO, or with status {@code 400 (Bad Request)} if the authorizingOfficer has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/authorizing-officers/add")
+    public ResponseEntity<AuthorizingOfficerDTO> addAuthorizingOfficer(@Valid @RequestBody AuthorizingOfficerDTO authorizingOfficerDTO)
+        throws URISyntaxException {
+        log.debug("REST request to save AuthorizingOfficer : {}", authorizingOfficerDTO);
+        if (authorizingOfficerDTO.getId() != null) {
+            throw new BadRequestAlertException("A new authorizingOfficer cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        AuthorizingOfficerDTO result = authorizingOfficerService.add(authorizingOfficerDTO);
+        return ResponseEntity
+            .created(new URI("/api/authorizing-officers/add/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
 }

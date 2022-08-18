@@ -50,7 +50,7 @@ export class ParentUpdateComponent implements OnInit {
   }
 
   previousState(): void {
-    window.history.back();
+    window.location.reload();
   }
 
   save(): void {

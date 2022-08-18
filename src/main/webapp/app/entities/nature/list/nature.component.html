@@ -1,98 +1,523 @@
-<div>
-  <h2 style="margin-top: 4rem; margin-bottom: 2rem" id="page-heading" data-cy="NatureHeading">
-    <span jhiTranslate="awtarApp.nature.home.title">Natures</span>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Charles Anderson" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
 
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="awtarApp.nature.home.refreshListLabel">Refresh List</span>
-      </button>
+    <title>AdminLTE 3 | Dashboard</title>
 
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-nature"
-        [routerLink]="['/nature/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="awtarApp.nature.home.createLabel"> Create a new Nature </span>
-      </button>
-    </div>
-  </h2>
+    <script nonce="33a2bf22-55fb-4fb7-baea-4b8bb2a21cdd">
+      (function (w, d) {
+        !(function (a, e, t, r) {
+          (a.zarazData = a.zarazData || {}),
+            (a.zarazData.executed = []),
+            (a.zaraz = { deferred: [] }),
+            (a.zaraz.q = []),
+            (a.zaraz._f = function (e) {
+              return function () {
+                var t = Array.prototype.slice.call(arguments);
+                a.zaraz.q.push({ m: e, a: t });
+              };
+            });
+          for (const e of ['track', 'set', 'ecommerce', 'debug']) a.zaraz[e] = a.zaraz._f(e);
+          (a.zaraz.init = () => {
+            var t = e.getElementsByTagName(r)[0],
+              z = e.createElement(r),
+              n = e.getElementsByTagName('title')[0];
+            for (
+              n && (a.zarazData.t = e.getElementsByTagName('title')[0].text),
+                a.zarazData.x = Math.random(),
+                a.zarazData.w = a.screen.width,
+                a.zarazData.h = a.screen.height,
+                a.zarazData.j = a.innerHeight,
+                a.zarazData.e = a.innerWidth,
+                a.zarazData.l = a.location.href,
+                a.zarazData.r = e.referrer,
+                a.zarazData.k = a.screen.colorDepth,
+                a.zarazData.n = e.characterSet,
+                a.zarazData.o = new Date().getTimezoneOffset(),
+                a.zarazData.q = [];
+              a.zaraz.q.length;
 
-  <jhi-alert-error></jhi-alert-error>
+            ) {
+              const e = a.zaraz.q.shift();
+              a.zarazData.q.push(e);
+            }
+            z.defer = !0;
+            for (const e of [localStorage, sessionStorage])
+              Object.keys(e || {})
+                .filter(a => a.startsWith('_zaraz_'))
+                .forEach(t => {
+                  try {
+                    a.zarazData['z_' + t.slice(7)] = JSON.parse(e.getItem(t));
+                  } catch {
+                    a.zarazData['z_' + t.slice(7)] = e.getItem(t);
+                  }
+                });
+            (z.referrerPolicy = 'origin'),
+              (z.src = '/cdn-cgi/zaraz/s.js?z=' + btoa(encodeURIComponent(JSON.stringify(a.zarazData)))),
+              t.parentNode.insertBefore(z, t);
+          }),
+            ['complete', 'interactive'].includes(e.readyState) ? zaraz.init() : a.addEventListener('DOMContentLoaded', zaraz.init);
+        })(w, d, 0, 'script');
+      })(window, document);
+    </script>
+  </head>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../../content/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
+      </div>
 
-  <jhi-alert></jhi-alert>
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black">
+        <a href="index3.html" class="brand-link" style="background-color: black">
+          <img
+            src="../../content/img/AdminLTELogo.png"
+            alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3"
+            style="opacity: 0.8"
+          />
+          <span class="brand-text font-weight-light">AWTAR</span>
+        </a>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="natures?.length === 0">
-    <span jhiTranslate="awtarApp.nature.home.notFound">No natures found</span>
-  </div>
-
-  <div class="table-responsive" id="entities" *ngIf="natures && natures.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="name"><span jhiTranslate="awtarApp.nature.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="destinedTo">
-            <span jhiTranslate="awtarApp.nature.destinedTo">Destined To</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="necessityValue">
-            <span jhiTranslate="awtarApp.nature.necessityValue">Necessity Value</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="archivated">
-            <span jhiTranslate="awtarApp.nature.archivated">Archivated</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let nature of natures; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/nature', nature.id, 'view']">{{ nature.id }}</a>
-          </td>
-          <td>{{ nature.name }}</td>
-          <td jhiTranslate="{{ 'awtarApp.Beneficiaries.' + nature.destinedTo }}">{{ nature.destinedTo }}</td>
-          <td>{{ nature.necessityValue }}</td>
-          <td>{{ nature.archivated }}</td>
-          <td class="text-end">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/nature', nature.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
-
-              <button type="submit" [routerLink]="['/nature', nature.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
-
-              <button type="submit" (click)="delete(nature)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-              </button>
+        <div class="sidebar">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
             </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+            <div class="info">
+              <a href="#" class="d-block">admin</a>
+            </div>
+          </div>
 
-  <div *ngIf="natures && natures.length > 0">
-    <div class="d-flex justify-content-center">
-      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item menu-open">
+                <a [routerLink]="['admin-dashboard/dashboard']" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-header">BENEFICIARIES</li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
+                  <p>
+                    Families
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a [routerLink]="['/family']" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Families</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a [routerLink]="['/family/add']" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Family</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
+                  <p>
+                    Children
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a [routerLink]="['admin-dashboard/children']" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Chilfren</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Child</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
+                  <p>
+                    Establishments
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Establishments</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+
+                      <p>Add Establishment</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">DONATIONS</li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
+                  <p>
+                    Donations Issued
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Donations Issued</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Donations Issued</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
+                  <p>
+                    Donations Received
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Donations Received</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Donations Received</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">DONATIONS Items</li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    Items
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Items</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Item</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Status Item</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">REFERENCE TABLE</li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Establishments Types</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Citys</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Health Categories</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Nature</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>School Level</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Educational Institutions</p>
+                </a>
+              </li>
+
+              <li class="nav-header">CONTRIBUTORS</li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
+                  <p>
+                    Authorizing Officers
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Authorizing Officers</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Authorizing Officer</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    Tutors
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Tutors</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Tutor</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    Tutors
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Tutors</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Tutor</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="content-wrapper" style="margin-top: -3rem">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0"><span jhiTranslate="awtarApp.nature.home.title">Natures</span></h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                  <li class="breadcrumb-item active"><span jhiTranslate="awtarApp.nature.home.title">Natures</span></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="content">
+          <div class="container-fluid">
+            <p-table
+              #dt2
+              [value]="natures"
+              dataKey="id"
+              [rows]="5"
+              [showCurrentPageReport]="true"
+              [rowsPerPageOptions]="[5, 10, 20]"
+              [paginator]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              [globalFilterFields]="['name', 'necessityValue', 'necessityValue']"
+            >
+              <ng-template pTemplate="caption">
+                <div class="flex" style="text-align: right">
+                  <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search" style="margin-left: 12rem"></i>
+                    <input
+                      pInputText
+                      type="text"
+                      (input)="dt2.filterGlobal($any($event.target).value!, 'contains')"
+                      placeholder="Search keyword"
+                    />
+                  </span>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th><span jhiTranslate="awtarApp.nature.name">Name</span></th>
+                  <th><span jhiTranslate="awtarApp.nature.necessityValue">Necessity Value</span></th>
+                  <th><span jhiTranslate="awtarApp.nature.necessityValue">Necessity Value</span></th>
+                  <th><span>Action</span></th>
+                </tr>
+                <tr>
+                  <th>
+                    <p-columnFilter type="text" field="name"></p-columnFilter>
+                  </th>
+                  <th>
+                    <p-columnFilter type="text" field="necessityValue"></p-columnFilter>
+                  </th>
+                  <th>
+                    <p-columnFilter type="text" field="destinedTo"></p-columnFilter>
+                  </th>
+                  <th></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-nature>
+                <tr>
+                  <td>
+                    {{ nature.name }}
+                  </td>
+                  <td>
+                    {{ nature.necessityValue }}
+                  </td>
+                  <td>
+                    {{ nature.destinedTo }}
+                  </td>
+                  <td>
+                    <ul class="list-unstyled mb-0 d-flex">
+                      <li style="margin-right: 0.5rem">
+                        <a
+                          [routerLink]="['/nature', nature.id, 'view']"
+                          class="text-primary"
+                          data-toggle="tooltip"
+                          title=""
+                          data-original-title="view"
+                          ><i class="far fa-eye"></i
+                        ></a>
+                      </li>
+                      <li style="margin-right: 0.5rem">
+                        <a
+                          [routerLink]="['/nature', nature.id, 'edit']"
+                          class="text-info"
+                          data-toggle="tooltip"
+                          title=""
+                          data-original-title="Edit"
+                          ><i class="fas fa-pencil-alt"></i
+                        ></a>
+                      </li>
+                      <li style="margin-right: 0.5rem">
+                        <a href="#" (click)="delete(nature)" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"
+                          ><i class="far fa-trash-alt"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="5">No natures found.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </section>
+      </div>
+
+      <footer class="main-footer"></footer>
+
+      <aside class="control-sidebar control-sidebar-dark"></aside>
     </div>
 
-    <div class="d-flex justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [(page)]="ngbPaginationPage"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="loadPage($event)"
-      ></ngb-pagination>
-    </div>
-  </div>
-</div>
+    <script></script>
+  </body>
+</html>

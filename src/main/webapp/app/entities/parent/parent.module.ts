@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { SharedModule } from 'app/shared/shared.module';
 import { ParentComponent } from './list/parent.component';
 import { ParentDetailComponent } from './detail/parent-detail.component';
@@ -11,5 +11,6 @@ import { AddParentComponent } from './add-parent/add-parent.component';
   imports: [SharedModule, ParentRoutingModule],
   declarations: [ParentComponent, ParentDetailComponent, ParentUpdateComponent, ParentDeleteDialogComponent, AddParentComponent],
   entryComponents: [ParentDeleteDialogComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ParentModule {}

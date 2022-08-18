@@ -214,4 +214,79 @@ public class BeneficiaryResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, beneficiaryDTO.getId().toString()))
             .body(result);
     }
+
+    @PutMapping("/beneficiaries/contributor/authorizing-officer/{id}")
+    public ResponseEntity<BeneficiaryDTO> EditAuthorizingOfficer(
+        @PathVariable(value = "id", required = false) final Long id,
+        @Valid @RequestBody BeneficiaryDTO beneficiaryDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to Edit Contributors: : {}, {}", id, beneficiaryDTO);
+        if (beneficiaryDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+
+        BeneficiaryDTO result = beneficiaryService.updateAuthorizingOfficer(beneficiaryDTO);
+
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, beneficiaryDTO.getId().toString()))
+            .body(result);
+    }
+
+    @PutMapping("/beneficiaries/contributor/tutor/{id}")
+    public ResponseEntity<BeneficiaryDTO> EditTutor(
+        @PathVariable(value = "id", required = false) final Long id,
+        @Valid @RequestBody BeneficiaryDTO beneficiaryDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to Edit Contributors: : {}, {}", id, beneficiaryDTO);
+        if (beneficiaryDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+
+        BeneficiaryDTO result = beneficiaryService.updateTutor(beneficiaryDTO);
+
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, beneficiaryDTO.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the beneficiaryDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/beneficiaries/families/{id}")
+    public ResponseEntity<List<BeneficiaryDTO>> getAllContributorFamilies(@PathVariable Long id) {
+        log.debug("REST request to get  all Families : {}");
+        List<BeneficiaryDTO> beneficiaryDTOC = beneficiaryService.findAllFamiliesContributor(id);
+        return ResponseEntity.ok().body(beneficiaryDTOC);
+    }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the beneficiaryDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/beneficiaries/children/{id}")
+    public ResponseEntity<List<BeneficiaryDTO>> getAllContributorChildren(@PathVariable Long id) {
+        log.debug("REST request to get  all Children : {}");
+        List<BeneficiaryDTO> beneficiaryDTOC = beneficiaryService.findAllChildrenContributor(id);
+        return ResponseEntity.ok().body(beneficiaryDTOC);
+    }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the beneficiaryDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/beneficiaries/establishments/{id}")
+    public ResponseEntity<List<BeneficiaryDTO>> getAllContributorEstablishments(@PathVariable Long id) {
+        log.debug("REST request to get  all Establishments : {}");
+        List<BeneficiaryDTO> beneficiaryDTOC = beneficiaryService.findAllEstablishmentsContributor(id);
+        return ResponseEntity.ok().body(beneficiaryDTOC);
+    }
 }

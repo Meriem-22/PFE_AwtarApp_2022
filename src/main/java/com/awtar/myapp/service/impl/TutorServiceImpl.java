@@ -1,9 +1,13 @@
 package com.awtar.myapp.service.impl;
 
+import com.awtar.myapp.domain.Profile;
 import com.awtar.myapp.domain.Tutor;
+import com.awtar.myapp.repository.ProfileRepository;
 import com.awtar.myapp.repository.TutorRepository;
 import com.awtar.myapp.service.TutorService;
+import com.awtar.myapp.service.dto.ProfileDTO;
 import com.awtar.myapp.service.dto.TutorDTO;
+import com.awtar.myapp.service.mapper.ProfileMapper;
 import com.awtar.myapp.service.mapper.TutorMapper;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,9 +34,20 @@ public class TutorServiceImpl implements TutorService {
 
     private final TutorMapper tutorMapper;
 
-    public TutorServiceImpl(TutorRepository tutorRepository, TutorMapper tutorMapper) {
+    private final ProfileMapper profileMapper;
+
+    private final ProfileRepository profileRepository;
+
+    public TutorServiceImpl(
+        TutorRepository tutorRepository,
+        TutorMapper tutorMapper,
+        ProfileMapper profileMapper,
+        ProfileRepository profileRepository
+    ) {
         this.tutorRepository = tutorRepository;
         this.tutorMapper = tutorMapper;
+        this.profileMapper = profileMapper;
+        this.profileRepository = profileRepository;
     }
 
     @Override
@@ -98,5 +113,17 @@ public class TutorServiceImpl implements TutorService {
     public void delete(Long id) {
         log.debug("Request to delete Tutor : {}", id);
         tutorRepository.deleteById(id);
+    }
+
+    @Override
+    public TutorDTO add(TutorDTO tutorDTO) {
+        ProfileDTO profiledto = tutorDTO.getProfile();
+        Profile profile = profileMapper.toEntity(profiledto);
+        Tutor tutor = tutorMapper.toEntity(tutorDTO);
+
+        tutor = tutorRepository.save(tutor);
+        profile.setTutor(tutor);
+        profileRepository.save(profile);
+        return tutorMapper.toDto(tutor);
     }
 }

@@ -204,4 +204,25 @@ public class EstablishmentResource {
         List<EstablishmentDTO> estabDTOC = establishmentService.findEstablishments();
         return ResponseEntity.ok().body(estabDTOC);
     }
+
+    /**
+     * {@code POST  /establishments} : Create a new establishment.
+     *
+     * @param establishmentDTO the establishmentDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new establishmentDTO, or with status {@code 400 (Bad Request)} if the establishment has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/establishments/add")
+    public ResponseEntity<EstablishmentDTO> addEstablishment(@Valid @RequestBody EstablishmentDTO establishmentDTO)
+        throws URISyntaxException {
+        log.debug("REST request to save Establishment : {}", establishmentDTO);
+        if (establishmentDTO.getId() != null) {
+            throw new BadRequestAlertException("A new establishment cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        EstablishmentDTO result = establishmentService.add(establishmentDTO);
+        return ResponseEntity
+            .created(new URI("/api/establishments/add/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
 }

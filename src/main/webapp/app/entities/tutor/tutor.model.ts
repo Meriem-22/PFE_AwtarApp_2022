@@ -8,6 +8,7 @@ export interface ITutor {
   managerCin?: string | null;
   beneficiaries?: IBeneficiary[] | null;
   tutorProfile?: IProfile | null;
+  profile?: IProfile | null;
 }
 
 export class Tutor implements ITutor {
@@ -17,7 +18,8 @@ export class Tutor implements ITutor {
     public manager?: string | null,
     public managerCin?: string | null,
     public beneficiaries?: IBeneficiary[] | null,
-    public tutorProfile?: IProfile | null
+    public tutorProfile?: IProfile | null,
+    public profile?: IProfile | null
   ) {}
 }
 

@@ -27,6 +27,11 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { DashboardModule } from './dashbord/dashboard.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardTemplateComponent } from './template/dashboard-template/dashboard-template.component';
+import { DashboardTemplateModule } from './template/dashboard-template/dashboard.module';
+import { MbscModule } from '@mobiscroll/angular-lite';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   imports: [
@@ -34,6 +39,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     HomeModule,
     DashboardModule,
+    DashboardTemplateModule,
 
     // jhipster-needle-angular-add-module JHipster will add new module here
     AppRoutingModule,
@@ -43,6 +49,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
     TranslationModule,
     ReactiveFormsModule,
+    MbscModule,
+    TableModule,
+    MultiSelectModule,
   ],
   providers: [
     Title,
@@ -50,7 +59,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [
+    MainComponent,
+    NavbarComponent,
+    ErrorComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    FooterComponent,
+    DashboardTemplateComponent,
+  ],
   bootstrap: [MainComponent],
 })
 export class AppModule {

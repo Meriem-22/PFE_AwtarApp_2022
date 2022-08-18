@@ -1,177 +1,193 @@
 <div class="d-flex justify-content-center">
-  <div class="col-8">
+  <div class="col-12" style="margin: 1rem">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2
-        style="margin-top: 4rem; margin-bottom: 2rem"
-        id="jhi-parent-heading"
-        data-cy="ParentCreateUpdateHeading"
-        jhiTranslate="awtarApp.parent.home.createOrEditLabel"
-      >
-        Create or edit a Parent
-      </h2>
-
       <div>
         <jhi-alert-error></jhi-alert-error>
+        <div class="row gutters-sm" style="display: flex">
+          <div class="col-sm-6 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <div>
+                  <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+                  <div class="row mb-3">
+                    <label class="form-label" jhiTranslate="awtarApp.parent.annualRevenue" for="field_annualRevenue">Annual Revenue</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="annualRevenue"
+                      id="field_annualRevenue"
+                      data-cy="annualRevenue"
+                      formControlName="annualRevenue"
+                    />
+                    <div
+                      *ngIf="
+                        editForm.get('annualRevenue')!.invalid &&
+                        (editForm.get('annualRevenue')!.dirty || editForm.get('annualRevenue')!.touched)
+                      "
+                    >
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="editForm.get('annualRevenue')?.errors?.required"
+                        jhiTranslate="entity.validation.required"
+                      >
+                        This field is required.
+                      </small>
+                      <small
+                        class="form-text text-danger"
+                        [hidden]="!editForm.get('annualRevenue')?.errors?.number"
+                        jhiTranslate="entity.validation.number"
+                      >
+                        This field should be a number.
+                      </small>
+                    </div>
+                  </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="awtarApp.parent.annualRevenue" for="field_annualRevenue">Annual Revenue</label>
-          <input
-            type="number"
-            class="form-control"
-            name="annualRevenue"
-            id="field_annualRevenue"
-            data-cy="annualRevenue"
-            formControlName="annualRevenue"
-          />
-          <div
-            *ngIf="
-              editForm.get('annualRevenue')!.invalid && (editForm.get('annualRevenue')!.dirty || editForm.get('annualRevenue')!.touched)
-            "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('annualRevenue')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              [hidden]="!editForm.get('annualRevenue')?.errors?.number"
-              jhiTranslate="entity.validation.number"
-            >
-              This field should be a number.
-            </small>
+                  <div class="row mb-3">
+                    <label class="form-label" jhiTranslate="awtarApp.parent.cnss" for="field_cnss">Cnss</label>
+                    <input type="number" class="form-control" name="cnss" id="field_cnss" data-cy="cnss" formControlName="cnss" />
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="form-label" jhiTranslate="awtarApp.parent.maritalStatus" for="field_maritalStatus">Marital Status</label>
+                    <select
+                      class="form-control"
+                      name="maritalStatus"
+                      formControlName="maritalStatus"
+                      id="field_maritalStatus"
+                      data-cy="maritalStatus"
+                    >
+                      <option [ngValue]="null">{{ 'awtarApp.MaritalStatus.null' | translate }}</option>
+                      <option *ngFor="let maritalStatus of maritalStatusValues" [value]="maritalStatus">
+                        {{ 'awtarApp.MaritalStatus.' + maritalStatus | translate }}
+                      </option>
+                    </select>
+                    <div
+                      *ngIf="
+                        editForm.get('maritalStatus')!.invalid &&
+                        (editForm.get('maritalStatus')!.dirty || editForm.get('maritalStatus')!.touched)
+                      "
+                    >
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="editForm.get('maritalStatus')?.errors?.required"
+                        jhiTranslate="entity.validation.required"
+                      >
+                        This field is required.
+                      </small>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="form-label" jhiTranslate="awtarApp.parent.occupation" for="field_occupation">Occupation</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="occupation"
+                      id="field_occupation"
+                      data-cy="occupation"
+                      formControlName="occupation"
+                    />
+                    <div
+                      *ngIf="
+                        editForm.get('occupation')!.invalid && (editForm.get('occupation')!.dirty || editForm.get('occupation')!.touched)
+                      "
+                    >
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="editForm.get('occupation')?.errors?.required"
+                        jhiTranslate="entity.validation.required"
+                      >
+                        This field is required.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+          <div class="col-sm-6 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    name="familyHead"
+                    id="field_familyHead"
+                    data-cy="archivated"
+                    formControlName="familyHead"
+                  />
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="awtarApp.parent.cnss" for="field_cnss">Cnss</label>
-          <input type="number" class="form-control" name="cnss" id="field_cnss" data-cy="cnss" formControlName="cnss" />
-        </div>
+                  <label class="form-label" jhiTranslate="awtarApp.parent.familyHead" for="field_familyHead">Family Head</label>
+                </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="awtarApp.parent.maritalStatus" for="field_maritalStatus">Marital Status</label>
-          <select
-            class="form-control"
-            name="maritalStatus"
-            formControlName="maritalStatus"
-            id="field_maritalStatus"
-            data-cy="maritalStatus"
-          >
-            <option [ngValue]="null">{{ 'awtarApp.MaritalStatus.null' | translate }}</option>
-            <option *ngFor="let maritalStatus of maritalStatusValues" [value]="maritalStatus">
-              {{ 'awtarApp.MaritalStatus.' + maritalStatus | translate }}
-            </option>
-          </select>
-          <div
-            *ngIf="
-              editForm.get('maritalStatus')!.invalid && (editForm.get('maritalStatus')!.dirty || editForm.get('maritalStatus')!.touched)
-            "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('maritalStatus')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
+                <div class="card card-danger" style="margin-top: 1rem">
+                  <div class="card-header">
+                    <h3 class="card-title">Different Width</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-15">
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="deceased"
+                              id="field_deceased"
+                              data-cy="deceased"
+                              formControlName="deceased"
+                            />
+
+                            <label class="form-check-label" jhiTranslate="awtarApp.parent.deceased" for="field_deceased">Deceased</label>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-15">
+                              <div class="form-group">
+                                <label
+                                  class="form-label"
+                                  jhiTranslate="awtarApp.parent.dateOfDeath"
+                                  for="field_dateOfDeath"
+                                  style="margin-top: 1rem"
+                                  >Date Of Death</label
+                                >
+                                <div class="input-group">
+                                  <input
+                                    id="field_dateOfDeath"
+                                    data-cy="dateOfDeath"
+                                    type="text"
+                                    class="form-control"
+                                    name="dateOfDeath"
+                                    ngbDatepicker
+                                    #dateOfDeathDp="ngbDatepicker"
+                                    formControlName="dateOfDeath"
+                                  />
+                                  <button type="button" class="btn btn-secondary" (click)="dateOfDeathDp.toggle()">
+                                    <fa-icon icon="calendar-alt"></fa-icon>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="awtarApp.parent.occupation" for="field_occupation">Occupation</label>
-          <input
-            type="text"
-            class="form-control"
-            name="occupation"
-            id="field_occupation"
-            data-cy="occupation"
-            formControlName="occupation"
-          />
-          <div *ngIf="editForm.get('occupation')!.invalid && (editForm.get('occupation')!.dirty || editForm.get('occupation')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('occupation')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="awtarApp.parent.deceased" for="field_deceased">Deceased</label>
-          <input type="checkbox" class="form-check" name="deceased" id="field_deceased" data-cy="deceased" formControlName="deceased" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="awtarApp.parent.dateOfDeath" for="field_dateOfDeath">Date Of Death</label>
-          <div class="input-group">
-            <input
-              id="field_dateOfDeath"
-              data-cy="dateOfDeath"
-              type="text"
-              class="form-control"
-              name="dateOfDeath"
-              ngbDatepicker
-              #dateOfDeathDp="ngbDatepicker"
-              formControlName="dateOfDeath"
-            />
-            <button type="button" class="btn btn-secondary" (click)="dateOfDeathDp.toggle()">
-              <fa-icon icon="calendar-alt"></fa-icon>
-            </button>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="awtarApp.parent.familyHead" for="field_familyHead">Family Head</label>
-          <select class="form-control" id="field_familyHead" data-cy="familyHead" name="familyHead" formControlName="familyHead">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="familyOption.id === editForm.get('familyHead')!.value?.id ? editForm.get('familyHead')!.value : familyOption"
-              *ngFor="let familyOption of familyHeadsCollection; trackBy: trackFamilyById"
-            >
-              {{ familyOption.id }}
-            </option>
-          </select>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="awtarApp.parent.family" for="field_family">Family</label>
-          <select class="form-control" id="field_family" data-cy="family" name="family" formControlName="family">
-            <option *ngIf="!editForm.get('family')!.value" [ngValue]="null" selected></option>
-            <option
-              [ngValue]="familyOption.id === editForm.get('family')!.value?.id ? editForm.get('family')!.value : familyOption"
-              *ngFor="let familyOption of familiesSharedCollection; trackBy: trackFamilyById"
-            >
-              {{ familyOption.id }}
-            </option>
-          </select>
-        </div>
-        <div *ngIf="editForm.get(['family'])!.invalid && (editForm.get(['family'])!.dirty || editForm.get(['family'])!.touched)">
-          <small class="form-text text-danger" *ngIf="editForm.get(['family'])?.errors?.required" jhiTranslate="entity.validation.required">
-            This field is required.
-          </small>
         </div>
       </div>
 
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
-
         <button
           type="submit"
           id="save-entity"
           data-cy="entityCreateSaveButton"
           [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
+          class="btn btn-primary float-right"
         >
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>

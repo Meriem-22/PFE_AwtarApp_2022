@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { SharedModule } from 'app/shared/shared.module';
 import { ProfileComponent } from './list/profile.component';
 import { ProfileDetailComponent } from './detail/profile-detail.component';
@@ -10,5 +10,6 @@ import { ProfileRoutingModule } from './route/profile-routing.module';
   imports: [SharedModule, ProfileRoutingModule],
   declarations: [ProfileComponent, ProfileDetailComponent, ProfileUpdateComponent, ProfileDeleteDialogComponent],
   entryComponents: [ProfileDeleteDialogComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProfileModule {}

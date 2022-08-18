@@ -5,6 +5,8 @@
         "title": "Tuteurs",
         "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Tuteur",
+        "addLabel": "Ajouter un Tuteur",
+
         "createOrEditLabel": "Créer ou éditer un Tuteur",
         "notFound": "Aucun Tuteur trouvé"
       },

@@ -224,6 +224,30 @@ public class Family extends Beneficiary implements Serializable {
         return this;
     }
 
+    public AuthorizingOfficer getAuthorizingOfficer() {
+        return super.authorizingOfficer;
+    }
+
+    public void setAuthorizingOfficer(AuthorizingOfficer authorizingOfficer) {
+        super.authorizingOfficer = authorizingOfficer;
+    }
+
+    public Tutor getTutor() {
+        return super.tutor;
+    }
+
+    public void setTutor(Tutor tutor) {
+        super.tutor = tutor;
+    }
+
+    public void setBeneficiaryReference(String beneficiaryReference) {
+        super.beneficiaryReference = beneficiaryReference;
+    }
+
+    public String getBeneficiaryReference() {
+        return super.beneficiaryReference;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Charles Anderson" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
+
+    <title>AdminLTE 3 | Dashboard</title>
+
+    <script nonce="33a2bf22-55fb-4fb7-baea-4b8bb2a21cdd">
+      (function (w, d) {
+        !(function (a, e, t, r) {
+          (a.zarazData = a.zarazData || {}),
+            (a.zarazData.executed = []),
+            (a.zaraz = { deferred: [] }),
+            (a.zaraz.q = []),
+            (a.zaraz._f = function (e) {
+              return function () {
+                var t = Array.prototype.slice.call(arguments);
+                a.zaraz.q.push({ m: e, a: t });
+              };
+            });
+          for (const e of ['track', 'set', 'ecommerce', 'debug']) a.zaraz[e] = a.zaraz._f(e);
+          (a.zaraz.init = () => {
+            var t = e.getElementsByTagName(r)[0],
+              z = e.createElement(r),
+              n = e.getElementsByTagName('title')[0];
+            for (
+              n && (a.zarazData.t = e.getElementsByTagName('title')[0].text),
+                a.zarazData.x = Math.random(),
+                a.zarazData.w = a.screen.width,
+                a.zarazData.h = a.screen.height,
+                a.zarazData.j = a.innerHeight,
+                a.zarazData.e = a.innerWidth,
+                a.zarazData.l = a.location.href,
+                a.zarazData.r = e.referrer,
+                a.zarazData.k = a.screen.colorDepth,
+                a.zarazData.n = e.characterSet,
+                a.zarazData.o = new Date().getTimezoneOffset(),
+                a.zarazData.q = [];
+              a.zaraz.q.length;
+
+            ) {
+              const e = a.zaraz.q.shift();
+              a.zarazData.q.push(e);
+            }
+            z.defer = !0;
+            for (const e of [localStorage, sessionStorage])
+              Object.keys(e || {})
+                .filter(a => a.startsWith('_zaraz_'))
+                .forEach(t => {
+                  try {
+                    a.zarazData['z_' + t.slice(7)] = JSON.parse(e.getItem(t));
+                  } catch {
+                    a.zarazData['z_' + t.slice(7)] = e.getItem(t);
+                  }
+                });
+            (z.referrerPolicy = 'origin'),
+              (z.src = '/cdn-cgi/zaraz/s.js?z=' + btoa(encodeURIComponent(JSON.stringify(a.zarazData)))),
+              t.parentNode.insertBefore(z, t);
+          }),
+            ['complete', 'interactive'].includes(e.readyState) ? zaraz.init() : a.addEventListener('DOMContentLoaded', zaraz.init);
+        })(w, d, 0, 'script');
+      })(window, document);
+    </script>
+  </head>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../../content/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
+      </div>
+
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="index3.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">Contact</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+              <i class="fas fa-search"></i>
+            </a>
+            <div class="navbar-search-block">
+              <form class="form-inline"></form>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+              <i class="far fa-comments"></i>
+              <span class="badge badge-danger navbar-badge">3</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+              <a href="#" class="dropdown-item">
+                <div class="media">
+                  <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle" />
+                  <div class="media-body">
+                    <h3 class="dropdown-item-title">
+                      Brad Diesel
+                      <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                    </h3>
+                    <p class="text-sm">Call me whenever you can...</p>
+                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                  </div>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <div class="media">
+                  <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3" />
+                  <div class="media-body">
+                    <h3 class="dropdown-item-title">
+                      John Pierce
+                      <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                    </h3>
+                    <p class="text-sm">I got your message bro</p>
+                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                  </div>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <div class="media">
+                  <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3" />
+                  <div class="media-body">
+                    <h3 class="dropdown-item-title">
+                      Nora Silvester
+                      <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                    </h3>
+                    <p class="text-sm">The subject goes here</p>
+                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                  </div>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+              <i class="far fa-bell"></i>
+              <span class="badge badge-warning navbar-badge">15</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+              <span class="dropdown-item dropdown-header">15 Notifications</span>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-envelope mr-2"></i> 4 new messages
+                <span class="float-right text-muted text-sm">3 mins</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-users mr-2"></i> 8 friend requests
+                <span class="float-right text-muted text-sm">12 hours</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-file mr-2"></i> 3 new reports
+                <span class="float-right text-muted text-sm">2 days</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+            </div>
+          </li>
+
+          <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"></li>
+              <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+              <li
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                ngbDropdown
+                class="nav-item dropdown pointer"
+                display="dynamic"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu" data-cy="adminMenu">
+                  <span>
+                    <fa-icon icon="users-cog"></fa-icon>
+                    <span jhiTranslate="global.menu.admin.main">Administration</span>
+                  </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
+                  <li>
+                    <a class="dropdown-item" routerLink="/admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
+                      <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="global.menu.admin.userManagement">User management</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
+                      <fa-icon icon="tachometer-alt" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/admin/health" routerLinkActive="active" (click)="collapseNavbar()">
+                      <fa-icon icon="heart" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="global.menu.admin.health">Health</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
+                      <fa-icon icon="cogs" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/admin/logs" routerLinkActive="active" (click)="collapseNavbar()">
+                      <fa-icon icon="tasks" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="global.menu.admin.logs">Logs</span>
+                    </a>
+                  </li>
+                  <li *ngIf="openAPIEnabled">
+                    <a class="dropdown-item" routerLink="/admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
+                      <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="global.menu.admin.apidocs">API</span>
+                    </a>
+                  </li>
+                  <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+                </ul>
+              </li>
+              <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *ngIf="languages && languages.length > 1">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
+                  <span>
+                    <fa-icon icon="flag"></fa-icon>
+                    <span jhiTranslate="global.menu.language">Language</span>
+                  </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="languagesnavBarDropdown">
+                  <li *ngFor="let language of languages">
+                    <a class="dropdown-item" href="javascript:void(0);" (click)="changeLanguage(language); collapseNavbar()">{{
+                      language | findLanguageFromKey
+                    }}</a>
+                  </li>
+                </ul>
+              </li>
+              <li
+                ngbDropdown
+                class="nav-item dropdown pointer"
+                display="dynamic"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu" data-cy="accountMenu">
+                  <span *ngIf="!account?.imageUrl">
+                    <fa-icon icon="user"></fa-icon>
+                    <span jhiTranslate="global.menu.account.main">Account</span>
+                  </span>
+                  <span *ngIf="account?.imageUrl">
+                    <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />
+                  </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
+                  <li *ngSwitchCase="true">
+                    <a
+                      class="dropdown-item"
+                      routerLink="/account/settings"
+                      routerLinkActive="active"
+                      (click)="collapseNavbar()"
+                      data-cy="settings"
+                    >
+                      <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="global.menu.account.settings">Settings</span>
+                    </a>
+                  </li>
+                  <li *ngSwitchCase="true">
+                    <a
+                      class="dropdown-item"
+                      routerLink="/account/password"
+                      routerLinkActive="active"
+                      (click)="collapseNavbar()"
+                      data-cy="passwordItem"
+                    >
+                      <fa-icon icon="lock" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="global.menu.account.password">Password</span>
+                    </a>
+                  </li>
+                  <li *ngSwitchCase="true">
+                    <a class="dropdown-item" (click)="logout()" id="logout" data-cy="logout">
+                      <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="global.menu.account.logout">Sign out</span>
+                    </a>
+                  </li>
+                  <li *ngSwitchCase="false">
+                    <a class="dropdown-item" (click)="login()" id="login" data-cy="login">
+                      <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="global.menu.account.login">Sign in</span>
+                    </a>
+                  </li>
+                  <li *ngSwitchCase="false">
+                    <a
+                      class="dropdown-item"
+                      routerLink="account/register"
+                      routerLinkActive="active"
+                      (click)="collapseNavbar()"
+                      data-cy="register"
+                    >
+                      <fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon>
+                      <span jhiTranslate="global.menu.account.register">Register</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </ul>
+      </nav>
+
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black">
+        <a href="index3.html" class="brand-link" style="background-color: black">
+          <img
+            src="../../content/img/AdminLTELogo.png"
+            alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3"
+            style="opacity: 0.8"
+          />
+          <span class="brand-text font-weight-light">AWTAR</span>
+        </a>
+
+        <div class="sidebar">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">{{ account?.login }}</a>
+            </div>
+          </div>
+
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item menu-open">
+                <a [routerLink]="['admin-dashboard/dashboard']" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-header">BENEFICIARIES</li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
+                  <p>
+                    Families
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a [routerLink]="['/family']" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Families</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a [routerLink]="['/family/add']" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Family</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
+                  <p>
+                    Children
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a [routerLink]="['admin-dashboard/children']" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Chilfren</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Child</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
+                  <p>
+                    Establishments
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Establishments</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+
+                      <p>Add Establishment</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">DONATIONS</li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
+                  <p>
+                    Donations Issued
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Donations Issued</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Donations Issued</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
+                  <p>
+                    Donations Received
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Donations Received</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Donations Received</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">DONATIONS Items</li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    Items
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Items</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Item</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Status Item</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">REFERENCE TABLE</li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Establishments Types</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Citys</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Health Categories</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Nature</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>School Level</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Educational Institutions</p>
+                </a>
+              </li>
+
+              <li class="nav-header">CONTRIBUTORS</li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
+                  <p>
+                    Authorizing Officers
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Authorizing Officers</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Authorizing Officer</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    Tutors
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Tutors</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Tutor</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    Tutors
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Tutors</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Tutor</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="content-wrapper" style="margin-top: -4rem">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0">Dashboard</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="content">
+          <div class="container-fluid">
+            <div class="container">
+              <div class="main-body">
+                <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                  <div class="row gutters-sm">
+                    <div class="col-md-4 mb-3">
+                      <div class="card1">
+                        <div class="card-body">
+                          <div class="d-flex flex-column">
+                            <div class="card1">
+                              <div class="card-header text-white" style="background-color: #fc00ff">
+                                <h3 class="card-title">Establishment</h3>
+                              </div>
+
+                              <div>
+                                <div class="card-body">
+                                  <div class="form-group">
+                                    <label class="form-label" jhiTranslate="awtarApp.establishment.name" for="field_name">Name</label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      name="name"
+                                      id="field_name"
+                                      data-cy="name"
+                                      formControlName="name"
+                                    />
+                                    <div
+                                      *ngIf="
+                                        editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)
+                                      "
+                                    >
+                                      <small
+                                        class="form-text text-danger"
+                                        *ngIf="editForm.get('name')?.errors?.required"
+                                        jhiTranslate="entity.validation.required"
+                                      >
+                                        This field is required.
+                                      </small>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="form-label" jhiTranslate="awtarApp.establishment.activity" for="field_activity"
+                                      >Activity</label
+                                    >
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      name="activity"
+                                      id="field_activity"
+                                      data-cy="activity"
+                                      formControlName="activity"
+                                    />
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="form-label" jhiTranslate="awtarApp.establishment.manager" for="field_manager"
+                                      >Manager</label
+                                    >
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      name="manager"
+                                      id="field_manager"
+                                      data-cy="manager"
+                                      formControlName="manager"
+                                    />
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="form-label" jhiTranslate="awtarApp.establishment.managerCin" for="field_managerCin"
+                                      >Manager Cin</label
+                                    >
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      name="managerCin"
+                                      id="field_managerCin"
+                                      data-cy="managerCin"
+                                      formControlName="managerCin"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card mt-3">
+                        <div class="d-flex flex-column">
+                          <div class="card-body">
+                            <div class="card-header text-white" style="background-color: #fc00ff">
+                              <h3 class="card-title">Contributor</h3>
+                            </div>
+
+                            <div>
+                              <div class="card-body">
+                                <div class="form-group">
+                                  <label
+                                    class="form-label"
+                                    jhiTranslate="awtarApp.beneficiary.authorizingOfficer"
+                                    for="field_authorizingOfficer"
+                                    >Authorizing Officer</label
+                                  >
+                                  <select
+                                    class="form-control"
+                                    id="field_authorizingOfficer"
+                                    data-cy="authorizingOfficer"
+                                    name="authorizingOfficer"
+                                    formControlName="authorizingOfficer"
+                                  >
+                                    <option [ngValue]="null"></option>
+                                    <option
+                                      [ngValue]="
+                                        authorizingOfficerOption.id === editForm.get('authorizingOfficer')!.value?.id
+                                          ? editForm.get('authorizingOfficer')!.value
+                                          : authorizingOfficerOption
+                                      "
+                                      *ngFor="
+                                        let authorizingOfficerOption of authorizingOfficersSharedCollection;
+                                        trackBy: trackAuthorizingOfficerById
+                                      "
+                                    >
+                                      {{ authorizingOfficerOption.lastName }} {{ authorizingOfficerOption.firstName }}
+                                    </option>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <label class="form-label" jhiTranslate="awtarApp.beneficiary.tutor" for="field_tutor">Tutor</label>
+                                  <select class="form-control" id="field_tutor" data-cy="tutor" name="tutor" formControlName="tutor">
+                                    <option [ngValue]="null"></option>
+                                    <option
+                                      [ngValue]="
+                                        tutorOption.id === editForm.get('tutor')!.value?.id ? editForm.get('tutor')!.value : tutorOption
+                                      "
+                                      *ngFor="let tutorOption of tutorsSharedCollection; trackBy: trackTutorById"
+                                    >
+                                      {{ tutorOption.lastName }} {{ tutorOption.firstName }}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card mb-3">
+                        <div class="card-body">
+                          <div class="card">
+                            <div class="card-header text-white" style="background-color: #fc00ff">
+                              <h3 class="card-title">Cordonnées</h3>
+                            </div>
+
+                            <div class="card-body">
+                              <div>
+                                <div class="row">
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" jhiTranslate="awtarApp.establishment.contact" for="field_contact"
+                                        >Contact</label
+                                      >
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        name="contact"
+                                        id="field_contact"
+                                        data-cy="contact"
+                                        formControlName="contact"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" jhiTranslate="awtarApp.establishment.adress" for="field_adress"
+                                        >Adress</label
+                                      >
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        name="adress"
+                                        id="field_adress"
+                                        data-cy="adress"
+                                        formControlName="adress"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" jhiTranslate="awtarApp.establishment.cp" for="field_cp">Cp</label>
+                                      <input type="text" class="form-control" name="cp" id="field_cp" data-cy="cp" formControlName="cp" />
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" jhiTranslate="awtarApp.establishment.region" for="field_region"
+                                        >Region</label
+                                      >
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        name="region"
+                                        id="field_region"
+                                        data-cy="region"
+                                        formControlName="region"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" jhiTranslate="awtarApp.establishment.phone" for="field_phone">Phone</label>
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        name="phone"
+                                        id="field_phone"
+                                        data-cy="phone"
+                                        formControlName="phone"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" jhiTranslate="awtarApp.establishment.fax" for="field_fax">Fax</label>
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        name="fax"
+                                        id="field_fax"
+                                        data-cy="fax"
+                                        formControlName="fax"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" jhiTranslate="awtarApp.establishment.email" for="field_email">Email</label>
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        name="email"
+                                        id="field_email"
+                                        data-cy="email"
+                                        formControlName="email"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label class="form-label" jhiTranslate="awtarApp.establishment.site" for="field_site">Site</label>
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        name="site"
+                                        id="field_site"
+                                        data-cy="site"
+                                        formControlName="site"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row gutters-sm">
+                        <div class="col-sm-6 mb-3">
+                          <div class="card h-100">
+                            <div class="card-body">
+                              <div class="card">
+                                <div class="card-header text-white" style="background-color: #fc00ff">
+                                  <h3 class="card-title">Remark</h3>
+                                </div>
+
+                                <div class="card-body">
+                                  <div>
+                                    <div class="row">
+                                      <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label class="form-label" jhiTranslate="awtarApp.establishment.remark" for="field_remark"
+                                            >Remark</label
+                                          >
+                                          <textarea
+                                            type="text"
+                                            rows="5"
+                                            class="form-control"
+                                            name="remark"
+                                            id="field_remark"
+                                            data-cy="remark"
+                                            formControlName="remark"
+                                          ></textarea>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                          <div class="card h-100">
+                            <div class="card-body">
+                              <div class="d-flex flex-column">
+                                <div class="card card">
+                                  <div class="card-header text-white" style="background-color: #fc00ff">
+                                    <h3 class="card-title">About</h3>
+                                  </div>
+
+                                  <div>
+                                    <div class="card-body">
+                                      <div class="form-group">
+                                        <label
+                                          class="form-label"
+                                          jhiTranslate="awtarApp.establishment.establishmentType"
+                                          for="field_establishmentType"
+                                          >Establishment Type</label
+                                        >
+                                        <select
+                                          class="form-control"
+                                          id="field_establishmentType"
+                                          data-cy="establishmentType"
+                                          name="establishmentType"
+                                          formControlName="establishmentType"
+                                        >
+                                          <option *ngIf="!editForm.get('establishmentType')!.value" [ngValue]="null" selected></option>
+                                          <option
+                                            [ngValue]="
+                                              establishmentTypeOption.id === editForm.get('establishmentType')!.value?.id
+                                                ? editForm.get('establishmentType')!.value
+                                                : establishmentTypeOption
+                                            "
+                                            *ngFor="
+                                              let establishmentTypeOption of establishmentTypesSharedCollection;
+                                              trackBy: trackEstablishmentTypeById
+                                            "
+                                          >
+                                            {{ establishmentTypeOption.typeName }}
+                                          </option>
+                                        </select>
+                                        <div
+                                          *ngIf="
+                                            editForm.get(['establishmentType'])!.invalid &&
+                                            (editForm.get(['establishmentType'])!.dirty || editForm.get(['establishmentType'])!.touched)
+                                          "
+                                        >
+                                          <small
+                                            class="form-text text-danger"
+                                            *ngIf="editForm.get(['establishmentType'])?.errors?.required"
+                                            jhiTranslate="entity.validation.required"
+                                          >
+                                            This field is required.
+                                          </small>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="form-label" jhiTranslate="awtarApp.establishment.city" for="field_city">City</label>
+                                        <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city">
+                                          <option *ngIf="!editForm.get('city')!.value" [ngValue]="null" selected></option>
+                                          <option
+                                            [ngValue]="
+                                              cityOption.id === editForm.get('city')!.value?.id ? editForm.get('city')!.value : cityOption
+                                            "
+                                            *ngFor="let cityOption of citiesSharedCollection; trackBy: trackCityById"
+                                          >
+                                            {{ cityOption.name }}
+                                          </option>
+                                        </select>
+                                        <div
+                                          *ngIf="
+                                            editForm.get(['city'])!.invalid &&
+                                            (editForm.get(['city'])!.dirty || editForm.get(['city'])!.touched)
+                                          "
+                                        >
+                                          <small
+                                            class="form-text text-danger"
+                                            *ngIf="editForm.get(['city'])?.errors?.required"
+                                            jhiTranslate="entity.validation.required"
+                                          >
+                                            This field is required.
+                                          </small>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      id="cancel-save"
+                      data-cy="entityCreateCancelButton"
+                      class="btn btn-secondary"
+                      (click)="previousState()"
+                    >
+                      <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+
+                    <button
+                      type="submit"
+                      id="save-entity"
+                      data-cy="entityCreateSaveButton"
+                      [disabled]="editForm.invalid || isSaving"
+                      class="btn btn-primary"
+                    >
+                      <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="main-footer"></footer>
+
+      <aside class="control-sidebar control-sidebar-dark"></aside>
+    </div>
+
+    <script></script>
+  </body>
+</html>

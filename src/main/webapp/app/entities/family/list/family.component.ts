@@ -9,6 +9,15 @@ import { IFamily } from '../family.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { FamilyService } from '../service/family.service';
 import { FamilyDeleteDialogComponent } from '../delete/family-delete-dialog.component';
+import { LANGUAGES } from 'app/config/language.constants';
+import { Account } from 'app/core/auth/account.model';
+import { LoginService } from 'app/login/login.service';
+import { TranslateService } from '@ngx-translate/core';
+import { SessionStorageService } from 'ngx-webstorage';
+import { AccountService } from 'app/core/auth/account.service';
+import { ProfileService } from 'app/layouts/profiles/profile.service';
+
+import { VERSION } from 'app/app.constants';
 
 @Component({
   selector: 'jhi-family',
@@ -23,14 +32,29 @@ export class FamilyComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  inProduction?: boolean;
+  isNavbarCollapsed = true;
+  languages = LANGUAGES;
+  openAPIEnabled?: boolean;
+  version = '';
+  account: Account | null = null;
+  entitiesNavbarItems: any[] = [];
 
   constructor(
     protected familyService: FamilyService,
     protected activatedRoute: ActivatedRoute,
-    protected router: Router,
-    protected modalService: NgbModal
-  ) {}
-
+    protected modalService: NgbModal,
+    private loginService: LoginService,
+    private translateService: TranslateService,
+    private sessionStorageService: SessionStorageService,
+    private accountService: AccountService,
+    private profileService: ProfileService,
+    private router: Router
+  ) {
+    if (VERSION) {
+      this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
+    }
+  }
   loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
@@ -72,6 +96,28 @@ export class FamilyComponent implements OnInit {
     });
   }
 
+  changeLanguage(languageKey: string): void {
+    this.sessionStorageService.store('locale', languageKey);
+    this.translateService.use(languageKey);
+  }
+
+  collapseNavbar(): void {
+    this.isNavbarCollapsed = true;
+  }
+
+  login(): void {
+    this.router.navigate(['/login']);
+  }
+
+  logout(): void {
+    this.collapseNavbar();
+    this.loginService.logout();
+    this.router.navigate(['']);
+  }
+
+  toggleNavbar(): void {
+    this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
   protected sort(): string[] {
     const result = [this.predicate + ',' + (this.ascending ? ASC : DESC)];
     if (this.predicate !== 'id') {
@@ -84,7 +130,7 @@ export class FamilyComponent implements OnInit {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
       const page = params.get('page');
       const pageNumber = +(page ?? 1);
-      const sort = (params.get(SORT) ?? data['defaultSort']).split(',');
+      const sort = (params.get(SORT) ?? data['defaultSort'])?.split(',');
       const predicate = sort[0];
       const ascending = sort[1] === ASC;
       if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {

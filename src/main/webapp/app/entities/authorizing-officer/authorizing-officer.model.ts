@@ -11,6 +11,7 @@ export interface IAuthorizingOfficer {
   donations?: IDonationsReceived[] | null;
   beneficiaries?: IBeneficiary[] | null;
   authorizingOfficerProfile?: IProfile | null;
+  profile?: IProfile | null;
 }
 
 export class AuthorizingOfficer implements IAuthorizingOfficer {
@@ -22,7 +23,8 @@ export class AuthorizingOfficer implements IAuthorizingOfficer {
     public managerCin?: string | null,
     public donations?: IDonationsReceived[] | null,
     public beneficiaries?: IBeneficiary[] | null,
-    public authorizingOfficerProfile?: IProfile | null
+    public authorizingOfficerProfile?: IProfile | null,
+    public profile?: IProfile | null
   ) {}
 }
 

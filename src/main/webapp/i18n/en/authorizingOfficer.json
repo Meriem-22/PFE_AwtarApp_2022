@@ -5,6 +5,8 @@
         "title": "Authorizing Officers",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Authorizing Officer",
+        "addLabel": "Add an Authorizing Officer",
+
         "createOrEditLabel": "Create or edit a Authorizing Officer",
         "notFound": "No Authorizing Officers found"
       },

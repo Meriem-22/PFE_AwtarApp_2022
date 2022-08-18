@@ -45,6 +45,10 @@ export class AuthorizingOfficerService {
     return this.http.get<IAuthorizingOfficer[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  add(AuthorizingOfficer: IAuthorizingOfficer): Observable<EntityResponseType> {
+    return this.http.post<IAuthorizingOfficer>(this.resourceUrl + '/add', AuthorizingOfficer, { observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

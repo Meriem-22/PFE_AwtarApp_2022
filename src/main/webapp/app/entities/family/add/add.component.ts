@@ -2,7 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, ElementRef } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { EventManager } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { IAuthorizingOfficer } from 'app/entities/authorizing-officer/authorizing-officer.model';
 import { AuthorizingOfficerService } from 'app/entities/authorizing-officer/service/authorizing-officer.service';
@@ -18,12 +18,22 @@ import { MaritalStatus } from 'app/entities/enumerations/marital-status.model';
 import { IParentAllDetails, ParentAllDetails } from 'app/entities/parent/parent.model';
 import { ParentService } from 'app/entities/parent/service/parent.service';
 import { IProfile, Profile } from 'app/entities/profile/profile.model';
+import { ProfileService } from 'app/entities/profile/service/profile.service';
+
 import { TutorService } from 'app/entities/tutor/service/tutor.service';
 import { ITutor } from 'app/entities/tutor/tutor.model';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { finalize, map, Observable } from 'rxjs';
 import { FamilyAllDetails, IFamilyAllDetails } from '../family.model';
 import { FamilyService } from '../service/family.service';
+import { TranslateService } from '@ngx-translate/core';
+import { SessionStorageService } from 'ngx-webstorage';
+
+import { VERSION } from 'app/app.constants';
+import { LANGUAGES } from 'app/config/language.constants';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { LoginService } from 'app/login/login.service';
+import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
 
 @Component({
   selector: 'jhi-add',
@@ -33,8 +43,8 @@ import { FamilyService } from '../service/family.service';
 export class AddComponent {
   isSavingParent = false;
 
-  authorizingOfficersSharedCollection: IAuthorizingOfficer[] = [];
-  tutorsSharedCollection: ITutor[] = [];
+  authorizingOfficersSharedCollection: IProfile[] = [];
+  tutorsSharedCollection: IProfile[] = [];
   ParentsCollection: IParentAllDetails[] = [];
   ChildrenCollection: IChildAllDetails[] = [];
   isSaving = false;
@@ -50,6 +60,13 @@ export class AddComponent {
   family_step = false;
   parent_step = false;
   child_step = false;
+  inProduction?: boolean;
+  isNavbarCollapsed = true;
+  languages = LANGUAGES;
+  openAPIEnabled?: boolean;
+  version = '';
+  account: Account | null = null;
+  entitiesNavbarItems: any[] = [];
   step = 1;
   i = 0;
   c = 0;
@@ -70,8 +87,17 @@ export class AddComponent {
     protected elementRefChild: ElementRef,
     protected activatedRoute: ActivatedRoute,
     protected familyService: FamilyService,
-    protected formBuilder: FormBuilder
-  ) {}
+    protected formBuilder: FormBuilder,
+    private loginService: LoginService,
+    private translateService: TranslateService,
+    private sessionStorageService: SessionStorageService,
+    private accountService: AccountService,
+    private router: Router
+  ) {
+    if (VERSION) {
+      this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
+    }
+  }
 
   ngOnInit(): void {
     this.FamilyDetails = this.formBuilder.group({
@@ -300,6 +326,29 @@ export class AddComponent {
     return item.id!;
   }
 
+  changeLanguage(languageKey: string): void {
+    this.sessionStorageService.store('locale', languageKey);
+    this.translateService.use(languageKey);
+  }
+
+  collapseNavbar(): void {
+    this.isNavbarCollapsed = true;
+  }
+
+  login(): void {
+    this.router.navigate(['/login']);
+  }
+
+  logout(): void {
+    this.collapseNavbar();
+    this.loginService.logout();
+    this.router.navigate(['']);
+  }
+
+  toggleNavbar(): void {
+    this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
+
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IFamilyAllDetails>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
@@ -322,24 +371,25 @@ export class AddComponent {
   }
 
   protected loadRelationshipsOptionsFamily(): void {
-    this.authorizingOfficerService
-      .query()
-      .pipe(map((res: HttpResponse<IAuthorizingOfficer[]>) => res.body ?? []))
-      .pipe(
-        map((authorizingOfficers: IAuthorizingOfficer[]) =>
-          this.authorizingOfficerService.addAuthorizingOfficerToCollectionIfMissing(
-            authorizingOfficers,
-            this.FamilyDetails.get('authorizingOfficer')!.value
-          )
-        )
-      )
-      .subscribe((authorizingOfficers: IAuthorizingOfficer[]) => (this.authorizingOfficersSharedCollection = authorizingOfficers));
+    this.profileService.findAuthorizingOfficerProfiles().subscribe({
+      next: (res: HttpResponse<IProfile[]>) => {
+        this.authorizingOfficersSharedCollection = res.body ?? [];
+        console.log(this.authorizingOfficersSharedCollection);
+      },
+      error: () => {
+        console.log(this.authorizingOfficersSharedCollection);
+      },
+    });
 
-    this.tutorService
-      .query()
-      .pipe(map((res: HttpResponse<ITutor[]>) => res.body ?? []))
-      .pipe(map((tutors: ITutor[]) => this.tutorService.addTutorToCollectionIfMissing(tutors, this.FamilyDetails.get('tutor')!.value)))
-      .subscribe((tutors: ITutor[]) => (this.tutorsSharedCollection = tutors));
+    this.profileService.findTutorsProfiles().subscribe({
+      next: (res: HttpResponse<IProfile[]>) => {
+        this.tutorsSharedCollection = res.body ?? [];
+        console.log(this.tutorsSharedCollection);
+      },
+      error: () => {
+        console.log(this.tutorsSharedCollection);
+      },
+    });
   }
 
   protected loadRelationshipsOptionsParent(): void {
@@ -383,6 +433,8 @@ export class AddComponent {
       notebookOfPoverty: this.FamilyDetails.get(['notebookOfPoverty'])!.value,
       notebookOfHandicap: this.FamilyDetails.get(['notebookOfHandicap'])!.value,
       archivated: this.FamilyDetails.get(['archivated'])!.value,
+      authorizingOfficer: this.FamilyDetails.get(['authorizingOfficer'])!.value,
+      tutor: this.FamilyDetails.get(['tutor'])!.value,
       beneficiary: this.createFromFormBeneficiary(),
       parentsDetails: this.ParentsCollection.slice(),
       childrenDetails: this.ChildrenCollection.slice(),
@@ -414,8 +466,6 @@ export class AddComponent {
     return {
       ...new Beneficiary(),
       archivated: this.FamilyDetails.get(['archivated'])!.value,
-      authorizingOfficer: this.FamilyDetails.get(['authorizingOfficer'])!.value,
-      tutor: this.FamilyDetails.get(['tutor'])!.value,
     };
   }
 

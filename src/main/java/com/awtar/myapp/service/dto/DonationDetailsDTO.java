@@ -1,6 +1,7 @@
 package com.awtar.myapp.service.dto;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 import javax.validation.constraints.*;
 
@@ -23,6 +24,49 @@ public class DonationDetailsDTO implements Serializable {
     private BeneficiaryDTO beneficiary;
 
     private DonationItemDetailsDTO donationItemDetails[];
+
+    private String model;
+
+    private LocalDate validationDate;
+
+    private LocalDate donationsDate;
+
+    private Long itemsNumber;
+
+    private Double totalPrice;
+
+    private Boolean isValidated;
+
+    public DonationDetailsDTO() {}
+
+    public DonationDetailsDTO(Long id, String model, Boolean isValidated, LocalDate donationsDate, Long itemsNumber, Double totalPrice) {
+        this.id = id;
+        this.model = model;
+        this.isValidated = isValidated;
+        this.donationsDate = donationsDate;
+        this.itemsNumber = itemsNumber;
+        this.totalPrice = totalPrice;
+    }
+
+    public DonationDetailsDTO(Long id, String model, Boolean isValidated, LocalDate donationsDate) {
+        this.id = id;
+        this.model = model;
+        this.isValidated = isValidated;
+        this.donationsDate = donationsDate;
+    }
+
+    public DonationDetailsDTO(String model, Long itemsNumber) {
+        this.model = model;
+        this.itemsNumber = itemsNumber;
+    }
+
+    public DonationDetailsDTO(Long itemsNumber) {
+        this.itemsNumber = itemsNumber;
+    }
+
+    public DonationDetailsDTO(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public Long getId() {
         return id;
@@ -78,6 +122,54 @@ public class DonationDetailsDTO implements Serializable {
 
     public void setDonationItemDetails(DonationItemDetailsDTO[] donationItemDetails) {
         this.donationItemDetails = donationItemDetails;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public LocalDate getValidationDate() {
+        return validationDate;
+    }
+
+    public void setValidationDate(LocalDate validationDate) {
+        this.validationDate = validationDate;
+    }
+
+    public LocalDate getDonationsDate() {
+        return donationsDate;
+    }
+
+    public void setDonationsDate(LocalDate donationsDate) {
+        this.donationsDate = donationsDate;
+    }
+
+    public Long getItemsNumber() {
+        return itemsNumber;
+    }
+
+    public void setItemsNumber(Long itemsNumber) {
+        this.itemsNumber = itemsNumber;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Boolean getIsValidated() {
+        return isValidated;
+    }
+
+    public void setIsValidated(Boolean isValidated) {
+        this.isValidated = isValidated;
     }
 
     @Override

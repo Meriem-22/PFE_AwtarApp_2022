@@ -13,6 +13,7 @@ export interface IBeneficiary {
   visits?: IVisit[] | null;
   authorizingOfficer?: IAuthorizingOfficer | null;
   tutor?: ITutor | null;
+  idContributor?: number | null;
 }
 
 export class Beneficiary implements IBeneficiary {
@@ -24,7 +25,8 @@ export class Beneficiary implements IBeneficiary {
     public donationdetails?: IDonationDetails[] | null,
     public visits?: IVisit[] | null,
     public authorizingOfficer?: IAuthorizingOfficer | null,
-    public tutor?: ITutor | null
+    public tutor?: ITutor | null,
+    public idContributor?: number | null
   ) {
     this.archivated = this.archivated ?? false;
   }

@@ -5,10 +5,18 @@ import { EstablishmentDetailComponent } from './detail/establishment-detail.comp
 import { EstablishmentUpdateComponent } from './update/establishment-update.component';
 import { EstablishmentDeleteDialogComponent } from './delete/establishment-delete-dialog.component';
 import { EstablishmentRoutingModule } from './route/establishment-routing.module';
+import { AddComponent } from './add/add.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
-  imports: [SharedModule, EstablishmentRoutingModule],
-  declarations: [EstablishmentComponent, EstablishmentDetailComponent, EstablishmentUpdateComponent, EstablishmentDeleteDialogComponent],
+  imports: [SharedModule, EstablishmentRoutingModule, NgxPaginationModule],
+  declarations: [
+    EstablishmentComponent,
+    EstablishmentDetailComponent,
+    EstablishmentUpdateComponent,
+    EstablishmentDeleteDialogComponent,
+    AddComponent,
+  ],
   entryComponents: [EstablishmentDeleteDialogComponent],
 })
 export class EstablishmentModule {}

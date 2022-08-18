@@ -47,11 +47,11 @@ public class Beneficiary implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "donations", "beneficiaries", "authorizingOfficerProfile" }, allowSetters = true)
-    private AuthorizingOfficer authorizingOfficer;
+    protected AuthorizingOfficer authorizingOfficer;
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "beneficiaries", "tutorProfile" }, allowSetters = true)
-    private Tutor tutor;
+    protected Tutor tutor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 

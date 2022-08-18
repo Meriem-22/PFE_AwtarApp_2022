@@ -1,96 +1,1146 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <div *ngIf="establishment">
-      <h2 style="margin-top: 4rem; margin-bottom: 2rem" data-cy="establishmentDetailsHeading">
-        <span jhiTranslate="awtarApp.establishment.detail.title">Establishment</span>
-      </h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Charles Anderson" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
 
-      <hr />
+    <title>AdminLTE 3 | Dashboard</title>
+    <style>
+      .text-blue {
+        color: #3afe;
+      }
 
-      <jhi-alert-error></jhi-alert-error>
+      ul.friend-list {
+        margin: 0;
+        padding: 0;
+      }
 
-      <jhi-alert></jhi-alert>
+      ul.friend-list li {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+      }
 
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ establishment.id }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.name">Name</span></dt>
-        <dd>
-          <span>{{ establishment.name }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.activity">Activity</span></dt>
-        <dd>
-          <span>{{ establishment.activity }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.manager">Manager</span></dt>
-        <dd>
-          <span>{{ establishment.manager }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.managerCin">Manager Cin</span></dt>
-        <dd>
-          <span>{{ establishment.managerCin }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.contact">Contact</span></dt>
-        <dd>
-          <span>{{ establishment.contact }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.adress">Adress</span></dt>
-        <dd>
-          <span>{{ establishment.adress }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.cp">Cp</span></dt>
-        <dd>
-          <span>{{ establishment.cp }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.region">Region</span></dt>
-        <dd>
-          <span>{{ establishment.region }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.phone">Phone</span></dt>
-        <dd>
-          <span>{{ establishment.phone }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.fax">Fax</span></dt>
-        <dd>
-          <span>{{ establishment.fax }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.email">Email</span></dt>
-        <dd>
-          <span>{{ establishment.email }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.site">Site</span></dt>
-        <dd>
-          <span>{{ establishment.site }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.remark">Remark</span></dt>
-        <dd>
-          <span>{{ establishment.remark }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.establishmentType">Establishment Type</span></dt>
-        <dd>
-          <div *ngIf="establishment.establishmentType">
-            <a [routerLink]="['/establishment-type', establishment.establishmentType?.id, 'view']">{{
-              establishment.establishmentType?.typeName
-            }}</a>
+      ul.friend-list li:hover {
+        background: rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
+      ul.friend-list .left img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-right: 20px;
+      }
+
+      ul.friend-list li {
+        padding: 10px;
+      }
+
+      ul.friend-list .right h3 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 0;
+      }
+
+      ul.friend-list .right p {
+        font-size: 11px;
+        color: #6c757d;
+        margin: 0;
+      }
+
+      .social-timeline-card .dropdown-toggle::after {
+        display: none;
+      }
+
+      .info-card h4 {
+        font-size: 15px;
+      }
+
+      .info-card h2 {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .social-about .social-info {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      .social-about p {
+        margin-bottom: 20px;
+      }
+
+      .info-card i {
+        color: #3afe;
+      }
+
+      .card-one {
+        position: relative;
+        width: 300px;
+        background: #fff;
+        box-shadow: 0 10px 7px -5px rgba(0, 0, 0, 0.4);
+      }
+
+      .card-one .header {
+        position: relative;
+        width: 100%;
+        height: 60px;
+        background-color: #3afe;
+      }
+
+      .card-one .header::before,
+      .card-one .header::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: inherit;
+      }
+
+      .card-one .header::before {
+        -webkit-transform: skewY(-8deg);
+        transform: skewY(-8deg);
+        -webkit-transform-origin: 100% 100%;
+        transform-origin: 100% 100%;
+      }
+
+      .card-one .header::after {
+        -webkit-transform: skewY(8deg);
+        transform: skewY(8deg);
+        -webkit-transform-origin: 0 100%;
+        transform-origin: 0 100%;
+      }
+
+      .card-one .header .avatar {
+        position: absolute;
+        left: 50%;
+        top: 30px;
+        margin-left: -50px;
+        z-index: 5;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #ccc;
+        border: 3px solid #fff;
+      }
+
+      .card-one .header .avatar img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: auto;
+      }
+
+      .card-one h3 {
+        position: relative;
+        margin: 80px 0 30px;
+        text-align: center;
+      }
+
+      .card-one h3::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        margin-left: -15px;
+        width: 30px;
+        height: 1px;
+        background: #000;
+      }
+
+      .card-one .desc {
+        padding: 0 1rem 2rem;
+        text-align: center;
+        line-height: 1.5;
+        color: #777;
+      }
+
+      .card-one .contacts {
+        width: 200px;
+        max-width: 100%;
+        margin: 0 auto 3rem;
+      }
+
+      .card-one .contacts a {
+        display: block;
+        width: 33.333333%;
+        float: left;
+        text-align: center;
+        color: #c8c;
+      }
+
+      .card-one .contacts a:hover {
+        color: #333;
+      }
+
+      .card-one .contacts a:hover .fa::before {
+        color: #fff;
+      }
+
+      .card-one .contacts a:hover .fa::after {
+        width: 100%;
+        height: 100%;
+      }
+
+      .card-one .contacts a .fa {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        line-height: 39px;
+        overflow: hidden;
+        text-align: center;
+        font-size: 1.3em;
+      }
+
+      .card-one .contacts a .fa:before {
+        position: relative;
+        z-index: 1;
+      }
+
+      .card-one .contacts a .fa::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background: #c8c;
+        transition: width 0.3s, height 0.3s;
+      }
+
+      .card-one .contacts a:last-of-type .fa {
+        line-height: 36px;
+      }
+
+      .card-one .footer {
+        position: relative;
+        padding: 1rem;
+        background-color: #3afe;
+        text-align: center;
+      }
+
+      .card-one .footer a {
+        padding: 0 1rem;
+        color: #e2e2e2;
+        transition: color 0.4s;
+      }
+
+      .card-one .footer a:hover {
+        color: #c8c;
+      }
+
+      .card-one .footer::before {
+        content: '';
+        position: absolute;
+        top: -27px;
+        left: 50%;
+        margin-left: -15px;
+        border: 15px solid transparent;
+        border-bottom-color: #3afe;
+      }
+
+      .card-title,
+      .card .card-title,
+      .card-2 .card-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+      a {
+        color: #333;
+      }
+      .badge {
+        font-size: 12px;
+        line-height: 1;
+        padding: 0.375rem 0.5625rem;
+        font-weight: normal;
+      }
+
+      .badge-primary {
+        color: #447de8;
+        background-color: #e6edff;
+      }
+      .badge {
+        display: inline-block;
+        padding: 0.4em 0.5em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+          box-shadow 0.15s ease-in-out;
+      }
+
+      /*end social*/
+    </style>
+
+    <script nonce="33a2bf22-55fb-4fb7-baea-4b8bb2a21cdd">
+      (function (w, d) {
+        !(function (a, e, t, r) {
+          (a.zarazData = a.zarazData || {}),
+            (a.zarazData.executed = []),
+            (a.zaraz = { deferred: [] }),
+            (a.zaraz.q = []),
+            (a.zaraz._f = function (e) {
+              return function () {
+                var t = Array.prototype.slice.call(arguments);
+                a.zaraz.q.push({ m: e, a: t });
+              };
+            });
+          for (const e of ['track', 'set', 'ecommerce', 'debug']) a.zaraz[e] = a.zaraz._f(e);
+          (a.zaraz.init = () => {
+            var t = e.getElementsByTagName(r)[0],
+              z = e.createElement(r),
+              n = e.getElementsByTagName('title')[0];
+            for (
+              n && (a.zarazData.t = e.getElementsByTagName('title')[0].text),
+                a.zarazData.x = Math.random(),
+                a.zarazData.w = a.screen.width,
+                a.zarazData.h = a.screen.height,
+                a.zarazData.j = a.innerHeight,
+                a.zarazData.e = a.innerWidth,
+                a.zarazData.l = a.location.href,
+                a.zarazData.r = e.referrer,
+                a.zarazData.k = a.screen.colorDepth,
+                a.zarazData.n = e.characterSet,
+                a.zarazData.o = new Date().getTimezoneOffset(),
+                a.zarazData.q = [];
+              a.zaraz.q.length;
+
+            ) {
+              const e = a.zaraz.q.shift();
+              a.zarazData.q.push(e);
+            }
+            z.defer = !0;
+            for (const e of [localStorage, sessionStorage])
+              Object.keys(e || {})
+                .filter(a => a.startsWith('_zaraz_'))
+                .forEach(t => {
+                  try {
+                    a.zarazData['z_' + t.slice(7)] = JSON.parse(e.getItem(t));
+                  } catch {
+                    a.zarazData['z_' + t.slice(7)] = e.getItem(t);
+                  }
+                });
+            (z.referrerPolicy = 'origin'),
+              (z.src = '/cdn-cgi/zaraz/s.js?z=' + btoa(encodeURIComponent(JSON.stringify(a.zarazData)))),
+              t.parentNode.insertBefore(z, t);
+          }),
+            ['complete', 'interactive'].includes(e.readyState) ? zaraz.init() : a.addEventListener('DOMContentLoaded', zaraz.init);
+        })(w, d, 0, 'script');
+      })(window, document);
+    </script>
+  </head>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../../content/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
+      </div>
+
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black">
+        <a href="index3.html" class="brand-link" style="background-color: black">
+          <img
+            src="../../content/img/AdminLTELogo.png"
+            alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3"
+            style="opacity: 0.8"
+          />
+          <span class="brand-text font-weight-light">AWTAR</span>
+        </a>
+
+        <div class="sidebar">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">{{ account?.firstName }} {{ account?.lastName }}</a>
+            </div>
           </div>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.establishment.city">City</span></dt>
-        <dd>
-          <div *ngIf="establishment.city">
-            <a [routerLink]="['/city', establishment.city?.id, 'view']">{{ establishment.city?.name }}</a>
+
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item menu-open">
+                <a href="dashboard" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-header">BENEFICIARIES</li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
+                  <p>
+                    Families
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/family" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Families</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/family/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Family</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
+                  <p>
+                    Children
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/child" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Chilfren</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="child/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Child</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
+                  <p>
+                    Establishments
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/establishment" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Establishments</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+
+                      <p>Add Establishment</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/establishment/new" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">DONATIONS</li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
+                  <p>
+                    Donations Issued
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Donations Issued</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Donations Issued</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
+                  <p>
+                    Donations Received
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Donations Received</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Donations Received</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">DONATIONS Items</li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    Items
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Items</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Item</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Status Item</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">REFERENCE TABLE</li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Establishments Types</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Citys</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Health Categories</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Nature</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>School Level</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Educational Institutions</p>
+                </a>
+              </li>
+
+              <li class="nav-header">CONTRIBUTORS</li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
+                  <p>
+                    Authorizing Officers
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Authorizing Officers</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Authorizing Officer</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    Tutors
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Tutors</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Tutor</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    Tutors
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Tutors</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Tutor</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="content-wrapper" style="margin-top: -3rem">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Establishment Profile</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                  <li class="breadcrumb-item"><a href="#">Establishment</a></li>
+                  <li class="breadcrumb-item active">Establishment Profile</li>
+                </ol>
+              </div>
+            </div>
           </div>
-        </dd>
-      </dl>
+        </section>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-      </button>
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="card card-primary card-outline">
+                  <div class="card-body box-profile" *ngIf="establishment">
+                    <div class="text-center">
+                      <img
+                        class="profile-user-img"
+                        style="width: 100%; height: 100%"
+                        src="../../../../content/images/establishment.jpg"
+                        alt="User profile picture"
+                      />
+                    </div>
+                    <h3 class="profile-username text-center"><span jhiTranslate="awtarApp.establishment.name">Name</span></h3>
+                    <p class="text-muted text-center">
+                      <span>{{ establishment.name }}</span>
+                    </p>
+                    <ul class="list-group list-group-unbordered mb-3">
+                      <li class="list-group-item">
+                        <b><span jhiTranslate="awtarApp.establishment.activity">Activity</span></b>
+                        <a class="float-right">{{ establishment.activity }}</a>
+                      </li>
 
-      <button type="button" [routerLink]="['/establishment', establishment.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-      </button>
+                      <li class="list-group-item">
+                        <b><span jhiTranslate="awtarApp.establishment.site">Site</span></b>
+                        <a class="float-right">{{ establishment.site }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="card social-timeline-card" *ngIf="establishment">
+                  <div class="card-body">
+                    <h5 class="card-title">Contributors</h5>
+                    <p><span class="material-icons-sharp" style="margin-left: 0.5rem">groups</span></p>
+                    <ul class="friend-list">
+                      <div>
+                        <div *ngIf="Ordonnateur" [routerLink]="['/authorizing-officer', establishment.authorizingOfficer?.id, 'view']">
+                          <li>
+                            <div class="left" *ngIf="Ordonnateur">
+                              <img *ngIf="!Ordonnateur.body?.urlPhoto" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                              <a (click)="openFile(Ordonnateur.body?.urlPhoto!, Ordonnateur.body?.urlPhotoContentType!)">
+                                <img
+                                  [src]="'data:' + Ordonnateur.body?.urlPhotoContentType + ';base64,' + Ordonnateur.body?.urlPhoto"
+                                  style="max-width: 100%"
+                                  alt="Ordonnateur.body? image"
+                                />
+                              </a>
+                            </div>
+                            <div class="right" *ngIf="Ordonnateur">
+                              <h3>{{ Ordonnateur.body?.lastName }} {{ Ordonnateur.body?.firstName }}</h3>
+                              <p><span jhiTranslate="awtarApp.profile.authorizingOfficer">Authorizing Officer</span></p>
+                            </div>
+                          </li>
+                        </div>
+                        <li *ngIf="!Ordonnateur">
+                          <div class="left">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                          </div>
+                          <div
+                            class="right"
+                            style="display: flex"
+                            [routerLink]="['/beneficiary', establishment.id, 'contributor', 'authorizing-officer']"
+                          >
+                            <p>
+                              <fa-icon icon="plus"></fa-icon>
+                              <span jhiTranslate="awtarApp.authorizingOfficer.home.addLabel"> Add an Authorizing Officer </span>
+                            </p>
+                          </div>
+                        </li>
+                        <div *ngIf="Ordonnateur" class="text-right" style="margin-top: -3rem">
+                          <div class="dropdown">
+                            <button
+                              class="btn btn-link dropdown-toggle"
+                              type="button"
+                              id="gedf-drop11"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="fa fa-ellipsis-h"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop11">
+                              <div class="h6 dropdown-header">Settings</div>
+                              <a class="dropdown-item" href="#">View</a>
+                              <a
+                                class="dropdown-item"
+                                [routerLink]="['/beneficiary', establishment.id, 'contributor', 'authorizing-officer']"
+                              >
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                              </a>
+                              <a class="dropdown-item" href="#">Delete</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="right">
+                        <div *ngIf="Tuteur" [routerLink]="['/tutor', establishment.tutor?.id, 'view']">
+                          <li>
+                            <div class="left">
+                              <img *ngIf="!Tuteur.body?.urlPhoto" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" />
+                              <a (click)="openFile(Tuteur.body?.urlPhoto!, Tuteur.body?.urlPhotoContentType!)">
+                                <img
+                                  [src]="'data:' + Tuteur.body?.urlPhotoContentType + ';base64,' + Tuteur.body?.urlPhoto"
+                                  style="max-width: 100%"
+                                  alt="Tuteur.body? image"
+                                />
+                              </a>
+                            </div>
+                            <div class="right">
+                              <h3 class="right">{{ Tuteur.body?.lastName }} {{ Tuteur.body?.firstName }}</h3>
+                              <p><span jhiTranslate="awtarApp.profile.tutor">Tutor</span></p>
+                            </div>
+                          </li>
+                        </div>
+                        <li *ngIf="!Tuteur">
+                          <div class="left">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" />
+                          </div>
+                          <div
+                            class="right"
+                            style="display: flex"
+                            [routerLink]="['/beneficiary', establishment.id, 'contributor', 'tutor']"
+                          >
+                            <p>
+                              <fa-icon icon="plus"></fa-icon>
+                              <span jhiTranslate="awtarApp.tutor.home.addLabel"> Add a tutor </span>
+                            </p>
+                          </div>
+                        </li>
+                        <div *ngIf="Tuteur" class="text-right" style="margin-top: -3rem">
+                          <div class="dropdown">
+                            <button
+                              class="btn btn-link dropdown-toggle"
+                              type="button"
+                              id="gedf-drop11"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="fa fa-ellipsis-h"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop11">
+                              <div class="h6 dropdown-header">Settings</div>
+                              <a class="dropdown-item" href="#">View</a>
+                              <a class="dropdown-item" [routerLink]="['/beneficiary', establishment.id, 'contributor', 'tutor']">
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                              </a>
+                              <a class="dropdown-item" href="#">Delete</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-9">
+                <div class="card">
+                  <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+                      <li class="nav-item"><a class="nav-link active" href="#about" data-toggle="tab">About</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#dons" data-toggle="tab">Donations</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                    </ul>
+                  </div>
+                  <div class="card-body">
+                    <div class="tab-content">
+                      <div class="active tab-pane" id="about">
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="card card-primary">
+                                <div class="card-header"></div>
+
+                                <div class="card-body" *ngIf="establishment">
+                                  <div class="row"></div>
+                                  <div class="row mt-4">
+                                    <div class="col-sm-4">
+                                      <div class="position-relative p-3 bg-warning" style="height: 280px">
+                                        <dt><span jhiTranslate="awtarApp.establishment.establishmentType">Establishment Type</span></dt>
+                                        <dd>
+                                          <div *ngIf="establishment.establishmentType">
+                                            <a [routerLink]="['/establishment-type', establishment.establishmentType?.id, 'view']">{{
+                                              establishment.establishmentType?.typeName
+                                            }}</a>
+                                          </div>
+                                        </dd>
+                                        <dt><span jhiTranslate="awtarApp.establishment.remark">Remark</span></dt>
+                                        <dd>
+                                          <span>{{ establishment.remark }}</span>
+                                        </dd>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                      <div class="position-relative p-3 bg-warning" style="height: 280px">
+                                        <dt><span jhiTranslate="awtarApp.establishment.city">City</span></dt>
+                                        <dd>
+                                          <div *ngIf="establishment.city">
+                                            <a [routerLink]="['/city', establishment.city?.id, 'view']">{{ establishment.city?.name }}</a>
+                                          </div>
+                                        </dd>
+                                        <dt><span jhiTranslate="awtarApp.establishment.region">Region</span></dt>
+                                        <dd>
+                                          <span>{{ establishment.region }}</span>
+                                        </dd>
+                                        <dt><span jhiTranslate="awtarApp.establishment.adress">Adress</span></dt>
+                                        <dd>
+                                          <span>{{ establishment.adress }}</span>
+                                        </dd>
+                                        <dt><span jhiTranslate="awtarApp.establishment.cp">Cp</span></dt>
+                                        <dd>
+                                          <span>{{ establishment.cp }}</span>
+                                        </dd>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                      <div class="position-relative p-3 bg-warning" style="height: 280px">
+                                        <dt><span jhiTranslate="awtarApp.establishment.phone">Phone</span></dt>
+                                        <dd>
+                                          <span>{{ establishment.phone }}</span>
+                                        </dd>
+                                        <dt><span jhiTranslate="awtarApp.establishment.fax">Fax</span></dt>
+                                        <dd>
+                                          <span>{{ establishment.fax }}</span>
+                                        </dd>
+                                        <dt><span jhiTranslate="awtarApp.establishment.contact">Contact</span></dt>
+                                        <dd>
+                                          <span>{{ establishment.contact }}</span>
+                                        </dd>
+                                        <dt><span jhiTranslate="awtarApp.establishment.email">Email</span></dt>
+                                        <dd>
+                                          <span>{{ establishment.email }}</span>
+                                        </dd>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row mt-4">
+                                    <div class="col-sm-4">
+                                      <div class="position-relative" *ngIf="establishment">
+                                        <img
+                                          src="../../../../content/images/gerant.jpg"
+                                          alt="Photo 1"
+                                          style="height: 194px"
+                                          class="img-fluid"
+                                        />
+                                        <div>
+                                          <h6 style="margin-top: 0.5rem">
+                                            <b><span jhiTranslate="awtarApp.establishment.manager">Manager</span></b>
+                                            <a class="float-right">{{ establishment.manager }}</a>
+                                          </h6>
+                                          <h6>
+                                            <b><span jhiTranslate="awtarApp.establishment.managerCin">Manager Cin</span></b>
+                                            <a class="float-right">{{ establishment.managerCin }}</a>
+                                          </h6>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-4 text-center">
+                                      <div class="position-relative">
+                                        <img src="../../../../content/images/Donations-family.jpg" alt="Photo 2" class="img-fluid" />
+                                        <h6 style="margin-top: 0.5rem">Donations Issued</h6>
+                                        <h6>{{ df }}</h6>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-4 text-center">
+                                      <div class="position-relative" *ngIf="benef">
+                                        <img
+                                          src="../../../../content/images/reference.jpg"
+                                          alt="Photo 3"
+                                          style="height: 194px"
+                                          class="img-fluid"
+                                        />
+                                        <h6 style="margin-top: 0.5rem">Reference</h6>
+                                        <h6>{{ benef.beneficiaryReference }}</h6>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="tab-pane" id="dons">
+                        <div class="col-lg-13 gedf-main" style="margin-left: -1rem; margin-right: -1rem">
+                          <!--- \\\\\\\Post-->
+                          <div class="card social-timeline-card">
+                            <div class="card-body" style="margin-left: -0.8rem; margin-right: -1rem">
+                              <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <div class="card">
+                                        <div class="card-header">
+                                          <h3 class="card-title">Donation Table</h3>
+                                          <div class="text-right">
+                                            <div class="dropdown">
+                                              <button
+                                                class="btn btn-link dropdown-toggle"
+                                                type="button"
+                                                id="gedf-drop11"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                              >
+                                                <i class="fa fa-ellipsis-h"></i>
+                                              </button>
+                                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop11">
+                                                <div class="h6 dropdown-header">Settings</div>
+                                                <a class="dropdown-item" href="#">Add Donation</a>
+                                                <a class="dropdown-item" href="#">Delete</a>
+                                                <a class="dropdown-item" href="#">Report</a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div class="card-body" *ngIf="donationList">
+                                          <table class="table table-bordered">
+                                            <thead>
+                                              <tr>
+                                                <th></th>
+                                                <th><span jhiTranslate="awtarApp.donationsIssued.model">Model</span></th>
+                                                <th><span jhiTranslate="awtarApp.donationsIssued.isValidated">Validation Date</span></th>
+                                                <th style="width: 40px">
+                                                  <span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span>
+                                                </th>
+                                                <th style="width: 40px">items Number</th>
+                                                <th style="width: 40px">Total Price</th>
+                                                <th></th>
+                                              </tr>
+                                            </thead>
+
+                                            <tbody>
+                                              <tr
+                                                *ngFor="
+                                                  let don of donationList
+                                                    | paginate
+                                                      : {
+                                                          itemsPerPage: tableSize,
+                                                          currentPage: page,
+                                                          totalItems: count
+                                                        };
+                                                  let i = index;
+                                                  trackBy: trackId
+                                                "
+                                              >
+                                                <td>
+                                                  <div class="custom-control custom-checkbox">
+                                                    <input
+                                                      class="custom-control-input"
+                                                      type="checkbox"
+                                                      id="customCheckbox1"
+                                                      value="option1"
+                                                    />
+                                                    <label for="customCheckbox1" class="custom-control-label"></label>
+                                                  </div>
+                                                </td>
+                                                <td>{{ don.model }}</td>
+                                                <td>
+                                                  <span class="badge" *ngIf="don.isValidated === true" style="background-color: #08cd67">
+                                                    {{ don.isValidated }}</span
+                                                  >
+                                                  <span
+                                                    class="badge"
+                                                    *ngIf="don.isValidated === false; or: don.isValidated === null"
+                                                    style="background-color: #cd1f08"
+                                                  >
+                                                    {{ don.isValidated }}</span
+                                                  >
+                                                </td>
+                                                <td>
+                                                  <span class="badge" style="background-color: #fc00ff">
+                                                    {{ don.donationsDate | formatMediumDate }}</span
+                                                  >
+                                                </td>
+                                                <td>{{ don.itemsNumber }}</td>
+                                                <td>{{ don.totalPrice }}</td>
+                                                <td>
+                                                  <button
+                                                    type="submit"
+                                                    [routerLink]="['/establishment', establishment!.id, 'view']"
+                                                    class="btn btn-info btn-sm"
+                                                    data-cy="entityDetailsButton"
+                                                  >
+                                                    <fa-icon icon="eye"></fa-icon>
+                                                  </button>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+
+                                        <div class="card-footer clearfix" style="display: flex">
+                                          <div>
+                                            <select (change)="onTableSizeChange($event)">
+                                              <option *ngFor="let size of tableSizes">{{ size }}</option>
+                                            </select>
+                                          </div>
+                                          <div>
+                                            <pagination-controls
+                                              previousLabel="Prev"
+                                              nextLabel="Next"
+                                              (pageChange)="onTableDataChange($event)"
+                                            >
+                                            </pagination-controls>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!--- \\\\\\\Post-->
+
+                          <!-- Post /////-->
+                          <!--- \\\\\\\Post-->
+                        </div>
+                      </div>
+
+                      <div class="tab-pane" id="settings">
+                        <jhi-establishment-update></jhi-establishment-update>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="main-footer"></footer>
+
+      <aside class="control-sidebar control-sidebar-dark"></aside>
     </div>
-  </div>
-</div>
+
+    <script></script>
+  </body>
+</html>

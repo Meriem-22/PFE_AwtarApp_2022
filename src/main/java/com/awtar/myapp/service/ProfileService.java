@@ -88,4 +88,41 @@ public interface ProfileService {
      * @return the entity.
      */
     List<ProfileDTO> findProfileChildren();
+
+    /**
+     *
+     *
+     *
+     * @return the entity.
+     */
+    List<ProfileDTO> findTutorProfile();
+    /**
+     *
+     *
+     *
+     * @return the entity.
+     */
+    List<ProfileDTO> findAuthorizingOfficerProfile();
+
+    /**
+     * Get the "id" profile.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    Optional<ProfileDTO> findProfileX(Long id);
+    /**
+     * Get the "id" profile.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    List<ProfileDTO> findOtherAuthorizingOfficers(Long id);
+    /**
+     * Get the "id" profile.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    List<ProfileDTO> findOthersTutors(Long id);
 }

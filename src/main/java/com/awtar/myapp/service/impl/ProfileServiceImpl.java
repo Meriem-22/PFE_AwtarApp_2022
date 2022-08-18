@@ -1,12 +1,17 @@
 package com.awtar.myapp.service.impl;
 
 import com.awtar.myapp.domain.Family;
+import com.awtar.myapp.domain.Parent;
 import com.awtar.myapp.domain.Profile;
+import com.awtar.myapp.domain.Tutor;
 import com.awtar.myapp.repository.FamilyRepository;
+import com.awtar.myapp.repository.ParentRepository;
 import com.awtar.myapp.repository.ProfileRepository;
+import com.awtar.myapp.repository.TutorRepository;
 import com.awtar.myapp.service.ProfileService;
 import com.awtar.myapp.service.dto.ProfileDTO;
 import com.awtar.myapp.service.mapper.ProfileMapper;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -31,10 +36,22 @@ public class ProfileServiceImpl implements ProfileService {
 
     private final FamilyRepository familyRepository;
 
-    public ProfileServiceImpl(ProfileRepository profileRepository, ProfileMapper profileMapper, FamilyRepository familyRepository) {
+    private final TutorRepository tutorRepository;
+
+    private final ParentRepository parentRepository;
+
+    public ProfileServiceImpl(
+        ProfileRepository profileRepository,
+        ProfileMapper profileMapper,
+        FamilyRepository familyRepository,
+        TutorRepository tutorRepository,
+        ParentRepository parentRepository
+    ) {
         this.profileRepository = profileRepository;
         this.profileMapper = profileMapper;
         this.familyRepository = familyRepository;
+        this.tutorRepository = tutorRepository;
+        this.parentRepository = parentRepository;
     }
 
     @Override
@@ -95,9 +112,9 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public List<ProfileDTO> findFamilyParents(Long id) {
         Family family = familyRepository.getById(id);
-        List<Profile> parents = profileRepository.findParentsOfOneFamily(family);
+        List<ProfileDTO> parents = profileRepository.findParentsOfOneFamily(family);
 
-        return profileMapper.toDto(parents);
+        return parents;
     }
 
     @Override
@@ -112,5 +129,36 @@ public class ProfileServiceImpl implements ProfileService {
     public List<ProfileDTO> findProfileChildren() {
         List<Profile> profile = profileRepository.findAllProfileChild();
         return profileMapper.toDto(profile);
+    }
+
+    @Override
+    public List<ProfileDTO> findTutorProfile() {
+        List<Profile> profiles = profileRepository.findProfileTutor();
+        return profileMapper.toDto(profiles);
+    }
+
+    @Override
+    public List<ProfileDTO> findAuthorizingOfficerProfile() {
+        List<Profile> profiles = profileRepository.findProfileAuthorizingOfficer();
+        return profileMapper.toDto(profiles);
+    }
+
+    @Override
+    public Optional<ProfileDTO> findProfileX(Long id) {
+        return profileRepository.findProfileX(id).map(profileMapper::toDto);
+    }
+
+    @Override
+    public List<ProfileDTO> findOtherAuthorizingOfficers(Long id) {
+        List<ProfileDTO> l = profileRepository.findOthersAuthorizingOfficersProfiles(id);
+
+        return l;
+    }
+
+    @Override
+    public List<ProfileDTO> findOthersTutors(Long id) {
+        List<ProfileDTO> l = profileRepository.findOthersTutorsProfiles(id);
+
+        return l;
     }
 }

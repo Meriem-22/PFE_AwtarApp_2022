@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDonationDetails, getDonationDetailsIdentifier } from '../donation-details.model';
+import dayjs from 'dayjs';
 
 export type EntityResponseType = HttpResponse<IDonationDetails>;
 export type EntityArrayResponseType = HttpResponse<IDonationDetails[]>;
+export type EntityArrayResponse = HttpResponse<any[]>;
 
 @Injectable({ providedIn: 'root' })
 export class DonationDetailsService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/donation-details');
+  protected Url = this.applicationConfigService.getEndpointFor('api/donation-details/beneficiary');
+  protected Url2 = this.applicationConfigService.getEndpointFor('api/donation-details/beneficiary/donation-list');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -69,5 +73,30 @@ export class DonationDetailsService {
       return [...donationDetailsToAdd, ...donationDetailsCollection];
     }
     return donationDetailsCollection;
+  }
+
+  getAllDonationsIssuedOfFamily(id: number): Observable<EntityArrayResponse> {
+    return this.http
+      .get<any[]>(`${this.Url2}/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponse) => this.convertDateArrayFromServer(res)));
+  }
+
+  querygetAllDonationsIssuedOfFamily(id: number, req?: any): Observable<EntityArrayResponse> {
+    const options = createRequestOption(req);
+    return this.http.get<any[]>(`${this.Url}/${id}`, { params: options, observe: 'response' });
+  }
+
+  getAll(params: any): Observable<any> {
+    return this.http.get<any>(this.Url, { params });
+  }
+
+  protected convertDateArrayFromServer(res: EntityArrayResponse): EntityArrayResponse {
+    if (res.body) {
+      res.body.forEach((donationsIssued: any) => {
+        donationsIssued.validationDate = donationsIssued.validationDate ? dayjs(donationsIssued.validationDate) : undefined;
+        donationsIssued.donationsDate = donationsIssued.donationsDate ? dayjs(donationsIssued.donationsDate) : undefined;
+      });
+    }
+    return res;
   }
 }

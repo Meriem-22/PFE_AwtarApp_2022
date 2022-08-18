@@ -187,4 +187,24 @@ public class TutorResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * {@code POST  /tutors} : Create a new tutor with profile info.
+     *
+     * @param tutorDTO the tutorDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new tutorDTO, or with status {@code 400 (Bad Request)} if the tutor has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/tutors/add")
+    public ResponseEntity<TutorDTO> addTutor(@RequestBody TutorDTO tutorDTO) throws URISyntaxException {
+        log.debug("REST request to save Tutor : {}", tutorDTO);
+        if (tutorDTO.getId() != null) {
+            throw new BadRequestAlertException("A new tutor cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        TutorDTO result = tutorService.add(tutorDTO);
+        return ResponseEntity
+            .created(new URI("/api/tutors/add/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
 }

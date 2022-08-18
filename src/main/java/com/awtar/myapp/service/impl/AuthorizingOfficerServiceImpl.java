@@ -1,10 +1,14 @@
 package com.awtar.myapp.service.impl;
 
 import com.awtar.myapp.domain.AuthorizingOfficer;
+import com.awtar.myapp.domain.Profile;
 import com.awtar.myapp.repository.AuthorizingOfficerRepository;
+import com.awtar.myapp.repository.ProfileRepository;
 import com.awtar.myapp.service.AuthorizingOfficerService;
 import com.awtar.myapp.service.dto.AuthorizingOfficerDTO;
+import com.awtar.myapp.service.dto.ProfileDTO;
 import com.awtar.myapp.service.mapper.AuthorizingOfficerMapper;
+import com.awtar.myapp.service.mapper.ProfileMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -30,12 +34,20 @@ public class AuthorizingOfficerServiceImpl implements AuthorizingOfficerService 
 
     private final AuthorizingOfficerMapper authorizingOfficerMapper;
 
+    private final ProfileMapper profileMapper;
+
+    private final ProfileRepository profileRepository;
+
     public AuthorizingOfficerServiceImpl(
         AuthorizingOfficerRepository authorizingOfficerRepository,
-        AuthorizingOfficerMapper authorizingOfficerMapper
+        AuthorizingOfficerMapper authorizingOfficerMapper,
+        ProfileMapper profileMapper,
+        ProfileRepository profileRepository
     ) {
         this.authorizingOfficerRepository = authorizingOfficerRepository;
         this.authorizingOfficerMapper = authorizingOfficerMapper;
+        this.profileMapper = profileMapper;
+        this.profileRepository = profileRepository;
     }
 
     @Override
@@ -101,5 +113,17 @@ public class AuthorizingOfficerServiceImpl implements AuthorizingOfficerService 
     public void delete(Long id) {
         log.debug("Request to delete AuthorizingOfficer : {}", id);
         authorizingOfficerRepository.deleteById(id);
+    }
+
+    @Override
+    public AuthorizingOfficerDTO add(AuthorizingOfficerDTO authorizingOfficerDTO) {
+        ProfileDTO profiledto = authorizingOfficerDTO.getProfile();
+        Profile profile = profileMapper.toEntity(profiledto);
+        AuthorizingOfficer authorizingOfficer = authorizingOfficerMapper.toEntity(authorizingOfficerDTO);
+
+        authorizingOfficer = authorizingOfficerRepository.save(authorizingOfficer);
+        profile.setAuthorizingOfficer(authorizingOfficer);
+        profileRepository.save(profile);
+        return authorizingOfficerMapper.toDto(authorizingOfficer);
     }
 }

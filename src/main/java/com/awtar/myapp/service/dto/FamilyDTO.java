@@ -25,6 +25,10 @@ public class FamilyDTO implements Serializable {
 
     private Boolean archivated;
 
+    private ProfileDTO authorizingOfficer;
+
+    private ProfileDTO tutor;
+
     private BeneficiaryDTO beneficiary;
 
     private ParentDTO parentsDetails[];
@@ -85,6 +89,22 @@ public class FamilyDTO implements Serializable {
 
     public void setArchivated(Boolean archivated) {
         this.archivated = archivated;
+    }
+
+    public ProfileDTO getAuthorizingOfficer() {
+        return authorizingOfficer;
+    }
+
+    public void setAuthorizingOfficer(ProfileDTO authorizingOfficer) {
+        this.authorizingOfficer = authorizingOfficer;
+    }
+
+    public ProfileDTO getTutor() {
+        return tutor;
+    }
+
+    public void setTutor(ProfileDTO tutor) {
+        this.tutor = tutor;
     }
 
     public BeneficiaryDTO getBeneficiary() {

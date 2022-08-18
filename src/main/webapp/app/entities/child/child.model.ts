@@ -1,6 +1,8 @@
 import { ITeachingCurriculum } from 'app/entities/teaching-curriculum/teaching-curriculum.model';
 import { IProfile } from 'app/entities/profile/profile.model';
 import { IFamily } from 'app/entities/family/family.model';
+import { IAuthorizingOfficer } from '../authorizing-officer/authorizing-officer.model';
+import { ITutor } from '../tutor/tutor.model';
 
 export interface IChild {
   id?: number;
@@ -23,6 +25,8 @@ export interface IChildAllDetails {
   teachingCurricula?: ITeachingCurriculum[] | null;
   childProfile?: IProfile | null;
   family?: IFamily | null;
+  authorizingOfficer?: IAuthorizingOfficer | null;
+  tutor?: ITutor | null;
   profile?: IProfile;
 }
 
@@ -32,6 +36,8 @@ export class ChildAllDetails implements IChildAllDetails {
     public teachingCurricula?: ITeachingCurriculum[] | null,
     public childProfile?: IProfile | null,
     public family?: IFamily | null,
+    public authorizingOfficer?: IAuthorizingOfficer | null,
+    public tutor?: ITutor | null,
     public profile?: IProfile
   ) {}
 }

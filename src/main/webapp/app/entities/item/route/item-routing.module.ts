@@ -6,6 +6,7 @@ import { ItemComponent } from '../list/item.component';
 import { ItemDetailComponent } from '../detail/item-detail.component';
 import { ItemUpdateComponent } from '../update/item-update.component';
 import { ItemRoutingResolveService } from './item-routing-resolve.service';
+import { AddItemComponent } from '../add-item/add-item.component';
 
 const itemRoute: Routes = [
   {
@@ -35,6 +36,14 @@ const itemRoute: Routes = [
   {
     path: ':id/edit',
     component: ItemUpdateComponent,
+    resolve: {
+      item: ItemRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'add',
+    component: AddItemComponent,
     resolve: {
       item: ItemRoutingResolveService,
     },

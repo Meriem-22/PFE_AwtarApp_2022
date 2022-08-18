@@ -1,7 +1,11 @@
 package com.awtar.myapp.repository;
 
 import com.awtar.myapp.domain.Family;
+import com.awtar.myapp.domain.Parent;
 import com.awtar.myapp.domain.Profile;
+import com.awtar.myapp.domain.Tutor;
+import com.awtar.myapp.service.dto.ProfileDTO;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -42,9 +46,9 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
     Optional<Profile> findOneWithToOneRelationships(@Param("id") Long id);
 
     @Query(
-        "select distinct profile from Profile profile left join fetch profile.birthPlace left join fetch profile.placeOfResidence where profile.parent.family = :family"
+        "select new com.awtar.myapp.service.dto.ProfileDTO (p.id, f.firstName,  f.lastName,  f.dateOfBirth, f.urlPhoto, p.annualRevenue, p.occupation, p.familyHead.id, f.urlPhotoContentType, f.phone, f.address) from Profile f join f.parent p where f.parent.family = :family"
     )
-    List<Profile> findParentsOfOneFamily(@Param("family") Family family);
+    List<ProfileDTO> findParentsOfOneFamily(@Param("family") Family family);
 
     @Query(
         "select distinct profile from Profile profile left join fetch profile.birthPlace left join fetch profile.placeOfResidence where profile.child.family = :family"
@@ -55,4 +59,29 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
         "select distinct profile from Profile profile left join fetch profile.birthPlace left join fetch profile.placeOfResidence where profile.child IS NOT NULL"
     )
     List<Profile> findAllProfileChild();
+
+    @Query(
+        "select distinct profile from Profile profile left join fetch profile.birthPlace left join fetch profile.placeOfResidence where profile.tutor IS NOT NULL"
+    )
+    List<Profile> findProfileTutor();
+
+    @Query(
+        "select distinct profile from Profile profile left join fetch profile.birthPlace left join fetch profile.placeOfResidence where profile.authorizingOfficer IS NOT NULL"
+    )
+    List<Profile> findProfileAuthorizingOfficer();
+
+    @Query(
+        "select profile from Profile profile left join fetch profile.birthPlace left join fetch profile.placeOfResidence where profile.authorizingOfficer.id =:id or profile.tutor.id =:id  or profile.parent.id =:id or profile.child.id =:id"
+    )
+    Optional<Profile> findProfileX(@Param("id") Long id);
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.ProfileDTO(a.id, p.firstName, p.lastName, p.address, p.urlPhoto, p.urlPhotoContentType, a.activity) from Profile p join p.authorizingOfficer a where p.authorizingOfficer.id !=:id and p.authorizingOfficer IS NOT NULL"
+    )
+    List<ProfileDTO> findOthersAuthorizingOfficersProfiles(@Param("id") Long id);
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.ProfileDTO(t.id, p.firstName, p.lastName, p.address, p.urlPhoto, p.urlPhotoContentType, t.activity) from Profile p join p.tutor t where p.tutor.id !=:id and p.tutor IS NOT NULL"
+    )
+    List<ProfileDTO> findOthersTutorsProfiles(@Param("id") Long id);
 }

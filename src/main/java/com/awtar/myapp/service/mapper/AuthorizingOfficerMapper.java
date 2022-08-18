@@ -2,6 +2,7 @@ package com.awtar.myapp.service.mapper;
 
 import com.awtar.myapp.domain.AuthorizingOfficer;
 import com.awtar.myapp.service.dto.AuthorizingOfficerDTO;
+import java.util.List;
 import org.mapstruct.*;
 
 /**

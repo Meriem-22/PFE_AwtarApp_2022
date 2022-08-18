@@ -42,6 +42,10 @@ public class EstablishmentDTO implements Serializable {
 
     private CityDTO city;
 
+    private ProfileDTO authorizingOfficer;
+
+    private ProfileDTO tutor;
+
     public Long getId() {
         return id;
     }
@@ -168,6 +172,22 @@ public class EstablishmentDTO implements Serializable {
 
     public void setCity(CityDTO city) {
         this.city = city;
+    }
+
+    public ProfileDTO getAuthorizingOfficer() {
+        return authorizingOfficer;
+    }
+
+    public void setAuthorizingOfficer(ProfileDTO authorizingOfficer) {
+        this.authorizingOfficer = authorizingOfficer;
+    }
+
+    public ProfileDTO getTutor() {
+        return tutor;
+    }
+
+    public void setTutor(ProfileDTO tutor) {
+        this.tutor = tutor;
     }
 
     @Override

@@ -10,10 +10,21 @@ import { Gender } from 'app/entities/enumerations/gender.model';
 import { MaritalStatus } from 'app/entities/enumerations/marital-status.model';
 import { IFamily } from 'app/entities/family/family.model';
 import { IProfile, Profile } from 'app/entities/profile/profile.model';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { finalize, map, Observable } from 'rxjs';
 import { ChildAllDetails, IChildAllDetails } from '../child.model';
 import { ChildService } from '../service/child.service';
+import { TranslateService } from '@ngx-translate/core';
+import { SessionStorageService } from 'ngx-webstorage';
+
+import { VERSION } from 'app/app.constants';
+import { LANGUAGES } from 'app/config/language.constants';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { LoginService } from 'app/login/login.service';
+import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
+import { IAuthorizingOfficer } from 'app/entities/authorizing-officer/authorizing-officer.model';
+import { ITutor } from 'app/entities/tutor/tutor.model';
+import { ProfileService } from 'app/entities/profile/service/profile.service';
 
 @Component({
   selector: 'jhi-add-child',
@@ -29,6 +40,40 @@ export class AddChildComponent implements OnInit {
 
   maritalStatusValues = Object.keys(MaritalStatus);
   ChildDetails!: FormGroup;
+  inProduction?: boolean;
+  isNavbarCollapsed = true;
+  languages = LANGUAGES;
+  openAPIEnabled?: boolean;
+  version = '';
+  account: Account | null = null;
+  entitiesNavbarItems: any[] = [];
+  authorizingOfficersSharedCollection: IProfile[] = [];
+  tutorsSharedCollection: IProfile[] = [];
+
+  editForm = this.fb.group({
+    id: [],
+    firstName: [null, [Validators.required]],
+    lastName: [null, [Validators.required]],
+    firstNameArabic: [],
+    lastNameArabic: [],
+    gender: [null, [Validators.required]],
+    dateOfBirth: [null, [Validators.required]],
+    cin: [],
+    urlPhoto: [],
+    urlPhotoContentType: [],
+    address: [],
+    phone: [],
+    email: [],
+    urlCinAttached: [],
+    urlCinAttachedContentType: [],
+    archivated: [],
+    parent: [],
+    child: [],
+    authorizingOfficer: [],
+    tutor: [],
+    birthPlace: [null, Validators.required],
+    placeOfResidence: [null, Validators.required],
+  });
 
   constructor(
     protected dataUtils: DataUtils,
@@ -39,31 +84,24 @@ export class AddChildComponent implements OnInit {
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     protected formBuilder: FormBuilder,
-    protected router: Router
-  ) {}
-
+    private loginService: LoginService,
+    private translateService: TranslateService,
+    private sessionStorageService: SessionStorageService,
+    private accountService: AccountService,
+    private router: Router,
+    protected fb: FormBuilder
+  ) {
+    if (VERSION) {
+      this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
+    }
+  }
   ngOnInit(): void {
-    this.ChildDetails = this.formBuilder.group({
-      firstName: [null, [Validators.required]],
-      lastName: [null, [Validators.required]],
-      firstNameArabic: [],
-      lastNameArabic: [],
-      gender: [null, [Validators.required]],
-      dateOfBirth: [null, [Validators.required]],
-      cin: [],
-      address: [],
-      phone: [],
-      email: [],
-      urlPhoto: [],
-      urlPhotoContentType: [],
-      archivated: [],
-      parent: [],
-      child: [],
-      birthPlace: [null, Validators.required],
-      placeOfResidence: [null, Validators.required],
-    });
     this.loadRelationshipsOptionsChild();
     this.ChildFamily = history.state.childFamily;
+
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
   }
   byteSize(base64String: string): string {
     return this.dataUtils.byteSize(base64String);
@@ -74,11 +112,11 @@ export class AddChildComponent implements OnInit {
   }
 
   setFileData(event: Event, field: string, isImage: boolean): void {
-    this.dataUtils.loadFileToForm(event, this.ChildDetails, field, isImage).subscribe({});
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe({});
   }
 
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
-    this.ChildDetails.patchValue({
+    this.editForm.patchValue({
       [field]: null,
       [fieldContentType]: null,
     });
@@ -87,7 +125,15 @@ export class AddChildComponent implements OnInit {
     }
   }
 
-  submit(): void {
+  trackAuthorizingOfficerById(_index: number, item: IAuthorizingOfficer): number {
+    return item.id!;
+  }
+
+  trackTutorById(_index: number, item: ITutor): number {
+    return item.id!;
+  }
+
+  save(): void {
     this.isSaving = true;
 
     const child = this.createFromFormChild();
@@ -101,6 +147,29 @@ export class AddChildComponent implements OnInit {
 
   trackCityById(_index: number, item: ICity): number {
     return item.id!;
+  }
+
+  changeLanguage(languageKey: string): void {
+    this.sessionStorageService.store('locale', languageKey);
+    this.translateService.use(languageKey);
+  }
+
+  collapseNavbar(): void {
+    this.isNavbarCollapsed = true;
+  }
+
+  login(): void {
+    this.router.navigate(['/login']);
+  }
+
+  logout(): void {
+    this.collapseNavbar();
+    this.loginService.logout();
+    this.router.navigate(['']);
+  }
+
+  toggleNavbar(): void {
+    this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IChildAllDetails>>): void {
@@ -125,6 +194,25 @@ export class AddChildComponent implements OnInit {
   }
 
   protected loadRelationshipsOptionsChild(): void {
+    this.profileService.findAuthorizingOfficerProfiles().subscribe({
+      next: (res: HttpResponse<IProfile[]>) => {
+        this.authorizingOfficersSharedCollection = res.body ?? [];
+        console.log(this.authorizingOfficersSharedCollection);
+      },
+      error: () => {
+        console.log(this.authorizingOfficersSharedCollection);
+      },
+    });
+
+    this.profileService.findTutorsProfiles().subscribe({
+      next: (res: HttpResponse<IProfile[]>) => {
+        this.tutorsSharedCollection = res.body ?? [];
+        console.log(this.tutorsSharedCollection);
+      },
+      error: () => {
+        console.log(this.tutorsSharedCollection);
+      },
+    });
     this.cityService
       .query()
       .pipe(map((res: HttpResponse<ICity[]>) => res.body ?? []))
@@ -132,8 +220,8 @@ export class AddChildComponent implements OnInit {
         map((cities: ICity[]) =>
           this.cityService.addCityToCollectionIfMissing(
             cities,
-            this.ChildDetails.get('birthPlace')!.value,
-            this.ChildDetails.get('placeOfResidence')!.value
+            this.editForm.get('birthPlace')!.value,
+            this.editForm.get('placeOfResidence')!.value
           )
         )
       )
@@ -144,6 +232,8 @@ export class AddChildComponent implements OnInit {
     return {
       ...new ChildAllDetails(),
       family: this.ChildFamily,
+      authorizingOfficer: this.editForm.get(['authorizingOfficer'])!.value,
+      tutor: this.editForm.get(['tutor'])!.value,
       profile: this.createFromFormChildProfile(),
     };
   }
@@ -151,21 +241,22 @@ export class AddChildComponent implements OnInit {
   protected createFromFormChildProfile(): IProfile {
     return {
       ...new Profile(),
-      firstName: this.ChildDetails.get(['firstName'])!.value,
-      lastName: this.ChildDetails.get(['lastName'])!.value,
-      firstNameArabic: this.ChildDetails.get(['firstNameArabic'])!.value,
-      lastNameArabic: this.ChildDetails.get(['lastNameArabic'])!.value,
-      gender: this.ChildDetails.get(['gender'])!.value,
-      dateOfBirth: this.ChildDetails.get(['dateOfBirth'])!.value,
-      cin: this.ChildDetails.get(['cin'])!.value,
-      address: this.ChildDetails.get(['address'])!.value,
-      phone: this.ChildDetails.get(['phone'])!.value,
-      email: this.ChildDetails.get(['email'])!.value,
-      urlPhotoContentType: this.ChildDetails.get(['urlPhotoContentType'])!.value,
-      urlPhoto: this.ChildDetails.get(['urlPhoto'])!.value,
-      archivated: this.ChildDetails.get(['archivated'])!.value,
-      birthPlace: this.ChildDetails.get(['birthPlace'])!.value,
-      placeOfResidence: this.ChildDetails.get(['placeOfResidence'])!.value,
+      firstName: this.editForm.get(['firstName'])!.value,
+      lastName: this.editForm.get(['lastName'])!.value,
+      firstNameArabic: this.editForm.get(['firstNameArabic'])!.value,
+      lastNameArabic: this.editForm.get(['lastNameArabic'])!.value,
+      gender: this.editForm.get(['gender'])!.value,
+      dateOfBirth: this.editForm.get(['dateOfBirth'])!.value,
+      cin: this.editForm.get(['cin'])!.value,
+      urlPhotoContentType: this.editForm.get(['urlPhotoContentType'])!.value,
+      urlPhoto: this.editForm.get(['urlPhoto'])!.value,
+      address: this.editForm.get(['address'])!.value,
+      phone: this.editForm.get(['phone'])!.value,
+      email: this.editForm.get(['email'])!.value,
+      urlCinAttachedContentType: this.editForm.get(['urlCinAttachedContentType'])!.value,
+      urlCinAttached: this.editForm.get(['urlCinAttached'])!.value,
+      birthPlace: this.editForm.get(['birthPlace'])!.value,
+      placeOfResidence: this.editForm.get(['placeOfResidence'])!.value,
     };
   }
 }

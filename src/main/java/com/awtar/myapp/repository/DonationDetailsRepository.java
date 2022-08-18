@@ -1,6 +1,9 @@
 package com.awtar.myapp.repository;
 
+import com.awtar.myapp.domain.Beneficiary;
 import com.awtar.myapp.domain.DonationDetails;
+import com.awtar.myapp.domain.Family;
+import com.awtar.myapp.service.dto.DonationDetailsDTO;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -41,4 +44,17 @@ public interface DonationDetailsRepository extends JpaRepository<DonationDetails
         "select donationDetails from DonationDetails donationDetails left join fetch donationDetails.nature left join fetch donationDetails.beneficiary where donationDetails.id =:id"
     )
     Optional<DonationDetails> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.DonationDetailsDTO (di.id, di.model, di.isValidated, di.donationsDate, COUNT(did.id) AS itemsNumber, (select SUM(iv.price * did.quantity) AS totalPrice from DonationsIssued di, DonationDetails dd, DonationItemDetails did, ItemValue iv where (di.id = dd.donationsIssued.id and did.donationDetails.id = dd.id  and did.item.id = iv.item.id)))" +
+        "from DonationItemDetails did, DonationsIssued di, DonationDetails dd where (did.donationDetails.id = dd.id and dd.donationsIssued.id = di.id and dd.beneficiary = :beneficiary) GROUP  BY di.id "
+    )
+    List<DonationDetailsDTO> findAllDonationsList(@Param("beneficiary") Beneficiary beneficiary);
+
+    @Query(
+        value = "select new com.awtar.myapp.service.dto.DonationDetailsDTO (di.id, di.model, di.isValidated, di.donationsDate, COUNT(did.id), (select SUM(iv.price * did.quantity) from DonationsIssued di, DonationDetails dd, DonationItemDetails did, ItemValue iv where (di.id = dd.donationsIssued.id and did.donationDetails.id = dd.id  and did.item.id = iv.item.id)))" +
+        "from DonationItemDetails did, DonationsIssued di, DonationDetails dd where (did.donationDetails.id = dd.id and dd.donationsIssued.id = di.id and dd.beneficiary = :beneficiary) GROUP  BY di.id",
+        countQuery = "select count(distinct di) from DonationsIssued di, DonationDetails dd where (dd.donationsIssued.id = di.id and dd.beneficiary = :beneficiary)"
+    )
+    Page<DonationDetailsDTO> findAllDonations(@Param("beneficiary") Beneficiary beneficiary, Pageable pageable);
 }

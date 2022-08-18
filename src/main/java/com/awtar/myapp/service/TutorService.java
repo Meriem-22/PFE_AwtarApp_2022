@@ -62,4 +62,12 @@ public interface TutorService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Save a tutor with profile info.
+     *
+     * @param tutorDTO the entity to save.
+     * @return the persisted entity.
+     */
+    TutorDTO add(TutorDTO tutorDTO);
 }

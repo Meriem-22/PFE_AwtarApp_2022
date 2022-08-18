@@ -72,4 +72,12 @@ public interface EstablishmentService {
      * @return the list of entities.
      */
     List<EstablishmentDTO> findEstablishments();
+
+    /**
+     * Save a establishment.
+     *
+     * @param establishmentDTO the entity to save.
+     * @return the persisted entity.
+     */
+    EstablishmentDTO add(EstablishmentDTO establishmentDTO);
 }

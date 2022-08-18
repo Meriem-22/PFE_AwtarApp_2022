@@ -14,6 +14,10 @@ public class ChildDTO implements Serializable {
 
     private ProfileDTO profile;
 
+    private ProfileDTO authorizingOfficer;
+
+    private ProfileDTO tutor;
+
     public Long getId() {
         return id;
     }
@@ -36,6 +40,22 @@ public class ChildDTO implements Serializable {
 
     public void setProfile(ProfileDTO profile) {
         this.profile = profile;
+    }
+
+    public ProfileDTO getAuthorizingOfficer() {
+        return authorizingOfficer;
+    }
+
+    public void setAuthorizingOfficer(ProfileDTO authorizingOfficer) {
+        this.authorizingOfficer = authorizingOfficer;
+    }
+
+    public ProfileDTO getTutor() {
+        return tutor;
+    }
+
+    public void setTutor(ProfileDTO tutor) {
+        this.tutor = tutor;
     }
 
     @Override

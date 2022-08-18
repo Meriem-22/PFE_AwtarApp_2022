@@ -1,6 +1,8 @@
 import { IReport } from 'app/entities/report/report.model';
 import { IEstablishmentType } from 'app/entities/establishment-type/establishment-type.model';
 import { ICity } from 'app/entities/city/city.model';
+import { IAuthorizingOfficer } from '../authorizing-officer/authorizing-officer.model';
+import { ITutor } from '../tutor/tutor.model';
 
 export interface IEstablishment {
   id?: number;
@@ -20,6 +22,8 @@ export interface IEstablishment {
   reports?: IReport[] | null;
   establishmentType?: IEstablishmentType;
   city?: ICity;
+  authorizingOfficer?: IAuthorizingOfficer | null;
+  tutor?: ITutor | null;
 }
 
 export class Establishment implements IEstablishment {
@@ -40,7 +44,9 @@ export class Establishment implements IEstablishment {
     public remark?: string | null,
     public reports?: IReport[] | null,
     public establishmentType?: IEstablishmentType,
-    public city?: ICity
+    public city?: ICity,
+    public authorizingOfficer?: IAuthorizingOfficer | null,
+    public tutor?: ITutor | null
   ) {}
 }
 

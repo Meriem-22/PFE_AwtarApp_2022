@@ -228,4 +228,70 @@ public class ProfileResource {
         List<ProfileDTO> profileDTOC = profileService.findProfileChildren();
         return ResponseEntity.ok().body(profileDTOC);
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profileDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/profiles/tutors")
+    public ResponseEntity<List<ProfileDTO>> getAllTutorProfiles() {
+        log.debug("REST request to get  all Profile : {}");
+        List<ProfileDTO> profileDTOC = profileService.findTutorProfile();
+        return ResponseEntity.ok().body(profileDTOC);
+    }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profileDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/profiles/authorizingOfficers")
+    public ResponseEntity<List<ProfileDTO>> getAllAuthorizingOficersProfiles() {
+        log.debug("REST request to get  all Profile : {}");
+        List<ProfileDTO> profileDTOC = profileService.findAuthorizingOfficerProfile();
+        return ResponseEntity.ok().body(profileDTOC);
+    }
+
+    /**
+     * {@code GET  /profiles/:id} : get the "id" profile.
+     *
+     * @param id the id of the profileDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profileDTO, or with status {@code 404 (Not Found)}.
+     */
+
+    @GetMapping("/profiles/x/{id}")
+    public ResponseEntity<ProfileDTO> getProfileX(@PathVariable Long id) {
+        log.debug("REST request to get Profile : {}", id);
+        Optional<ProfileDTO> profileDTO = profileService.findProfileX(id);
+        return ResponseUtil.wrapOrNotFound(profileDTO);
+    }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profileDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/profiles/authorizing-officers/{id}")
+    public ResponseEntity<List<ProfileDTO>> getAllOthersAuthorizingOfficersProfiles(@PathVariable Long id) {
+        log.debug("REST request to get  all Profile : {}");
+        List<ProfileDTO> profileDTOC = profileService.findOtherAuthorizingOfficers(id);
+        return ResponseEntity.ok().body(profileDTOC);
+    }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profileDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/profiles/tutors/{id}")
+    public ResponseEntity<List<ProfileDTO>> getAllOthersTutorsProfile(@PathVariable Long id) {
+        log.debug("REST request to get  all Profile : {}");
+        List<ProfileDTO> profileDTOC = profileService.findOthersTutors(id);
+        return ResponseEntity.ok().body(profileDTOC);
+    }
 }

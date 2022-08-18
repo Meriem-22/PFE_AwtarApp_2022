@@ -1,11 +1,13 @@
 package com.awtar.myapp.service.dto;
 
+import com.awtar.myapp.domain.Family;
 import com.awtar.myapp.domain.enumeration.Gender;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.Lob;
 import javax.validation.constraints.*;
+import net.bytebuddy.implementation.bind.annotation.Default;
 
 /**
  * A DTO for the {@link com.awtar.myapp.domain.Profile} entity.
@@ -59,6 +61,69 @@ public class ProfileDTO implements Serializable {
     private CityDTO birthPlace;
 
     private CityDTO placeOfResidence;
+
+    private Double annualRevenue;
+
+    private String occupation;
+
+    private Long familyHead;
+
+    private String activity;
+
+    public ProfileDTO() {}
+
+    public ProfileDTO(
+        Long id,
+        String firstName,
+        String lastName,
+        LocalDate dateOfBirth,
+        byte[] urlPhoto,
+        Double annualRevenue,
+        String occupation,
+        Long familyHead,
+        String urlPhotoContentType,
+        String phone,
+        String address
+    ) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.urlPhoto = urlPhoto;
+        this.annualRevenue = annualRevenue;
+        this.occupation = occupation;
+        this.familyHead = familyHead;
+        this.urlPhotoContentType = urlPhotoContentType;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public ProfileDTO(Long id, String firstName, String lastName, LocalDate dateOfBirth, byte[] urlPhoto, String urlPhotoContentType) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.urlPhoto = urlPhoto;
+        this.urlPhotoContentType = urlPhotoContentType;
+    }
+
+    public ProfileDTO(
+        Long id,
+        String firstName,
+        String lastName,
+        String address,
+        byte[] urlPhoto,
+        String urlPhotoContentType,
+        String activity
+    ) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.urlPhoto = urlPhoto;
+        this.urlPhotoContentType = urlPhotoContentType;
+        this.activity = activity;
+    }
 
     public Long getId() {
         return id;
@@ -234,6 +299,38 @@ public class ProfileDTO implements Serializable {
 
     public void setPlaceOfResidence(CityDTO placeOfResidence) {
         this.placeOfResidence = placeOfResidence;
+    }
+
+    public Double getAnnualRevenue() {
+        return annualRevenue;
+    }
+
+    public void setAnnualRevenue(Double annualRevenue) {
+        this.annualRevenue = annualRevenue;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    public Long getFamilyHead() {
+        return familyHead;
+    }
+
+    public void setFamilyHead(Long familyHead) {
+        this.familyHead = familyHead;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
     }
 
     @Override

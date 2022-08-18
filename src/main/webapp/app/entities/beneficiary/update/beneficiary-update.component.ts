@@ -43,6 +43,7 @@ export class BeneficiaryUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ beneficiary }) => {
+      console.log(beneficiary);
       this.updateForm(beneficiary);
 
       this.loadRelationshipsOptions();

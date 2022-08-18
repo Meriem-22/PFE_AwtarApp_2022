@@ -32,6 +32,10 @@ export class TutorService {
     return this.http.get<ITutor>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  add(tutor: ITutor): Observable<EntityResponseType> {
+    return this.http.post<ITutor>(this.resourceUrl + '/add', tutor, { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<ITutor[]>(this.resourceUrl, { params: options, observe: 'response' });

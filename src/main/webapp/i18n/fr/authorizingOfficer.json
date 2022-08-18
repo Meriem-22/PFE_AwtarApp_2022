@@ -5,6 +5,8 @@
         "title": "Ordonnateurs",
         "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Ordonnateur",
+        "addLabel": "Ajouter un Ordonnateur",
+
         "createOrEditLabel": "Créer ou éditer un Ordonnateur",
         "notFound": "Aucun Ordonnateur trouvé"
       },

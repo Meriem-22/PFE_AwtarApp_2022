@@ -21,7 +21,6 @@ import { ParentService } from '../service/parent.service';
   styleUrls: ['./add-parent.component.scss'],
 })
 export class AddParentComponent implements OnInit {
-  ParentDetails!: FormGroup;
   isSaving = false;
   parentFamily: IFamily | undefined;
 
@@ -30,6 +29,33 @@ export class AddParentComponent implements OnInit {
   citiesSharedCollection: ICity[] = [];
 
   maritalStatusValues = Object.keys(MaritalStatus);
+
+  editForm = this.fb.group({
+    id: [],
+    firstName: [null, [Validators.required]],
+    lastName: [null, [Validators.required]],
+    firstNameArabic: [],
+    lastNameArabic: [],
+    gender: [null, [Validators.required]],
+    dateOfBirth: [null, [Validators.required]],
+    cin: [],
+    urlPhoto: [],
+    urlPhotoContentType: [],
+    address: [],
+    phone: [],
+    email: [],
+    urlCinAttached: [],
+    urlCinAttachedContentType: [],
+    birthPlace: [null, Validators.required],
+    placeOfResidence: [null, Validators.required],
+    annualRevenue: [null, [Validators.required]],
+    cnss: [],
+    maritalStatus: [null, [Validators.required]],
+    occupation: [null, [Validators.required]],
+    deceased: [],
+    dateOfDeath: [],
+    familyHead: [],
+  });
 
   constructor(
     protected dataUtils: DataUtils,
@@ -43,45 +69,21 @@ export class AddParentComponent implements OnInit {
     protected elementRefChild: ElementRef,
     protected activatedRoute: ActivatedRoute,
     protected formBuilder: FormBuilder,
-    protected router: Router
+    protected router: Router,
+    protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ family }) => {
       this.parentFamily = family;
     });
-    this.ParentDetails = this.formBuilder.group({
-      firstName: [null, [Validators.required]],
-      lastName: [null, [Validators.required]],
-      firstNameArabic: [],
-      lastNameArabic: [],
-      gender: [null, [Validators.required]],
-      dateOfBirth: [null, [Validators.required]],
-      cin: [],
-      address: [],
-      phone: [],
-      email: [],
-      urlPhoto: [],
-      urlPhotoContentType: [],
-      archivated: [],
-      parent: [],
-      child: [],
-      birthPlace: [null, Validators.required],
-      placeOfResidence: [null, Validators.required],
-      annualRevenue: [null, [Validators.required]],
-      cnss: [],
-      maritalStatus: [null, [Validators.required]],
-      occupation: [null, [Validators.required]],
-      deceased: [],
-      dateOfDeath: [],
-      familyHead: [],
-    });
+
     this.loadRelationshipsOptionsParent();
     console.log(history.state);
     this.parentFamily = history.state.parentFamily;
   }
 
-  submit(): void {
+  save(): void {
     this.isSaving = true;
 
     const parent = this.createFromFormParent();
@@ -98,11 +100,11 @@ export class AddParentComponent implements OnInit {
   }
 
   setFileData(event: Event, field: string, isImage: boolean): void {
-    this.dataUtils.loadFileToForm(event, this.ParentDetails, field, isImage).subscribe({});
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe({});
   }
 
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
-    this.ParentDetails.patchValue({
+    this.editForm.patchValue({
       [field]: null,
       [fieldContentType]: null,
     });
@@ -148,8 +150,8 @@ export class AddParentComponent implements OnInit {
         map((cities: ICity[]) =>
           this.cityService.addCityToCollectionIfMissing(
             cities,
-            this.ParentDetails.get('birthPlace')!.value,
-            this.ParentDetails.get('placeOfResidence')!.value
+            this.editForm.get('birthPlace')!.value,
+            this.editForm.get('placeOfResidence')!.value
           )
         )
       )
@@ -159,14 +161,14 @@ export class AddParentComponent implements OnInit {
   protected createFromFormParent(): IParentAllDetails {
     return {
       ...new ParentAllDetails(),
-      annualRevenue: this.ParentDetails.get(['annualRevenue'])!.value,
-      cnss: this.ParentDetails.get(['cnss'])!.value,
-      maritalStatus: this.ParentDetails.get(['maritalStatus'])!.value,
-      occupation: this.ParentDetails.get(['occupation'])!.value,
-      deceased: this.ParentDetails.get(['deceased'])!.value,
-      dateOfDeath: this.ParentDetails.get(['dateOfDeath'])!.value,
+      annualRevenue: this.editForm.get(['annualRevenue'])!.value,
+      cnss: this.editForm.get(['cnss'])!.value,
+      maritalStatus: this.editForm.get(['maritalStatus'])!.value,
+      occupation: this.editForm.get(['occupation'])!.value,
+      deceased: this.editForm.get(['deceased'])!.value,
+      dateOfDeath: this.editForm.get(['dateOfDeath'])!.value,
       family: this.parentFamily,
-      head: this.ParentDetails.get(['familyHead'])!.value,
+      head: this.editForm.get(['familyHead'])!.value,
       profile: this.createFromFormParentProfile(),
     };
   }
@@ -174,21 +176,20 @@ export class AddParentComponent implements OnInit {
   protected createFromFormParentProfile(): IProfile {
     return {
       ...new Profile(),
-      firstName: this.ParentDetails.get(['firstName'])!.value,
-      lastName: this.ParentDetails.get(['lastName'])!.value,
-      firstNameArabic: this.ParentDetails.get(['firstNameArabic'])!.value,
-      lastNameArabic: this.ParentDetails.get(['lastNameArabic'])!.value,
-      gender: this.ParentDetails.get(['gender'])!.value,
-      dateOfBirth: this.ParentDetails.get(['dateOfBirth'])!.value,
-      cin: this.ParentDetails.get(['cin'])!.value,
-      address: this.ParentDetails.get(['address'])!.value,
-      phone: this.ParentDetails.get(['phone'])!.value,
-      email: this.ParentDetails.get(['email'])!.value,
-      urlPhotoContentType: this.ParentDetails.get(['urlPhotoContentType'])!.value,
-      urlPhoto: this.ParentDetails.get(['urlPhoto'])!.value,
-      archivated: this.ParentDetails.get(['archivated'])!.value,
-      birthPlace: this.ParentDetails.get(['birthPlace'])!.value,
-      placeOfResidence: this.ParentDetails.get(['placeOfResidence'])!.value,
+      firstName: this.editForm.get(['firstName'])!.value,
+      lastName: this.editForm.get(['lastName'])!.value,
+      firstNameArabic: this.editForm.get(['firstNameArabic'])!.value,
+      lastNameArabic: this.editForm.get(['lastNameArabic'])!.value,
+      gender: this.editForm.get(['gender'])!.value,
+      dateOfBirth: this.editForm.get(['dateOfBirth'])!.value,
+      cin: this.editForm.get(['cin'])!.value,
+      address: this.editForm.get(['address'])!.value,
+      phone: this.editForm.get(['phone'])!.value,
+      email: this.editForm.get(['email'])!.value,
+      urlPhotoContentType: this.editForm.get(['urlPhotoContentType'])!.value,
+      urlPhoto: this.editForm.get(['urlPhoto'])!.value,
+      birthPlace: this.editForm.get(['birthPlace'])!.value,
+      placeOfResidence: this.editForm.get(['placeOfResidence'])!.value,
     };
   }
 }

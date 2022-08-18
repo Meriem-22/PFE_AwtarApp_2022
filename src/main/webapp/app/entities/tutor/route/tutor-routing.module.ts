@@ -6,6 +6,7 @@ import { TutorComponent } from '../list/tutor.component';
 import { TutorDetailComponent } from '../detail/tutor-detail.component';
 import { TutorUpdateComponent } from '../update/tutor-update.component';
 import { TutorRoutingResolveService } from './tutor-routing-resolve.service';
+import { AddComponent } from '../add/add.component';
 
 const tutorRoute: Routes = [
   {
@@ -35,6 +36,14 @@ const tutorRoute: Routes = [
   {
     path: ':id/edit',
     component: TutorUpdateComponent,
+    resolve: {
+      tutor: TutorRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'add',
+    component: AddComponent,
     resolve: {
       tutor: TutorRoutingResolveService,
     },

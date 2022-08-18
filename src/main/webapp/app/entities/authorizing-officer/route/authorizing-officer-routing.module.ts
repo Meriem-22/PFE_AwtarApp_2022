@@ -6,6 +6,7 @@ import { AuthorizingOfficerComponent } from '../list/authorizing-officer.compone
 import { AuthorizingOfficerDetailComponent } from '../detail/authorizing-officer-detail.component';
 import { AuthorizingOfficerUpdateComponent } from '../update/authorizing-officer-update.component';
 import { AuthorizingOfficerRoutingResolveService } from './authorizing-officer-routing-resolve.service';
+import { AddComponent } from '../add/add.component';
 
 const authorizingOfficerRoute: Routes = [
   {
@@ -35,6 +36,14 @@ const authorizingOfficerRoute: Routes = [
   {
     path: ':id/edit',
     component: AuthorizingOfficerUpdateComponent,
+    resolve: {
+      authorizingOfficer: AuthorizingOfficerRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'add',
+    component: AddComponent,
     resolve: {
       authorizingOfficer: AuthorizingOfficerRoutingResolveService,
     },

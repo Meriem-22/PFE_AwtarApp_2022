@@ -1,0 +1,139 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-beneficiary-heading"
+        style="margin-top: 4rem; margin-bottom: 2rem"
+        data-cy="BeneficiaryCreateUpdateHeading"
+        jhiTranslate="awtarApp.beneficiary.home.createOrEditLabel"
+      >
+        Create or edit a Beneficiary
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.beneficiary.beneficiaryReference" for="field_beneficiaryReference"
+            >Beneficiary Reference</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="beneficiaryReference"
+            id="field_beneficiaryReference"
+            data-cy="beneficiaryReference"
+            formControlName="beneficiaryReference"
+          />
+          <div
+            *ngIf="
+              editForm.get('beneficiaryReference')!.invalid &&
+              (editForm.get('beneficiaryReference')!.dirty || editForm.get('beneficiaryReference')!.touched)
+            "
+          ></div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.beneficiary.beneficiaryType" for="field_beneficiaryType">Beneficiary Type</label>
+          <select
+            class="form-control"
+            name="beneficiaryType"
+            formControlName="beneficiaryType"
+            id="field_beneficiaryType"
+            data-cy="beneficiaryType"
+          >
+            <option [ngValue]="null">{{ 'awtarApp.Beneficiaries.null' | translate }}</option>
+            <option *ngFor="let beneficiaries of beneficiariesValues" [value]="beneficiaries">
+              {{ 'awtarApp.Beneficiaries.' + beneficiaries | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('beneficiaryType')!.invalid &&
+              (editForm.get('beneficiaryType')!.dirty || editForm.get('beneficiaryType')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('beneficiaryType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.beneficiary.archivated" for="field_archivated">Archivated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="archivated"
+            id="field_archivated"
+            data-cy="archivated"
+            formControlName="archivated"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.beneficiary.authorizingOfficer" for="field_authorizingOfficer"
+            >Authorizing Officer</label
+          >
+          <select
+            class="form-control"
+            id="field_authorizingOfficer"
+            data-cy="authorizingOfficer"
+            name="authorizingOfficer"
+            formControlName="authorizingOfficer"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                authorizingOfficerOption.id === editForm.get('authorizingOfficer')!.value?.id
+                  ? editForm.get('authorizingOfficer')!.value
+                  : authorizingOfficerOption
+              "
+              *ngFor="let authorizingOfficerOption of authorizingOfficersSharedCollection; trackBy: trackAuthorizingOfficerById"
+            >
+              {{ authorizingOfficerOption.abbreviation }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="awtarApp.beneficiary.tutor" for="field_tutor">Tutor</label>
+          <select class="form-control" id="field_tutor" data-cy="tutor" name="tutor" formControlName="tutor">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="tutorOption.id === editForm.get('tutor')!.value?.id ? editForm.get('tutor')!.value : tutorOption"
+              *ngFor="let tutorOption of tutorsSharedCollection; trackBy: trackTutorById"
+            >
+              {{ tutorOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

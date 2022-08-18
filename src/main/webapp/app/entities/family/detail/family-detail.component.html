@@ -3,439 +3,1929 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
-    <meta name="generator" content="Hugo 0.98.0" />
+    <meta name="author" content="Charles Anderson" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/" />
-
-    <link
-      href="/docs/5.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous"
-    />
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180" />
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
-    <link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json" />
-    <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9" />
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico" />
-    <meta name="theme-color" content="#712cf9" />
-
+    <title>AdminLTE 3 | Dashboard</title>
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+      @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
+      .containerf {
+        max-width: 100vw;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-gap: 35px;
+        margin: 0 auto;
+        padding: 20px 0;
       }
-
-      .b-example-divider {
-        height: 3rem;
-        background-color: rgba(0, 0, 0, 0.1);
-        border: solid rgba(0, 0, 0, 0.15);
-        border-width: 1px 0;
-        box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1), inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -0.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
+      .cardf {
         position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
+        width: 280px;
+        height: 200px;
+        margin: 0 auto;
+        background: #000;
+        border-radius: 15px;
+        box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5);
       }
-
-      .nav-scroller .nav {
+      .face {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
+        justify-content: center;
+        align-items: center;
+      }
+      .face1 {
+        box-sizing: border-box;
+        padding: 20px;
+      }
+      h2 {
+        margin: 0;
+        padding: 0;
       }
 
-      img {
-        height: 15rem;
-        width: 22rem;
-      }
-      .album .table-responsive {
-        padding: 3rem;
+      .java {
+        background-color: #fffc00;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
 
-      .albumP {
-        height: 30rem;
+      .python {
+        background-color: #00fffc;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
 
-      .album {
-        height: auto;
+      .cSharp {
+        background-color: #fc00ff;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .face2 {
+        transition: 0.5s;
+      }
+      h2 {
+        margin: 0;
+        padding: 0;
+        font-size: 10em;
+        color: #fff;
+        transition: 0.5s;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+      }
+
+      .cardf:hover .face.face2 {
+        height: 60px;
+      }
+
+      h2 {
+        font-size: 2em;
+      }
+
+      .cardf:nth-child(1) .face.face2 {
+        background-image: linear-gradient(40deg, #fffc00 0%, #fc00ff 45%, #00fffc 100%);
+        border-radius: 15px;
+      }
+
+      .cardf:nth-child(2) .face.face2 {
+        background-image: linear-gradient(40deg, #fc00ff 0%, #00fffc 45%, #fffc00 100%);
+        border-radius: 15px;
+      }
+
+      .cardf:nth-child(3) .face.face2 {
+        background-image: linear-gradient(40deg, #00fffc 0%, #fc00ff 45%, #fffc00 100%);
+        border-radius: 15px;
+      }
+
+      body {
+        margin-top: 20px;
+        background: #eee;
+      }
+      .single_advisor_profile {
+        position: relative;
+        margin-bottom: 50px;
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        z-index: 1;
+        border-radius: 15px;
+        -webkit-box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
+        box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
+      }
+      .single_advisor_profile .advisor_thumb {
+        position: relative;
+        z-index: 1;
+        border-radius: 15px 15px 0 0;
+        margin: 0 auto;
+        padding: 30px 30px 0 30px;
+        background-color: linear-gradient(40deg, #fffc00 0%, #fc00ff 45%, #00fffc 100%);
         overflow: hidden;
       }
+      .single_advisor_profile .advisor_thumb::after {
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        position: absolute;
+        width: 150%;
+        height: 80px;
+        bottom: -45px;
+        left: -25%;
+        content: '';
+        background-color: #ffffff;
+        -webkit-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+      }
+      @media only screen and (max-width: 575px) {
+        .single_advisor_profile .advisor_thumb::after {
+          height: 160px;
+          bottom: -90px;
+        }
+      }
+      .single_advisor_profile .advisor_thumb .social-info {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        bottom: 0;
+        right: 30px;
+        text-align: right;
+      }
+      .single_advisor_profile .advisor_thumb .social-info a {
+        font-size: 14px;
+        color: #020710;
+        padding: 0 5px;
+      }
+      .single_advisor_profile .advisor_thumb .social-info a:hover,
+      .single_advisor_profile .advisor_thumb .social-info a:focus {
+        color: #3f43fd;
+      }
+      .single_advisor_profile .advisor_thumb .social-info a:last-child {
+        padding-right: 0;
+      }
+      .single_advisor_profile .single_advisor_details_info {
+        position: relative;
+        z-index: 1;
+        padding: 30px;
+        text-align: right;
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        border-radius: 0 0 15px 15px;
+        background-color: #ffffff;
+      }
+      .single_advisor_profile .single_advisor_details_info::after {
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        position: absolute;
+        z-index: 1;
+        width: 50px;
+        height: 3px;
+        background-color: #3f43fd;
+        content: '';
+        top: 12px;
+        right: 30px;
+      }
+      .single_advisor_profile .single_advisor_details_info h6 {
+        margin-bottom: 0.25rem;
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+      }
+      @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .single_advisor_profile .single_advisor_details_info h6 {
+          font-size: 14px;
+        }
+      }
+      .single_advisor_profile .single_advisor_details_info p {
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        margin-bottom: 0;
+        font-size: 14px;
+      }
+      @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .single_advisor_profile .single_advisor_details_info p {
+          font-size: 12px;
+        }
+      }
+      .single_advisor_profile:hover .advisor_thumb::after,
+      .single_advisor_profile:focus .advisor_thumb::after {
+        background-color: #fc00ff;
+      }
+      .single_advisor_profile:hover .advisor_thumb .social-info a,
+      .single_advisor_profile:focus .advisor_thumb .social-info a {
+        color: #ffffff;
+      }
+      .single_advisor_profile:hover .advisor_thumb .social-info a:hover,
+      .single_advisor_profile:hover .advisor_thumb .social-info a:focus,
+      .single_advisor_profile:focus .advisor_thumb .social-info a:hover,
+      .single_advisor_profile:focus .advisor_thumb .social-info a:focus {
+        color: #ffffff;
+      }
+      .single_advisor_profile:hover .single_advisor_details_info,
+      .single_advisor_profile:focus .single_advisor_details_info {
+        background-color: #fc00ff;
+      }
+      .single_advisor_profile:hover .single_advisor_details_info::after,
+      .single_advisor_profile:focus .single_advisor_details_info::after {
+        background-color: #ffffff;
+      }
+      .single_advisor_profile:hover .single_advisor_details_info h6,
+      .single_advisor_profile:focus .single_advisor_details_info h6 {
+        color: #ffffff;
+      }
+      .single_advisor_profile:hover .single_advisor_details_info p,
+      .single_advisor_profile:focus .single_advisor_details_info p {
+        color: #ffffff;
+      }
+      body {
+        background-color: #f0f6ff;
+        color: #28384d;
+      }
+      /*social */
+      .card-one {
+        position: relative;
+        width: 300px;
+        background: #fff;
+        box-shadow: 0 10px 7px -5px rgba(0, 0, 0, 0.4);
+      }
+      .card {
+        margin-bottom: 35px;
+        box-shadow: 0 10px 20px 0 rgba(26, 44, 57, 0.14);
+        border: none;
+      }
+
+      .follower-wrapper li {
+        list-style-type: none;
+        color: #fff;
+        display: inline-block;
+        float: left;
+        margin-right: 20px;
+      }
+
+      .social-profile {
+        color: #fff;
+      }
+
+      .social-profile a {
+        color: #fff;
+      }
+
+      .social-profile {
+        position: relative;
+        margin-bottom: 150px;
+      }
+
+      .social-profile .user-profile {
+        position: absolute;
+        bottom: -75px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        left: 50px;
+      }
+
+      .social-nav {
+        position: absolute;
+        bottom: 0;
+      }
+
+      .social-prof {
+        color: #333;
+        text-align: center;
+      }
+
+      .social-prof .wrapper {
+        width: 70%;
+        margin: auto;
+        margin-top: -100px;
+      }
+
+      .social-prof img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        border: 5px solid #fff;
+        /*border: 10px solid #70b5e6ee;*/
+      }
+
+      .social-prof h3 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 0;
+      }
+
+      .social-prof p {
+        font-size: 18px;
+      }
+
+      .social-prof .nav-tabs {
+        border: none;
+      }
+
+      .card .nav > li {
+        position: relative;
+        display: block;
+      }
+
+      .card .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 10px 15px;
+        font-weight: 300;
+        border-radius: 4px;
+      }
+
+      .card .nav > li > a:focus,
+      .card .nav > li > a:hover {
+        text-decoration: none;
+        background-color: #eee;
+      }
+
+      .card .s-nav > li > a.active {
+        text-decoration: none;
+        background-color: #3afe;
+        color: #fff;
+      }
+
+      .text-blue {
+        color: #3afe;
+      }
+
+      ul.friend-list {
+        margin: 0;
+        padding: 0;
+      }
+
+      ul.friend-list li {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+      }
+
+      ul.friend-list li:hover {
+        background: rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
+      ul.friend-list .left img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-right: 20px;
+      }
+
+      ul.friend-list li {
+        padding: 10px;
+      }
+
+      ul.friend-list .right h3 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 0;
+      }
+
+      ul.friend-list .right p {
+        font-size: 11px;
+        color: #6c757d;
+        margin: 0;
+      }
+
+      .social-timeline-card .dropdown-toggle::after {
+        display: none;
+      }
+
+      .info-card h4 {
+        font-size: 15px;
+      }
+
+      .info-card h2 {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .social-about .social-info {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      .social-about p {
+        margin-bottom: 20px;
+      }
+
+      .info-card i {
+        color: #3afe;
+      }
+
+      .card-one {
+        position: relative;
+        width: 300px;
+        background: #fff;
+        box-shadow: 0 10px 7px -5px rgba(0, 0, 0, 0.4);
+      }
+
+      .card-one .header {
+        position: relative;
+        width: 100%;
+        height: 60px;
+        background-color: #3afe;
+      }
+
+      .card-one .header::before,
+      .card-one .header::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: inherit;
+      }
+
+      .card-one .header::before {
+        -webkit-transform: skewY(-8deg);
+        transform: skewY(-8deg);
+        -webkit-transform-origin: 100% 100%;
+        transform-origin: 100% 100%;
+      }
+
+      .card-one .header::after {
+        -webkit-transform: skewY(8deg);
+        transform: skewY(8deg);
+        -webkit-transform-origin: 0 100%;
+        transform-origin: 0 100%;
+      }
+
+      .card-one .header .avatar {
+        position: absolute;
+        left: 50%;
+        top: 30px;
+        margin-left: -50px;
+        z-index: 5;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #ccc;
+        border: 3px solid #fff;
+      }
+
+      .card-one .header .avatar img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: auto;
+      }
+
+      .card-one h3 {
+        position: relative;
+        margin: 80px 0 30px;
+        text-align: center;
+      }
+
+      .card-one h3::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        margin-left: -15px;
+        width: 30px;
+        height: 1px;
+        background: #000;
+      }
+
+      .card-one .desc {
+        padding: 0 1rem 2rem;
+        text-align: center;
+        line-height: 1.5;
+        color: #777;
+      }
+
+      .card-one .contacts {
+        width: 200px;
+        max-width: 100%;
+        margin: 0 auto 3rem;
+      }
+
+      .card-one .contacts a {
+        display: block;
+        width: 33.333333%;
+        float: left;
+        text-align: center;
+        color: #c8c;
+      }
+
+      .card-one .contacts a:hover {
+        color: #333;
+      }
+
+      .card-one .contacts a:hover .fa::before {
+        color: #fff;
+      }
+
+      .card-one .contacts a:hover .fa::after {
+        width: 100%;
+        height: 100%;
+      }
+
+      .card-one .contacts a .fa {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        line-height: 39px;
+        overflow: hidden;
+        text-align: center;
+        font-size: 1.3em;
+      }
+
+      .card-one .contacts a .fa:before {
+        position: relative;
+        z-index: 1;
+      }
+
+      .card-one .contacts a .fa::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background: #c8c;
+        transition: width 0.3s, height 0.3s;
+      }
+
+      .card-one .contacts a:last-of-type .fa {
+        line-height: 36px;
+      }
+
+      .card-one .footer {
+        position: relative;
+        padding: 1rem;
+        background-color: #3afe;
+        text-align: center;
+      }
+
+      .card-one .footer a {
+        padding: 0 1rem;
+        color: #e2e2e2;
+        transition: color 0.4s;
+      }
+
+      .card-one .footer a:hover {
+        color: #c8c;
+      }
+
+      .card-one .footer::before {
+        content: '';
+        position: absolute;
+        top: -27px;
+        left: 50%;
+        margin-left: -15px;
+        border: 15px solid transparent;
+        border-bottom-color: #3afe;
+      }
+
+      .card-title,
+      .card .card-title,
+      .card-2 .card-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+      a {
+        color: #333;
+      }
+      .badge {
+        font-size: 12px;
+        line-height: 1;
+        padding: 0.375rem 0.5625rem;
+        font-weight: normal;
+      }
+
+      .badge-primary {
+        color: #447de8;
+        background-color: #e6edff;
+      }
+      .badge {
+        display: inline-block;
+        padding: 0.4em 0.5em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+          box-shadow 0.15s ease-in-out;
+      }
+
+      /*end social*/
     </style>
+
+    <script nonce="33a2bf22-55fb-4fb7-baea-4b8bb2a21cdd">
+      (function (w, d) {
+        !(function (a, e, t, r) {
+          (a.zarazData = a.zarazData || {}),
+            (a.zarazData.executed = []),
+            (a.zaraz = { deferred: [] }),
+            (a.zaraz.q = []),
+            (a.zaraz._f = function (e) {
+              return function () {
+                var t = Array.prototype.slice.call(arguments);
+                a.zaraz.q.push({ m: e, a: t });
+              };
+            });
+          for (const e of ['track', 'set', 'ecommerce', 'debug']) a.zaraz[e] = a.zaraz._f(e);
+          (a.zaraz.init = () => {
+            var t = e.getElementsByTagName(r)[0],
+              z = e.createElement(r),
+              n = e.getElementsByTagName('title')[0];
+            for (
+              n && (a.zarazData.t = e.getElementsByTagName('title')[0].text),
+                a.zarazData.x = Math.random(),
+                a.zarazData.w = a.screen.width,
+                a.zarazData.h = a.screen.height,
+                a.zarazData.j = a.innerHeight,
+                a.zarazData.e = a.innerWidth,
+                a.zarazData.l = a.location.href,
+                a.zarazData.r = e.referrer,
+                a.zarazData.k = a.screen.colorDepth,
+                a.zarazData.n = e.characterSet,
+                a.zarazData.o = new Date().getTimezoneOffset(),
+                a.zarazData.q = [];
+              a.zaraz.q.length;
+
+            ) {
+              const e = a.zaraz.q.shift();
+              a.zarazData.q.push(e);
+            }
+            z.defer = !0;
+            for (const e of [localStorage, sessionStorage])
+              Object.keys(e || {})
+                .filter(a => a.startsWith('_zaraz_'))
+                .forEach(t => {
+                  try {
+                    a.zarazData['z_' + t.slice(7)] = JSON.parse(e.getItem(t));
+                  } catch {
+                    a.zarazData['z_' + t.slice(7)] = e.getItem(t);
+                  }
+                });
+            (z.referrerPolicy = 'origin'),
+              (z.src = '/cdn-cgi/zaraz/s.js?z=' + btoa(encodeURIComponent(JSON.stringify(a.zarazData)))),
+              t.parentNode.insertBefore(z, t);
+          }),
+            ['complete', 'interactive'].includes(e.readyState) ? zaraz.init() : a.addEventListener('DOMContentLoaded', zaraz.init);
+        })(w, d, 0, 'script');
+      })(window, document);
+    </script>
   </head>
-  <body>
-    <main>
-      <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
-            <div class="d-flex justify-content-center">
-              <div class="col-8">
-                <div *ngIf="family">
-                  <button
-                    style="margin-left: 46rem; width: 7.5rem"
-                    type="button"
-                    [routerLink]="['/family', family.id, 'edit']"
-                    class="btn btn-primary"
-                  >
-                    <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-                  </button>
-                  <h1 data-cy="familyDetailsHeading"><span jhiTranslate="awtarApp.family.detail.title">Family</span></h1>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../../content/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
+      </div>
 
-                  <hr style="height: 1rem" />
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black">
+        <a href="index3.html" class="brand-link" style="background-color: black">
+          <img
+            src="../../content/img/AdminLTELogo.png"
+            alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3"
+            style="opacity: 0.8"
+          />
+          <span class="brand-text font-weight-light">AWTAR</span>
+        </a>
 
-                  <jhi-alert-error></jhi-alert-error>
+        <div class="sidebar">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">{{ account?.firstName }} {{ account?.lastName }}</a>
+            </div>
+          </div>
 
-                  <jhi-alert></jhi-alert>
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item menu-open">
+                <a href="dashboard" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-header">BENEFICIARIES</li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
+                  <p>
+                    Families
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/nature" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Families</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/family/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Family</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
+                  <p>
+                    Children
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/child" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Chilfren</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="child/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Child</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
+                  <p>
+                    Establishments
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/establishment" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Establishments</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
 
-                  <dl class="row-md jh-entity-details">
-                    <dt><span jhiTranslate="awtarApp.family.familyName">Family Name</span></dt>
-                    <dd>
-                      <span>{{ family.familyName }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.family.dwelling">Dwelling</span></dt>
-                    <dd>
-                      <span>{{ family.dwelling }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.family.area">Area</span></dt>
-                    <dd>
-                      <span>{{ family.area }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.family.notebookOfPoverty">Notebook Of Poverty</span></dt>
-                    <dd>
-                      <span>{{ family.notebookOfPoverty }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.family.notebookOfHandicap">Notebook Of Handicap</span></dt>
-                    <dd>
-                      <span>{{ family.notebookOfHandicap }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="userManagement.createdDate">Created Date</span></dt>
-                    <dd>
-                      <span></span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.parent.annualRevenue">Annual Revenue</span></dt>
-                    <dd>
-                      <span></span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.profile.phone">Phone</span></dt>
-                    <dd>
-                      <span></span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.profile.authorizingOfficer">Authorizing Officer</span></dt>
-                    <dd>
-                      <span></span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.profile.tutor">Tutor</span></dt>
-                    <dd>
-                      <span></span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.beneficiary.beneficiaryReference">Beneficiary Reference</span></dt>
-                    <dd>
-                      <span></span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.profile.placeOfResidence">Place Of Residence</span></dt>
-                    <dd>
-                      <span></span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.profile.address">Address</span></dt>
-                    <dd>
-                      <span></span>
-                    </dd>
-                  </dl>
-                </div>
+                      <p>Add Establishment</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/establishment/new" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">DONATIONS</li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
+                  <p>
+                    Donations Issued
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Donations Issued</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Donations Issued</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
+                  <p>
+                    Donations Received
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Donations Received</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Donations Received</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">DONATIONS Items</li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    Items
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Items</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Item</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Status Item</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">REFERENCE TABLE</li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Establishments Types</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Citys</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Health Categories</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Nature</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>School Level</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Educational Institutions</p>
+                </a>
+              </li>
+
+              <li class="nav-header">CONTRIBUTORS</li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
+                  <p>
+                    Authorizing Officers
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Authorizing Officers</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Authorizing Officer</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    Tutors
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Tutors</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Tutor</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    Tutors
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Tutors</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Tutor</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="content-wrapper" style="margin-top: -3rem">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Family Profile</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                  <li class="breadcrumb-item"><a href="#">Family</a></li>
+                  <li class="breadcrumb-item active">Family Profile</li>
+                </ol>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <h3 class="p-3 text-center" style="margin: 2rem; text-align: center">Liste Des Parents</h3>
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="card card-primary card-outline">
+                  <div class="card-body box-profile" *ngIf="family">
+                    <div class="text-center">
+                      <img
+                        class="profile-user-img"
+                        style="width: 72%"
+                        src="../../../../content/images/family.jpg"
+                        alt="User profile picture"
+                      />
+                    </div>
+                    <h3 class="profile-username text-center"><span jhiTranslate="awtarApp.family.familyName">Family Name</span></h3>
+                    <p class="text-muted text-center">
+                      <span>{{ family.familyName }}</span>
+                    </p>
+                    <ul class="list-group list-group-unbordered mb-3">
+                      <li class="list-group-item">
+                        <b><span jhiTranslate="awtarApp.family.dwelling">Dwelling</span></b>
+                        <a *ngIf="parents && children" class="float-right">{{ family.dwelling }}</a>
+                      </li>
+                      <li class="list-group-item">
+                        <b><span jhiTranslate="awtarApp.family.area">Area</span></b>
+                        <a *ngIf="parents && children" class="float-right">{{ family.area }}</a>
+                      </li>
+                      <li class="list-group-item">
+                        <b><span jhiTranslate="awtarApp.family.notebookOfPoverty">Notebook Of Poverty</span></b>
+                        <a *ngIf="parents && children" class="float-right">{{ family.notebookOfPoverty }}</a>
+                      </li>
+                      <li class="list-group-item">
+                        <b><span jhiTranslate="awtarApp.family.notebookOfHandicap">Notebook Of Handicap</span></b>
+                        <a *ngIf="parents && children" class="float-right">{{ family.notebookOfHandicap }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
 
-      <div class="album py-5 bg-light" id="entities">
-        <button type="button" (click)="addParent()" class="btn btn-primary" style="margin-left: 80rem; margin-bottom: 1rem">
-          <span>Ajouter Parent</span>
-        </button>
-        <div class="table-responsive" id="entities" *ngIf="profiles && profiles.length > 0">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>
-                  <span jhiTranslate="awtarApp.profile.firstName">First Name</span>
-                </th>
-                <th>
-                  <span jhiTranslate="awtarApp.profile.lastName">Last Name</span>
-                </th>
+                <div class="card social-timeline-card" *ngIf="family">
+                  <div class="card-body">
+                    <h5 class="card-title">Contributors</h5>
+                    <p><span class="material-icons-sharp" style="margin-left: 0.5rem">groups</span></p>
+                    <ul class="friend-list">
+                      <div>
+                        <div *ngIf="Ordonnateur" [routerLink]="['/authorizing-officer', family.authorizingOfficer?.id, 'view']">
+                          <li>
+                            <div class="left" *ngIf="Ordonnateur">
+                              <img *ngIf="!Ordonnateur.body?.urlPhoto" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                              <a (click)="openFile(Ordonnateur.body?.urlPhoto!, Ordonnateur.body?.urlPhotoContentType!)">
+                                <img
+                                  [src]="'data:' + Ordonnateur.body?.urlPhotoContentType + ';base64,' + Ordonnateur.body?.urlPhoto"
+                                  style="max-width: 100%"
+                                  alt="Ordonnateur.body? image"
+                                />
+                              </a>
+                            </div>
+                            <div class="right" *ngIf="Ordonnateur">
+                              <h3>{{ Ordonnateur.body?.lastName }} {{ Ordonnateur.body?.firstName }}</h3>
+                              <p><span jhiTranslate="awtarApp.profile.authorizingOfficer">Authorizing Officer</span></p>
+                            </div>
+                          </li>
+                        </div>
+                        <li *ngIf="!Ordonnateur">
+                          <div class="left">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                          </div>
+                          <div
+                            class="right"
+                            style="display: flex"
+                            [routerLink]="['/beneficiary', family.id, 'contributor', 'authorizing-officer']"
+                          >
+                            <p>
+                              <fa-icon icon="plus"></fa-icon>
+                              <span jhiTranslate="awtarApp.authorizingOfficer.home.addLabel"> Add an Authorizing Officer </span>
+                            </p>
+                          </div>
+                        </li>
+                        <div *ngIf="Ordonnateur" class="text-right" style="margin-top: -3rem">
+                          <div class="dropdown">
+                            <button
+                              class="btn btn-link dropdown-toggle"
+                              type="button"
+                              id="gedf-drop11"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="fa fa-ellipsis-h"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop11">
+                              <div class="h6 dropdown-header">Settings</div>
+                              <a class="dropdown-item" href="#">View</a>
+                              <a class="dropdown-item" [routerLink]="['/beneficiary', family.id, 'contributor', 'authorizing-officer']">
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                              </a>
+                              <a class="dropdown-item" href="#">Delete</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="right">
+                        <div *ngIf="Tuteur" [routerLink]="['/tutor', family.tutor?.id, 'view']">
+                          <li>
+                            <div class="left">
+                              <img *ngIf="!Tuteur.body?.urlPhoto" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" />
+                              <a (click)="openFile(Tuteur.body?.urlPhoto!, Tuteur.body?.urlPhotoContentType!)">
+                                <img
+                                  [src]="'data:' + Tuteur.body?.urlPhotoContentType + ';base64,' + Tuteur.body?.urlPhoto"
+                                  style="max-width: 100%"
+                                  alt="Tuteur.body? image"
+                                />
+                              </a>
+                            </div>
+                            <div class="right">
+                              <h3 class="right">{{ Tuteur.body?.lastName }} {{ Tuteur.body?.firstName }}</h3>
+                              <p><span jhiTranslate="awtarApp.profile.tutor">Tutor</span></p>
+                            </div>
+                          </li>
+                        </div>
+                        <li *ngIf="!Tuteur">
+                          <div class="left">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" />
+                          </div>
+                          <div class="right" style="display: flex" [routerLink]="['/beneficiary', family.id, 'contributor', 'tutor']">
+                            <p>
+                              <fa-icon icon="plus"></fa-icon>
+                              <span jhiTranslate="awtarApp.tutor.home.addLabel"> Add a tutor </span>
+                            </p>
+                          </div>
+                        </li>
+                        <div *ngIf="Tuteur" class="text-right" style="margin-top: -3rem">
+                          <div class="dropdown">
+                            <button
+                              class="btn btn-link dropdown-toggle"
+                              type="button"
+                              id="gedf-drop11"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="fa fa-ellipsis-h"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop11">
+                              <div class="h6 dropdown-header">Settings</div>
+                              <a class="dropdown-item" href="#">View</a>
+                              <a class="dropdown-item" [routerLink]="['/beneficiary', family.id, 'contributor', 'tutor']">
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                              </a>
+                              <a class="dropdown-item" href="#">Delete</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+              </div>
 
-                <th>
-                  <span jhiTranslate="awtarApp.profile.dateOfBirth">Date Of Birth</span>
-                </th>
-                <th>
-                  <span jhiTranslate="awtarApp.parent.annualRevenue">Annual Revenue</span>
-                </th>
-                <th>
-                  <span jhiTranslate="awtarApp.parent.familyHead">Family Head</span>
-                </th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+                      <li class="nav-item"><a class="nav-link active" href="#about" data-toggle="tab">About</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Parents</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Children</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#dons" data-toggle="tab">Donations</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                    </ul>
+                  </div>
+                  <div class="card-body">
+                    <div class="tab-content">
+                      <div class="active tab-pane" id="about">
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-      <h3 class="p-3 text-center" style="margin: 2rem; text-align: center">Liste Des Enfants</h3>
+                        <div class="container">
+                          <div class="row justify-content-center">
+                            <div class="col-12 col-sm-8 col-lg-6">
+                              <!-- Section Heading-->
+                              <div
+                                class="section_heading text-center wow fadeInUp"
+                                data-wow-delay="0.2s"
+                                style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp"
+                              >
+                                <div class="line"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <!-- Single Advisor-->
+                            <div class="col-12 col-sm-6 col-lg-6">
+                              <div
+                                class="single_advisor_profile wow fadeInUp"
+                                data-wow-delay="0.2s"
+                                style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp"
+                              >
+                                <!-- Team Thumb-->
+                                <div class="advisor_thumb">
+                                  <img src="../../../../content/images/famille-membres.jpg" style="width: 70%" alt="" />
+                                  <!-- Social Info-->
+                                  <div class="social-info"><h5>Membres</h5></div>
+                                </div>
+                                <!-- Team Details-->
+                                <div class="single_advisor_details_info" *ngIf="parents && children">
+                                  <h6 style="margin-right: 1rem">{{ parents.length + children.length }}</h6>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Single Advisor-->
+                            <div class="col-12 col-sm-6 col-lg-6">
+                              <div
+                                class="single_advisor_profile wow fadeInUp"
+                                data-wow-delay="0.3s"
+                                style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp"
+                              >
+                                <!-- Team Thumb-->
+                                <div class="advisor_thumb">
+                                  <img src="../../../../content/images/revenu.jpg" style="width: 49%" alt="" />
+                                  <!-- Social Info-->
+                                  <div class="social-info"><h5>Revenu Annuel</h5></div>
+                                </div>
+                                <!-- Team Details-->
+                                <div class="single_advisor_details_info">
+                                  <h6 style="margin-right: 1rem">{{ o }}</h6>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Single Advisor-->
+                            <div class="col-12 col-sm-6 col-lg-6">
+                              <div
+                                class="single_advisor_profile wow fadeInUp"
+                                data-wow-delay="0.4s"
+                                style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp"
+                              >
+                                <!-- Team Thumb-->
+                                <div class="advisor_thumb">
+                                  <img src="../../../../content/images/Donations-family.jpg" style="width: 85%" alt="" />
+                                  <!-- Social Info-->
+                                  <div class="social-info"><h5>Dons Famille</h5></div>
+                                </div>
+                                <!-- Team Details-->
+                                <div class="single_advisor_details_info">
+                                  <h6 style="margin-right: 1rem">{{ df }}</h6>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-6">
+                              <div
+                                class="single_advisor_profile wow fadeInUp"
+                                data-wow-delay="0.4s"
+                                style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp"
+                              >
+                                <!-- Team Thumb-->
+                                <div class="advisor_thumb">
+                                  <img src="../../../../content/images/don-enfants.jpg" style="width: 60%" alt="" />
+                                  <!-- Social Info-->
+                                  <div class="social-info"><h5>Dons Enfants</h5></div>
+                                </div>
+                                <!-- Team Details-->
+                                <div class="single_advisor_details_info">
+                                  <h6>{{ donationChild }}</h6>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="activity">
+                        <div class="card">
+                          <div class="card-header" style="background-color: #fc00ff; color: white">
+                            <h3 class="card-title">Parents Details</h3>
+                            <div class="card-tools">
+                              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus" style="color: white"></i>
+                              </button>
+                              <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                <i class="fas fa-times" style="color: white"></i>
+                              </button>
+                            </div>
+                          </div>
 
-      <div class="album py-5 bg-light" id="entities">
-        <button type="button" (click)="addChild()" class="btn btn-primary" style="margin-left: 80rem; margin-bottom: 1rem">
-          <span>Ajouter Enfant</span>
-        </button>
-        <div class="table-responsive" id="entities" *ngIf="children && children.length > 0">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>
-                  <span jhiTranslate="awtarApp.profile.firstName">First Name</span>
-                </th>
-                <th>
-                  <span jhiTranslate="awtarApp.profile.dateOfBirth">Date Of Birth</span>
-                </th>
-                <th><span jhiTranslate="awtarApp.schoolLevel.schoolLevel">School Level</span></th>
-                <th><span jhiTranslate="awtarApp.teachingCurriculum.annualResult">Annual Result</span></th>
-                <th><span>Nombre Dons</span></th>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                                <div class="row">
+                                  <div class="col-12">
+                                    <div class="post" *ngIf="parents && parents.length > 0">
+                                      <div *ngFor="let profil of parents; trackBy: trackId">
+                                        <div class="card card-default">
+                                          <div class="card-header">
+                                            <div class="user-block">
+                                              <div class="card-tools text-right">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                  <i class="fas fa-minus"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                  <i class="fas fa-times"></i>
+                                                </button>
+                                              </div>
+                                              <img
+                                                class="img-circle img-bordered-sm"
+                                                *ngIf="profil.urlPhoto"
+                                                (click)="openFile(profil.urlPhoto, profil.urlPhotoContentType)"
+                                                class="bd-placeholder-img card-img-top"
+                                                [src]="'data:' + profil.urlPhotoContentType + ';base64,' + profil.urlPhoto"
+                                                alt="profile image"
+                                                role="img"
+                                                aria-label="Placeholder: Thumbnail"
+                                                preserveAspectRatio="xMidYMid slice"
+                                                focusable="false"
+                                              />
+                                              <span class="username">
+                                                <a href="#">{{ profil.lastName }} {{ profil.firstName }}</a>
+                                              </span>
+                                              <span class="description"
+                                                >{{ profil.occupation }} -
+                                                <span
+                                                  *ngIf="profil.familyHead"
+                                                  style="color: #fc00ff"
+                                                  jhiTranslate="awtarApp.parent.familyHead"
+                                                  >Family Head</span
+                                                ></span
+                                              >
+                                            </div>
+                                          </div>
 
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
+                                          <div class="card-body">
+                                            <div class="row">
+                                              <div class="col-12">
+                                                <dl>
+                                                  <dt><span jhiTranslate="awtarApp.profile.dateOfBirth">Date Of Birth</span></dt>
+                                                  <dd>
+                                                    <span>{{ profil.dateOfBirth | formatMediumDate }}</span>
+                                                  </dd>
+                                                  <dt><span jhiTranslate="awtarApp.parent.annualRevenue">Annual Revenue</span></dt>
+                                                  <dd *ngIf="profil">
+                                                    <span>{{ profil.annualRevenue }}</span>
+                                                  </dd>
+                                                </dl>
+                                              </div>
+                                            </div>
+                                          </div>
 
-      <h3 class="p-3 text-center" style="margin: 2rem; text-align: center">Liste Des Dons</h3>
+                                          <div class="card-footer">
+                                            <p>
+                                              <a [routerLink]="['/parent', profil.id, 'view']" class="link-black text-sm mr-2"
+                                                ><fa-icon icon="eye" style="color: #447de8"></fa-icon>
+                                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span></a
+                                              >
+                                              <a [routerLink]="['/parent', profil.id, 'edit']" class="link-black text-sm mr-2"
+                                                ><fa-icon icon="pencil-alt" style="color: #e0de4c"></fa-icon>
+                                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Modify</span>
+                                              </a>
+                                              <a href="#" class="link-black text-sm mr-2"
+                                                ><fa-icon icon="times" style="color: red"></fa-icon> Delete</a
+                                              >
 
-      <div class="album py-5 bg-light" id="entities">
-        <button type="button" (click)="addChild()" class="btn btn-primary" style="margin-left: 80rem; margin-bottom: 1rem">
-          <span>Ajouter Dons</span>
-        </button>
-        <div class="table-responsive" id="entities" *ngIf="children && children.length > 0">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>
-                  <span jhiTranslate="userManagement.createdDate">Created Date</span>
-                </th>
-                <th>
-                  <span jhiTranslate="awtarApp.donationsIssued.model">Model</span>
-                </th>
+                                              <span class="float-right"> </span>
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2"></div>
+                            </div>
+                          </div>
+                        </div>
 
-                <th>
-                  <span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span>
-                </th>
+                        <div class="text-right mt-1 mb-3">
+                          <button (click)="addParent()" class="btn btn-sm btn-primary">Add Parent</button>
+                        </div>
+                      </div>
 
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
+                      <div class="tab-pane" id="timeline">
+                        <div class="post">
+                          <div class="card">
+                            <div class="card-header" style="background-color: #fc00ff; color: white">
+                              <h3 class="card-title">Children Details</h3>
+                              <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                  <i class="fas fa-minus" style="color: white"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                  <i class="fas fa-times" style="color: white"></i>
+                                </button>
+                              </div>
+                            </div>
 
-      <!--Soulution Précedente de l'interface Famille-->
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <div class="post clearfix" *ngIf="children && children.length > 0">
+                                        <div *ngFor="let childx of children; trackBy: trackId">
+                                          <div class="card card-default">
+                                            <div class="card-header">
+                                              <div class="user-block">
+                                                <div class="card-tools text-right">
+                                                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                  </button>
+                                                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                  </button>
+                                                </div>
+                                                <img
+                                                  class="img-circle img-bordered-sm"
+                                                  *ngIf="childx.urlPhoto"
+                                                  (click)="openFile(childx.urlPhoto, childx.urlPhotoContentType)"
+                                                  class="bd-placeholder-img card-img-top"
+                                                  [src]="'data:' + childx.urlPhotoContentType + ';base64,' + childx.urlPhoto"
+                                                  alt="profile image"
+                                                  role="img"
+                                                  aria-label="Placeholder: Thumbnail"
+                                                  preserveAspectRatio="xMidYMid slice"
+                                                  focusable="false"
+                                                />
+                                                <span class="username">
+                                                  <a href="#">{{ childx.lastName }} {{ childx.firstName }}</a>
+                                                </span>
+                                                <span class="description"
+                                                  ><span jhiTranslate="awtarApp.schoolLevel.schoolLevel">School Level</span> - ??</span
+                                                >
+                                              </div>
+                                            </div>
 
-      <body style="background-color: #b667ff">
-        <main>
-          <section class="py-5 text-center container">
-            <h1>Soulution Précedente de l'interface Famille</h1>
-            <div class="row py-lg-5">
-              <div class="col-lg-6 col-md-8 mx-auto">
-                <div class="d-flex justify-content-center">
-                  <div class="col-8">
-                    <div *ngIf="family">
-                      <h1 data-cy="familyDetailsHeading" class="text-white">
-                        <span jhiTranslate="awtarApp.family.detail.title">Family</span>
-                      </h1>
+                                            <div class="card-body">
+                                              <div class="row">
+                                                <div class="col-12">
+                                                  <dl>
+                                                    <dt><span jhiTranslate="awtarApp.profile.dateOfBirth">Date Of Birth</span></dt>
+                                                    <dd>
+                                                      <span>15/02/1558</span>
+                                                    </dd>
 
-                      <hr style="height: 1rem; color: azure" />
+                                                    <dt>
+                                                      <span jhiTranslate="awtarApp.teachingCurriculum.annualResult">Annual Result</span>
+                                                    </dt>
+                                                    <dd>
+                                                      <span>1558</span>
+                                                    </dd>
+                                                    <dt><span>Nombre Dons</span></dt>
+                                                    <dd>
+                                                      <span>1558</span>
+                                                    </dd>
+                                                  </dl>
+                                                </div>
+                                              </div>
+                                            </div>
 
-                      <jhi-alert-error></jhi-alert-error>
+                                            <div class="card-footer">
+                                              <p>
+                                                <a [routerLink]="['/child', childx.child?.id, 'view']" class="link-black text-sm mr-2"
+                                                  ><fa-icon icon="eye" style="color: #447de8"></fa-icon>
+                                                  <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span></a
+                                                >
+                                                <a [routerLink]="['/child', childx.child?.id, 'edit']" class="link-black text-sm mr-2"
+                                                  ><fa-icon icon="pencil-alt" style="color: #e0de4c"></fa-icon>
+                                                  <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Modify</span>
+                                                </a>
+                                                <a href="#" class="link-black text-sm mr-2"
+                                                  ><fa-icon icon="times" style="color: red"></fa-icon> Delete</a
+                                                >
 
-                      <jhi-alert></jhi-alert>
+                                                <span class="float-right"> </span>
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2"></div>
+                              </div>
+                            </div>
+                          </div>
 
-                      <dl class="row-md jh-entity-details">
-                        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-                        <dd>
-                          <span>{{ family.id }}</span>
-                        </dd>
-                        <dt><span jhiTranslate="awtarApp.family.familyName">Family Name</span></dt>
-                        <dd>
-                          <span>{{ family.familyName }}</span>
-                        </dd>
-                        <dt><span jhiTranslate="awtarApp.family.dwelling">Dwelling</span></dt>
-                        <dd>
-                          <span>{{ family.dwelling }}</span>
-                        </dd>
-                        <dt><span jhiTranslate="awtarApp.family.area">Area</span></dt>
-                        <dd>
-                          <span>{{ family.area }}</span>
-                        </dd>
-                        <dt><span jhiTranslate="awtarApp.family.notebookOfPoverty">Notebook Of Poverty</span></dt>
-                        <dd>
-                          <span>{{ family.notebookOfPoverty }}</span>
-                        </dd>
-                        <dt><span jhiTranslate="awtarApp.family.notebookOfHandicap">Notebook Of Handicap</span></dt>
-                        <dd>
-                          <span>{{ family.notebookOfHandicap }}</span>
-                        </dd>
-                        <dt><span jhiTranslate="awtarApp.family.archivated">Archivated</span></dt>
-                        <dd>
-                          <span>{{ family.archivated }}</span>
-                        </dd>
-                      </dl>
+                          <div class="text-right mt-5 mb-3">
+                            <button (click)="addChild()" class="btn btn-sm btn-primary">Add child</button>
+                          </div>
+                        </div>
+                      </div>
 
-                      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-                        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-                      </button>
-                      <button type="button" class="btn btn-info" [routerLink]="['/beneficiary', family.id, 'view']">
-                        <fa-icon icon="eye"></fa-icon>
-                      </button>
+                      <div class="tab-pane" id="dons">
+                        <div class="col-lg-13 gedf-main" style="margin-left: -1rem; margin-right: -1rem">
+                          <!--- \\\\\\\Post-->
+                          <div class="card social-timeline-card">
+                            <div class="card-header">
+                              <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                  <a
+                                    class="nav-link active"
+                                    id="posts-tab"
+                                    data-toggle="tab"
+                                    href="#posts"
+                                    role="tab"
+                                    aria-controls="posts"
+                                    aria-selected="true"
+                                    >Family Donation</a
+                                  >
+                                </li>
+                                <li class="nav-item">
+                                  <a
+                                    class="nav-link"
+                                    id="images-tab"
+                                    data-toggle="tab"
+                                    role="tab"
+                                    aria-controls="images"
+                                    aria-selected="false"
+                                    href="#images"
+                                    >Children Donation</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="card-body" style="margin-left: -0.8rem; margin-right: -1rem">
+                              <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <div class="card">
+                                        <div class="card-header">
+                                          <h3 class="card-title">Donation Table</h3>
+                                          <div class="text-right">
+                                            <div class="dropdown">
+                                              <button
+                                                class="btn btn-link dropdown-toggle"
+                                                type="button"
+                                                id="gedf-drop11"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                              >
+                                                <i class="fa fa-ellipsis-h"></i>
+                                              </button>
+                                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop11">
+                                                <div class="h6 dropdown-header">Settings</div>
+                                                <a class="dropdown-item" href="#">Add Donation</a>
+                                                <a class="dropdown-item" href="#">Delete</a>
+                                                <a class="dropdown-item" href="#">Report</a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
 
-                      <button type="button" [routerLink]="['/family', family.id, 'edit']" class="btn btn-primary">
-                        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-                      </button>
+                                        <div class="card-body" *ngIf="donationList">
+                                          <table class="table table-bordered">
+                                            <thead>
+                                              <tr>
+                                                <th></th>
+                                                <th><span jhiTranslate="awtarApp.donationsIssued.model">Model</span></th>
+                                                <th><span jhiTranslate="awtarApp.donationsIssued.isValidated">Validation Date</span></th>
+                                                <th style="width: 40px">
+                                                  <span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span>
+                                                </th>
+                                                <th style="width: 40px">items Number</th>
+                                                <th style="width: 40px">Total Price</th>
+                                                <th></th>
+                                              </tr>
+                                            </thead>
+
+                                            <tbody>
+                                              <tr
+                                                *ngFor="
+                                                  let don of donationList
+                                                    | paginate
+                                                      : {
+                                                          itemsPerPage: tableSize,
+                                                          currentPage: page,
+                                                          totalItems: count
+                                                        };
+                                                  let i = index;
+                                                  trackBy: trackId
+                                                "
+                                              >
+                                                <td>
+                                                  <div class="custom-control custom-checkbox">
+                                                    <input
+                                                      class="custom-control-input"
+                                                      type="checkbox"
+                                                      id="customCheckbox1"
+                                                      value="option1"
+                                                    />
+                                                    <label for="customCheckbox1" class="custom-control-label"></label>
+                                                  </div>
+                                                </td>
+                                                <td>{{ don.model }}</td>
+                                                <td>
+                                                  <span class="badge" *ngIf="don.isValidated === true" style="background-color: #08cd67">
+                                                    {{ don.isValidated }}</span
+                                                  >
+                                                  <span
+                                                    class="badge"
+                                                    *ngIf="don.isValidated === false; or: don.isValidated === null"
+                                                    style="background-color: #cd1f08"
+                                                  >
+                                                    {{ don.isValidated }}</span
+                                                  >
+                                                </td>
+                                                <td>
+                                                  <span class="badge" style="background-color: #fc00ff">
+                                                    {{ don.donationsDate | formatMediumDate }}</span
+                                                  >
+                                                </td>
+                                                <td>{{ don.itemsNumber }}</td>
+                                                <td>{{ don.totalPrice }}</td>
+                                                <td>
+                                                  <button
+                                                    type="submit"
+                                                    [routerLink]="['/family', family!.id, 'view']"
+                                                    class="btn btn-info btn-sm"
+                                                    data-cy="entityDetailsButton"
+                                                  >
+                                                    <fa-icon icon="eye"></fa-icon>
+                                                  </button>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+
+                                        <div class="card-footer clearfix" style="display: flex">
+                                          <div>
+                                            <select (change)="onTableSizeChange($event)">
+                                              <option *ngFor="let size of tableSizes">{{ size }}</option>
+                                            </select>
+                                          </div>
+                                          <div>
+                                            <pagination-controls
+                                              previousLabel="Prev"
+                                              nextLabel="Next"
+                                              (pageChange)="onTableDataChange($event)"
+                                            >
+                                            </pagination-controls>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <div class="col-8">
+                                        <form name="editForm" role="form" novalidate [formGroup]="editForm">
+                                          <div>
+                                            <div>
+                                              <select name="child" formControlName="child" (change)="choix($event)">
+                                                <option
+                                                  *ngFor="let c of childrenCollection; trackBy: trackChildById"
+                                                  [ngValue]="c.id === editForm.get('child')!.value?.id ? editForm.get('child')!.value : c"
+                                                >
+                                                  {{ c.lastName }} {{ c.firstName }}
+                                                </option>
+                                              </select>
+                                            </div>
+
+                                            <div style="display: flex; margin: 1rem">
+                                              <label
+                                                class="form-label"
+                                                jhiTranslate="awtarApp.profile.child"
+                                                for="field_child"
+                                                style="margin-right: 1rem"
+                                                >Child</label
+                                              >
+                                              <select
+                                                class="form-control"
+                                                id="field_child"
+                                                data-cy="child"
+                                                name="child"
+                                                formControlName="child"
+                                                (change)="choix($event)"
+                                              >
+                                                <option [ngValue]="null"></option>
+                                                <option
+                                                  [ngValue]="
+                                                    childOption.id === editForm.get('child')!.value?.id
+                                                      ? editForm.get('child')!.value
+                                                      : childOption
+                                                  "
+                                                  *ngFor="let childOption of childrenCollection; trackBy: trackChildById"
+                                                >
+                                                  {{ childOption.lastName }} {{ childOption.firstName }}
+                                                </option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                        </form>
+                                      </div>
+                                      <div class="card">
+                                        <div class="card-header">
+                                          <h3 class="card-title">Donation Table</h3>
+                                          <div class="text-right">
+                                            <div class="dropdown">
+                                              <button
+                                                class="btn btn-link dropdown-toggle"
+                                                type="button"
+                                                id="gedf-drop11"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                              >
+                                                <i class="fa fa-ellipsis-h"></i>
+                                              </button>
+                                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop11">
+                                                <div class="h6 dropdown-header">Settings</div>
+                                                <a class="dropdown-item" href="#">Add Donation</a>
+                                                <a class="dropdown-item" href="#">Delete</a>
+                                                <a class="dropdown-item" href="#">Report</a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div class="card-body" *ngIf="donationListChild && donationListChild.length > 0">
+                                          <table class="table table-bordered">
+                                            <thead>
+                                              <tr>
+                                                <th></th>
+                                                <th><span jhiTranslate="awtarApp.donationsIssued.model">Model</span></th>
+                                                <th><span jhiTranslate="awtarApp.donationsIssued.isValidated"> is Validated</span></th>
+                                                <th style="width: 40px">
+                                                  <span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span>
+                                                </th>
+                                                <th style="width: 40px">items Number</th>
+                                                <th style="width: 40px">Total Price</th>
+                                                <th></th>
+                                              </tr>
+                                            </thead>
+
+                                            <tbody>
+                                              <tr
+                                                *ngFor="
+                                                  let childDon of donationListChild
+                                                    | paginate
+                                                      : {
+                                                          itemsPerPage: tableSize,
+                                                          currentPage: page,
+                                                          totalItems: count
+                                                        };
+                                                  let i = index;
+                                                  trackBy: trackId
+                                                "
+                                              >
+                                                <td>
+                                                  <div class="custom-control custom-checkbox">
+                                                    <input
+                                                      class="custom-control-input"
+                                                      type="checkbox"
+                                                      id="customCheckbox1"
+                                                      value="option1"
+                                                    />
+                                                    <label for="customCheckbox1" class="custom-control-label"></label>
+                                                  </div>
+                                                </td>
+                                                <td>{{ childDon.model }}</td>
+                                                <td>
+                                                  <span
+                                                    class="badge"
+                                                    *ngIf="childDon.isValidated === true"
+                                                    style="background-color: #08cd67"
+                                                  >
+                                                    {{ childDon.isValidated }}</span
+                                                  >
+                                                  <span
+                                                    class="badge"
+                                                    *ngIf="childDon.isValidated != true"
+                                                    style="background-color: #cd1f08"
+                                                  >
+                                                    {{ childDon.isValidated }}</span
+                                                  >
+                                                </td>
+                                                <td>
+                                                  <span class="badge" style="background-color: #fc00ff">
+                                                    {{ childDon.donationsDate | formatMediumDate }}</span
+                                                  >
+                                                </td>
+                                                <td>{{ childDon.itemsNumber }}</td>
+                                                <td>{{ childDon.totalPrice }}</td>
+                                                <td>
+                                                  <button
+                                                    type="submit"
+                                                    [routerLink]="['/family', family!.id, 'view']"
+                                                    class="btn btn-info btn-sm"
+                                                    data-cy="entityDetailsButton"
+                                                  >
+                                                    <fa-icon icon="eye"></fa-icon>
+                                                  </button>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+
+                                        <div class="card-footer clearfix" style="display: flex">
+                                          <div>
+                                            <select (change)="onTableSizeChange($event)">
+                                              <option *ngFor="let size of tableSizes">{{ size }}</option>
+                                            </select>
+                                          </div>
+                                          <div>
+                                            <pagination-controls
+                                              previousLabel="Prev"
+                                              nextLabel="Next"
+                                              (pageChange)="onTableDataChange($event)"
+                                            >
+                                            </pagination-controls>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!--- \\\\\\\Post-->
+
+                          <!-- Post /////-->
+                          <!--- \\\\\\\Post-->
+                        </div>
+                      </div>
+
+                      <div class="tab-pane" id="settings">
+                        <jhi-family-update></jhi-family-update>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="containerf">
+                  <div class="cardf">
+                    <div class="face face1">
+                      <div class="content" *ngIf="parents && parents.length > 0">
+                        <div *ngFor="let profil of parents; trackBy: trackId">
+                          <span class="stars"> </span>
+                          <h2 class="java"></h2>
+                          <p class="java">{{ profil.phone }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="face face2">
+                      <h2 jhiTranslate="awtarApp.profile.phone">phone</h2>
+                    </div>
+                  </div>
+
+                  <div class="cardf">
+                    <div class="face face1">
+                      <div class="content" *ngIf="parents && parents.length > 0">
+                        <div *ngFor="let profil of parents; trackBy: trackId">
+                          <span class="stars"></span>
+                          <h2 class="python" *ngIf="profil.familyHead"></h2>
+                          <p class="python" *ngIf="profil.familyHead">{{ profil.address }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="face face2">
+                      <h2>Adresse</h2>
+                    </div>
+                  </div>
+
+                  <div class="cardf">
+                    <div class="face face1">
+                      <div class="content" *ngIf="benef">
+                        <span class="stars"></span>
+                        <h2 class="cSharp"></h2>
+                        <p class="cSharp">{{ benef.beneficiaryReference }}</p>
+                      </div>
+                    </div>
+                    <div class="face face2">
+                      <h2>Reference</h2>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </section>
-
-          <h3 class="p-3 text-center" class="text-white" style="margin: 2rem; text-align: center">La Liste Des Parents</h3>
-
-          <div class="album py-5 bg-light" id="entities">
-            <button type="button" (click)="addParent()" class="btn btn-primary" style="margin-left: 43rem; margin-bottom: 1rem">
-              <span>Ajouter Parent</span>
-            </button>
-            <div class="table-responsive" id="entities" *ngIf="profiles && profiles.length > 0" style="margin-left: 20rem">
-              <tbody>
-                <tr>
-                  <td *ngFor="let profile of profiles; trackBy: trackId" data-cy="entityTable">
-                    <div class="col" style="width: 22rem; height: 30rem; margin-right: 2rem">
-                      <div class="card shadow-sm">
-                        <img
-                          *ngIf="profile.urlPhoto"
-                          (click)="openFile(profile.urlPhoto, profile.urlPhotoContentType)"
-                          class="bd-placeholder-img card-img-top"
-                          [src]="'data:' + profile.urlPhotoContentType + ';base64,' + profile.urlPhoto"
-                          alt="profile image"
-                          role="img"
-                          aria-label="Placeholder: Thumbnail"
-                          preserveAspectRatio="xMidYMid slice"
-                          focusable="false"
-                        />
-
-                        <div class="card-body">
-                          <p class="card-text">{{ profile.lastName }} {{ profile.firstName }}</p>
-                          <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                              <button type="button" class="btn btn-info btn-sm" [routerLink]="['/profile', profile.id, 'view']">
-                                <fa-icon icon="eye"></fa-icon>
-                              </button>
-                              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/profile', profile.id, 'edit']">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </div>
           </div>
+        </section>
+      </div>
 
-          <h3 class="p-3 text-center" class="text-white" style="margin: 2rem; text-align: center">La Liste Des Enfants</h3>
+      <footer class="main-footer"></footer>
 
-          <div class="album py-5 bg-light" id="entities">
-            <button type="button" (click)="addChild()" class="btn btn-primary" style="margin-left: 43rem; margin-bottom: 1rem">
-              <span>Ajouter Enfant</span>
-            </button>
-            <div class="table-responsive" id="entitie" *ngIf="children && children.length > 0">
-              <tbody>
-                <tr>
-                  <td *ngFor="let child of children; trackBy: trackId" data-cy="entityTable">
-                    <div class="col" style="width: 22rem; height: 30rem; margin-right: 2rem">
-                      <div class="card shadow-sm">
-                        <img
-                          *ngIf="child.urlPhoto"
-                          (click)="openFile(child.urlPhoto, child.urlPhotoContentType)"
-                          class="bd-placeholder-img card-img-top"
-                          [src]="'data:' + child.urlPhotoContentType + ';base64,' + child.urlPhoto"
-                          alt="profile image"
-                          role="img"
-                          aria-label="Placeholder: Thumbnail"
-                          preserveAspectRatio="xMidYMid slice"
-                          focusable="false"
-                        />
+      <aside class="control-sidebar control-sidebar-dark"></aside>
+    </div>
 
-                        <div class="card-body">
-                          <p class="card-text">{{ child.lastName }} {{ child.firstName }}</p>
-                          <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                              <button type="button" class="btn btn-info btn-sm" [routerLink]="['/profile', child.id, 'view']">
-                                <fa-icon icon="eye"></fa-icon>
-                              </button>
-                              <button
-                                type="submit"
-                                class="btn btn-primary btn-sm"
-                                data-cy="entityEditButton"
-                                [routerLink]="['/profile', child.id, 'edit']"
-                              >
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </div>
-          </div>
-        </main>
-      </body>
-    </main>
+    <script></script>
   </body>
 </html>

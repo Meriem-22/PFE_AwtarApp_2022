@@ -8,7 +8,8 @@ import { Authority } from 'app/config/authority.constants';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { DASHBOARD_ROUTE } from './dashbord/dashboard.route';
-import { DashboardComponent } from './dashbord/dashbord.component';
+import { DASHBOARD_Template_ROUTE } from './template/dashboard-template/dashboard.route';
+import { BeneficiaryModule } from './entities/beneficiary/beneficiary.module';
 
 @NgModule({
   imports: [
@@ -34,12 +35,11 @@ import { DashboardComponent } from './dashbord/dashbord.component';
           path: '',
           loadChildren: () => import(`./entities/entity-routing.module`).then(m => m.EntityRoutingModule),
         },
-        {
-          path: 'dashbord',
-          component: DashboardComponent,
-        },
+
         navbarRoute,
         DASHBOARD_ROUTE,
+        DASHBOARD_Template_ROUTE,
+
         ...errorRoute,
       ],
       { enableTracing: DEBUG_INFO_ENABLED }

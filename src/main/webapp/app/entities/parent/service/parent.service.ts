@@ -12,6 +12,7 @@ import { IParent, getParentIdentifier, IParentAllDetails } from '../parent.model
 
 export type EntityResponseType = HttpResponse<IParent>;
 export type EntityArrayResponseType = HttpResponse<IParent[]>;
+export type EntityResponseTyp = HttpResponse<IParentAllDetails>;
 
 @Injectable({ providedIn: 'root' })
 export class ParentService {
@@ -41,6 +42,11 @@ export class ParentService {
   }
 
   find(id: number): Observable<EntityResponseType> {
+    return this.http
+      .get<IParent>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+  findA(id: number): Observable<EntityResponseTyp> {
     return this.http
       .get<IParent>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));

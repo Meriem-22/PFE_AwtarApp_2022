@@ -1,6 +1,7 @@
 package com.awtar.myapp.service;
 
 import com.awtar.myapp.service.dto.BeneficiaryDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -71,4 +72,44 @@ public interface BeneficiaryService {
      * @return the persisted entity.
      */
     BeneficiaryDTO calculReference(BeneficiaryDTO beneficiaryDTO);
+
+    /**
+     * Updates a beneficiary.
+     *
+     * @param beneficiaryDTO the entity to update.
+     * @return the persisted entity.
+     */
+    BeneficiaryDTO updateAuthorizingOfficer(BeneficiaryDTO beneficiaryDTO);
+
+    /**
+     * Updates a beneficiary.
+     *
+     * @param beneficiaryDTO the entity to update.
+     * @return the persisted entity.
+     */
+    BeneficiaryDTO updateTutor(BeneficiaryDTO beneficiaryDTO);
+
+    /**
+     * Updates a beneficiary.
+     *
+     * @param id the id of the contributor..
+     * @return the persisted entity.
+     */
+    List<BeneficiaryDTO> findAllFamiliesContributor(Long id);
+
+    /**
+     * Updates a beneficiary.
+     *
+     * @param id the id of the contributor..
+     * @return the persisted entity.
+     */
+    List<BeneficiaryDTO> findAllChildrenContributor(Long id);
+
+    /**
+     * Updates a beneficiary.
+     *
+     * @param id the id of the contributor..
+     * @return the persisted entity.
+     */
+    List<BeneficiaryDTO> findAllEstablishmentsContributor(Long id);
 }

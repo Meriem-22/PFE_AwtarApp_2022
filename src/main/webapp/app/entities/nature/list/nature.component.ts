@@ -9,13 +9,15 @@ import { INature } from '../nature.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { NatureService } from '../service/nature.service';
 import { NatureDeleteDialogComponent } from '../delete/nature-delete-dialog.component';
+import { faCarSide } from '@fortawesome/free-solid-svg-icons';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'jhi-nature',
   templateUrl: './nature.component.html',
 })
 export class NatureComponent implements OnInit {
-  natures?: INature[];
+  natures!: INature[];
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -23,6 +25,13 @@ export class NatureComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+
+  columns: { field: string; header: string; width: string }[] = [];
+
+  carsData!: INature[];
+  selectedColumns: { field: string }[] = [];
+  selectedNature!: INature[];
+  loading = true;
 
   constructor(
     protected natureService: NatureService,
@@ -55,6 +64,33 @@ export class NatureComponent implements OnInit {
 
   ngOnInit(): void {
     this.handleNavigation();
+    this.columns[0] = { field: 'Name', header: 'Name', width: '15%' };
+    this.columns[1] = { field: 'Destined To', header: 'Destined To', width: '15%' };
+    this.columns[2] = { field: 'Necessity Value', header: 'Necessity Value', width: '15%' };
+    this.columns[3] = { field: 'Archivated', header: 'Archivated', width: '15%' };
+
+    if (!localStorage.getItem('selectedColumns')) {
+      this.setColumnsDefaultValue();
+    } else {
+      this.selectedColumns = JSON.parse(localStorage.getItem('selectedColumns')!);
+    }
+  }
+
+  getColumnsField(): any {
+    return this.selectedColumns.map(c => c.field).join(',');
+  }
+
+  setColumnsDefaultValue(): void {
+    this.selectedColumns = this.columns;
+    this.save();
+  }
+
+  clear(table: Table): void {
+    table.clear();
+  }
+
+  save(): void {
+    localStorage.setItem('selectedColumns', JSON.stringify(this.selectedColumns));
   }
 
   trackId(_index: number, item: INature): number {
@@ -108,6 +144,8 @@ export class NatureComponent implements OnInit {
       });
     }
     this.natures = data ?? [];
+    this.carsData = data ?? [];
+    console.log(this.carsData);
     this.ngbPaginationPage = this.page;
   }
 

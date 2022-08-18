@@ -7,6 +7,7 @@ import { FamilyDetailComponent } from '../detail/family-detail.component';
 import { FamilyUpdateComponent } from '../update/family-update.component';
 import { FamilyRoutingResolveService } from './family-routing-resolve.service';
 import { AddComponent } from '../add/add.component';
+import { BeneficiaryUpdateComponent } from '../beneficiary-update/beneficiary-update.component';
 
 const familyRoute: Routes = [
   {
@@ -45,6 +46,14 @@ const familyRoute: Routes = [
   {
     path: 'add',
     component: AddComponent,
+    resolve: {
+      family: FamilyRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'beneficiary',
+    component: BeneficiaryUpdateComponent,
     resolve: {
       family: FamilyRoutingResolveService,
     },

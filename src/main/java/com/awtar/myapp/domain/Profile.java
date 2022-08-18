@@ -91,7 +91,7 @@ public class Profile implements Serializable {
     @JoinColumn(unique = true)
     private AuthorizingOfficer authorizingOfficer;
 
-    @JsonIgnoreProperties(value = { "beneficiaries", "tutorProfile" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "beneficiaries" }, allowSetters = true)
     @OneToOne
     @JoinColumn(unique = true)
     private Tutor tutor;

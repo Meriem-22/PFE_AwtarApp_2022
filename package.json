@@ -72,6 +72,8 @@
     "packaging": "jar"
   },
   "dependencies": {
+    "@angular/animations": "^13.3.1",
+    "@angular/cdk": "^13.3.1",
     "@angular/common": "13.3.1",
     "@angular/compiler": "13.3.1",
     "@angular/core": "13.3.1",
@@ -83,14 +85,19 @@
     "@fortawesome/angular-fontawesome": "0.10.2",
     "@fortawesome/fontawesome-svg-core": "6.1.1",
     "@fortawesome/free-solid-svg-icons": "6.1.1",
+    "@mobiscroll/angular-lite": "^4.10.9",
     "@ng-bootstrap/ng-bootstrap": "12.0.1",
     "@ngx-translate/core": "14.0.0",
     "@ngx-translate/http-loader": "7.0.0",
     "@popperjs/core": "^2.11.5",
+    "admin-lte": "3.0",
     "bootstrap": "^5.1.3",
     "dayjs": "1.11.0",
     "ngx-infinite-scroll": "13.0.1",
+    "ngx-pagination": "^6.0.2",
     "ngx-webstorage": "9.0.0",
+    "primeicons": "^5.0.0",
+    "primeng": "^13.0.0",
     "rxjs": "7.5.5",
     "tslib": "2.3.1",
     "zone.js": "0.11.4"

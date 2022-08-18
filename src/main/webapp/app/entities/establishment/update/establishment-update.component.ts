@@ -11,6 +11,17 @@ import { IEstablishmentType } from 'app/entities/establishment-type/establishmen
 import { EstablishmentTypeService } from 'app/entities/establishment-type/service/establishment-type.service';
 import { ICity } from 'app/entities/city/city.model';
 import { CityService } from 'app/entities/city/service/city.service';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { SessionStorageService } from 'ngx-webstorage';
+
+import { VERSION } from 'app/app.constants';
+import { LANGUAGES } from 'app/config/language.constants';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { LoginService } from 'app/login/login.service';
+import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
 
 @Component({
   selector: 'jhi-establishment-update',
@@ -41,13 +52,31 @@ export class EstablishmentUpdateComponent implements OnInit {
     city: [null, Validators.required],
   });
 
+  inProduction?: boolean;
+  isNavbarCollapsed = true;
+  languages = LANGUAGES;
+  openAPIEnabled?: boolean;
+  version = '';
+  account: Account | null = null;
+  entitiesNavbarItems: any[] = [];
+
   constructor(
     protected establishmentService: EstablishmentService,
     protected establishmentTypeService: EstablishmentTypeService,
     protected cityService: CityService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
-  ) {}
+    protected fb: FormBuilder,
+    private loginService: LoginService,
+    private translateService: TranslateService,
+    private sessionStorageService: SessionStorageService,
+    private accountService: AccountService,
+    private profileService: ProfileService,
+    private router: Router
+  ) {
+    if (VERSION) {
+      this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
+    }
+  }
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ establishment }) => {
@@ -77,6 +106,29 @@ export class EstablishmentUpdateComponent implements OnInit {
 
   trackCityById(_index: number, item: ICity): number {
     return item.id!;
+  }
+
+  changeLanguage(languageKey: string): void {
+    this.sessionStorageService.store('locale', languageKey);
+    this.translateService.use(languageKey);
+  }
+
+  collapseNavbar(): void {
+    this.isNavbarCollapsed = true;
+  }
+
+  login(): void {
+    this.router.navigate(['/login']);
+  }
+
+  logout(): void {
+    this.collapseNavbar();
+    this.loginService.logout();
+    this.router.navigate(['']);
+  }
+
+  toggleNavbar(): void {
+    this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IEstablishment>>): void {

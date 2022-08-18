@@ -1,10 +1,12 @@
 package com.awtar.myapp.service.impl;
 
 import com.awtar.myapp.domain.DonationDetails;
+import com.awtar.myapp.repository.BeneficiaryRepository;
 import com.awtar.myapp.repository.DonationDetailsRepository;
 import com.awtar.myapp.service.DonationDetailsService;
 import com.awtar.myapp.service.dto.DonationDetailsDTO;
 import com.awtar.myapp.service.mapper.DonationDetailsMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +28,16 @@ public class DonationDetailsServiceImpl implements DonationDetailsService {
 
     private final DonationDetailsMapper donationDetailsMapper;
 
-    public DonationDetailsServiceImpl(DonationDetailsRepository donationDetailsRepository, DonationDetailsMapper donationDetailsMapper) {
+    private final BeneficiaryRepository beneficiaryRepository;
+
+    public DonationDetailsServiceImpl(
+        DonationDetailsRepository donationDetailsRepository,
+        DonationDetailsMapper donationDetailsMapper,
+        BeneficiaryRepository beneficiaryRepository
+    ) {
         this.donationDetailsRepository = donationDetailsRepository;
         this.donationDetailsMapper = donationDetailsMapper;
+        this.beneficiaryRepository = beneficiaryRepository;
     }
 
     @Override
@@ -84,5 +93,17 @@ public class DonationDetailsServiceImpl implements DonationDetailsService {
     public void delete(Long id) {
         log.debug("Request to delete DonationDetails : {}", id);
         donationDetailsRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<DonationDetailsDTO> findAllBeneficiaryDonation(Long id, Pageable pageable) {
+        Page<DonationDetailsDTO> donation = donationDetailsRepository.findAllDonations(beneficiaryRepository.getById(id), pageable);
+        return donation;
+    }
+
+    @Override
+    public List<DonationDetailsDTO> findAllBeneficiaryDonationList(Long id) {
+        List<DonationDetailsDTO> donation = donationDetailsRepository.findAllDonationsList(beneficiaryRepository.getById(id));
+        return donation;
     }
 }

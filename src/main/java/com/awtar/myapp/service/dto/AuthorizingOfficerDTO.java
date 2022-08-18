@@ -20,6 +20,8 @@ public class AuthorizingOfficerDTO implements Serializable {
 
     private String managerCin;
 
+    private ProfileDTO profile;
+
     public Long getId() {
         return id;
     }
@@ -58,6 +60,14 @@ public class AuthorizingOfficerDTO implements Serializable {
 
     public void setManagerCin(String managerCin) {
         this.managerCin = managerCin;
+    }
+
+    public ProfileDTO getProfile() {
+        return profile;
+    }
+
+    public void setProfile(ProfileDTO profile) {
+        this.profile = profile;
     }
 
     @Override

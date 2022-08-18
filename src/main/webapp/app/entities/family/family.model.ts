@@ -1,6 +1,8 @@
 import { IParent, IParentAllDetails } from 'app/entities/parent/parent.model';
 import { IChild, IChildAllDetails } from 'app/entities/child/child.model';
 import { IBeneficiary } from '../beneficiary/beneficiary.model';
+import { IAuthorizingOfficer } from '../authorizing-officer/authorizing-officer.model';
+import { ITutor } from '../tutor/tutor.model';
 
 export interface IFamily {
   id?: number;
@@ -42,6 +44,8 @@ export interface IFamilyAllDetails {
   notebookOfPoverty?: boolean | null;
   notebookOfHandicap?: boolean | null;
   archivated?: boolean | null;
+  authorizingOfficer?: IAuthorizingOfficer | null;
+  tutor?: ITutor | null;
   parents?: IParent[] | null;
   children?: IChild[] | null;
   head?: IParentAllDetails | null;
@@ -59,6 +63,8 @@ export class FamilyAllDetails implements IFamilyAllDetails {
     public notebookOfPoverty?: boolean | null,
     public notebookOfHandicap?: boolean | null,
     public archivated?: boolean | null,
+    public authorizingOfficer?: IAuthorizingOfficer | null,
+    public tutor?: ITutor | null,
     public parents?: IParent[] | null,
     public children?: IChild[] | null,
     public head?: IParentAllDetails | null,

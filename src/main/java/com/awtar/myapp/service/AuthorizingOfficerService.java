@@ -62,4 +62,12 @@ public interface AuthorizingOfficerService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * add a authorizingOfficer with profile info.
+     *
+     * @param authorizingOfficerDTO the entity to save.
+     * @return the persisted entity.
+     */
+    AuthorizingOfficerDTO add(AuthorizingOfficerDTO authorizingOfficerDTO);
 }

@@ -2,8 +2,11 @@ package com.awtar.myapp.service.mapper;
 
 import com.awtar.myapp.domain.Child;
 import com.awtar.myapp.domain.Family;
+import com.awtar.myapp.domain.Profile;
 import com.awtar.myapp.service.dto.ChildDTO;
 import com.awtar.myapp.service.dto.FamilyDTO;
+import com.awtar.myapp.service.dto.ProfileDTO;
+import java.util.List;
 import org.mapstruct.*;
 
 /**

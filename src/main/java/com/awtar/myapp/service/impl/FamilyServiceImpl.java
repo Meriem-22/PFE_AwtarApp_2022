@@ -6,11 +6,13 @@ import com.awtar.myapp.domain.Family;
 import com.awtar.myapp.domain.Parent;
 import com.awtar.myapp.domain.Profile;
 import com.awtar.myapp.domain.enumeration.Beneficiaries;
+import com.awtar.myapp.repository.AuthorizingOfficerRepository;
 import com.awtar.myapp.repository.BeneficiaryRepository;
 import com.awtar.myapp.repository.ChildRepository;
 import com.awtar.myapp.repository.FamilyRepository;
 import com.awtar.myapp.repository.ParentRepository;
 import com.awtar.myapp.repository.ProfileRepository;
+import com.awtar.myapp.repository.TutorRepository;
 import com.awtar.myapp.service.BeneficiaryService;
 import com.awtar.myapp.service.FamilyService;
 import com.awtar.myapp.service.dto.BeneficiaryDTO;
@@ -23,6 +25,7 @@ import com.awtar.myapp.service.mapper.ChildMapper;
 import com.awtar.myapp.service.mapper.FamilyMapper;
 import com.awtar.myapp.service.mapper.ParentMapper;
 import com.awtar.myapp.service.mapper.ProfileMapper;
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -56,6 +59,8 @@ public class FamilyServiceImpl implements FamilyService {
     private final ChildMapper childMapper;
     private final ProfileMapper profileMapper;
     private final BeneficiaryService beneficiaryService;
+    private final AuthorizingOfficerRepository authorizingOfficerRepository;
+    private final TutorRepository tutorRepository;
 
     public FamilyServiceImpl(
         FamilyRepository familyRepository,
@@ -68,7 +73,9 @@ public class FamilyServiceImpl implements FamilyService {
         ChildMapper childMapper,
         ProfileRepository profileRepository,
         ProfileMapper profileMapper,
-        BeneficiaryService beneficiaryService
+        BeneficiaryService beneficiaryService,
+        AuthorizingOfficerRepository authorizingOfficerRepository,
+        TutorRepository tutorRepository
     ) {
         this.familyRepository = familyRepository;
         this.familyMapper = familyMapper;
@@ -81,6 +88,8 @@ public class FamilyServiceImpl implements FamilyService {
         this.profileMapper = profileMapper;
         this.profileRepository = profileRepository;
         this.beneficiaryService = beneficiaryService;
+        this.authorizingOfficerRepository = authorizingOfficerRepository;
+        this.tutorRepository = tutorRepository;
     }
 
     @Override
@@ -95,6 +104,11 @@ public class FamilyServiceImpl implements FamilyService {
     public FamilyDTO update(FamilyDTO familyDTO) {
         log.debug("Request to save Family : {}", familyDTO);
         Family family = familyMapper.toEntity(familyDTO);
+        family.setBeneficiaryType(Beneficiaries.FAMILY);
+        Beneficiary beneficiary = beneficiaryRepository.getById(family.getId());
+        family.setAuthorizingOfficer(beneficiary.getAuthorizingOfficer());
+        family.setTutor(beneficiary.getTutor());
+        family.setBeneficiaryReference(beneficiary.getBeneficiaryReference());
         family = familyRepository.save(family);
         return familyMapper.toDto(family);
     }
@@ -151,13 +165,37 @@ public class FamilyServiceImpl implements FamilyService {
     @Override
     public FamilyDTO saveCompletedFamily(FamilyDTO familyDTO) {
         log.debug("Request to save completed Family  : {}", familyDTO);
+        ProfileDTO a = familyDTO.getAuthorizingOfficer();
+        ProfileDTO t = familyDTO.getTutor();
+
+        Profile pa = profileMapper.toEntity(a);
+        Profile pt = profileMapper.toEntity(t);
 
         Family family = familyMapper.toEntity(familyDTO);
         BeneficiaryDTO beneficiarydto = familyDTO.getBeneficiary();
+
         Beneficiary beneficiary = beneficiaryMapper.toEntity(beneficiarydto);
         family.setBeneficiaryType(Beneficiaries.FAMILY);
-        family.setAuthorizingOfficer(beneficiary.getAuthorizingOfficer());
-        family.setTutor(beneficiary.getTutor());
+        if (pa != null) {
+            family.setAuthorizingOfficer(authorizingOfficerRepository.getById(pa.getAuthorizingOfficer().getId()));
+        }
+        if (pt != null) {
+            family.setTutor(tutorRepository.getById(pt.getTutor().getId()));
+        }
+        family = familyRepository.save(family);
+        if (pa != null) {
+            String reference =
+                "Ref_FA/" +
+                authorizingOfficerRepository.getById(a.getAuthorizingOfficer().getId()).getAbbreviation() +
+                "-" +
+                family.getId().toString();
+            family.setBeneficiaryReference(reference);
+        }
+        if (pa == null) {
+            String reference = "Ref_FA/" + "-" + family.getId().toString();
+            family.setBeneficiaryReference(reference);
+        }
+
         family = familyRepository.save(family);
 
         ParentDTO[] parentCollection;
@@ -174,10 +212,12 @@ public class FamilyServiceImpl implements FamilyService {
             p = parentRepository.save(p);
             Profile profileParent = profileMapper.toEntity(profile);
             profileParent.setParent(p);
-            profileRepository.save(profileParent);
+            profileParent = profileRepository.save(profileParent);
+            p.setParentProfile(profileParent);
+            p = parentRepository.save(p);
         }
 
-        for (int i = 0; i < childCollection.length; i++) {
+        for (int i = 0, j = 1; i < childCollection.length; i++, j++) {
             ChildDTO childdto = childCollection[i];
             ProfileDTO profiledto = childdto.getProfile();
             Profile profile = profileMapper.toEntity(profiledto);
@@ -186,9 +226,31 @@ public class FamilyServiceImpl implements FamilyService {
             child.setAuthorizingOfficer(beneficiary.getAuthorizingOfficer());
             child.setTutor(beneficiary.getTutor());
             child.setBeneficiaryType(Beneficiaries.CHILD);
+            if (pa != null) {
+                child.setAuthorizingOfficer(authorizingOfficerRepository.getById(pa.getAuthorizingOfficer().getId()));
+            }
+            if (pt != null) {
+                child.setTutor(tutorRepository.getById(pt.getTutor().getId()));
+            }
+            if (pa != null) {
+                String reference =
+                    "Ref_EN/" +
+                    authorizingOfficerRepository.getById(a.getAuthorizingOfficer().getId()).getAbbreviation() +
+                    "-" +
+                    family.getId().toString() +
+                    "-" +
+                    j;
+                child.setBeneficiaryReference(reference);
+            }
+            if (pa == null) {
+                String reference = "Ref_EN/" + "-" + family.getId().toString() + "-" + j;
+                child.setBeneficiaryReference(reference);
+            }
             child = childRepository.save(child);
             profile.setChild(child);
-            profileRepository.save(profile);
+            profile = profileRepository.save(profile);
+            child.setChildProfile(profile);
+            child = childRepository.save(child);
         }
 
         return familyMapper.toDto(family);

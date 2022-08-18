@@ -4,6 +4,7 @@ import com.awtar.myapp.domain.AuthorizingOfficer;
 import com.awtar.myapp.domain.Beneficiary;
 import com.awtar.myapp.domain.Tutor;
 import com.awtar.myapp.domain.enumeration.Beneficiaries;
+import com.awtar.myapp.service.dto.BeneficiaryDTO;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -41,6 +42,21 @@ public interface BeneficiaryRepository extends JpaRepository<Beneficiary, Long> 
     @Query("select beneficiary from Beneficiary beneficiary left join fetch beneficiary.authorizingOfficer where beneficiary.id =:id")
     Optional<Beneficiary> findOneWithToOneRelationships(@Param("id") Long id);
 
+    @Query(
+        "select new com.awtar.myapp.service.dto.BeneficiaryDTO(b.id, f.familyName) from Beneficiary b, Family f where b.id = f.id and (b.authorizingOfficer.id =:id or b.tutor.id =:id)"
+    )
+    List<BeneficiaryDTO> findAllFamiliesByContributors(@Param("id") Long id);
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.BeneficiaryDTO(b.id, p.firstName, p.lastName, p.urlPhoto, p.urlPhotoContentType) from Beneficiary b, Profile p where b.id = p.child.id and (b.authorizingOfficer.id =:id or b.tutor.id =:id)"
+    )
+    List<BeneficiaryDTO> findAllChildrenByContributors(@Param("id") Long id);
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.BeneficiaryDTO(b.id, e.name, e.activity) from Beneficiary b, Establishment e where b.id = e.id and (b.authorizingOfficer.id =:id or b.tutor.id =:id)"
+    )
+    List<BeneficiaryDTO> findAllEstablishmentsByContributors(@Param("id") Long id);
+
     @Modifying
     @Query("update Beneficiary set beneficiaryReference= :reference, authorizingOfficer= :authorizingOfficer  where id= :id")
     void setBeneficiaryReference(
@@ -56,5 +72,14 @@ public interface BeneficiaryRepository extends JpaRepository<Beneficiary, Long> 
         @Param("authorizingOfficer") AuthorizingOfficer authorizingOfficer,
         @Param("tutor") Tutor tutor,
         @Param("beneficiaries") Beneficiaries beneficiaries
+    );
+
+    @Modifying
+    @Query("update Beneficiary set beneficiaryReference= :nRef, authorizingOfficer= :authorizingOfficer,tutor= :tutor  where id= :id")
+    void setBeneficiaryContributor(
+        @Param("id") Long id,
+        @Param("nRef") String nRef,
+        @Param("authorizingOfficer") AuthorizingOfficer authorizingOfficer,
+        @Param("tutor") Tutor tutor
     );
 }
