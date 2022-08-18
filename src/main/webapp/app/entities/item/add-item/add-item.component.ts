@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventManager } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
@@ -23,6 +23,17 @@ export class AddItemComponent implements OnInit {
   itemGenderValues = Object.keys(ItemGender);
 
   naturesSharedCollection: INature[] = [];
+
+  DonationsIssued!: FormGroup;
+  DonationsDetails!: FormGroup;
+  DonationsDetails2!: FormGroup;
+  DonationsDetails3!: FormGroup;
+  DonationsDetails4!: FormGroup;
+
+  DonationsDetailsItem!: FormGroup;
+  DonationsIssued_step = false;
+  DonationsDetails_step = false;
+  step = 1;
 
   editForm = this.fb.group({
     id: [],
@@ -48,6 +59,7 @@ export class AddItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.i++;
+    this.loadRelationshipsOptions();
   }
   byteSize(base64String: string): string {
     return this.dataUtils.byteSize(base64String);
@@ -59,6 +71,14 @@ export class AddItemComponent implements OnInit {
 
   setFileData(event: Event, field: string, isImage: boolean): void {
     this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe({});
+  }
+
+  next(): void {
+    this.step++;
+  }
+
+  previous(): void {
+    this.step--;
   }
 
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
