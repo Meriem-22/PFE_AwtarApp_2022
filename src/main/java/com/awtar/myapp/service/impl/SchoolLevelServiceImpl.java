@@ -5,6 +5,7 @@ import com.awtar.myapp.repository.SchoolLevelRepository;
 import com.awtar.myapp.service.SchoolLevelService;
 import com.awtar.myapp.service.dto.SchoolLevelDTO;
 import com.awtar.myapp.service.mapper.SchoolLevelMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,5 +81,11 @@ public class SchoolLevelServiceImpl implements SchoolLevelService {
     public void delete(Long id) {
         log.debug("Request to delete SchoolLevel : {}", id);
         schoolLevelRepository.deleteById(id);
+    }
+
+    @Override
+    public List<SchoolLevelDTO> findAllSchoolLevel() {
+        List<SchoolLevel> l = schoolLevelRepository.findAllSchoolLevels();
+        return schoolLevelMapper.toDto(l);
     }
 }

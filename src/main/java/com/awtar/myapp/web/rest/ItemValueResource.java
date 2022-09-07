@@ -189,4 +189,17 @@ public class ItemValueResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * {@code GET  /item-values/:id} : get the "id" itemValue.
+     *
+     * @param id the id of the itemValueDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the itemValueDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/item-values/item/{id}")
+    public ResponseEntity<ItemValueDTO> getItem(@PathVariable Long id) {
+        log.debug("REST request to get ItemValue : {}", id);
+        Optional<ItemValueDTO> itemValueDTO = itemValueService.findItem(id);
+        return ResponseUtil.wrapOrNotFound(itemValueDTO);
+    }
 }

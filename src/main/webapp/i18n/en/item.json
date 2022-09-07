@@ -11,6 +11,7 @@
       "created": "A new Item is created with identifier {{ param }}",
       "updated": "A Item is updated with identifier {{ param }}",
       "deleted": "A Item is deleted with identifier {{ param }}",
+      "invalideChoice": "SVP vous devez choisir entre un article composé ou un article simple pas le duex à la foix !!",
       "delete": {
         "question": "Are you sure you want to delete Item {{ id }}?"
       },
@@ -18,7 +19,7 @@
         "title": "Item"
       },
       "id": "ID",
-      "name": "Name",
+      "name": "Item Name",
       "urlPhoto": "Url Photo",
       "gender": "Gender",
       "composed": "Composed",

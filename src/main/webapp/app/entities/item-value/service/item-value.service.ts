@@ -46,6 +46,12 @@ export class ItemValueService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  findItem(id: number): Observable<EntityResponseType> {
+    return this.http
+      .get<IItemValue>(`${this.resourceUrl + '/item'}/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http

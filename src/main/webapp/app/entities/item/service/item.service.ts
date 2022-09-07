@@ -32,6 +32,10 @@ export class ItemService {
     return this.http.get<IItem>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findAllItems(): Observable<EntityArrayResponseType> {
+    return this.http.get<IItem[]>(this.resourceUrl + '/all', { observe: 'response' });
+  }
+
   findItemWithNature(id: number): Observable<EntityArrayResponseType> {
     return this.http.get<IItem[]>(`${this.resourceUrl + '/nature'}/${id}`, { observe: 'response' });
   }

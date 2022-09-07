@@ -92,4 +92,10 @@ public class ItemServiceImpl implements ItemService {
         List<Item> items = itemRepository.findItemsWithNature(id);
         return itemMapper.toDto(items);
     }
+
+    @Override
+    public List<ItemDTO> findAllItems() {
+        List<Item> items = itemRepository.findAllItems();
+        return itemMapper.toDto(items);
+    }
 }

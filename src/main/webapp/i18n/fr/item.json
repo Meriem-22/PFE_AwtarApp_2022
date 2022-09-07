@@ -11,6 +11,7 @@
       "created": "Un nouveau article a été créé avec l'identifiant {{ param }}",
       "updated": "L'article avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "L'article avec l'identifiant {{ param }} a été supprimé",
+      "nvalideChoice": "SVP vous devez choisir entre un article composé ou un article simple pas le duex à la foix !!",
       "delete": {
         "question": "Êtes-vous certain de vouloir supprimer L'article {{ id }} ?"
       },
@@ -18,7 +19,7 @@
         "title": "Article"
       },
       "id": "ID",
-      "name": "Nom",
+      "name": "Nom D'article",
       "urlPhoto": "Photo d'article",
       "gender": "Genre",
       "composed": "Composé",

@@ -32,6 +32,7 @@ import { DashboardTemplateModule } from './template/dashboard-template/dashboard
 import { MbscModule } from '@mobiscroll/angular-lite';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TableModule } from 'primeng/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { TableModule } from 'primeng/table';
     MbscModule,
     TableModule,
     MultiSelectModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     Title,

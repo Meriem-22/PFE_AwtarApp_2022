@@ -12,7 +12,7 @@ import { Beneficiaries } from 'app/entities/enumerations/beneficiaries.model';
 import { Period } from 'app/entities/enumerations/period.model';
 import { IEstablishment } from 'app/entities/establishment/establishment.model';
 import { EstablishmentService } from 'app/entities/establishment/service/establishment.service';
-import { IFamily } from 'app/entities/family/family.model';
+import { IFamily, IFamilyAllDetails } from 'app/entities/family/family.model';
 import { FamilyService } from 'app/entities/family/service/family.service';
 import { IItem, Item } from 'app/entities/item/item.model';
 import { ItemService } from 'app/entities/item/service/item.service';
@@ -33,21 +33,37 @@ export class AddDonationsIssuedComponent implements OnInit {
   isSaving = false;
   beneficiariesValues = Object.keys(Beneficiaries);
   periodValues = Object.keys(Period);
-
+  recurring?: string;
   isSavingDetails = false;
   isLoading = false;
+  display = false;
+  displayc = false;
+  displayE = false;
+  nbDonCTot = 0;
+  selectedFID?: string;
+  selectedCID?: string;
+  selectedEID?: string;
+  targetProducts: IItem[] = [];
 
   donationsIssuedsSharedCollection: IDonationsIssued[] = [];
   naturesSharedCollection: INature[] = [];
+  textParamNature!: string[];
   beneficiariesSharedCollection: IBeneficiary[] = [];
   itemsSharedCollection: IItem[] = [];
   items: IItem[] = [];
   DonationsDetailsCollection: IDonationDetails[] = [];
   // ChildrenCollection: IChildAllDetails[] = [];
+  textParam!: string;
+  id1 = -1;
+  step2 = 0;
 
   familys?: IFamily[] = [];
   childrenProfiles?: IProfile[] = [];
   establishments?: IEstablishment[] = [];
+
+  selectedFamilys?: IFamily[] = [];
+  selectedChildrenProfiles?: IProfile[] = [];
+  selectedEstablishments?: IEstablishment[] = [];
   beneficiaries: number[] = [];
   AddedItems: IDonationItemDetails[] = [];
   itemdetails?: IDonationItemDetails;
@@ -58,6 +74,18 @@ export class AddDonationsIssuedComponent implements OnInit {
   DonationsDetailsItem!: FormGroup;
   beneficiaryType: string | undefined;
   donationsNature!: INature;
+
+  donationList?: any[];
+  donationListChild?: any[];
+  donationChild = 0;
+  Ordonnateur!: HttpResponse<IProfile>;
+  Tuteur!: HttpResponse<IProfile>;
+  parents?: any[] = [];
+  children?: IProfile[] = [];
+  t = 0;
+  df = 0;
+  o = 0;
+  nbChild = 0;
 
   DonationsIssued_step = false;
   DonationsDetails_step = false;
@@ -99,15 +127,14 @@ export class AddDonationsIssuedComponent implements OnInit {
     this.DonationsDetails = this.formBuilder.group({
       description: [null, [Validators.required]],
       archivated: [],
-      nature: [null, Validators.required],
       beneficiary: [null, Validators.required],
       quantity: [null, [Validators.required]],
       date: [null, [Validators.required]],
       item: [null, Validators.required],
     });
-
     this.loadRelationshipsOptions();
     this.loadRelationshipsOptionsItemDetails();
+    this.childDon();
   }
 
   trackItemById(_index: number, item: IItem): number {
@@ -117,26 +144,13 @@ export class AddDonationsIssuedComponent implements OnInit {
   next(): void {
     if (this.step === 1) {
       this.DonationsIssued_step = true;
-      if (this.DonationsIssued.invalid) {
+      /*if (this.DonationsIssued.invalid) {
         return;
-      }
-      this.step++;
+      }*/
     }
 
     this.beneficiaryType = this.DonationsIssued.get(['beneficiaryType'])!.value;
-    this.donationsNature = this.DonationsIssued.get(['nature'])!.value;
-    console.log(this.donationsNature);
-
-    this.itemService.findItemWithNature(this.donationsNature.id!).subscribe({
-      next: (res: HttpResponse<IItem[]>) => {
-        this.isLoading = true;
-        this.items = res.body ?? [];
-        console.log(this.items);
-      },
-      error: () => {
-        this.isLoading = false;
-      },
-    });
+    console.log(this.beneficiaryType);
 
     if (this.beneficiaryType === 'FAMILY') {
       this.familyService.findFamily().subscribe({
@@ -144,6 +158,7 @@ export class AddDonationsIssuedComponent implements OnInit {
           this.isLoading = true;
           this.familys = res.body ?? [];
           console.log(this.familys);
+          this.step = 3;
           this.i = 1;
         },
         error: () => {
@@ -157,8 +172,10 @@ export class AddDonationsIssuedComponent implements OnInit {
         next: (res: HttpResponse<IProfile[]>) => {
           this.isLoading = true;
           this.childrenProfiles = res.body ?? [];
+
           console.log(this.childrenProfiles);
           this.i = 2;
+          this.step = 2;
         },
         error: () => {
           this.isLoading = false;
@@ -173,6 +190,7 @@ export class AddDonationsIssuedComponent implements OnInit {
           this.establishments = res.body ?? [];
           console.log(this.establishments);
           this.i = 3;
+          this.step = 4;
         },
         error: () => {
           this.isLoading = false;
@@ -181,6 +199,87 @@ export class AddDonationsIssuedComponent implements OnInit {
     }
   }
 
+  showDialog(family: IFamilyAllDetails): void {
+    this.selectedFID = family.familyName!;
+    this.display = true;
+    this.profileService.getAllParentsProfile(family.id!).subscribe({
+      next: (res: HttpResponse<any[]>) => {
+        this.parents = res.body ?? [];
+        for (this.t = 0; this.t < this.parents.length; this.t++) {
+          this.o = this.o + +this.parents[this.t].annualRevenue;
+        }
+      },
+      error: e => console.error(e),
+    });
+
+    this.profileService.getAllChildrenProfile(family.id!).subscribe({
+      next: (res: HttpResponse<IProfile[]>) => {
+        this.children = res.body ?? [];
+        this.nbChild = this.children.length;
+        for (this.t = 0; this.t < this.children.length; this.t++) {
+          this.donationDetailsService.getAllDonationsIssuedOfFamily(this.children[this.t].child!.id!).subscribe({
+            next: (resc: HttpResponse<any[]>) => {
+              this.nbDonCTot = this.nbDonCTot + resc.body!.length;
+            },
+            error: e => console.error(e),
+          });
+        }
+      },
+      error: e => console.error(e),
+    });
+
+    this.donationDetailsService.getAllDonationsIssuedOfFamily(family.id!).subscribe({
+      next: (res: HttpResponse<any[]>) => {
+        this.donationList = res.body ?? [];
+        for (this.t = 0; this.t < this.donationList.length; this.t++) {
+          if (this.donationList[this.t].isValidated === true) {
+            this.df = this.df + 1;
+          }
+        }
+      },
+      error: e => console.error(e),
+    });
+
+    this.profileService.findProfile(family.authorizingOfficer!.id!).subscribe({
+      next: res => {
+        this.Ordonnateur = res;
+      },
+      error: e => console.error(e),
+    });
+
+    this.profileService.findProfile(family.tutor!.id!).subscribe({
+      next: res => {
+        this.Tuteur = res;
+      },
+      error: e => console.error(e),
+    });
+  }
+
+  childNbDon(child: IProfile): number {
+    this.donationChild = 0;
+
+    /*this.donationDetailsService.getAllDonationsIssuedOfFamily(child.child!.id!).subscribe({
+    next: (res: HttpResponse<any[]>) => {
+      this.donationListChild = res.body ?? [];
+      this.donationChild= this.donationListChild.length
+      console.log(this.donationListChild);
+    },
+    error: e => console.error(e),
+  });*/
+
+    return this.donationChild;
+  }
+
+  childDon(): void {
+    for (this.t = 0; this.t < this.children!.length; this.t++) {
+      this.donationDetailsService.getAllDonationsIssuedOfFamily(this.children![this.t].child!.id!).subscribe({
+        next: (resc: HttpResponse<any[]>) => {
+          this.nbDonCTot = this.nbDonCTot + resc.body!.length;
+        },
+        error: e => console.error(e),
+      });
+    }
+  }
   add(): void {
     if (this.step === 2) {
       this.DonationsDetails_step = true;
@@ -208,7 +307,7 @@ export class AddDonationsIssuedComponent implements OnInit {
   }
 
   previous(): void {
-    this.step--;
+    this.step = 1;
 
     if (this.step === 1) {
       this.DonationsDetails_step = false;
@@ -250,6 +349,52 @@ export class AddDonationsIssuedComponent implements OnInit {
   addItem(item: Item): void {
     this.AddedItems.push(this.createFromFormItemDetails(item));
     console.log(this.AddedItems);
+  }
+
+  SearchNature(event: any): void {
+    this.textParamNature = this.searchN(event.query, this.naturesSharedCollection);
+  }
+
+  getNatureID(): void {
+    console.log(this.naturesSharedCollection);
+
+    for (let i = 0; i < this.naturesSharedCollection.length; i++) {
+      if (
+        this.naturesSharedCollection[i].name!.includes(this.textParam) &&
+        this.naturesSharedCollection[i].name!.length === this.textParam.length
+      ) {
+        this.id1 = this.naturesSharedCollection[i].id!;
+      }
+      console.log(this.id1);
+    }
+  }
+
+  searchN(keyword: string, tab: INature[]): string[] {
+    const names: string[] = [];
+    console.log(tab);
+    for (let i = 0; i < tab.length; i++) {
+      if (tab[i].name!.includes(keyword)) {
+        names.push(tab[i].name!);
+      }
+    }
+    return names;
+  }
+  goToItem(): void {
+    this.step2 = 1;
+  }
+  getItemByNature(): void {
+    this.getNatureID();
+
+    this.itemService.findItemWithNature(this.id1).subscribe({
+      next: (res: HttpResponse<IItem[]>) => {
+        this.isLoading = true;
+        this.items = res.body ?? [];
+        console.log(this.items);
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IDonationsIssued>>): void {
@@ -318,7 +463,7 @@ export class AddDonationsIssuedComponent implements OnInit {
       ...new DonationDetails(),
       description: this.DonationsDetails.get(['description'])!.value,
       archivated: this.DonationsDetails.get(['archivated'])!.value,
-      nature: this.DonationsIssued.get(['nature'])!.value,
+      /*nature: this.DonationsIssued.get(['nature'])!.value,*/
       donationItemDetails: this.AddedItems.slice(),
     };
   }

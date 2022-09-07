@@ -1,6 +1,7 @@
 package com.awtar.myapp.repository;
 
 import com.awtar.myapp.domain.ItemValue;
+import com.awtar.myapp.service.dto.ItemValueDTO;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -37,4 +38,7 @@ public interface ItemValueRepository extends JpaRepository<ItemValue, Long> {
 
     @Query("select itemValue from ItemValue itemValue left join fetch itemValue.item where itemValue.id =:id")
     Optional<ItemValue> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query("select itemValue from ItemValue itemValue left join fetch itemValue.item where itemValue.item.id =:id")
+    Optional<ItemValue> findwithItem(@Param("id") Long id);
 }

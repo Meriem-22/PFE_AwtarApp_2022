@@ -65,6 +65,20 @@
       })(window, document);
     </script>
   </head>
+
+  <style>
+    input,
+    select {
+      border-left-width: 0.08rem;
+      border-left-color: #d4d1d1;
+    }
+    p-autoComplete,
+    p-inputNumber {
+      border-left-width: 0.001;
+      border-left-color: rgb(255, 202, 249);
+    }
+  </style>
+
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
       <div class="preloader flex-column justify-content-center align-items-center"></div>
@@ -419,208 +433,288 @@
             <div class="container py-5">
               <div class="row">
                 <div class="col-md-12 col-md-offset-3">
-                  <form [formGroup]="DonationsIssued" id="msform">
-                    <!-- progressbar -->
+                  <!-- progressbar -->
 
-                    <!-- fieldsets -->
-                    <fieldset *ngIf="step == 1">
-                      <div class="card card-primary">
-                        <div class="card-header">
-                          <h3 class="card-title">Item Parametre</h3>
-                        </div>
+                  <!-- fieldsets -->
 
-                        <form>
-                          <div style="display: flex">
-                            <div class="card-body col-md-6">
-                              <div class="form-group">
-                                <div class="row mb-3">
-                                  <label class="form-label" jhiTranslate="awtarApp.item.nature" for="field_nature">Nature</label>
-                                  <select class="form-control" id="field_nature" data-cy="nature" name="nature" formControlName="nature">
-                                    <option *ngIf="!editForm.get('nature')!.value" [ngValue]="null" selected></option>
-                                    <option
-                                      [ngValue]="
-                                        natureOption.id === editForm.get('nature')!.value?.id ? editForm.get('nature')!.value : natureOption
-                                      "
-                                      *ngFor="let natureOption of naturesSharedCollection; trackBy: trackNatureById"
-                                    >
-                                      {{ natureOption.name }}
-                                    </option>
-                                  </select>
-                                </div>
-                                <div
-                                  *ngIf="
-                                    editForm.get(['nature'])!.invalid &&
-                                    (editForm.get(['nature'])!.dirty || editForm.get(['nature'])!.touched)
-                                  "
-                                >
-                                  <small
-                                    class="form-text text-danger"
-                                    *ngIf="editForm.get(['nature'])?.errors?.required"
-                                    jhiTranslate="entity.validation.required"
-                                  >
-                                    This field is required.
-                                  </small>
-                                </div>
-                              </div>
-
-                              <div class="form-check">
-                                <div class="box">
-                                  <input
-                                    type="checkbox"
-                                    class="form-check-input"
-                                    name="isSchoolItem"
-                                    id="field_isSchoolItem"
-                                    data-cy="isSchoolItem"
-                                    formControlName="isSchoolItem"
-                                  />
-                                  <span class="check"></span>
-                                  <label
-                                    class="form-check-label"
-                                    jhiTranslate="awtarApp.schoolLevelItem.isSchoolItem"
-                                    for="field_isSchoolItem"
-                                    >Is School Item</label
-                                  >
-                                </div>
-                              </div>
-                              <div class="form-check">
-                                <div class="box">
-                                  <input
-                                    type="checkbox"
-                                    class="form-check-input"
-                                    name="composed"
-                                    id="field_composed"
-                                    data-cy="composed"
-                                    formControlName="composed"
-                                  />
-                                  <span class="check"></span>
-                                  <label class="form-check-label" jhiTranslate="awtarApp.item.composed" for="field_composed"
-                                    >Composed</label
-                                  >
-                                </div>
-                              </div>
-
-                              <div class="form-check">
-                                <div class="box">
-                                  <input
-                                    type="checkbox"
-                                    class="form-check-input"
-                                    name="simple"
-                                    id="field_simple"
-                                    data-cy="simple"
-                                    formControlName="simple"
-                                  />
-                                  <span class="check"></span>
-                                  <label class="form-check-label" for="field_simple">Simple Item</label>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="card-body col-md-6 text-center">
-                              <img src="../../../../content/images/product-add.jpg" />
-                            </div>
-                          </div>
-                          <div class="card-footer text-right">
-                            <div class="button">
-                              <button (click)="previousState()" type="button" name="next" class="btn btn-secondary">Annuler</button>
-                              <button (click)="next()" type="button" name="next" class="btn btn-primary">Next</button>
-                            </div>
-                          </div>
-                        </form>
+                  <fieldset *ngIf="step == 1">
+                    <div class="card card-primary" style="background-color: rgb(255, 202, 249)">
+                      <div class="card-header">
+                        <h3 class="card-title">Item Parametre</h3>
                       </div>
-                    </fieldset>
-                  </form>
 
-                  <form [formGroup]="DonationsDetails" id="msform">
-                    <fieldset *ngIf="step == 2">
-                      <div class="card card-primary">
-                        <div class="card-header">
-                          <h3 class="card-title">Simple Item Details</h3>
+                      <div style="display: flex">
+                        <div class="card-body col-md-6">
+                          <div>
+                            <label class="form-label" jhiTranslate="awtarApp.item.nature" for="field_nature">Nature</label>
+                            <br />
+                            <div style="display: flex">
+                              <p-autoComplete
+                                [(ngModel)]="textParam"
+                                [suggestions]="textParamNature"
+                                [dropdown]="true"
+                                (completeMethod)="SearchNature($event)"
+                                [forceSelection]="true"
+                              ></p-autoComplete>
+                              <div *ngIf="invalide === true" style="margin-left: 1rem">
+                                <p-message severity="error"></p-message>
+                              </div>
+                            </div>
+                            <br />
+                          </div>
+
+                          <p-radioButton name="groupname" value="1" [(ngModel)]="itemNature"></p-radioButton>
+                          <label class="form-check-label" jhiTranslate="awtarApp.schoolLevelItem.isSchoolItem"> Is School Item </label>
+                          <br />
+                          <br />
+                          <p-radioButton name="groupname" value="2" [(ngModel)]="itemNature"></p-radioButton>
+                          <label class="form-check-label"> any article </label>
+                          <br />
+                          <br />
+                          <p-radioButton name="groupname2" value="1" [(ngModel)]="itemType"></p-radioButton>
+                          <label class="form-check-label" jhiTranslate="awtarApp.item.composed"> Composed Item </label>
+                          <br />
+                          <br />
+                          <p-radioButton name="groupname2" value="2" [(ngModel)]="itemType"></p-radioButton>
+                          <label class="form-check-label" for="flexRadioItemType2"> Simple Item </label>
+                          <br />
                         </div>
 
-                        <div class="card-body">
-                          <form>
-                            <div class="card-body col-md-3 text-right" style="display: flex">
+                        <div class="card-body col-md-6 text-center">
+                          <img src="../../../../content/images/itemsBoxes.PNG" style="height: 350px; width: 530px" />
+                        </div>
+                      </div>
+                      <div class="card-footer text-right">
+                        <div class="button">
+                          <button (click)="previousState()" type="button" name="reset" class="btn btn-secondary">Annuler</button>
+                          <button (click)="next()" type="button" name="next" class="btn btn-primary">Next</button>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset *ngIf="step == 2">
+                    <div class="card card-primary" style="background-color: rgb(255, 202, 249)">
+                      <div class="card-header">
+                        <h3 class="card-title">Simple Item Details</h3>
+                      </div>
+                      <div *ngIf="SI == 0">
+                        <div style="display: flex">
+                          <img src="../../../../content/images/SearchBox.PNG" style="height: 380px; width: 410px" />
+
+                          <div style="display: flex; align-items: center">
+                            <div style="margin-bottom: 1rem; margin-left: 12rem">
+                              <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
+                              <br />
                               <div>
-                                <img src="../../../../content/images/product-add.jpg" alt="" style="height: 100px; width: 120px" />
-                                <label class="form-label" jhiTranslate="awtarApp.item.urlPhoto" for="field_urlPhoto">Url Photo</label>
+                                <p-autoComplete
+                                  id="field_name"
+                                  name="name"
+                                  [(ngModel)]="SimpleItemSearch"
+                                  [suggestions]="results"
+                                  [dropdown]="true"
+                                  (completeMethod)="getSearch($event)"
+                                ></p-autoComplete>
+                                <p-button icon="pi pi-check" style="margin-left: 0.5rem" (click)="getItemName()"></p-button>
                               </div>
-                              <div>
+                              <br />
+                              <br />
+
+                              <p-progressBar mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-footer text-right" style="margin-top: 1rem">
+                          <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
+                          <button (click)="nextStep()" type="button" name="next" class="btn btn-primary">Next</button>
+                        </div>
+                      </div>
+
+                      <div *ngIf="SI == 2">
+                        <form name="simpleItemForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="simpleItemForm">
+                          <div class="item" style="margin-top: 1rem; margin-right: 1rem">
+                            <div class="item text-right" style="display: flex">
+                              <label style="margin-left: 1rem; margin-right: 1rem" for="horizontal">Quantity</label>
+                              <input
+                                type="number"
+                                style="width: 5rem"
+                                class="form-control"
+                                formControlName="quantity"
+                                id="field_quantity"
+                                name="quantity"
+                              />
+                            </div>
+                            <div
+                              style="margin-left: 6rem"
+                              *ngIf="
+                                simpleItemForm.get('quantity')!.invalid &&
+                                (simpleItemForm.get('quantity')!.dirty || simpleItemForm.get('quantity')!.touched)
+                              "
+                            >
+                              <small
+                                class="form-text text-danger"
+                                *ngIf="simpleItemForm.get('quantity')?.errors?.required"
+                                jhiTranslate="entity.validation.required"
+                              >
+                                This field is required.
+                              </small>
+                              <small
+                                class="form-text text-danger"
+                                [hidden]="!simpleItemForm.get('quantity')?.errors?.number"
+                                jhiTranslate="entity.validation.number"
+                              >
+                                This field should be a number.
+                              </small>
+                            </div>
+                          </div>
+
+                          <div class="card-body">
+                            <div style="display: flex">
+                              <div class="card-body col-md-3 text-right" style="display: flex; margin-right: 16rem">
                                 <div>
                                   <img
+                                    *ngIf="!simpleItemForm.get('urlPhoto')!.value"
+                                    src="../../../../content/images/Box.png"
+                                    alt=""
+                                    style="height: 100px; width: 120px; border-width: 0.5rem; border-color: blueviolet"
+                                  />
+                                  <img
                                     [src]="
-                                      'data:' + editForm.get('urlPhotoContentType')!.value + ';base64,' + editForm.get('urlPhoto')!.value
+                                      'data:' +
+                                      simpleItemForm.get('urlPhotoContentType')!.value +
+                                      ';base64,' +
+                                      simpleItemForm.get('urlPhoto')!.value
                                     "
-                                    style="max-height: 100px"
-                                    *ngIf="editForm.get('urlPhoto')!.value"
+                                    style="max-height: 100px; max-width: 100px"
+                                    *ngIf="simpleItemForm.get('urlPhoto')!.value"
                                     alt="item image"
                                   />
-                                  <div *ngIf="editForm.get('urlPhoto')!.value" class="form-text text-danger clearfix">
-                                    <span class="pull-start"
-                                      >{{ editForm.get('urlPhotoContentType')!.value }},
-                                      {{ byteSize(editForm.get('urlPhoto')!.value) }}</span
+
+                                  <div>
+                                    <label
+                                      class="label-file"
+                                      jhiTranslate="awtarApp.item.urlPhoto"
+                                      style="color: black; font-weight: bold; color: black"
+                                      for="field_urlPhoto"
+                                      >Url Photo</label
                                     >
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <div>
+                                    <input
+                                      type="file"
+                                      id="file_urlPhoto"
+                                      data-cy="urlPhoto"
+                                      (change)="setFileData1($event, 'urlPhoto', true)"
+                                      accept="image/*"
+                                      jhiTranslate="entity.action.addimage"
+                                      style="margin-top: 2rem; margin-left: 1rem"
+                                    />
                                     <button
+                                      style="margin-top: 2.5rem; margin-right: -5rem"
+                                      pButton
+                                      pRipple
                                       type="button"
-                                      (click)="clearInputImage('urlPhoto', 'urlPhotoContentType', 'file_urlPhoto')"
-                                      class="btn btn-secondary btn-xs pull-end"
-                                    >
-                                      <fa-icon icon="times"></fa-icon>
-                                    </button>
+                                      *ngIf="simpleItemForm.get('urlPhoto')!.value"
+                                      (click)="clearInputImage1('urlPhoto', 'urlPhotoContentType', 'file_urlPhoto')"
+                                      icon="pi pi-times"
+                                      class="p-button-rounded p-button-danger"
+                                    ></button>
                                   </div>
                                   <input
-                                    type="file"
-                                    id="file_urlPhoto"
+                                    type="hidden"
+                                    class="form-control"
+                                    name="urlPhoto"
+                                    id="field_urlPhoto"
                                     data-cy="urlPhoto"
-                                    (change)="setFileData($event, 'urlPhoto', true)"
-                                    accept="image/*"
-                                    jhiTranslate="entity.action.addimage"
-                                    style="margin-top: 2rem; margin-left: 1rem"
+                                    formControlName="urlPhoto"
+                                  />
+                                  <input
+                                    type="hidden"
+                                    class="form-control"
+                                    name="urlPhotoContentType"
+                                    id="field_urlPhotoContentType"
+                                    formControlName="urlPhotoContentType"
                                   />
                                 </div>
-                                <input
-                                  type="hidden"
-                                  class="form-control"
-                                  name="urlPhoto"
-                                  id="field_urlPhoto"
-                                  data-cy="urlPhoto"
-                                  formControlName="urlPhoto"
-                                />
-                                <input
-                                  type="hidden"
-                                  class="form-control"
-                                  name="urlPhotoContentType"
-                                  id="field_urlPhotoContentType"
-                                  formControlName="urlPhotoContentType"
-                                />
+                              </div>
+
+                              <div class="card-body" style="display: qrid">
+                                <div style="display: flex">
+                                  <div style="margin-bottom: 1rem">
+                                    <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
+                                    <p-autoComplete
+                                      id="field_name"
+                                      name="name"
+                                      formControlName="name"
+                                      [dropdown]="true"
+                                      [readonly]="true"
+                                    ></p-autoComplete>
+                                    <div
+                                      *ngIf="
+                                        simpleItemForm.get('name')!.invalid &&
+                                        (simpleItemForm.get('name')!.dirty || simpleItemForm.get('name')!.touched)
+                                      "
+                                    >
+                                      <small
+                                        class="form-text text-danger"
+                                        *ngIf="simpleItemForm.get('name')?.errors?.required"
+                                        jhiTranslate="entity.validation.required"
+                                      >
+                                        This field is required.
+                                      </small>
+                                    </div>
+                                  </div>
+                                  <div></div>
+                                </div>
+
+                                <div>
+                                  <div>
+                                    <div class="field col-12 md:col-3">
+                                      <label class="form-label" jhiTranslate="awtarApp.itemValue.price" for="field_price">Price</label>
+                                      <p-inputNumber
+                                        name="price"
+                                        formControlName="price"
+                                        id="field_price"
+                                        mode="decimal"
+                                        [showButtons]="true"
+                                      >
+                                      </p-inputNumber>
+                                      <div
+                                        *ngIf="
+                                          simpleItemForm.get('price')!.invalid &&
+                                          (simpleItemForm.get('price')!.dirty || simpleItemForm.get('price')!.touched)
+                                        "
+                                      >
+                                        <small
+                                          class="form-text text-danger"
+                                          *ngIf="simpleItemForm.get('price')?.errors?.required"
+                                          jhiTranslate="entity.validation.required"
+                                        >
+                                          This field is required.
+                                        </small>
+                                        <small
+                                          class="form-text text-danger"
+                                          [hidden]="!simpleItemForm.get('price')?.errors?.number"
+                                          jhiTranslate="entity.validation.number"
+                                        >
+                                          This field should be a number.
+                                        </small>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                            <div class="row">
+
+                            <br />
+                            <div class="row" style="margin-top: -2rem">
                               <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    name="name"
-                                    id="field_name"
-                                    data-cy="name"
-                                    formControlName="name"
-                                  />
-                                  <div
-                                    *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)"
-                                  >
-                                    <small
-                                      class="form-text text-danger"
-                                      *ngIf="editForm.get('name')?.errors?.required"
-                                      jhiTranslate="entity.validation.required"
-                                    >
-                                      This field is required.
-                                    </small>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group">
+                                <div>
                                   <label class="form-label" jhiTranslate="awtarApp.item.gender" for="field_gender">Gender</label>
+
                                   <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
                                     <option [ngValue]="null">{{ 'awtarApp.ItemGender.null' | translate }}</option>
                                     <option *ngFor="let itemGender of itemGenderValues" [value]="itemGender">
@@ -629,12 +723,13 @@
                                   </select>
                                   <div
                                     *ngIf="
-                                      editForm.get('gender')!.invalid && (editForm.get('gender')!.dirty || editForm.get('gender')!.touched)
+                                      simpleItemForm.get('gender')!.invalid &&
+                                      (simpleItemForm.get('gender')!.dirty || simpleItemForm.get('gender')!.touched)
                                     "
                                   >
                                     <small
                                       class="form-text text-danger"
-                                      *ngIf="editForm.get('gender')?.errors?.required"
+                                      *ngIf="simpleItemForm.get('gender')?.errors?.required"
                                       jhiTranslate="entity.validation.required"
                                     >
                                       This field is required.
@@ -642,43 +737,8 @@
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                            <div class="row">
                               <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label class="form-label" jhiTranslate="awtarApp.itemValue.price" for="field_price">Price</label>
-                                  <input
-                                    type="number"
-                                    class="form-control"
-                                    name="price"
-                                    id="field_price"
-                                    data-cy="price"
-                                    formControlName="price"
-                                  />
-                                  <div
-                                    *ngIf="
-                                      editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)
-                                    "
-                                  >
-                                    <small
-                                      class="form-text text-danger"
-                                      *ngIf="editForm.get('price')?.errors?.required"
-                                      jhiTranslate="entity.validation.required"
-                                    >
-                                      This field is required.
-                                    </small>
-                                    <small
-                                      class="form-text text-danger"
-                                      [hidden]="!editForm.get('price')?.errors?.number"
-                                      jhiTranslate="entity.validation.number"
-                                    >
-                                      This field should be a number.
-                                    </small>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group">
+                                <div>
                                   <label class="form-label" jhiTranslate="awtarApp.itemValue.priceDate" for="field_priceDate"
                                     >Price Date</label
                                   >
@@ -699,13 +759,13 @@
                                   </div>
                                   <div
                                     *ngIf="
-                                      editForm.get('priceDate')!.invalid &&
-                                      (editForm.get('priceDate')!.dirty || editForm.get('priceDate')!.touched)
+                                      simpleItemForm.get('priceDate')!.invalid &&
+                                      (simpleItemForm.get('priceDate')!.dirty || simpleItemForm.get('priceDate')!.touched)
                                     "
                                   >
                                     <small
                                       class="form-text text-danger"
-                                      *ngIf="editForm.get('priceDate')?.errors?.required"
+                                      *ngIf="simpleItemForm.get('priceDate')?.errors?.required"
                                       jhiTranslate="entity.validation.required"
                                     >
                                       This field is required.
@@ -715,158 +775,308 @@
                               </div>
                             </div>
 
-                            <div class="card-footer text-right">
-                              <button (click)="previousState()" type="button" name="next" class="btn btn-secondary">Annuler</button>
-                              <button (click)="previousState()" type="button" name="next" class="btn btn-success">Save</button>
-                              <button (click)="next()" type="button" name="next" class="btn btn-primary">Next</button>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </fieldset>
-                  </form>
-                  <form [formGroup]="DonationsDetails2" id="msform">
-                    <fieldset *ngIf="step == 3">
-                      <div class="card card-primary">
-                        <div class="card-header">
-                          <h3 class="card-title">Composite Item</h3>
-                        </div>
-                        <div style="display: flex">
-                          <div class="card-body col-md-6">
-                            <div class="form-group">
-                              <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
-                              <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
-                              <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-                                <small
-                                  class="form-text text-danger"
-                                  *ngIf="editForm.get('name')?.errors?.required"
-                                  jhiTranslate="entity.validation.required"
-                                >
-                                  This field is required.
-                                </small>
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <label class="form-label" jhiTranslate="awtarApp.item.gender" for="field_gender">Gender</label>
-                              <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
-                                <option [ngValue]="null">{{ 'awtarApp.ItemGender.null' | translate }}</option>
-                                <option *ngFor="let itemGender of itemGenderValues" [value]="itemGender">
-                                  {{ 'awtarApp.ItemGender.' + itemGender | translate }}
-                                </option>
-                              </select>
-                              <div
-                                *ngIf="
-                                  editForm.get('gender')!.invalid && (editForm.get('gender')!.dirty || editForm.get('gender')!.touched)
-                                "
-                              >
-                                <small
-                                  class="form-text text-danger"
-                                  *ngIf="editForm.get('gender')?.errors?.required"
-                                  jhiTranslate="entity.validation.required"
-                                >
-                                  This field is required.
-                                </small>
-                              </div>
+                            <div class="card-footer text-right" style="margin-top: 1rem">
+                              <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
+                              <button type="button" name="next" class="btn btn-success">Save</button>
+                              <button (click)="nextStep()" type="button" name="next" class="btn btn-primary">Next</button>
                             </div>
                           </div>
-                          <div class="card-body col-md-6 text-center">
-                            <div class="card-body col-md-3 text-right" style="display: flex">
-                              <div>
-                                <img src="../../../../content/images/product-add.jpg" alt="" style="height: 100px; width: 120px" />
-                                <label class="form-label" jhiTranslate="awtarApp.item.urlPhoto" for="field_urlPhoto">Url Photo</label>
-                              </div>
-                              <div>
-                                <div>
+                        </form>
+                      </div>
+
+                      <div *ngIf="SI == 1">
+                        <form name="simpleItemForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="simpleItemForm">
+                          <div class="item text-right" style="margin-top: 1rem; margin-right: 1rem">
+                            <div class="item text-right" style="display: flex">
+                              <label class="item text-right" style="margin-left: 1rem; margin-right: 1rem" for="horizontal">Quantity</label>
+                              <input
+                                class="item text-right"
+                                type="number"
+                                style="width: 5rem"
+                                class="form-control"
+                                formControlName="quantity"
+                                id="field_quantity"
+                                name="quantity"
+                              />
+                              <i style="margin-left: 1rem; color: blueviolet" class="fas fa-pencil-alt"></i>
+                            </div>
+                            <div
+                              style="margin-left: 6rem"
+                              *ngIf="
+                                simpleItemForm.get('quantity')!.invalid &&
+                                (simpleItemForm.get('quantity')!.dirty || simpleItemForm.get('quantity')!.touched)
+                              "
+                            >
+                              <small
+                                class="form-text text-danger"
+                                *ngIf="simpleItemForm.get('quantity')?.errors?.required"
+                                jhiTranslate="entity.validation.required"
+                              >
+                                This field is required.
+                              </small>
+                              <small
+                                class="form-text text-danger"
+                                [hidden]="!simpleItemForm.get('quantity')?.errors?.number"
+                                jhiTranslate="entity.validation.number"
+                              >
+                                This field should be a number.
+                              </small>
+                            </div>
+                          </div>
+
+                          <div class="card-body">
+                            <div style="display: flex; margin-top: -2rem">
+                              <div class="card-body col-md-3 text-center" style="display: flex; margin-right: 16rem">
+                                <div style="display: flex">
+                                  <div style="text-align: center">
+                                    <label
+                                      class="label-file"
+                                      jhiTranslate="awtarApp.item.urlPhoto"
+                                      style="color: black; font-weight: bold; color: black"
+                                      for="field_urlPhoto"
+                                      >Url Photo</label
+                                    >
+                                  </div>
+                                  <img
+                                    *ngIf="!simpleItemForm.get('urlPhoto')!.value"
+                                    src="../../../../content/images/product-add.jpg"
+                                    alt=""
+                                    style="height: 100px; width: 120px"
+                                  />
                                   <img
                                     [src]="
-                                      'data:' + editForm.get('urlPhotoContentType')!.value + ';base64,' + editForm.get('urlPhoto')!.value
+                                      'data:' +
+                                      simpleItemForm.get('urlPhotoContentType')!.value +
+                                      ';base64,' +
+                                      simpleItemForm.get('urlPhoto')!.value
                                     "
-                                    style="max-height: 100px"
-                                    *ngIf="editForm.get('urlPhoto')!.value"
+                                    style="max-height: 200px; max-width: 200px; margin-left: 7rem"
+                                    *ngIf="simpleItemForm.get('urlPhoto')!.value"
                                     alt="item image"
                                   />
-                                  <div *ngIf="editForm.get('urlPhoto')!.value" class="form-text text-danger clearfix">
-                                    <span class="pull-start"
-                                      >{{ editForm.get('urlPhotoContentType')!.value }},
-                                      {{ byteSize(editForm.get('urlPhoto')!.value) }}</span
-                                    >
-                                    <button
-                                      type="button"
-                                      (click)="clearInputImage('urlPhoto', 'urlPhotoContentType', 'file_urlPhoto')"
-                                      class="btn btn-secondary btn-xs pull-end"
-                                    >
-                                      <fa-icon icon="times"></fa-icon>
-                                    </button>
-                                  </div>
+                                </div>
+
+                                <div>
                                   <input
-                                    type="file"
-                                    id="file_urlPhoto"
+                                    type="hidden"
+                                    class="form-control"
+                                    name="urlPhoto"
+                                    id="field_urlPhoto"
                                     data-cy="urlPhoto"
-                                    (change)="setFileData($event, 'urlPhoto', true)"
-                                    accept="image/*"
-                                    jhiTranslate="entity.action.addimage"
-                                    style="margin-top: 2rem; margin-left: 1rem"
+                                    formControlName="urlPhoto"
+                                  />
+                                  <input
+                                    type="hidden"
+                                    class="form-control"
+                                    name="urlPhotoContentType"
+                                    id="field_urlPhotoContentType"
+                                    formControlName="urlPhotoContentType"
                                   />
                                 </div>
-                                <input
-                                  type="hidden"
-                                  class="form-control"
-                                  name="urlPhoto"
-                                  id="field_urlPhoto"
-                                  data-cy="urlPhoto"
-                                  formControlName="urlPhoto"
-                                />
-                                <input
-                                  type="hidden"
-                                  class="form-control"
-                                  name="urlPhotoContentType"
-                                  id="field_urlPhotoContentType"
-                                  formControlName="urlPhotoContentType"
-                                />
+                              </div>
+
+                              <div class="card-body" style="display: qrid">
+                                <div style="margin-bottom: 1rem">
+                                  <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
+                                  <p-autoComplete
+                                    id="field_name"
+                                    name="name"
+                                    formControlName="name"
+                                    [dropdown]="true"
+                                    (completeMethod)="getSearch($event)"
+                                    [readonly]="true"
+                                  ></p-autoComplete>
+                                  <div
+                                    *ngIf="
+                                      simpleItemForm.get('name')!.invalid &&
+                                      (simpleItemForm.get('name')!.dirty || simpleItemForm.get('name')!.touched)
+                                    "
+                                  >
+                                    <small
+                                      class="form-text text-danger"
+                                      *ngIf="simpleItemForm.get('name')?.errors?.required"
+                                      jhiTranslate="entity.validation.required"
+                                    >
+                                      This field is required.
+                                    </small>
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <div>
+                                    <div class="field col-12 md:col-3">
+                                      <label class="form-label" jhiTranslate="awtarApp.itemValue.price" for="field_price">Price</label>
+                                      <p-inputNumber
+                                        name="price"
+                                        formControlName="price"
+                                        id="field_price"
+                                        mode="decimal"
+                                        [showButtons]="true"
+                                      >
+                                      </p-inputNumber
+                                      ><i style="margin-left: 1rem; color: blueviolet" class="fas fa-pencil-alt"></i>
+                                      <div
+                                        *ngIf="
+                                          simpleItemForm.get('price')!.invalid &&
+                                          (simpleItemForm.get('price')!.dirty || simpleItemForm.get('price')!.touched)
+                                        "
+                                      >
+                                        <small
+                                          class="form-text text-danger"
+                                          *ngIf="simpleItemForm.get('price')?.errors?.required"
+                                          jhiTranslate="entity.validation.required"
+                                        >
+                                          This field is required.
+                                        </small>
+                                        <small
+                                          class="form-text text-danger"
+                                          [hidden]="!simpleItemForm.get('price')?.errors?.number"
+                                          jhiTranslate="entity.validation.number"
+                                        >
+                                          This field should be a number.
+                                        </small>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div style="margin-top: 1rem">
+                                  <label class="form-label" jhiTranslate="awtarApp.itemValue.priceDate" for="field_priceDate"
+                                    >Price Date</label
+                                  >
+                                  <div class="input-group">
+                                    <input
+                                      id="field_priceDate"
+                                      data-cy="priceDate"
+                                      type="text"
+                                      class="form-control"
+                                      name="priceDate"
+                                      ngbDatepicker
+                                      #priceDateDp="ngbDatepicker"
+                                      formControlName="priceDate"
+                                    />
+                                    <button type="button" class="btn btn-secondary" (click)="priceDateDp.toggle()">
+                                      <fa-icon icon="calendar-alt"></fa-icon></button
+                                    ><i style="margin-left: 1rem; color: blueviolet" class="fas fa-pencil-alt"></i>
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      simpleItemForm.get('priceDate')!.invalid &&
+                                      (simpleItemForm.get('priceDate')!.dirty || simpleItemForm.get('priceDate')!.touched)
+                                    "
+                                  >
+                                    <small
+                                      class="form-text text-danger"
+                                      *ngIf="simpleItemForm.get('priceDate')?.errors?.required"
+                                      jhiTranslate="entity.validation.required"
+                                    >
+                                      This field is required.
+                                    </small>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
 
-                        <div class="card-body">
-                          <div class="card">
-                            <div class="card-header">
-                              <h3 class="card-title">General Elements</h3>
+                            <br />
+                            <div class="row" style="margin-top: -2rem">
+                              <div class="col-sm-6">
+                                <div>
+                                  <label class="form-label" jhiTranslate="awtarApp.item.gender" for="field_gender">Gender</label>
+                                  <select name="gender" id="field_gender" disabled>
+                                    <option [ngValue]="item!.gender">{{ 'awtarApp.ItemGender.' + item!.gender | translate }}</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-sm-6"></div>
                             </div>
 
-                            <div class="card-body">
-                              <form>
-                                <div class="item text-right">
-                                  <button (click)="next()" type="button" name="next" class="btn btn-primary">Add Item</button>
+                            <div class="card-footer text-right" style="margin-top: 1rem">
+                              <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
+                              <button type="button" name="next" class="btn btn-success">Save</button>
+                              <button (click)="nextStep()" type="button" name="next" class="btn btn-primary">Next</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset *ngIf="step == 3">
+                    <div class="card card-primary" style="background-color: rgb(255, 202, 249)">
+                      <div class="card-header">
+                        <h3 class="card-title">Composite Item</h3>
+                      </div>
+                      <div class="card" style="background-color: rgb(255, 202, 249)">
+                        <div class="card-body">
+                          <form name=" compositeItemForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="compositeItemForm">
+                            <div style="display: flex">
+                              <div class="card-body col-md-6">
+                                <div>
+                                  <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
+                                  <p-autoComplete
+                                    id="field_name"
+                                    name="name"
+                                    formControlName="name"
+                                    [suggestions]="results"
+                                    [dropdown]="true"
+                                    (completeMethod)="getSearch($event)"
+                                  ></p-autoComplete>
                                 </div>
+
+                                <div>
+                                  <label class="form-label" jhiTranslate="awtarApp.item.gender" for="field_gender">Gender</label>
+                                  <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
+                                    <option [ngValue]="null">{{ 'awtarApp.ItemGender.null' | translate }}</option>
+                                    <option *ngFor="let itemGender of itemGenderValues" [value]="itemGender">
+                                      {{ 'awtarApp.ItemGender.' + itemGender | translate }}
+                                    </option>
+                                  </select>
+                                  <div
+                                    *ngIf="
+                                      compositeItemForm.get('gender')!.invalid &&
+                                      (compositeItemForm.get('gender')!.dirty || compositeItemForm.get('gender')!.touched)
+                                    "
+                                  >
+                                    <small
+                                      class="form-text text-danger"
+                                      *ngIf="compositeItemForm.get('gender')?.errors?.required"
+                                      jhiTranslate="entity.validation.required"
+                                    >
+                                      This field is required.
+                                    </small>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="card-body col-md-6 text-center" style="margin-left: 15rem">
                                 <div class="card-body col-md-3 text-right" style="display: flex">
                                   <div>
-                                    <img src="../../../../content/images/product-add.jpg" alt="" style="height: 100px; width: 120px" />
+                                    <img
+                                      *ngIf="!compositeItemForm.get('urlPhoto')!.value"
+                                      src="../../../../content/images/Box.png"
+                                      alt="item image"
+                                      style="height: 100px; width: 120px"
+                                    />
+                                    <img
+                                      [src]="
+                                        'data:' +
+                                        compositeItemForm.get('urlPhotoContentType')!.value +
+                                        ';base64,' +
+                                        compositeItemForm.get('urlPhoto')!.value
+                                      "
+                                      *ngIf="compositeItemForm.get('urlPhoto')!.value"
+                                      alt="item image"
+                                      style="max-height: 100px; max-width: 120px"
+                                    />
                                     <label class="form-label" jhiTranslate="awtarApp.item.urlPhoto" for="field_urlPhoto">Url Photo</label>
                                   </div>
                                   <div>
                                     <div>
-                                      <img
-                                        [src]="
-                                          'data:' +
-                                          editForm.get('urlPhotoContentType')!.value +
-                                          ';base64,' +
-                                          editForm.get('urlPhoto')!.value
-                                        "
-                                        style="max-height: 100px"
-                                        *ngIf="editForm.get('urlPhoto')!.value"
-                                        alt="item image"
-                                      />
-                                      <div *ngIf="editForm.get('urlPhoto')!.value" class="form-text text-danger clearfix">
-                                        <span class="pull-start"
-                                          >{{ editForm.get('urlPhotoContentType')!.value }},
-                                          {{ byteSize(editForm.get('urlPhoto')!.value) }}</span
-                                        >
+                                      <div *ngIf="compositeItemForm.get('urlPhoto')!.value" class="form-text text-left clearfix">
                                         <button
-                                          type="button"
-                                          (click)="clearInputImage('urlPhoto', 'urlPhotoContentType', 'file_urlPhoto')"
-                                          class="btn btn-secondary btn-xs pull-end"
+                                          type="button text-left"
+                                          (click)="clearInputImage2('urlPhoto', 'urlPhotoContentType', 'file_urlPhoto')"
+                                          class="btn btn-secondary btn-xs"
+                                          style="margin-left: 1rem"
                                         >
                                           <fa-icon icon="times"></fa-icon>
                                         </button>
@@ -875,7 +1085,7 @@
                                         type="file"
                                         id="file_urlPhoto"
                                         data-cy="urlPhoto"
-                                        (change)="setFileData($event, 'urlPhoto', true)"
+                                        (change)="setFileData2($event, 'urlPhoto', true)"
                                         accept="image/*"
                                         jhiTranslate="entity.action.addimage"
                                         style="margin-top: 2rem; margin-left: 1rem"
@@ -898,102 +1108,149 @@
                                     />
                                   </div>
                                 </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="card-body" style="margin-top: -2rem">
+                          <div class="card">
+                            <div class="card-header">
+                              <h3 class="card-title">Compositeur Items</h3>
+                            </div>
+                            <form name="compositeurItemForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="compositeurItemForm">
+                              <div class="card-body">
+                                <div class="item text-right">
+                                  <button style="margin-bottom: 1rem" (click)="next()" type="button" name="next" class="btn btn-primary">
+                                    Add Item
+                                  </button>
+                                </div>
+                                <div class="item text-right" style="display: flex; margin-top: -1rem">
+                                  <label for="horizontal">Quantity</label>
+                                  <input
+                                    type="number"
+                                    style="width: 5rem; margin-left: 1rem; margin-bottom: 3rem"
+                                    class="form-control"
+                                    formControlName="quantity"
+                                    id="field_quantity"
+                                    name="quantity"
+                                  />
+                                </div>
 
-                                <div class="row">
-                                  <div class="col-sm-6">
-                                    <div class="form-group">
-                                      <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
-                                      <input
-                                        type="text"
-                                        class="form-control"
-                                        name="name"
-                                        id="field_name"
-                                        data-cy="name"
-                                        formControlName="name"
-                                      />
-                                      <div
-                                        *ngIf="
-                                          editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)
-                                        "
-                                      >
-                                        <small
-                                          class="form-text text-danger"
-                                          *ngIf="editForm.get('name')?.errors?.required"
-                                          jhiTranslate="entity.validation.required"
+                                <div class="card-body col-md-3 text-left" style="display: flex">
+                                  <div>
+                                    <img
+                                      *ngIf="!compositeurItemForm.get('urlPhoto')!.value"
+                                      src="../../../../content/images/OpenBox.PNG"
+                                      alt="item image"
+                                      style="height: 100px; width: 120px; margin-top: -2.5rem"
+                                    />
+                                    <img
+                                      [src]="
+                                        'data:' +
+                                        compositeurItemForm.get('urlPhotoContentType')!.value +
+                                        ';base64,' +
+                                        compositeurItemForm.get('urlPhoto')!.value
+                                      "
+                                      style="max-height: 100px; margin-top: -2.5rem"
+                                      *ngIf="compositeurItemForm.get('urlPhoto')!.value"
+                                      alt="item image"
+                                      style="max-height: 100px; max-width: 100px; margin-top: -2.5rem"
+                                    />
+                                    <label class="form-label" jhiTranslate="awtarApp.item.urlPhoto" for="field_urlPhoto">Url Photo</label>
+                                  </div>
+                                  <div style="margin-right: 8rem">
+                                    <div>
+                                      <div *ngIf="compositeurItemForm.get('urlPhoto')!.value" class="form-text text-danger clearfix">
+                                        <button
+                                          type="button"
+                                          (click)="clearInputImage3('urlPhoto', 'urlPhotoContentType', 'file_urlPhoto')"
+                                          class="btn btn-secondary btn-xs pull-end"
+                                          style="margin-left: 1rem; margin-top: -4rem"
                                         >
-                                          This field is required.
-                                        </small>
+                                          <fa-icon icon="times"></fa-icon>
+                                        </button>
+                                      </div>
+                                      <input
+                                        type="file"
+                                        id="file_urlPhoto"
+                                        data-cy="urlPhoto"
+                                        (change)="setFileData3($event, 'urlPhoto', true)"
+                                        accept="image/*"
+                                        jhiTranslate="entity.action.addimage"
+                                        style="margin-top: 1rem; margin-left: 1rem"
+                                      />
+                                    </div>
+                                    <input
+                                      type="hidden"
+                                      class="form-control"
+                                      name="urlPhoto"
+                                      id="field_urlPhoto"
+                                      data-cy="urlPhoto"
+                                      formControlName="urlPhoto"
+                                    />
+                                    <input
+                                      type="hidden"
+                                      class="form-control"
+                                      name="urlPhotoContentType"
+                                      id="field_urlPhotoContentType"
+                                      formControlName="urlPhotoContentType"
+                                    />
+                                  </div>
+
+                                  <div class="card-body text-right">
+                                    <div class="row text-left">
+                                      <div class="col">
+                                        <label class="form-label" jhiTranslate="awtarApp.item.nature" for="field_nature">Nature</label>
+                                        <br />
+                                        <div style="display: flex">
+                                          <p-autoComplete
+                                            id="field_nature"
+                                            name="nature"
+                                            formControlName="nature"
+                                            [suggestions]="textParamNature"
+                                            [dropdown]="true"
+                                            (completeMethod)="SearchNature($event)"
+                                            [forceSelection]="true"
+                                          ></p-autoComplete>
+                                          <div *ngIf="invalide === true" style="margin-left: 1rem">
+                                            <p-message severity="error"></p-message>
+                                          </div>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="form-group">
-                                      <label class="form-label" jhiTranslate="awtarApp.item.gender" for="field_gender">Gender</label>
-                                      <select
-                                        class="form-control"
-                                        name="gender"
-                                        formControlName="gender"
-                                        id="field_gender"
-                                        data-cy="gender"
-                                      >
-                                        <option [ngValue]="null">{{ 'awtarApp.ItemGender.null' | translate }}</option>
-                                        <option *ngFor="let itemGender of itemGenderValues" [value]="itemGender">
-                                          {{ 'awtarApp.ItemGender.' + itemGender | translate }}
-                                        </option>
-                                      </select>
-                                      <div
-                                        *ngIf="
-                                          editForm.get('gender')!.invalid &&
-                                          (editForm.get('gender')!.dirty || editForm.get('gender')!.touched)
-                                        "
-                                      >
-                                        <small
-                                          class="form-text text-danger"
-                                          *ngIf="editForm.get('gender')?.errors?.required"
-                                          jhiTranslate="entity.validation.required"
+
+                                    <div class="row text-left">
+                                      <div class="col">
+                                        <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
+                                        <p-autoComplete
+                                          id="field_name"
+                                          name="name"
+                                          formControlName="name"
+                                          [suggestions]="results"
+                                          [dropdown]="true"
+                                          (completeMethod)="getSearch($event)"
+                                        ></p-autoComplete>
+                                      </div>
+                                    </div>
+                                    <div class="row text-left">
+                                      <div class="col">
+                                        <label class="form-label" jhiTranslate="awtarApp.itemValue.price" for="field_price">Price</label>
+                                        <p-inputNumber
+                                          name="price"
+                                          formControlName="price"
+                                          id="field_price"
+                                          mode="decimal"
+                                          [showButtons]="true"
                                         >
-                                          This field is required.
-                                        </small>
+                                        </p-inputNumber>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="row">
+
+                                <div class="row text-left" style="display: grid; margin-top: -11.3rem">
                                   <div class="col-sm-6">
-                                    <div class="form-group">
-                                      <label class="form-label" jhiTranslate="awtarApp.itemValue.price" for="field_price">Price</label>
-                                      <input
-                                        type="number"
-                                        class="form-control"
-                                        name="price"
-                                        id="field_price"
-                                        data-cy="price"
-                                        formControlName="price"
-                                      />
-                                      <div
-                                        *ngIf="
-                                          editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)
-                                        "
-                                      >
-                                        <small
-                                          class="form-text text-danger"
-                                          *ngIf="editForm.get('price')?.errors?.required"
-                                          jhiTranslate="entity.validation.required"
-                                        >
-                                          This field is required.
-                                        </small>
-                                        <small
-                                          class="form-text text-danger"
-                                          [hidden]="!editForm.get('price')?.errors?.number"
-                                          jhiTranslate="entity.validation.number"
-                                        >
-                                          This field should be a number.
-                                        </small>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="form-group">
+                                    <div>
                                       <label class="form-label" jhiTranslate="awtarApp.itemValue.priceDate" for="field_priceDate"
                                         >Price Date</label
                                       >
@@ -1012,15 +1269,32 @@
                                           <fa-icon icon="calendar-alt"></fa-icon>
                                         </button>
                                       </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div>
+                                      <label class="form-label" jhiTranslate="awtarApp.item.gender" for="field_gender">Gender</label>
+                                      <select
+                                        class="form-control"
+                                        name="gender"
+                                        formControlName="gender"
+                                        id="field_gender"
+                                        data-cy="gender"
+                                      >
+                                        <option [ngValue]="null">{{ 'awtarApp.ItemGender.null' | translate }}</option>
+                                        <option *ngFor="let itemGender of itemGenderValues" [value]="itemGender">
+                                          {{ 'awtarApp.ItemGender.' + itemGender | translate }}
+                                        </option>
+                                      </select>
                                       <div
                                         *ngIf="
-                                          editForm.get('priceDate')!.invalid &&
-                                          (editForm.get('priceDate')!.dirty || editForm.get('priceDate')!.touched)
+                                          compositeurItemForm.get('gender')!.invalid &&
+                                          (compositeurItemForm.get('gender')!.dirty || compositeurItemForm.get('gender')!.touched)
                                         "
                                       >
                                         <small
                                           class="form-text text-danger"
-                                          *ngIf="editForm.get('priceDate')?.errors?.required"
+                                          *ngIf="compositeurItemForm.get('gender')?.errors?.required"
                                           jhiTranslate="entity.validation.required"
                                         >
                                           This field is required.
@@ -1029,313 +1303,674 @@
                                     </div>
                                   </div>
                                 </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                        <div *ngIf="SI == 0">
+                          <div style="display: flex">
+                            <img src="../../../../content/images/SearchBox.PNG" style="height: 380px; width: 410px" />
+
+                            <div style="display: flex; align-items: center">
+                              <div style="margin-bottom: 1rem; margin-left: 12rem">
+                                <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
+                                <br />
+                                <div>
+                                  <p-autoComplete
+                                    id="field_name"
+                                    name="name"
+                                    [(ngModel)]="SimpleItemSearch"
+                                    [suggestions]="results"
+                                    [dropdown]="true"
+                                    (completeMethod)="getSearch($event)"
+                                  ></p-autoComplete>
+                                  <p-button icon="pi pi-check" style="margin-left: 0.5rem" (click)="getItemName()"></p-button>
+                                </div>
+                                <br />
+                                <br />
+
+                                <p-progressBar mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-footer text-right" style="margin-top: 1rem">
+                            <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
+                            <button (click)="nextStep()" type="button" name="next" class="btn btn-primary">Next</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer text-right">
+                        <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
+                        <button (click)="previousState()" type="button" name="next" class="btn btn-success">Save</button>
+                        <button (click)="nextStep()" type="button" name="next" class="btn btn-primary">Next</button>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset *ngIf="step == 4">
+                    <form name="simpleSchoolItemForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="simpleSchoolItemForm">
+                      <div class="card card-primary">
+                        <div class="card-header">
+                          <h3 class="card-title">Simple School Item Details</h3>
+                        </div>
+
+                        <div class="item text-right" style="margin-top: 1rem; margin-right: 1rem">
+                          <label for="horizontal">Quantity</label>
+                          <input type="number" formControlName="quantity" id="field_quantity" name="quantity" />
+                        </div>
+
+                        <div class="card-body">
+                          <div style="display: flex">
+                            <div class="card-body col-md-3 text-right" style="display: flex">
+                              <div>
+                                <img
+                                  *ngIf="!simpleSchoolItemForm.get('urlPhoto')!.value"
+                                  src="../../../../content/images/product-add.jpg"
+                                  alt="item image"
+                                  style="height: 100px; width: 120px"
+                                />
+                                <img
+                                  [src]="
+                                    'data:' +
+                                    simpleSchoolItemForm.get('urlPhotoContentType')!.value +
+                                    ';base64,' +
+                                    simpleSchoolItemForm.get('urlPhoto')!.value
+                                  "
+                                  *ngIf="simpleSchoolItemForm.get('urlPhoto')!.value"
+                                  alt="item image"
+                                  style="max-height: 100px; max-width: 120px"
+                                />
+                                <label class="form-label" jhiTranslate="awtarApp.item.urlPhoto" for="field_urlPhoto">Url Photo</label>
+                              </div>
+                              <div>
+                                <div>
+                                  <div *ngIf="simpleSchoolItemForm.get('urlPhoto')!.value" class="form-text text-left clearfix">
+                                    <button
+                                      type="button"
+                                      (click)="clearInputImage4('urlPhoto', 'urlPhotoContentType', 'file_urlPhoto')"
+                                      class="btn btn-secondary btn-xs"
+                                      style="margin-left: 1rem"
+                                    >
+                                      <fa-icon icon="times"></fa-icon>
+                                    </button>
+                                  </div>
+                                  <input
+                                    type="file"
+                                    id="file_urlPhoto"
+                                    data-cy="urlPhoto"
+                                    (change)="setFileData4($event, 'urlPhoto', true)"
+                                    accept="image/*"
+                                    jhiTranslate="entity.action.addimage"
+                                    style="margin-top: 2rem; margin-left: 1rem"
+                                  />
+                                </div>
+                                <input
+                                  type="hidden"
+                                  class="form-control"
+                                  name="urlPhoto"
+                                  id="field_urlPhoto"
+                                  data-cy="urlPhoto"
+                                  formControlName="urlPhoto"
+                                />
+                                <input
+                                  type="hidden"
+                                  class="form-control"
+                                  name="urlPhotoContentType"
+                                  id="field_urlPhotoContentType"
+                                  formControlName="urlPhotoContentType"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="card-body" style="display: qrid; margin-left: 18rem">
+                              <div style="display: flex">
+                                <div style="margin-bottom: 1rem">
+                                  <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
+                                  <p-autoComplete
+                                    id="field_name"
+                                    name="name"
+                                    formControlName="name"
+                                    [suggestions]="results"
+                                    [dropdown]="true"
+                                    (completeMethod)="getSearch($event)"
+                                  ></p-autoComplete>
+                                </div>
+                                <div>
+                                  <button
+                                    style="margin-left: 0.5rem"
+                                    pButton
+                                    pRipple
+                                    type="button"
+                                    (click)="getItemName()"
+                                    icon="pi pi-filter"
+                                    class="p-button-rounded p-button-text p-button-plain"
+                                  ></button>
+                                </div>
+                              </div>
+
+                              <div>
+                                <div>
+                                  <div class="field col-12 md:col-3">
+                                    <label class="form-label" jhiTranslate="awtarApp.itemValue.price" for="field_price">Price</label>
+                                    <p-inputNumber
+                                      name="price"
+                                      formControlName="price"
+                                      id="field_price"
+                                      mode="decimal"
+                                      [showButtons]="true"
+                                    >
+                                    </p-inputNumber>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-sm-6" style="display: grid">
+                              <div>
+                                <div>
+                                  <label class="form-label" jhiTranslate="awtarApp.itemValue.priceDate" for="field_priceDate"
+                                    >Price Date</label
+                                  >
+                                  <div class="input-group">
+                                    <input
+                                      id="field_priceDate"
+                                      data-cy="priceDate"
+                                      type="text"
+                                      class="form-control"
+                                      name="priceDate"
+                                      ngbDatepicker
+                                      #priceDateDp="ngbDatepicker"
+                                      formControlName="priceDate"
+                                    />
+                                    <button type="button" class="btn btn-secondary" (click)="priceDateDp.toggle()">
+                                      <fa-icon icon="calendar-alt"></fa-icon>
+                                    </button>
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      simpleSchoolItemForm.get('priceDate')!.invalid &&
+                                      (simpleSchoolItemForm.get('priceDate')!.dirty || simpleSchoolItemForm.get('priceDate')!.touched)
+                                    "
+                                  >
+                                    <small
+                                      class="form-text text-danger"
+                                      *ngIf="simpleSchoolItemForm.get('priceDate')?.errors?.required"
+                                      jhiTranslate="entity.validation.required"
+                                    >
+                                      This field is required.
+                                    </small>
+                                  </div>
+                                </div>
+                              </div>
+                              <div>
+                                <div>
+                                  <label class="form-label" jhiTranslate="awtarApp.item.gender" for="field_gender">Gender</label>
+                                  <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
+                                    <option [ngValue]="null">{{ 'awtarApp.ItemGender.null' | translate }}</option>
+                                    <option *ngFor="let itemGender of itemGenderValues" [value]="itemGender">
+                                      {{ 'awtarApp.ItemGender.' + itemGender | translate }}
+                                    </option>
+                                  </select>
+                                  <div
+                                    *ngIf="
+                                      simpleSchoolItemForm.get('gender')!.invalid &&
+                                      (simpleSchoolItemForm.get('gender')!.dirty || simpleSchoolItemForm.get('gender')!.touched)
+                                    "
+                                  >
+                                    <small
+                                      class="form-text text-danger"
+                                      *ngIf="simpleSchoolItemForm.get('gender')?.errors?.required"
+                                      jhiTranslate="entity.validation.required"
+                                    >
+                                      This field is required.
+                                    </small>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div>
+                                <label class="form-label" jhiTranslate="awtarApp.childStatus.staus" for="field_staus">Staus</label>
+                                <select multiple class="form-control" name="staus" formControlName="staus" id="field_staus" data-cy="staus">
+                                  <option [ngValue]="null">{{ 'awtarApp.Status.null' | translate }}</option>
+                                  <option *ngFor="let status of statusValues" [value]="status">
+                                    {{ 'awtarApp.Status.' + status | translate }}
+                                  </option>
+                                </select>
+                                <div
+                                  *ngIf="
+                                    simpleSchoolItemForm.get('staus')!.invalid &&
+                                    (simpleSchoolItemForm.get('staus')!.dirty || simpleSchoolItemForm.get('staus')!.touched)
+                                  "
+                                >
+                                  <small
+                                    class="form-text text-danger"
+                                    *ngIf="simpleSchoolItemForm.get('staus')?.errors?.required"
+                                    jhiTranslate="entity.validation.required"
+                                  >
+                                    This field is required.
+                                  </small>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="card-footer text-right" style="margin-top: 0.8rem">
+                            <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
+                            <button (click)="previousState()" type="button" name="next" class="btn btn-success">Save</button>
+                            <button (click)="nextStep()" type="button" name="next" class="btn btn-primary">Next</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </fieldset>
+
+                  <fieldset *ngIf="step == 5">
+                    <div class="card card-primary">
+                      <div class="card-header">
+                        <h3 class="card-title">Composite School Item</h3>
+                      </div>
+                      <div class="card">
+                        <div class="card-body">
+                          <form
+                            name=" compositeSchoolItemForm"
+                            role="form"
+                            novalidate
+                            (ngSubmit)="save()"
+                            [formGroup]="compositeSchoolItemForm"
+                          >
+                            <div style="display: flex">
+                              <div class="card-body col-md-6">
+                                <div>
+                                  <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
+                                  <p-autoComplete
+                                    id="field_name"
+                                    name="name"
+                                    formControlName="name"
+                                    [suggestions]="results"
+                                    [dropdown]="true"
+                                    (completeMethod)="getSearch($event)"
+                                  ></p-autoComplete>
+                                </div>
+
+                                <div>
+                                  <label class="form-label" jhiTranslate="awtarApp.item.gender" for="field_gender">Gender</label>
+                                  <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
+                                    <option [ngValue]="null">{{ 'awtarApp.ItemGender.null' | translate }}</option>
+                                    <option *ngFor="let itemGender of itemGenderValues" [value]="itemGender">
+                                      {{ 'awtarApp.ItemGender.' + itemGender | translate }}
+                                    </option>
+                                  </select>
+                                  <div
+                                    *ngIf="
+                                      compositeSchoolItemForm.get('gender')!.invalid &&
+                                      (compositeSchoolItemForm.get('gender')!.dirty || compositeSchoolItemForm.get('gender')!.touched)
+                                    "
+                                  >
+                                    <small
+                                      class="form-text text-danger"
+                                      *ngIf="compositeSchoolItemForm.get('gender')?.errors?.required"
+                                      jhiTranslate="entity.validation.required"
+                                    >
+                                      This field is required.
+                                    </small>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="card-body col-md-6 text-center" style="margin-left: 15rem">
+                                <div class="card-body col-md-3 text-right" style="display: flex">
+                                  <div>
+                                    <img
+                                      *ngIf="!compositeSchoolItemForm.get('urlPhoto')!.value"
+                                      src="../../../../content/images/product-add.jpg"
+                                      alt="item image"
+                                      style="height: 100px; width: 120px"
+                                    />
+                                    <img
+                                      [src]="
+                                        'data:' +
+                                        compositeSchoolItemForm.get('urlPhotoContentType')!.value +
+                                        ';base64,' +
+                                        compositeSchoolItemForm.get('urlPhoto')!.value
+                                      "
+                                      *ngIf="compositeSchoolItemForm.get('urlPhoto')!.value"
+                                      alt="item image"
+                                      style="max-height: 100px; max-width: 120px"
+                                    />
+                                    <label class="form-label" jhiTranslate="awtarApp.item.urlPhoto" for="field_urlPhoto">Url Photo</label>
+                                  </div>
+                                  <div>
+                                    <div>
+                                      <div *ngIf="compositeSchoolItemForm.get('urlPhoto')!.value" class="form-text text-left clearfix">
+                                        <button
+                                          type="button"
+                                          (click)="clearInputImage5('urlPhoto', 'urlPhotoContentType', 'file_urlPhoto')"
+                                          class="btn btn-secondary btn-xs"
+                                          style="margin-left: 1rem"
+                                        >
+                                          <fa-icon icon="times"></fa-icon>
+                                        </button>
+                                      </div>
+                                      <input
+                                        type="file"
+                                        id="file_urlPhoto"
+                                        data-cy="urlPhoto"
+                                        (change)="setFileData5($event, 'urlPhoto', true)"
+                                        accept="image/*"
+                                        jhiTranslate="entity.action.addimage"
+                                        style="margin-top: 2rem; margin-left: 1rem"
+                                      />
+                                    </div>
+                                    <input
+                                      type="hidden"
+                                      class="form-control"
+                                      name="urlPhoto"
+                                      id="field_urlPhoto"
+                                      data-cy="urlPhoto"
+                                      formControlName="urlPhoto"
+                                    />
+                                    <input
+                                      type="hidden"
+                                      class="form-control"
+                                      name="urlPhotoContentType"
+                                      id="field_urlPhotoContentType"
+                                      formControlName="urlPhotoContentType"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+
+                        <div class="card-body" style="margin-top: -2rem">
+                          <div class="card">
+                            <div class="card-header">
+                              <h3 class="card-title">Compositeur Items</h3>
+                            </div>
+
+                            <div class="card-body">
+                              <form
+                                name="compositeurSchoolItemForm"
+                                role="form"
+                                novalidate
+                                (ngSubmit)="save()"
+                                [formGroup]="compositeurSchoolItemForm"
+                              >
+                                <div class="item text-right">
+                                  <button style="margin-bottom: 1rem" (click)="next()" type="button" name="next" class="btn btn-primary">
+                                    Add Item
+                                  </button>
+                                </div>
+                                <div class="item text-right" style="margin-bottom: 2rem">
+                                  <label for="horizontal">Quantity</label>
+                                  <input type="number" formControlName="quantity" id="field_quantity" name="quantity" />
+                                </div>
+
+                                <div class="row" style="display: flex">
+                                  <div class="card-body col-md-3 text-left" style="display: grid; margin-right: 4rem">
+                                    <div>
+                                      <img
+                                        *ngIf="!compositeurSchoolItemForm.get('urlPhoto')!.value"
+                                        src="../../../../content/images/openBox.jpg"
+                                        alt="item image"
+                                        style="height: 100px; width: 120px; margin-top: -2.5rem"
+                                      />
+                                      <img
+                                        [src]="
+                                          'data:' +
+                                          compositeurSchoolItemForm.get('urlPhotoContentType')!.value +
+                                          ';base64,' +
+                                          compositeurSchoolItemForm.get('urlPhoto')!.value
+                                        "
+                                        style="height: 100px; width: 120px; margin-top: -2.5rem"
+                                        *ngIf="compositeurSchoolItemForm.get('urlPhoto')!.value"
+                                        alt="item image"
+                                      />
+
+                                      <button
+                                        *ngIf="compositeurSchoolItemForm.get('urlPhoto')!.value"
+                                        type="button"
+                                        (click)="clearInputImage6('urlPhoto', 'urlPhotoContentType', 'file_urlPhoto')"
+                                        class="btn btn-secondary btn-xs"
+                                        style="margin-left: 1rem"
+                                      >
+                                        <fa-icon icon="times"></fa-icon>
+                                      </button>
+
+                                      <br />
+                                      <label class="form-label" jhiTranslate="awtarApp.item.urlPhoto" for="field_urlPhoto">Url Photo</label>
+                                    </div>
+                                    <div style="margin-right: 8rem">
+                                      <div>
+                                        <input
+                                          type="file"
+                                          id="file_urlPhoto"
+                                          data-cy="urlPhoto"
+                                          (change)="setFileData6($event, 'urlPhoto', true)"
+                                          accept="image/*"
+                                          jhiTranslate="entity.action.addimage"
+                                        />
+                                      </div>
+                                      <input
+                                        type="hidden"
+                                        class="form-control"
+                                        name="urlPhoto"
+                                        id="field_urlPhoto"
+                                        data-cy="urlPhoto"
+                                        formControlName="urlPhoto"
+                                      />
+                                      <input
+                                        type="hidden"
+                                        class="form-control"
+                                        name="urlPhotoContentType"
+                                        id="field_urlPhotoContentType"
+                                        formControlName="urlPhotoContentType"
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div class="col-sm-3" style="display: grid; margin-right: 7rem">
+                                    <div>
+                                      <div class="col">
+                                        <label class="form-label" jhiTranslate="awtarApp.item.nature" for="field_nature">Nature</label>
+
+                                        <div style="display: flex">
+                                          <p-autoComplete
+                                            id="field_nature"
+                                            name="nature"
+                                            formControlName="nature"
+                                            [suggestions]="textParamNature"
+                                            [dropdown]="true"
+                                            (completeMethod)="SearchNature($event)"
+                                            [forceSelection]="true"
+                                          ></p-autoComplete>
+                                          <div *ngIf="invalide === true" style="margin-left: 1rem">
+                                            <p-message severity="error"></p-message>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div>
+                                      <div class="col">
+                                        <label class="form-label" jhiTranslate="awtarApp.item.name" for="field_name">Name</label>
+                                        <br />
+                                        <p-autoComplete
+                                          id="field_name"
+                                          name="name"
+                                          formControlName="name"
+                                          [suggestions]="results"
+                                          [dropdown]="true"
+                                          (completeMethod)="getSearch($event)"
+                                        ></p-autoComplete>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <div class="col">
+                                        <label class="form-label" jhiTranslate="awtarApp.itemValue.price" for="field_price">Price</label>
+                                        <br />
+                                        <p-inputNumber
+                                          name="price"
+                                          formControlName="price"
+                                          id="field_price"
+                                          mode="decimal"
+                                          [showButtons]="true"
+                                        >
+                                        </p-inputNumber>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4" style="display: grid">
+                                    <div>
+                                      <div>
+                                        <label class="form-label" jhiTranslate="awtarApp.itemValue.priceDate" for="field_priceDate"
+                                          >Price Date</label
+                                        >
+
+                                        <div class="input-group">
+                                          <input
+                                            id="field_priceDate"
+                                            data-cy="priceDate"
+                                            type="text"
+                                            class="form-control"
+                                            name="priceDate"
+                                            ngbDatepicker
+                                            #priceDateDp="ngbDatepicker"
+                                            formControlName="priceDate"
+                                          />
+                                          <button type="button" class="btn btn-secondary" (click)="priceDateDp.toggle()">
+                                            <fa-icon icon="calendar-alt"></fa-icon>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <div>
+                                        <label class="form-label" jhiTranslate="awtarApp.item.gender" for="field_gender">Gender</label>
+                                        <select
+                                          class="form-control"
+                                          name="gender"
+                                          formControlName="gender"
+                                          id="field_gender"
+                                          data-cy="gender"
+                                        >
+                                          <option [ngValue]="null">{{ 'awtarApp.ItemGender.null' | translate }}</option>
+                                          <option *ngFor="let itemGender of itemGenderValues" [value]="itemGender">
+                                            {{ 'awtarApp.ItemGender.' + itemGender | translate }}
+                                          </option>
+                                        </select>
+                                        <div
+                                          *ngIf="
+                                            compositeurSchoolItemForm.get('gender')!.invalid &&
+                                            (compositeurSchoolItemForm.get('gender')!.dirty ||
+                                              compositeurSchoolItemForm.get('gender')!.touched)
+                                          "
+                                        >
+                                          <small
+                                            class="form-text text-danger"
+                                            *ngIf="compositeurSchoolItemForm.get('gender')?.errors?.required"
+                                            jhiTranslate="entity.validation.required"
+                                          >
+                                            This field is required.
+                                          </small>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <div>
+                                        <label class="form-label" jhiTranslate="awtarApp.childStatus.staus" for="field_staus">Staus</label>
+                                        <select
+                                          multiple
+                                          class="form-control"
+                                          name="staus"
+                                          formControlName="staus"
+                                          id="field_staus"
+                                          data-cy="staus"
+                                        >
+                                          <option [ngValue]="null">{{ 'awtarApp.Status.null' | translate }}</option>
+                                          <option *ngFor="let status of statusValues" [value]="status">
+                                            {{ 'awtarApp.Status.' + status | translate }}
+                                          </option>
+                                        </select>
+                                        <div
+                                          *ngIf="
+                                            compositeurSchoolItemForm.get('staus')!.invalid &&
+                                            (compositeurSchoolItemForm.get('staus')!.dirty ||
+                                              compositeurSchoolItemForm.get('staus')!.touched)
+                                          "
+                                        >
+                                          <small
+                                            class="form-text text-danger"
+                                            *ngIf="compositeurSchoolItemForm.get('staus')?.errors?.required"
+                                            jhiTranslate="entity.validation.required"
+                                          >
+                                            This field is required.
+                                          </small>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                               </form>
+                              <div class="row">
+                                <div style="margin-top: 1rem">
+                                  <p-multiSelect
+                                    [options]="schoolLevels"
+                                    defaultLabel="Select School Levels"
+                                    [(ngModel)]="SelectedLevel"
+                                    optionLabel="schoolLevel"
+                                    [maxSelectedLabels]="5"
+                                    [selectedItemsLabel]="'{0} items selected'"
+                                  ></p-multiSelect>
+                                </div>
+                                <div class="card-body">
+                                  <p-table [value]="SelectedLevel" styleClass="p-datatable-sm" responsiveLayout="scroll">
+                                    <ng-template pTemplate="caption"> Selected School Level </ng-template>
+                                    <ng-template pTemplate="header">
+                                      <tr>
+                                        <th>sckool Level</th>
+                                        <th><span jhiTranslate="awtarApp.schoolLevelItem.quantityNeeded">Quantity Needed</span></th>
+                                      </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-selectedLevel>
+                                      <tr>
+                                        <td>{{ selectedLevel.schoolLevel }}</td>
+                                        <td>
+                                          <form name="SchoolItemQuantityForm" role="form" novalidate [formGroup]="SchoolItemQuantityForm">
+                                            <input
+                                              type="number"
+                                              class="form-control"
+                                              name="selectedLevel.id"
+                                              id="{{ selectedLevel.id }}"
+                                              (change)="updateTable($event)"
+                                              data-cy="quantityNeeded"
+                                              formControlName="selectedLevel.schoolLevel"
+                                            />
+                                          </form>
+                                        </td>
+                                      </tr>
+                                    </ng-template>
+                                  </p-table>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-
-                        <div class="card-footer text-right">
-                          <button (click)="previousState()" type="button" name="next" class="btn btn-secondary">Annuler</button>
-                          <button (click)="previousState()" type="button" name="next" class="btn btn-success">Save</button>
-                          <button (click)="next()" type="button" name="next" class="btn btn-primary">Next</button>
-                        </div>
-                      </div>
-                    </fieldset>
-                  </form>
-
-                  <form [formGroup]="DonationsDetails3" id="msform">
-                    <fieldset *ngIf="step == 4">
-                      <h1 class="fs-title" style="margin-bottom: 2rem">Simple School Item</h1>
-
-                      <div class="card card-warning">
-                        <div class="card-header">
-                          <h3 class="card-title">General Elements</h3>
-                        </div>
-
-                        <div class="card-body">
-                          <form>
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Text</label>
-                                  <input type="text" class="form-control" placeholder="Enter ..." />
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Text Disabled</label>
-                                  <input type="text" class="form-control" placeholder="Enter ..." disabled />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Textarea</label>
-                                  <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Textarea Disabled</label>
-                                  <textarea class="form-control" rows="3" placeholder="Enter ..." disabled></textarea>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Input with success</label>
-                              <input type="text" class="form-control is-valid" id="inputSuccess" placeholder="Enter ..." />
-                            </div>
-                            <div class="form-group">
-                              <label class="col-form-label" for="inputWarning"><i class="far fa-bell"></i> Input with warning</label>
-                              <input type="text" class="form-control is-warning" id="inputWarning" placeholder="Enter ..." />
-                            </div>
-                            <div class="form-group">
-                              <label class="col-form-label" for="inputError"><i class="far fa-times-circle"></i> Input with error</label>
-                              <input type="text" class="form-control is-invalid" id="inputError" placeholder="Enter ..." />
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" />
-                                    <label class="form-check-label">Checkbox</label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" checked />
-                                    <label class="form-check-label">Checkbox checked</label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" disabled />
-                                    <label class="form-check-label">Checkbox disabled</label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radio1" />
-                                    <label class="form-check-label">Radio</label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radio1" checked />
-                                    <label class="form-check-label">Radio checked</label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" disabled />
-                                    <label class="form-check-label">Radio disabled</label>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Select</label>
-                                  <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Select Disabled</label>
-                                  <select class="form-control" disabled>
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Select Multiple</label>
-                                  <select multiple class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Select Multiple Disabled</label>
-                                  <select multiple class="form-control" disabled>
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
                       </div>
 
-                      <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
-                      <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Précedent" />
-                      <input type="submit" name="submit" class="submit action-button" value="Enregistrer" />
-                    </fieldset>
-                  </form>
-                  <form [formGroup]="DonationsDetails4" id="msform">
-                    <fieldset *ngIf="step == 5">
-                      <h1 class="fs-title" style="margin-bottom: 2rem">Composite School Item</h1>
-                      <div class="card card-warning">
-                        <div class="card-header">
-                          <h3 class="card-title">General Elements</h3>
-                        </div>
-
-                        <div class="card-body">
-                          <form>
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Text</label>
-                                  <input type="text" class="form-control" placeholder="Enter ..." />
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Text Disabled</label>
-                                  <input type="text" class="form-control" placeholder="Enter ..." disabled />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Textarea</label>
-                                  <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Textarea Disabled</label>
-                                  <textarea class="form-control" rows="3" placeholder="Enter ..." disabled></textarea>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Input with success</label>
-                              <input type="text" class="form-control is-valid" id="inputSuccess" placeholder="Enter ..." />
-                            </div>
-                            <div class="form-group">
-                              <label class="col-form-label" for="inputWarning"><i class="far fa-bell"></i> Input with warning</label>
-                              <input type="text" class="form-control is-warning" id="inputWarning" placeholder="Enter ..." />
-                            </div>
-                            <div class="form-group">
-                              <label class="col-form-label" for="inputError"><i class="far fa-times-circle"></i> Input with error</label>
-                              <input type="text" class="form-control is-invalid" id="inputError" placeholder="Enter ..." />
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" />
-                                    <label class="form-check-label">Checkbox</label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" checked />
-                                    <label class="form-check-label">Checkbox checked</label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" disabled />
-                                    <label class="form-check-label">Checkbox disabled</label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radio1" />
-                                    <label class="form-check-label">Radio</label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radio1" checked />
-                                    <label class="form-check-label">Radio checked</label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" disabled />
-                                    <label class="form-check-label">Radio disabled</label>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Select</label>
-                                  <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Select Disabled</label>
-                                  <select class="form-control" disabled>
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Select Multiple</label>
-                                  <select multiple class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label>Select Multiple Disabled</label>
-                                  <select multiple class="form-control" disabled>
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
+                      <div class="card-footer text-right">
+                        <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
+                        <button (click)="previousState()" type="button" name="next" class="btn btn-success">Save</button>
+                        <button (click)="nextStep()" type="button" name="next" class="btn btn-primary">Next</button>
                       </div>
+                    </div>
+                  </fieldset>
 
-                      <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
-                      <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Précedent" />
-                      <input type="submit" name="submit" class="submit action-button" value="Enregistrer" />
-                    </fieldset>
-                  </form>
+                  {{ SelectedLevel }}
+                  {{ finalquantitytable }}
                 </div>
               </div>
             </div>

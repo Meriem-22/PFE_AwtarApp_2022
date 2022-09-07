@@ -18,7 +18,7 @@
         "title": "Item Value"
       },
       "id": "ID",
-      "price": "Price",
+      "price": "Item Price",
       "priceDate": "Price Date",
       "availableStockQuantity": "Available Stock Quantity",
       "archivated": "Archivated",

@@ -85,4 +85,9 @@ public class ItemValueServiceImpl implements ItemValueService {
         log.debug("Request to delete ItemValue : {}", id);
         itemValueRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<ItemValueDTO> findItem(Long id) {
+        return itemValueRepository.findwithItem(id).map(itemValueMapper::toDto);
+    }
 }

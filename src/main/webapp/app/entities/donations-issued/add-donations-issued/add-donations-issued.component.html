@@ -1,413 +1,1483 @@
-<div class="container py-5">
-  <div class="row">
-    <div class="col-md-12 col-md-offset-3">
-      <form [formGroup]="DonationsIssued" id="msform">
-        <!-- progressbar -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Charles Anderson" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
 
-        <!-- fieldsets -->
-        <fieldset *ngIf="step == 1">
-          <h1 class="fs-title" style="margin-bottom: 2rem">Ajouter un don émis</h1>
+    <title>AdminLTE 3 | Dashboard</title>
 
-          <div class="Dons">
-            <jhi-alert-error></jhi-alert-error>
+    <style>
+      body {
+        background-color: #f0f6ff;
+        color: #28384d;
+      }
+      /*social */
+      .card-one {
+        position: relative;
+        width: 300px;
+        background: #fff;
+        box-shadow: 0 10px 7px -5px rgba(0, 0, 0, 0.4);
+      }
+      .card {
+        margin-bottom: 35px;
+        box-shadow: 0 10px 20px 0 rgba(26, 44, 57, 0.14);
+        border: none;
+      }
 
-            <div class="row" style="margin-bottom: 1rem">
-              <label class="form-label" jhiTranslate="awtarApp.donationsIssued.model" for="field_model">Model</label>
-              <input type="text" class="form-control" name="model" id="field_model" data-cy="model" formControlName="model" />
-              <div
-                *ngIf="
-                  DonationsIssued_step &&
-                  DonationsIssued.get('model')!.invalid &&
-                  (DonationsIssued.get('model')!.dirty || DonationsIssued.get('model')!.touched)
-                "
-              >
-                <small
-                  class="form-text text-danger"
-                  *ngIf="DonationsIssued.get('model')?.errors?.required"
-                  jhiTranslate="entity.validation.required"
-                >
-                  This field is required.
-                </small>
-              </div>
+      .follower-wrapper li {
+        list-style-type: none;
+        color: #fff;
+        display: inline-block;
+        float: left;
+        margin-right: 20px;
+      }
+
+      .social-profile {
+        color: #fff;
+      }
+
+      .social-profile a {
+        color: #fff;
+      }
+
+      .social-profile {
+        position: relative;
+        margin-bottom: 150px;
+      }
+
+      .social-profile .user-profile {
+        position: absolute;
+        bottom: -75px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        left: 50px;
+      }
+
+      .social-nav {
+        position: absolute;
+        bottom: 0;
+      }
+
+      .social-prof {
+        color: #333;
+        text-align: center;
+      }
+
+      .social-prof .wrapper {
+        width: 70%;
+        margin: auto;
+        margin-top: -100px;
+      }
+
+      .social-prof img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        border: 5px solid #fff;
+        /*border: 10px solid #70b5e6ee;*/
+      }
+
+      .social-prof h3 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 0;
+      }
+
+      .social-prof p {
+        font-size: 18px;
+      }
+
+      .social-prof .nav-tabs {
+        border: none;
+      }
+
+      .card .nav > li {
+        position: relative;
+        display: block;
+      }
+
+      .card .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 10px 15px;
+        font-weight: 300;
+        border-radius: 4px;
+      }
+
+      .card .nav > li > a:focus,
+      .card .nav > li > a:hover {
+        text-decoration: none;
+        background-color: #eee;
+      }
+
+      .card .s-nav > li > a.active {
+        text-decoration: none;
+        background-color: #3afe;
+        color: #fff;
+      }
+
+      .text-blue {
+        color: #3afe;
+      }
+
+      ul.friend-list {
+        margin: 0;
+        padding: 0;
+      }
+
+      ul.friend-list li {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+      }
+
+      ul.friend-list li:hover {
+        background: rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
+      ul.friend-list .left img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-right: 20px;
+      }
+
+      ul.friend-list li {
+        padding: 10px;
+      }
+
+      ul.friend-list .right h3 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 0;
+      }
+
+      ul.friend-list .right p {
+        font-size: 11px;
+        color: #6c757d;
+        margin: 0;
+      }
+
+      .social-timeline-card .dropdown-toggle::after {
+        display: none;
+      }
+
+      .info-card h4 {
+        font-size: 15px;
+      }
+
+      .info-card h2 {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .social-about .social-info {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      .social-about p {
+        margin-bottom: 20px;
+      }
+
+      .info-card i {
+        color: #3afe;
+      }
+
+      .card-one {
+        position: relative;
+        width: 300px;
+        background: #fff;
+        box-shadow: 0 10px 7px -5px rgba(0, 0, 0, 0.4);
+      }
+
+      .card-one .header {
+        position: relative;
+        width: 100%;
+        height: 60px;
+        background-color: #3afe;
+      }
+
+      .card-one .header::before,
+      .card-one .header::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: inherit;
+      }
+
+      .card-one .header::before {
+        -webkit-transform: skewY(-8deg);
+        transform: skewY(-8deg);
+        -webkit-transform-origin: 100% 100%;
+        transform-origin: 100% 100%;
+      }
+
+      .card-one .header::after {
+        -webkit-transform: skewY(8deg);
+        transform: skewY(8deg);
+        -webkit-transform-origin: 0 100%;
+        transform-origin: 0 100%;
+      }
+
+      .card-one .header .avatar {
+        position: absolute;
+        left: 50%;
+        top: 30px;
+        margin-left: -50px;
+        z-index: 5;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #ccc;
+        border: 3px solid #fff;
+      }
+
+      .card-one .header .avatar img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: auto;
+      }
+
+      .card-one h3 {
+        position: relative;
+        margin: 80px 0 30px;
+        text-align: center;
+      }
+
+      .card-one h3::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        margin-left: -15px;
+        width: 30px;
+        height: 1px;
+        background: #000;
+      }
+
+      .card-one .desc {
+        padding: 0 1rem 2rem;
+        text-align: center;
+        line-height: 1.5;
+        color: #777;
+      }
+
+      .card-one .contacts {
+        width: 200px;
+        max-width: 100%;
+        margin: 0 auto 3rem;
+      }
+
+      .card-one .contacts a {
+        display: block;
+        width: 33.333333%;
+        float: left;
+        text-align: center;
+        color: #c8c;
+      }
+
+      .card-one .contacts a:hover {
+        color: #333;
+      }
+
+      .card-one .contacts a:hover .fa::before {
+        color: #fff;
+      }
+
+      .card-one .contacts a:hover .fa::after {
+        width: 100%;
+        height: 100%;
+      }
+
+      .card-one .contacts a .fa {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        line-height: 39px;
+        overflow: hidden;
+        text-align: center;
+        font-size: 1.3em;
+      }
+
+      .card-one .contacts a .fa:before {
+        position: relative;
+        z-index: 1;
+      }
+
+      .card-one .contacts a .fa::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background: #c8c;
+        transition: width 0.3s, height 0.3s;
+      }
+
+      .card-one .contacts a:last-of-type .fa {
+        line-height: 36px;
+      }
+
+      .card-one .footer {
+        position: relative;
+        padding: 1rem;
+        background-color: #3afe;
+        text-align: center;
+      }
+
+      .card-one .footer a {
+        padding: 0 1rem;
+        color: #e2e2e2;
+        transition: color 0.4s;
+      }
+
+      .card-one .footer a:hover {
+        color: #c8c;
+      }
+
+      .card-one .footer::before {
+        content: '';
+        position: absolute;
+        top: -27px;
+        left: 50%;
+        margin-left: -15px;
+        border: 15px solid transparent;
+        border-bottom-color: #3afe;
+      }
+
+      .card-title,
+      .card .card-title,
+      .card-2 .card-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+      a {
+        color: #333;
+      }
+      .badge {
+        font-size: 12px;
+        line-height: 1;
+        padding: 0.375rem 0.5625rem;
+        font-weight: normal;
+      }
+
+      .badge-primary {
+        color: #447de8;
+        background-color: #e6edff;
+      }
+      .badge {
+        display: inline-block;
+        padding: 0.4em 0.5em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+          box-shadow 0.15s ease-in-out;
+      }
+
+      /*end social*/
+    </style>
+
+    <script nonce="33a2bf22-55fb-4fb7-baea-4b8bb2a21cdd">
+      (function (w, d) {
+        !(function (a, e, t, r) {
+          (a.zarazData = a.zarazData || {}),
+            (a.zarazData.executed = []),
+            (a.zaraz = { deferred: [] }),
+            (a.zaraz.q = []),
+            (a.zaraz._f = function (e) {
+              return function () {
+                var t = Array.prototype.slice.call(arguments);
+                a.zaraz.q.push({ m: e, a: t });
+              };
+            });
+          for (const e of ['track', 'set', 'ecommerce', 'debug']) a.zaraz[e] = a.zaraz._f(e);
+          (a.zaraz.init = () => {
+            var t = e.getElementsByTagName(r)[0],
+              z = e.createElement(r),
+              n = e.getElementsByTagName('title')[0];
+            for (
+              n && (a.zarazData.t = e.getElementsByTagName('title')[0].text),
+                a.zarazData.x = Math.random(),
+                a.zarazData.w = a.screen.width,
+                a.zarazData.h = a.screen.height,
+                a.zarazData.j = a.innerHeight,
+                a.zarazData.e = a.innerWidth,
+                a.zarazData.l = a.location.href,
+                a.zarazData.r = e.referrer,
+                a.zarazData.k = a.screen.colorDepth,
+                a.zarazData.n = e.characterSet,
+                a.zarazData.o = new Date().getTimezoneOffset(),
+                a.zarazData.q = [];
+              a.zaraz.q.length;
+
+            ) {
+              const e = a.zaraz.q.shift();
+              a.zarazData.q.push(e);
+            }
+            z.defer = !0;
+            for (const e of [localStorage, sessionStorage])
+              Object.keys(e || {})
+                .filter(a => a.startsWith('_zaraz_'))
+                .forEach(t => {
+                  try {
+                    a.zarazData['z_' + t.slice(7)] = JSON.parse(e.getItem(t));
+                  } catch {
+                    a.zarazData['z_' + t.slice(7)] = e.getItem(t);
+                  }
+                });
+            (z.referrerPolicy = 'origin'),
+              (z.src = '/cdn-cgi/zaraz/s.js?z=' + btoa(encodeURIComponent(JSON.stringify(a.zarazData)))),
+              t.parentNode.insertBefore(z, t);
+          }),
+            ['complete', 'interactive'].includes(e.readyState) ? zaraz.init() : a.addEventListener('DOMContentLoaded', zaraz.init);
+        })(w, d, 0, 'script');
+      })(window, document);
+    </script>
+  </head>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../../content/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
+      </div>
+
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black">
+        <a href="index3.html" class="brand-link" style="background-color: black">
+          <img
+            src="../../content/img/AdminLTELogo.png"
+            alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3"
+            style="opacity: 0.8"
+          />
+          <span class="brand-text font-weight-light">AWTAR</span>
+        </a>
+
+        <div class="sidebar">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
             </div>
-
-            <div class="blok1" style="display: flex; margin-right: 1rem">
-              <div class="row mb-3" style="margin-right: 5rem">
-                <label class="form-label" jhiTranslate="awtarApp.donationsIssued.isValidated" for="field_isValidated">Is Validated</label>
-                <input
-                  type="checkbox"
-                  class="form-check"
-                  name="isValidated"
-                  id="field_isValidated"
-                  data-cy="isValidated"
-                  formControlName="isValidated"
-                />
-              </div>
-
-              <div class="row mb-3">
-                <label class="form-label" jhiTranslate="awtarApp.donationsIssued.donationsDate" for="field_donationsDate"
-                  >Donations Date</label
-                >
-                <div class="input-group">
-                  <input
-                    id="field_donationsDate"
-                    data-cy="donationsDate"
-                    type="text"
-                    class="form-control"
-                    name="donationsDate"
-                    ngbDatepicker
-                    #donationsDateDp="ngbDatepicker"
-                    formControlName="donationsDate"
-                  />
-                  <button type="button" class="btn btn-secondary" (click)="donationsDateDp.toggle()">
-                    <fa-icon icon="calendar-alt"></fa-icon>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="blok1" style="display: flex; margin-top: 2rem">
-              <div class="row mb-3" style="margin-right: 5rem">
-                <label class="form-label" jhiTranslate="awtarApp.donationsIssued.recurringDonations" for="field_recurringDonations"
-                  >Recurring Donations</label
-                >
-                <input
-                  type="checkbox"
-                  class="form-check"
-                  name="recurringDonations"
-                  id="field_recurringDonations"
-                  data-cy="recurringDonations"
-                  formControlName="recurringDonations"
-                />
-              </div>
-
-              <div class="row mb-3" style="margin-right: 5rem">
-                <label class="form-label" jhiTranslate="awtarApp.donationsIssued.periodicity" for="field_periodicity">Periodicity</label>
-                <select class="form-control" name="periodicity" formControlName="periodicity" id="field_periodicity" data-cy="periodicity">
-                  <option [ngValue]="null">{{ 'awtarApp.Period.null' | translate }}</option>
-                  <option *ngFor="let period of periodValues" [value]="period">{{ 'awtarApp.Period.' + period | translate }}</option>
-                </select>
-
-                <div class="row mb-3">
-                  <label class="form-label" jhiTranslate="awtarApp.donationsIssued.recurrence" for="field_recurrence">Recurrence</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    name="recurrence"
-                    id="field_recurrence"
-                    data-cy="recurrence"
-                    formControlName="recurrence"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="blok1" style="display: flex; margin-top: 2rem">
-              <div class="row mb-3" style="margin-right: 5rem">
-                <label class="form-label" for="field_beneficiaryType">Beneficiary Type</label>
-                <select
-                  class="form-control"
-                  name="beneficiaryType"
-                  formControlName="beneficiaryType"
-                  id="field_beneficiaryType"
-                  data-cy="beneficiaryType"
-                >
-                  <option [ngValue]="null">{{ 'awtarApp.Beneficiaries.null' | translate }}</option>
-                  <option *ngFor="let beneficiaries of beneficiariesValues" [value]="beneficiaries">
-                    {{ 'awtarApp.Beneficiaries.' + beneficiaries | translate }}
-                  </option>
-                </select>
-                <div
-                  *ngIf="
-                    DonationsIssued_step &&
-                    DonationsIssued.get('beneficiaryType')!.invalid &&
-                    (DonationsIssued.get('beneficiaryType')!.dirty || DonationsIssued.get('beneficiaryType')!.touched)
-                  "
-                >
-                  <small
-                    class="form-text text-danger"
-                    *ngIf="DonationsIssued_step && DonationsIssued.get('beneficiaryType')?.errors?.required"
-                    jhiTranslate="entity.validation.required"
-                  >
-                    This field is required.
-                  </small>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label class="form-label" jhiTranslate="awtarApp.donationDetails.nature" for="field_nature">Nature</label>
-                <select class="form-control" id="field_nature" data-cy="nature" name="nature" formControlName="nature">
-                  <option *ngIf="DonationsIssued_step && !DonationsIssued.get('nature')!.value" [ngValue]="null" selected></option>
-                  <option
-                    [ngValue]="
-                      natureOption.id === DonationsIssued.get('nature')!.value?.id ? DonationsIssued.get('nature')!.value : natureOption
-                    "
-                    *ngFor="let natureOption of naturesSharedCollection; trackBy: trackNatureById"
-                  >
-                    {{ natureOption.name }}
-                  </option>
-                </select>
-              </div>
-              <div
-                *ngIf="
-                  DonationsIssued_step &&
-                  DonationsIssued.get(['nature'])!.invalid &&
-                  (DonationsIssued.get(['nature'])!.dirty || DonationsIssued.get(['nature'])!.touched)
-                "
-              >
-                <small
-                  class="form-text text-danger"
-                  *ngIf="DonationsIssued.get(['nature'])?.errors?.required"
-                  jhiTranslate="entity.validation.required"
-                >
-                  This field is required.
-                </small>
-              </div>
-            </div>
-
-            <div class="row mb-3">
-              <label class="form-label" jhiTranslate="awtarApp.donationsIssued.archivated" for="field_archivated">Archivated</label>
-              <input
-                type="checkbox"
-                class="form-check"
-                name="archivated"
-                id="field_archivated"
-                data-cy="archivated"
-                formControlName="archivated"
-              />
+            <div class="info">
+              <a href="#" class="d-block"></a>
             </div>
           </div>
-          <div class="button" style="margin-left: 70rem">
-            <input (click)="previousState()" type="button" name="next" class="next action-button" value="Annuler" />
-            <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
-          </div>
-        </fieldset>
-      </form>
 
-      <form [formGroup]="DonationsDetails" id="msform">
-        <fieldset *ngIf="step == 2">
-          <h1 class="fs-title" style="margin-bottom: 2rem">Détails des dons émis</h1>
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item menu-open">
+                <a [routerLink]="['admin-dashboard/dashboard']" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-header">BENEFICIARIES</li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
+                  <p>
+                    Families
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a [routerLink]="['/family']" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Families</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a [routerLink]="['/family/add']" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Family</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
+                  <p>
+                    Children
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a [routerLink]="['admin-dashboard/children']" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Chilfren</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Child</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
+                  <p>
+                    Establishments
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Establishments</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
 
-          <div>
-            <jhi-alert-error></jhi-alert-error>
+                      <p>Add Establishment</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
 
-            <div class="row mb-3">
-              <label class="form-label" jhiTranslate="awtarApp.donationDetails.description" for="field_description">Description</label>
-              <input
-                type="text"
-                class="form-control"
-                name="description"
-                id="field_description"
-                data-cy="description"
-                formControlName="description"
-              />
-              <div
-                *ngIf="
-                  DonationsDetails_step &&
-                  DonationsDetails.get('description')!.invalid &&
-                  (DonationsDetails.get('description')!.dirty || DonationsDetails.get('description')!.touched)
-                "
-              >
-                <small
-                  class="form-text text-danger"
-                  *ngIf="DonationsDetails_step && DonationsDetails.get('description')?.errors?.required"
-                  jhiTranslate="entity.validation.required"
-                >
-                  This field is required.
-                </small>
+              <li class="nav-header">DONATIONS</li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
+                  <p>
+                    Donations Issued
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Donations Issued</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Donations Issued</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
+                  <p>
+                    Donations Received
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Donations Received</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Donations Received</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">DONATIONS Items</li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    Items
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Items</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Item</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Status Item</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">REFERENCE TABLE</li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Establishments Types</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Citys</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Health Categories</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Nature</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>School Level</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Educational Institutions</p>
+                </a>
+              </li>
+
+              <li class="nav-header">CONTRIBUTORS</li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
+                  <p>
+                    Authorizing Officers
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Authorizing Officers</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Authorizing Officer</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    Tutors
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Tutors</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Tutor</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    Tutors
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Tutors</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Tutor</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="content-wrapper" style="margin-top: -3rem">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0">Add Donation</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                  <li class="breadcrumb-item"><a href="#">Donations Issued</a></li>
+                  <li class="breadcrumb-item active">Add Donation</li>
+                </ol>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="cont1">
-            <h3 style="margin-top: 2rem; margin-bottom: 3rem">Choisissez les bénéficiaires auxquels vous souhaitez attribuer le don :</h3>
+        <section class="content">
+          <div class="container-fluid">
+            <div
+              *ngIf="step == 1"
+              class="main-body"
+              style="
+                background: url('../../content/images/donsBG.jpg');
+                background-size: cover;
+                height: 100%;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 36rem;
+              "
+            >
+              <form [formGroup]="DonationsIssued" id="msform">
+                <fieldset *ngIf="step == 1">
+                  <div class="Dons" style="width: 31rem; margin-left: 6rem; background-color: rgba(249, 199, 20, 3); margin-top: 4rem">
+                    <jhi-alert-error></jhi-alert-error>
+                    <div class="col flex align-items-center justify-content-center">
+                      <!-- progressbar -->
 
-            <div class="beneficiaires" style="align-items: center">
-              <div class="table-responsive" id="entities" *ngIf="childrenProfiles && childrenProfiles.length > 0">
-                <tbody>
-                  <tr>
-                    <td *ngFor="let profile of childrenProfiles" data-cy="entityTable">
-                      <div class="col" style="width: 22rem; height: 30rem; margin-right: 2rem">
-                        <div class="card shadow-sm">
-                          <img
-                            *ngIf="profile.urlPhoto"
-                            (click)="openFile(profile.urlPhoto, profile.urlPhotoContentType)"
-                            class="bd-placeholder-img card-img-top"
-                            [src]="'data:' + profile.urlPhotoContentType + ';base64,' + profile.urlPhoto"
-                            alt="profile image"
-                            role="img"
-                            aria-label="Placeholder: Thumbnail"
-                            preserveAspectRatio="xMidYMid slice"
-                            focusable="false"
-                            style="height: 20rem; width: 20rem"
+                      <!-- fieldsets -->
+
+                      <div class="row mb-1">
+                        <label
+                          style="margin-top: 1rem; margin-left: 1rem"
+                          class="form-label"
+                          jhiTranslate="awtarApp.donationsIssued.model"
+                          for="field_model"
+                          >Model</label
+                        >
+                        <input
+                          style="margin-left: 1rem; margin-right: 1rem; width: 29rem"
+                          type="text"
+                          class="form-control"
+                          name="model"
+                          id="field_model"
+                          data-cy="model"
+                          formControlName="model"
+                        />
+                        <div
+                          *ngIf="
+                            DonationsIssued_step &&
+                            DonationsIssued.get('model')!.invalid &&
+                            (DonationsIssued.get('model')!.dirty || DonationsIssued.get('model')!.touched)
+                          "
+                        >
+                          <small
+                            class="form-text text-danger"
+                            *ngIf="DonationsIssued.get('model')?.errors?.required"
+                            jhiTranslate="entity.validation.required"
+                          >
+                            This field is required.
+                          </small>
+                        </div>
+                      </div>
+
+                      <div style="display: flex">
+                        <div class="row mb-3">
+                          <label
+                            style="margin-left: 1rem"
+                            class="form-label"
+                            jhiTranslate="awtarApp.donationsIssued.donationsDate"
+                            for="field_donationsDate"
+                            >Donations Date</label
+                          >
+                          <div class="input-group">
+                            <input
+                              id="field_donationsDate"
+                              data-cy="donationsDate"
+                              type="text"
+                              class="form-control"
+                              name="donationsDate"
+                              ngbDatepicker
+                              #donationsDateDp="ngbDatepicker"
+                              formControlName="donationsDate"
+                              style="width: 13rem"
+                            />
+                            <button type="button" class="btn btn-secondary" (click)="donationsDateDp.toggle()">
+                              <fa-icon icon="calendar-alt"></fa-icon>
+                            </button>
+                          </div>
+                        </div>
+
+                        <div class="row mb-3">
+                          <label style="margin-left: 1rem" class="form-label" for="field_beneficiaryType">Beneficiary Type</label>
+                          <select
+                            class="form-control"
+                            name="beneficiaryType"
+                            formControlName="beneficiaryType"
+                            id="field_beneficiaryType"
+                            data-cy="beneficiaryType"
+                            style="margin-left: 1rem; width: 14rem"
+                          >
+                            <option [ngValue]="null">{{ 'awtarApp.Beneficiaries.null' | translate }}</option>
+                            <option *ngFor="let beneficiaries of beneficiariesValues" [value]="beneficiaries">
+                              {{ 'awtarApp.Beneficiaries.' + beneficiaries | translate }}
+                            </option>
+                          </select>
+                          <div
+                            *ngIf="
+                              DonationsIssued_step &&
+                              DonationsIssued.get('beneficiaryType')!.invalid &&
+                              (DonationsIssued.get('beneficiaryType')!.dirty || DonationsIssued.get('beneficiaryType')!.touched)
+                            "
+                          >
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="DonationsIssued_step && DonationsIssued.get('beneficiaryType')?.errors?.required"
+                              jhiTranslate="entity.validation.required"
+                            >
+                              This field is required.
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style="display: flex">
+                        <p-checkbox
+                          name="recurringDonations"
+                          id="field_recurringDonations"
+                          value="true"
+                          formControlName="recurringDonations"
+                        ></p-checkbox>
+                        <label
+                          style="margin-left: 1rem"
+                          class="form-label"
+                          jhiTranslate="awtarApp.donationsIssued.recurringDonations"
+                          for="field_recurringDonations"
+                          >Recurring Donations</label
+                        >
+                      </div>
+
+                      <div style="display: flex; margin-top: 1rem; margin-left: 1rem">
+                        <div class="row mb-3">
+                          <label class="form-label" jhiTranslate="awtarApp.donationsIssued.periodicity" for="field_periodicity"
+                            >Periodicity</label
+                          >
+                          <select
+                            style="width: 14rem"
+                            class="form-control"
+                            name="periodicity"
+                            formControlName="periodicity"
+                            id="field_periodicity"
+                            data-cy="periodicity"
+                          >
+                            <option [ngValue]="null">{{ 'awtarApp.Period.null' | translate }}</option>
+                            <option *ngFor="let period of periodValues" [value]="period">
+                              {{ 'awtarApp.Period.' + period | translate }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="row mb-3">
+                          <label
+                            style="margin-left: 1rem"
+                            class="form-label"
+                            jhiTranslate="awtarApp.donationsIssued.recurrence"
+                            for="field_recurrence"
+                            >Recurrence</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="recurrence"
+                            id="field_recurrence"
+                            data-cy="recurrence"
+                            formControlName="recurrence"
+                            style="width: 14rem; margin-left: 1rem"
                           />
-
-                          <div class="card-body">
-                            <p class="card-text">{{ profile.lastName }} {{ profile.firstName }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                              <label class="slds-checkbox-button" for="example-unique-id-3">
-                                <input
-                                  type="checkbox"
-                                  (click)="addBeneficiary(profile.id!)"
-                                  class="slds-assistive-text"
-                                  id="example-unique-id-3"
-                                  value="example-unique-id-3"
-                                  style="height: 3rem; width: 3rem"
-                                />
-                              </label>
-                            </div>
-                          </div>
                         </div>
                       </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </div>
 
-              <div class="table-responsive" id="entities" *ngIf="familys && familys.length > 0">
-                <tbody>
-                  <tr>
-                    <td *ngFor="let family of familys" data-cy="entityTable">
-                      <div class="col" style="width: 22rem; height: 30rem; margin-right: 2rem">
-                        <div class="card shadow-sm">
-                          <div class="card-body">
-                            <p class="card-text">{{ family.familyName }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                              <label class="slds-checkbox-button" for="example-unique-id-3">
-                                <input
-                                  type="checkbox"
-                                  (click)="addBeneficiary(family.id!)"
-                                  class="slds-assistive-text"
-                                  id="example-unique-id-3"
-                                  value="example-unique-id-3"
-                                  style="height: 3rem; width: 3rem"
-                                />
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </div>
+                      <div style="display: flex; margin-bottom: 2rem">
+                        <p-checkbox name="isValidated" id="field_isValidated" value="true" formControlName="isValidated"></p-checkbox>
 
-              <div class="table-responsive" id="entities" *ngIf="establishments && establishments.length > 0">
-                <tbody>
-                  <tr>
-                    <td *ngFor="let establishment of establishments" data-cy="entityTable">
-                      <div class="col" style="width: 22rem; height: 30rem; margin-right: 2rem">
-                        <div class="card shadow-sm">
-                          <div class="card-body">
-                            <p class="card-text">{{ establishment.name }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                              <label class="slds-checkbox-button" for="example-unique-id-3">
-                                <input
-                                  type="checkbox"
-                                  (click)="addBeneficiary(establishment.id!)"
-                                  class="slds-assistive-text"
-                                  id="example-unique-id-3"
-                                  value="example-unique-id-3"
-                                  style="height: 3rem; width: 3rem"
-                                />
-                              </label>
-                            </div>
-                          </div>
-                        </div>
+                        <label
+                          class="form-label"
+                          style="margin-left: 1rem"
+                          jhiTranslate="awtarApp.donationsIssued.isValidated"
+                          for="field_isValidated"
+                          >Is Validated</label
+                        >
                       </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </div>
+                      <div class="button text-right">
+                        <button
+                          style="margin-bottom: 1rem"
+                          (click)="previousState()"
+                          pButton
+                          pRipple
+                          type="button"
+                          label="Reset"
+                          class="p-button-secondary"
+                        ></button>
+                        <button
+                          style="margin-bottom: 1rem"
+                          (click)="next()"
+                          pButton
+                          pRipple
+                          type="button"
+                          label="Next"
+                          class="p-button-help"
+                        ></button>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
             </div>
-          </div>
 
-          <div class="cont2" style="margin-top: 1.5rem; margin-bottom: 3rem">
-            <h3 style="margin-top: 1rem; margin-bottom: 2rem">Choisissez les articles de donation en indiquant la quantité de chacun :</h3>
+            <div class="card_body">
+              <div class="row">
+                <div class="col-md-12 col-md-offset-3">
+                  <form [formGroup]="DonationsDetails" id="msform">
+                    <fieldset *ngIf="step > 1 && step < 6 && step2 == 0">
+                      <p-splitter [style]="{ height: 'auto' }" layout="vertical" styleClass="mb-5">
+                        <ng-template pTemplate> </ng-template>
+                        <ng-template pTemplate>
+                          <p-splitter layout="vertical" [panelSizes]="[15, 85]">
+                            <ng-template pTemplate>
+                              <div style="background-color: rgba(204, 204, 20, 0.76)"></div>
+                            </ng-template>
+                            <ng-template pTemplate>
+                              <p-splitter [panelSizes]="[20, 80]">
+                                <ng-template pTemplate>
+                                  <div class="col flex align-items-center justify-content-center">
+                                    <div
+                                      style="
+                                        background: url('../../content/images/dons.jpg');
+                                        background-size: cover;
+                                        height: 100%;
+                                        background-position: center;
+                                        background-repeat: no-repeat;
+                                      "
+                                    ></div>
+                                  </div>
+                                </ng-template>
+                                <ng-template pTemplate>
+                                  <div class="col flex align-items-center justify-content-center">
+                                    <fieldset *ngIf="step == 2">
+                                      <h3 style="margin-top: 2rem; margin-bottom: 3rem">
+                                        Choisissez les bénéficiaires auxquels vous souhaitez attribuer le don :
+                                      </h3>
 
-            <div class="items">
-              <div class="table-responsive" id="entities" *ngIf="items && items.length > 0">
-                <tbody>
-                  <tr>
-                    <td *ngFor="let item of items" data-cy="entityTable">
-                      <div class="col" style="width: 20rem; height: 10; margin-right: 2rem">
-                        <div class="card shadow-sm">
-                          <img
-                            *ngIf="item.urlPhoto"
-                            (click)="openFile(item.urlPhoto, item.urlPhotoContentType)"
-                            class="bd-placeholder-img card-img-top"
-                            [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto"
-                            alt="profile image"
-                            role="img"
-                            aria-label="Placeholder: Thumbnail"
-                            preserveAspectRatio="xMidYMid slice"
-                            focusable="false"
-                            style="height: 20rem; width: 20rem"
-                          />
+                                      <div class="table-responsive" id="entities" *ngIf="childrenProfiles && childrenProfiles.length > 0">
+                                        <tbody>
+                                          <tr>
+                                            <td *ngFor="let profile of childrenProfiles" data-cy="entityTable">
+                                              <div class="col">
+                                                <div class="card shadow-sm">
+                                                  <img
+                                                    *ngIf="profile.urlPhoto"
+                                                    (click)="openFile(profile.urlPhoto, profile.urlPhotoContentType)"
+                                                    class="bd-placeholder-img card-img-top"
+                                                    [src]="'data:' + profile.urlPhotoContentType + ';base64,' + profile.urlPhoto"
+                                                    alt="profile image"
+                                                    role="img"
+                                                    aria-label="Placeholder: Thumbnail"
+                                                    preserveAspectRatio="xMidYMid slice"
+                                                    focusable="false"
+                                                    style="height: 20rem; width: 20rem"
+                                                  />
 
-                          <div class="card-body">
-                            <p class="card-text">{{ item.name }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                              <div class="row mb-3" style="margin-left: 1rem">
-                                <label class="form-label" jhiTranslate="awtarApp.donationItemDetails.quantity" for="field_quantity"
-                                  >Quantity</label
-                                >
-                                <input
-                                  type="number"
-                                  class="form-control"
-                                  name="quantity"
-                                  id="field_quantity"
-                                  data-cy="quantity"
-                                  formControlName="quantity"
+                                                  <div class="card-body">
+                                                    <p class="card-text">{{ profile.lastName }} {{ profile.firstName }}</p>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                      <label class="slds-checkbox-button" for="example-unique-id-3">
+                                                        <input
+                                                          type="checkbox"
+                                                          (click)="addBeneficiary(profile.id!)"
+                                                          class="slds-assistive-text"
+                                                          id="example-unique-id-3"
+                                                          value="example-unique-id-3"
+                                                          style="height: 3rem; width: 3rem"
+                                                        />
+                                                      </label>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </div>
+                                    </fieldset>
+
+                                    <fieldset *ngIf="step == 3">
+                                      <p-table
+                                        #dt
+                                        [value]="familys!"
+                                        [(selection)]="selectedFamilys"
+                                        dataKey="id"
+                                        styleClass="p-datatable-sm"
+                                        [rowHover]="true"
+                                        [rows]="4"
+                                        [showCurrentPageReport]="true"
+                                        [rowsPerPageOptions]="[4, 8, 16]"
+                                        responsiveLayout="scroll"
+                                        [paginator]="true"
+                                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                        [filterDelay]="0"
+                                        [globalFilterFields]="['familyName', 'dwelling', 'area', 'notebookOfPoverty', 'notebookOfHandicap']"
+                                      >
+                                        <ng-template pTemplate="caption">
+                                          <div class="table-header">
+                                            Choisir parmet la liste de Famille
+                                            <div class="flex" style="text-align: right">
+                                              <span class="p-input-icon-left ml-auto">
+                                                <i class="pi pi-search" style="margin-left: 12rem"></i>
+                                                <input
+                                                  pInputText
+                                                  type="text"
+                                                  (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                                  placeholder="Recherche Globale"
+                                                />
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="header">
+                                          <tr>
+                                            <th style="width: 3rem">
+                                              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                            </th>
+                                            <th pSortableColumn="name">
+                                              <div class="flex justify-content-between align-items-center">
+                                                <span jhiTranslate="awtarApp.family.familyName">Family Name</span>
+                                                <p-sortIcon field="name"></p-sortIcon>
+                                                <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
+                                              </div>
+                                            </th>
+                                            <th pSortableColumn="dwelling">
+                                              <div class="flex justify-content-between align-items-center">
+                                                <span jhiTranslate="awtarApp.family.dwelling">Dwelling</span>
+                                                <p-sortIcon field="dwelling"></p-sortIcon>
+                                                <p-columnFilter
+                                                  type="text"
+                                                  field="dwelling"
+                                                  display="menu"
+                                                  class="ml-auto"
+                                                ></p-columnFilter>
+                                              </div>
+                                            </th>
+                                            <th pSortableColumn="area">
+                                              <div class="flex justify-content-between align-items-center">
+                                                <span jhiTranslate="awtarApp.family.area">Area</span>
+                                                <p-sortIcon field="area"></p-sortIcon>
+                                                <p-columnFilter type="text" field="area" display="menu" class="ml-auto"></p-columnFilter>
+                                              </div>
+                                            </th>
+                                            <th pSortableColumn="notebookOfPoverty">
+                                              <div class="flex justify-content-between align-items-center">
+                                                <span jhiTranslate="awtarApp.family.notebookOfPoverty">Notebook Of Poverty</span>
+                                                <p-sortIcon field="notebookOfPoverty"></p-sortIcon>
+                                                <p-columnFilter
+                                                  type="text"
+                                                  field="notebookOfPoverty"
+                                                  display="menu"
+                                                  class="ml-auto"
+                                                ></p-columnFilter>
+                                              </div>
+                                            </th>
+                                            <th pSortableColumn="notebookOfHandicap">
+                                              <div class="flex justify-content-between align-items-center">
+                                                <span jhiTranslate="awtarApp.family.notebookOfHandicap">Notebook Of Handicap</span>
+                                                <p-sortIcon field="notebookOfHandicap"></p-sortIcon>
+                                                <p-columnFilter
+                                                  type="text"
+                                                  field="notebookOfHandicap"
+                                                  display="menu"
+                                                  class="ml-auto"
+                                                ></p-columnFilter>
+                                              </div>
+                                            </th>
+
+                                            <th></th>
+                                          </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-family>
+                                          <tr class="p-selectable-row">
+                                            <td>
+                                              <p-tableCheckbox [value]="family"></p-tableCheckbox>
+                                            </td>
+                                            <td>
+                                              <span class="p-column-title"></span>
+                                              {{ family.familyName }}
+                                            </td>
+                                            <td>
+                                              <span class="p-column-title"></span>
+                                              {{ family.dwelling }}
+                                            </td>
+                                            <td>
+                                              <span class="p-column-title"></span>
+                                              {{ family.area }}
+                                            </td>
+                                            <td>
+                                              <span class="p-column-title"></span>
+                                              {{ family.notebookOfPoverty }}
+                                            </td>
+                                            <td>
+                                              <span class="p-column-title"></span>
+                                              {{ family.notebookOfHandicap }}
+                                            </td>
+
+                                            <td style="text-align: center">
+                                              <p-button (click)="showDialog(family)" icon="pi pi-external-link" label="Details"></p-button>
+                                            </td>
+                                          </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="emptymessage">
+                                          <tr>
+                                            <td colspan="8">No families found.</td>
+                                          </tr>
+                                        </ng-template>
+                                      </p-table>
+
+                                      <p-dialog header="Famille Détails" [(visible)]="display" [style]="{ width: '50vw' }">
+                                        <h3>Famille : {{ selectedFID }}</h3>
+                                        <br />
+
+                                        <h4>Nombre de dons de cette famille est: {{ df }}</h4>
+                                        <h4 *ngIf="parents && parents.length > 0">Parent:</h4>
+                                        <h4 *ngIf="parents && parents.length == 0">0 Parent:</h4>
+
+                                        <div *ngIf="parents && parents.length > 0">
+                                          <div *ngFor="let parent of parents">
+                                            <div style="display: flex">
+                                              <h5>Nom & Prénom :</h5>
+                                              <h6 style="margin-right: 3rem; margin-left: 1rem">
+                                                {{ parent.lastName }} {{ parent.firstName }}
+                                              </h6>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <h4>{{ nbChild }} Enfants :</h4>
+                                        <div *ngIf="children && children.length > 0">
+                                          <h5>Nombre des dons des enfants de cette famille est: {{ nbDonCTot }}</h5>
+                                          <div *ngFor="let child of children">
+                                            <div style="display: flex">
+                                              <h5>Nom & Prénom :</h5>
+                                              <h6 style="margin-left: 1rem">{{ child.lastName }} {{ child.firstName }}</h6>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <ng-template pTemplate="footer">
+                                          <p-button
+                                            icon="pi pi-check"
+                                            (click)="display = false"
+                                            label="Ok"
+                                            styleClass="p-button-text"
+                                          ></p-button>
+                                        </ng-template>
+                                      </p-dialog>
+                                      <div style="text-align: right">
+                                        <div>
+                                          <p-button (click)="previous()" label="Précedent" styleClass="p-button-text"></p-button>
+                                          <p-button
+                                            icon="pi pi-check"
+                                            (click)="goToItem()"
+                                            label="suivant"
+                                            styleClass="p-button-text"
+                                          ></p-button>
+                                        </div>
+                                      </div>
+                                    </fieldset>
+
+                                    <fieldset *ngIf="step == 4">
+                                      <h3 style="margin-top: 2rem; margin-bottom: 1rem">
+                                        Choisissez les bénéficiaires auxquels vous souhaitez attribuer le don :
+                                      </h3>
+
+                                      <div class="table-responsive" id="entities" *ngIf="establishments && establishments.length > 0">
+                                        <tbody>
+                                          <tr>
+                                            <td *ngFor="let establishment of establishments" data-cy="entityTable">
+                                              <div class="col">
+                                                <div class="card shadow-sm">
+                                                  <div class="card-body">
+                                                    <p class="card-text">{{ establishment.name }}</p>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                      <label class="slds-checkbox-button" for="example-unique-id-3">
+                                                        <input
+                                                          type="checkbox"
+                                                          (click)="addBeneficiary(establishment.id!)"
+                                                          class="slds-assistive-text"
+                                                          id="example-unique-id-3"
+                                                          value="example-unique-id-3"
+                                                        />
+                                                      </label>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </div>
+                                    </fieldset>
+                                  </div>
+                                </ng-template>
+                              </p-splitter>
+                            </ng-template>
+                          </p-splitter>
+                        </ng-template>
+                      </p-splitter>
+                    </fieldset>
+
+                    <!-- Steeeeep 1-->
+
+                    <fieldset *ngIf="step2 == 1"></fieldset>
+
+                    <fieldset *ngIf="step2 == 1">
+                      <div class="col flex align-items-center justify-content-center">
+                        <div style="margin: 1rem">
+                          <label class="form-label" jhiTranslate="awtarApp.item.nature" for="field_nature">Nature</label>
+                          <br />
+
+                          <p-autoComplete
+                            [(ngModel)]="textParam"
+                            [suggestions]="textParamNature"
+                            [dropdown]="true"
+                            (completeMethod)="SearchNature($event)"
+                            [forceSelection]="true"
+                            (change)="getItemByNature()"
+                          ></p-autoComplete>
+                        </div>
+
+                        <p-pickList
+                          [source]="items"
+                          [target]="targetProducts"
+                          sourceHeader="Available"
+                          targetHeader="Selected"
+                          [dragdrop]="true"
+                          [responsive]="true"
+                          [sourceStyle]="{ height: '20rem' }"
+                          [targetStyle]="{ height: '20rem' }"
+                          filterBy="name"
+                          sourceFilterPlaceholder="Search by name"
+                          targetFilterPlaceholder="Search by name"
+                        >
+                          <ng-template let-item pTemplate="item">
+                            <div class="product-item">
+                              <div class="image-container">
+                                <img
+                                  *ngIf="item.urlPhoto"
+                                  (click)="openFile(item.urlPhoto, item.urlPhotoContentType)"
+                                  class="bd-placeholder-img card-img-top"
+                                  [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto"
+                                  alt="profile image"
+                                  role="img"
+                                  aria-label="Placeholder: Thumbnail"
+                                  preserveAspectRatio="xMidYMid slice"
+                                  focusable="false"
+                                  [alt]="item.name"
+                                  class="product-image"
                                 />
-                                <div
-                                  *ngIf="
-                                    DonationsDetails_step &&
-                                    DonationsDetails.get('quantity')!.invalid &&
-                                    (DonationsDetails.get('quantity')!.dirty || DonationsDetails.get('quantity')!.touched)
-                                  "
-                                >
-                                  <small
-                                    class="form-text text-danger"
-                                    *ngIf="DonationsDetails.get('quantity')?.errors?.required"
-                                    jhiTranslate="entity.validation.required"
-                                  >
-                                    This field is required.
-                                  </small>
-                                  <small
-                                    class="form-text text-danger"
-                                    [hidden]="!DonationsDetails.get('quantity')?.errors?.number"
-                                    jhiTranslate="entity.validation.number"
-                                  >
-                                    This field should be a number.
-                                  </small>
-                                </div>
                               </div>
-
-                              <label class="slds-checkbox-button" for="example-unique-id-3" style="margin-left: 1rem">
-                                <input
-                                  type="checkbox"
-                                  (click)="addItem(item!)"
-                                  class="slds-assistive-text"
-                                  id="example-unique-id-3"
-                                  value="example-unique-id-3"
-                                  style="height: 2.5rem; width: 3rem; margin-top: +1rem"
-                                />
-                              </label>
+                              <div class="product-list-detail">
+                                <h5 class="mb-2">{{ item.name }}</h5>
+                                <i class="pi pi-tag product-category-icon"></i>
+                                <span class="product-category">{{ item.nature.name }}</span>
+                              </div>
+                              <!--
+<div class="product-list-action">
+<h6 class="mb-2">${{product.price}}</h6>
+<span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
+</div>
+-->
                             </div>
+                          </ng-template>
+                        </p-pickList>
+                      </div>
+
+                      <div class="cont2" style="margin-top: 1.5rem; margin-bottom: 3rem">
+                        <h3 style="margin-top: 1rem; margin-bottom: 2rem">
+                          Choisissez les articles de donation en indiquant la quantité de chacun :
+                        </h3>
+
+                        <div class="items">
+                          <div class="table-responsive" id="entities" *ngIf="items && items.length > 0">
+                            <tbody>
+                              <tr>
+                                <td *ngFor="let item of items" data-cy="entityTable">
+                                  <div class="col" style="width: 20rem; height: 10; margin-right: 2rem">
+                                    <div class="card shadow-sm">
+                                      <img
+                                        *ngIf="item.urlPhoto"
+                                        (click)="openFile(item.urlPhoto, item.urlPhotoContentType)"
+                                        class="bd-placeholder-img card-img-top"
+                                        [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto"
+                                        alt="profile image"
+                                        role="img"
+                                        aria-label="Placeholder: Thumbnail"
+                                        preserveAspectRatio="xMidYMid slice"
+                                        focusable="false"
+                                        style="height: 20rem; width: 20rem"
+                                      />
+
+                                      <div class="card-body">
+                                        <p class="card-text">{{ item.name }}</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                          <div class="row mb-3" style="margin-left: 1rem">
+                                            <label
+                                              class="form-label"
+                                              jhiTranslate="awtarApp.donationItemDetails.quantity"
+                                              for="field_quantity"
+                                              >Quantity</label
+                                            >
+                                            <input
+                                              type="number"
+                                              class="form-control"
+                                              name="quantity"
+                                              id="field_quantity"
+                                              data-cy="quantity"
+                                              formControlName="quantity"
+                                            />
+                                            <div
+                                              *ngIf="
+                                                DonationsDetails_step &&
+                                                DonationsDetails.get('quantity')!.invalid &&
+                                                (DonationsDetails.get('quantity')!.dirty || DonationsDetails.get('quantity')!.touched)
+                                              "
+                                            >
+                                              <small
+                                                class="form-text text-danger"
+                                                *ngIf="DonationsDetails.get('quantity')?.errors?.required"
+                                                jhiTranslate="entity.validation.required"
+                                              >
+                                                This field is required.
+                                              </small>
+                                              <small
+                                                class="form-text text-danger"
+                                                [hidden]="!DonationsDetails.get('quantity')?.errors?.number"
+                                                jhiTranslate="entity.validation.number"
+                                              >
+                                                This field should be a number.
+                                              </small>
+                                            </div>
+                                          </div>
+
+                                          <label class="slds-checkbox-button" for="example-unique-id-3" style="margin-left: 1rem">
+                                            <input
+                                              type="checkbox"
+                                              (click)="addItem(item!)"
+                                              class="slds-assistive-text"
+                                              id="example-unique-id-3"
+                                              value="example-unique-id-3"
+                                              style="height: 2.5rem; width: 3rem; margin-top: +1rem"
+                                            />
+                                          </label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
                           </div>
                         </div>
                       </div>
-                    </td>
-                  </tr>
-                </tbody>
+
+                      <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Précedent" />
+                      <input (click)="submit()" type="submit" name="submit" class="submit action-button" value="Enregistrer" />
+                    </fieldset>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-
-          <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Précedent" />
-          <input (click)="submit()" type="submit" name="submit" class="submit action-button" value="Enregistrer" />
-        </fieldset>
-      </form>
+        </section>
+      </div>
     </div>
-  </div>
-</div>
+  </body>
+</html>

@@ -63,4 +63,12 @@ public interface ItemValueService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get the "id" itemValue.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    Optional<ItemValueDTO> findItem(Long id);
 }

@@ -202,4 +202,17 @@ public class ItemResource {
         List<ItemDTO> itemDTO = itemService.findItemsWithNature(id);
         return ResponseEntity.ok().body(itemDTO);
     }
+
+    /**
+     * {@code GET  /items/:id} : get the "id" item.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the itemDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/items/all")
+    public ResponseEntity<List<ItemDTO>> getAllItems() {
+        log.debug("REST request to get Items : {}");
+        List<ItemDTO> itemDTO = itemService.findAllItems();
+        return ResponseEntity.ok().body(itemDTO);
+    }
 }

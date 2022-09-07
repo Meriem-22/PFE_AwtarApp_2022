@@ -13,6 +13,7 @@ export type EntityArrayResponseType = HttpResponse<ISchoolLevel[]>;
 @Injectable({ providedIn: 'root' })
 export class SchoolLevelService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/school-levels');
+  protected Url = this.applicationConfigService.getEndpointFor('api/school-levels/alls');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -34,6 +35,10 @@ export class SchoolLevelService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<ISchoolLevel>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findAllSchoolLevel(): Observable<EntityArrayResponseType> {
+    return this.http.get<ISchoolLevel[]>(this.Url, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

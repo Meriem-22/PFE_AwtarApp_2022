@@ -48,16 +48,16 @@ export class FamilyDetailComponent implements OnInit {
   family?: IFamilyAllDetails | null = null;
   parents?: any[] = [];
   children?: IProfile[] = [];
+  t = 0;
   parent?: HttpResponse<IParentAllDetails>;
   donation?: any[];
-  donationList?: any[];
-  donationListChild?: any[];
+
   benef!: IBeneficiary;
 
   childrenCollection?: IProfile[] = [];
   childProfile?: HttpResponse<IProfile>;
   childSelected?: number;
-  donationChild = 0;
+
   text?: any;
 
   inProduction?: boolean;
@@ -67,14 +67,18 @@ export class FamilyDetailComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
+  donationList?: any[];
+  donationListChild?: any[];
+  donationChild = 0;
   Ordonnateur!: HttpResponse<IProfile>;
   Tuteur!: HttpResponse<IProfile>;
+  df = 0;
   beneficiary!: HttpResponse<IBeneficiary>;
   familyId?: number;
   o = 0;
-  df = 0;
+
   dc = 0;
-  t = 0;
+
   i = 0;
 
   constructor(
@@ -87,8 +91,9 @@ export class FamilyDetailComponent implements OnInit {
     private sessionStorageService: SessionStorageService,
     private accountService: AccountService,
     private profileService: ProfileService,
-    private parentService: ParentService,
     private donationDetailsService: DonationDetailsService,
+    private parentService: ParentService,
+
     protected fb: FormBuilder,
     protected beneficiaryService: BeneficiaryService
   ) {
@@ -101,19 +106,20 @@ export class FamilyDetailComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ family }) => {
       this.family = family;
       this.familyId = family.id;
+
+      this.beneficiaryService.find(family.id).subscribe({
+        next: (res: HttpResponse<IBeneficiary>) => {
+          this.benef = res.body!;
+        },
+        error: e => console.error(e),
+      });
+
       this.profileService.getAllParentsProfile(family.id).subscribe({
         next: (res: HttpResponse<any[]>) => {
           this.parents = res.body ?? [];
           for (this.t = 0; this.t < this.parents.length; this.t++) {
             this.o = this.o + +this.parents[this.t].annualRevenue;
           }
-        },
-        error: e => console.error(e),
-      });
-
-      this.beneficiaryService.find(family.id).subscribe({
-        next: (res: HttpResponse<IBeneficiary>) => {
-          this.benef = res.body!;
         },
         error: e => console.error(e),
       });

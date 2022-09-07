@@ -180,4 +180,17 @@ public class SchoolLevelResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the school-levelsDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/school-levels/alls")
+    public ResponseEntity<List<SchoolLevelDTO>> getAllSchoolLevel() {
+        log.debug("REST request to get  all Profile : {}");
+        List<SchoolLevelDTO> schoolLevelDTO = schoolLevelService.findAllSchoolLevel();
+        return ResponseEntity.ok().body(schoolLevelDTO);
+    }
 }

@@ -72,4 +72,12 @@ public interface ItemService {
      * @return the entity.
      */
     List<ItemDTO> findItemsWithNature(Long id);
+
+    /**
+     * Get the "id" item.
+     *
+     *
+     * @return the entity.
+     */
+    List<ItemDTO> findAllItems();
 }

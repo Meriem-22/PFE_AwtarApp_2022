@@ -87,7 +87,7 @@ export class EstablishmentUpdateComponent implements OnInit {
   }
 
   previousState(): void {
-    window.history.back();
+    window.location.reload();
   }
 
   save(): void {
@@ -139,7 +139,7 @@ export class EstablishmentUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    window.location.reload();
   }
 
   protected onSaveError(): void {
