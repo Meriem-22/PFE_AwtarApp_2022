@@ -45,6 +45,10 @@ export class SchoolLevelItemService {
     return this.http.get<ISchoolLevelItem[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  findAllCompositeurSchoolItems(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<ISchoolLevelItem[]>(`${this.resourceUrl}/${id}` + '/compositeur-school-items', { observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

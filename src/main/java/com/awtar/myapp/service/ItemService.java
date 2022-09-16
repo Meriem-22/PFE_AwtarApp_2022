@@ -80,4 +80,28 @@ public interface ItemService {
      * @return the entity.
      */
     List<ItemDTO> findAllItems();
+
+    /**
+     * Get the "id" item.
+     *
+     *
+     * @return the entity.
+     */
+    List<ItemDTO> findAllDetailsItems();
+
+    /**
+     * Get the "id" item.
+     *
+     *
+     * @return the entity.
+     */
+    List<ItemDTO> findAllSchoolItemsDetails();
+
+    /**
+     * Get the "id" item.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    List<ItemDTO> findAllCompositeurItemsDetails(Long id);
 }

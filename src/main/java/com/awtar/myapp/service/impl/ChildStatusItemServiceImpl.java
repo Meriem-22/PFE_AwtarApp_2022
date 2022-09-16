@@ -1,10 +1,15 @@
 package com.awtar.myapp.service.impl;
 
+import com.awtar.myapp.domain.ChildStatus;
 import com.awtar.myapp.domain.ChildStatusItem;
 import com.awtar.myapp.repository.ChildStatusItemRepository;
+import com.awtar.myapp.repository.ChildStatusRepository;
 import com.awtar.myapp.service.ChildStatusItemService;
+import com.awtar.myapp.service.dto.ChildStatusDTO;
 import com.awtar.myapp.service.dto.ChildStatusItemDTO;
 import com.awtar.myapp.service.mapper.ChildStatusItemMapper;
+import com.awtar.myapp.service.mapper.ChildStatusMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +31,12 @@ public class ChildStatusItemServiceImpl implements ChildStatusItemService {
 
     private final ChildStatusItemMapper childStatusItemMapper;
 
-    public ChildStatusItemServiceImpl(ChildStatusItemRepository childStatusItemRepository, ChildStatusItemMapper childStatusItemMapper) {
+    public ChildStatusItemServiceImpl(
+        ChildStatusItemRepository childStatusItemRepository,
+        ChildStatusItemMapper childStatusItemMapper,
+        ChildStatusRepository childStatusRepository,
+        ChildStatusMapper childStatusMapper
+    ) {
         this.childStatusItemRepository = childStatusItemRepository;
         this.childStatusItemMapper = childStatusItemMapper;
     }
@@ -84,5 +94,11 @@ public class ChildStatusItemServiceImpl implements ChildStatusItemService {
     public void delete(Long id) {
         log.debug("Request to delete ChildStatusItem : {}", id);
         childStatusItemRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ChildStatusItemDTO> findAllStatusOfItem(Long id) {
+        List<ChildStatusItemDTO> items = childStatusItemRepository.findAllChildStatusItem(id);
+        return items;
     }
 }

@@ -5,6 +5,7 @@ import com.awtar.myapp.repository.SchoolLevelItemRepository;
 import com.awtar.myapp.service.SchoolLevelItemService;
 import com.awtar.myapp.service.dto.SchoolLevelItemDTO;
 import com.awtar.myapp.service.mapper.SchoolLevelItemMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,5 +85,11 @@ public class SchoolLevelItemServiceImpl implements SchoolLevelItemService {
     public void delete(Long id) {
         log.debug("Request to delete SchoolLevelItem : {}", id);
         schoolLevelItemRepository.deleteById(id);
+    }
+
+    @Override
+    public List<SchoolLevelItemDTO> findSchoolLevelItemDetails(Long id) {
+        List<SchoolLevelItemDTO> items = schoolLevelItemRepository.findSchoolLevelItemDetails(id);
+        return items;
     }
 }

@@ -9,6 +9,7 @@ import { IChildStatusItem, getChildStatusItemIdentifier } from '../child-status-
 
 export type EntityResponseType = HttpResponse<IChildStatusItem>;
 export type EntityArrayResponseType = HttpResponse<IChildStatusItem[]>;
+export type EntityArrayResponseAnyType = HttpResponse<any[]>;
 
 @Injectable({ providedIn: 'root' })
 export class ChildStatusItemService {
@@ -34,6 +35,10 @@ export class ChildStatusItemService {
       childStatusItem,
       { observe: 'response' }
     );
+  }
+
+  findAllStatusOfItem(id: number): Observable<EntityArrayResponseAnyType> {
+    return this.http.get<any[]>(`${this.resourceUrl}/${id}` + '/item', { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {

@@ -215,4 +215,43 @@ public class ItemResource {
         List<ItemDTO> itemDTO = itemService.findAllItems();
         return ResponseEntity.ok().body(itemDTO);
     }
+
+    /**
+     * {@code GET  /items/:id} : get the "id" item.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the itemDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/items/normal/allDetails")
+    public ResponseEntity<List<ItemDTO>> getAllDetailsItems() {
+        log.debug("REST request to get Items : {}");
+        List<ItemDTO> itemDTO = itemService.findAllDetailsItems();
+        return ResponseEntity.ok().body(itemDTO);
+    }
+
+    /**
+     * {@code GET  /items/:id} : get the "id" item.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the itemDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/items/schoolItems/allDetails")
+    public ResponseEntity<List<ItemDTO>> getAllSchoolItemsDetails() {
+        log.debug("REST request to get Items : {}");
+        List<ItemDTO> itemDTO = itemService.findAllSchoolItemsDetails();
+        return ResponseEntity.ok().body(itemDTO);
+    }
+
+    /**
+     * {@code GET  /items/:id} : get the "id" item.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the itemDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/items/{id}/compositeur-items/all")
+    public ResponseEntity<List<ItemDTO>> getAllCompositeurSchoolItemDetails(@PathVariable Long id) {
+        log.debug("REST request to get Items : {}");
+        List<ItemDTO> itemDTO = itemService.findAllCompositeurItemsDetails(id);
+        return ResponseEntity.ok().body(itemDTO);
+    }
 }

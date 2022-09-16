@@ -1,5 +1,6 @@
 package com.awtar.myapp.service.dto;
 
+import com.awtar.myapp.domain.enumeration.Status;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.*;
@@ -18,6 +19,15 @@ public class ChildStatusItemDTO implements Serializable {
     private ItemDTO item;
 
     private ChildStatusDTO childStatus;
+
+    private Status staus;
+
+    public ChildStatusItemDTO() {}
+
+    public ChildStatusItemDTO(Long id, Status staus) {
+        this.staus = staus;
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -57,6 +67,14 @@ public class ChildStatusItemDTO implements Serializable {
 
     public void setChildStatus(ChildStatusDTO childStatus) {
         this.childStatus = childStatus;
+    }
+
+    public Status getStaus() {
+        return staus;
+    }
+
+    public void setStaus(Status staus) {
+        this.staus = staus;
     }
 
     @Override

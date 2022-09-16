@@ -1,6 +1,7 @@
 package com.awtar.myapp.repository;
 
 import com.awtar.myapp.domain.SchoolLevelItem;
+import com.awtar.myapp.service.dto.SchoolLevelItemDTO;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -41,4 +42,9 @@ public interface SchoolLevelItemRepository extends JpaRepository<SchoolLevelItem
         "select schoolLevelItem from SchoolLevelItem schoolLevelItem left join fetch schoolLevelItem.item left join fetch schoolLevelItem.schoolLevel where schoolLevelItem.id =:id"
     )
     Optional<SchoolLevelItem> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.SchoolLevelItemDTO (sli.schoolLevel.schoolLevel, sli.quantityNeeded) from SchoolLevelItem sli where sli.item.id = :id"
+    )
+    List<SchoolLevelItemDTO> findSchoolLevelItemDetails(@Param("id") Long id);
 }

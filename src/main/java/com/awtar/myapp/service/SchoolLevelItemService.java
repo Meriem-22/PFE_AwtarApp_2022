@@ -1,6 +1,7 @@
 package com.awtar.myapp.service;
 
 import com.awtar.myapp.service.dto.SchoolLevelItemDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -63,4 +64,12 @@ public interface SchoolLevelItemService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get the "id" schoolLevelItem.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    List<SchoolLevelItemDTO> findSchoolLevelItemDetails(Long id);
 }

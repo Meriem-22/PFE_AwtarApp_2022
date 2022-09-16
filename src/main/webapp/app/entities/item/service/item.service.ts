@@ -9,6 +9,7 @@ import { IItem, getItemIdentifier } from '../item.model';
 
 export type EntityResponseType = HttpResponse<IItem>;
 export type EntityArrayResponseType = HttpResponse<IItem[]>;
+export type EntityArrayResponseType1 = HttpResponse<any[]>;
 
 @Injectable({ providedIn: 'root' })
 export class ItemService {
@@ -30,6 +31,18 @@ export class ItemService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IItem>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findAllNormalItems(): Observable<EntityArrayResponseType1> {
+    return this.http.get<any[]>(this.resourceUrl + '/normal/allDetails', { observe: 'response' });
+  }
+
+  findAllSchoolItems(): Observable<EntityArrayResponseType1> {
+    return this.http.get<IItem[]>(this.resourceUrl + '/schoolItems/allDetails', { observe: 'response' });
+  }
+
+  findAllCompositeurItems(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IItem[]>(`${this.resourceUrl}/${id}` + '/compositeur-items/all', { observe: 'response' });
   }
 
   findAllItems(): Observable<EntityArrayResponseType> {

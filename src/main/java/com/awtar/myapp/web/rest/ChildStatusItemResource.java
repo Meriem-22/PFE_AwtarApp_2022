@@ -2,6 +2,7 @@ package com.awtar.myapp.web.rest;
 
 import com.awtar.myapp.repository.ChildStatusItemRepository;
 import com.awtar.myapp.service.ChildStatusItemService;
+import com.awtar.myapp.service.dto.ChildStatusDTO;
 import com.awtar.myapp.service.dto.ChildStatusItemDTO;
 import com.awtar.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -189,5 +190,18 @@ public class ChildStatusItemResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    /**
+     * {@code GET  /items/:id} : get the "id" item.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the childStatusItemDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/child-status-items/{id}/item")
+    public ResponseEntity<List<ChildStatusItemDTO>> getAllChildStatusItem(@PathVariable Long id) {
+        log.debug("REST request to get Items : {}");
+        List<ChildStatusItemDTO> childStatusIemDTO = childStatusItemService.findAllStatusOfItem(id);
+        return ResponseEntity.ok().body(childStatusIemDTO);
     }
 }

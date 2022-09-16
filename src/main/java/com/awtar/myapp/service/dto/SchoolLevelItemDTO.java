@@ -21,6 +21,15 @@ public class SchoolLevelItemDTO implements Serializable {
 
     private SchoolLevelDTO schoolLevel;
 
+    private String schoolLevelItem;
+
+    public SchoolLevelItemDTO() {}
+
+    public SchoolLevelItemDTO(String schoolLevelItem, Integer quantityNeeded) {
+        this.schoolLevelItem = schoolLevelItem;
+        this.quantityNeeded = quantityNeeded;
+    }
+
     public Long getId() {
         return id;
     }
@@ -67,6 +76,14 @@ public class SchoolLevelItemDTO implements Serializable {
 
     public void setSchoolLevel(SchoolLevelDTO schoolLevel) {
         this.schoolLevel = schoolLevel;
+    }
+
+    public String getSchoolLevelItem() {
+        return schoolLevelItem;
+    }
+
+    public void setSchoolLevelItem(String schoolLevelItem) {
+        this.schoolLevelItem = schoolLevelItem;
     }
 
     @Override

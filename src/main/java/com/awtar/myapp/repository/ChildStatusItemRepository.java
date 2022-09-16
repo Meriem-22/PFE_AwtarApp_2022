@@ -1,6 +1,7 @@
 package com.awtar.myapp.repository;
 
 import com.awtar.myapp.domain.ChildStatusItem;
+import com.awtar.myapp.service.dto.ChildStatusItemDTO;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -41,4 +42,9 @@ public interface ChildStatusItemRepository extends JpaRepository<ChildStatusItem
         "select childStatusItem from ChildStatusItem childStatusItem left join fetch childStatusItem.item left join fetch childStatusItem.childStatus where childStatusItem.id =:id"
     )
     Optional<ChildStatusItem> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.ChildStatusItemDTO (cs.id, csi.childStatus.staus) from ChildStatus cs, ChildStatusItem csi where csi.item.id =:id and csi.childStatus.id = cs.id"
+    )
+    List<ChildStatusItemDTO> findAllChildStatusItem(@Param("id") Long id);
 }

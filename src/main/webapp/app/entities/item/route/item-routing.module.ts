@@ -7,6 +7,8 @@ import { ItemDetailComponent } from '../detail/item-detail.component';
 import { ItemUpdateComponent } from '../update/item-update.component';
 import { ItemRoutingResolveService } from './item-routing-resolve.service';
 import { AddItemComponent } from '../add-item/add-item.component';
+import { AddCompositeItemComponent } from '../add-composite-item/add-composite-item.component';
+import { AddCompositeSchoolItemComponent } from '../add-composite-school-item/add-composite-school-item.component';
 
 const itemRoute: Routes = [
   {
@@ -44,6 +46,24 @@ const itemRoute: Routes = [
   {
     path: 'add',
     component: AddItemComponent,
+    resolve: {
+      item: ItemRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+
+  {
+    path: 'add/composite',
+    component: AddCompositeItemComponent,
+    resolve: {
+      item: ItemRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+
+  {
+    path: 'add/composite-school-item',
+    component: AddCompositeSchoolItemComponent,
     resolve: {
       item: ItemRoutingResolveService,
     },

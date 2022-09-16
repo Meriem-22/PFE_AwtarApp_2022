@@ -190,4 +190,17 @@ public class SchoolLevelItemResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * {@code GET  /items/:id} : get the "id" item.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the schoolLevelItemDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/school-level-items/{id}/compositeur-school-items")
+    public ResponseEntity<List<SchoolLevelItemDTO>> getAllCompositeurItemDetails(@PathVariable Long id) {
+        log.debug("REST request to get Items : {}");
+        List<SchoolLevelItemDTO> schoolLevelItemDTO = schoolLevelItemService.findSchoolLevelItemDetails(id);
+        return ResponseEntity.ok().body(schoolLevelItemDTO);
+    }
 }

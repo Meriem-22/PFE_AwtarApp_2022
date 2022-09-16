@@ -18,6 +18,13 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { AddCompositeItemComponent } from './add-composite-item/add-composite-item.component';
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
+import { AddCompositeSchoolItemComponent } from './add-composite-school-item/add-composite-school-item.component';
 
 @NgModule({
   imports: [
@@ -35,8 +42,21 @@ import { ProgressBarModule } from 'primeng/progressbar';
     ButtonModule,
     DropdownModule,
     InputNumberModule,
+    ToastModule,
+    ToolbarModule,
+    ConfirmDialogModule,
+    DialogModule,
   ],
-  declarations: [ItemComponent, ItemDetailComponent, ItemUpdateComponent, ItemDeleteDialogComponent, AddItemComponent],
+  providers: [ConfirmationService, MessageService],
+  declarations: [
+    ItemComponent,
+    ItemDetailComponent,
+    ItemUpdateComponent,
+    ItemDeleteDialogComponent,
+    AddItemComponent,
+    AddCompositeItemComponent,
+    AddCompositeSchoolItemComponent,
+  ],
   entryComponents: [ItemDeleteDialogComponent],
 })
 export class ItemModule {}

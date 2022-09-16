@@ -2,7 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventManager } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { EventWithContent } from 'app/core/util/event-manager.service';
 import { IChildStatus } from 'app/entities/child-status/child-status.model';
@@ -60,7 +60,10 @@ export class AddItemComponent implements OnInit {
   n!: string;
   itemValue!: IItemValue;
   SimpleItemSearch?: string;
+  CompositeurItemSearch?: string;
+
   SI = 0;
+  SIC = 0;
 
   step = 1;
   id1 = -1;
@@ -124,7 +127,8 @@ export class AddItemComponent implements OnInit {
     price: [null, [Validators.required]],
     priceDate: [null, [Validators.required]],
     schoolLevel: [null, [Validators.required]],
-    quantityNeeded: [null, [Validators.required]],
+    nature: [null, [Validators.required]],
+    quantityNeeded: [],
     staus: [null, [Validators.required]],
     quantity: [null, [Validators.required]],
   });
@@ -159,7 +163,8 @@ export class AddItemComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder,
     protected schoolLevelService: SchoolLevelService,
-    protected itemValueService: ItemValueService
+    protected itemValueService: ItemValueService,
+    protected router: Router
   ) {}
 
   ngOnInit(): void {
@@ -177,10 +182,6 @@ export class AddItemComponent implements OnInit {
 
   getSearch(event: any): void {
     this.results = this.search(event.query);
-  }
-
-  getName(): void {
-    this.getItemName();
   }
 
   search(keyword: string): string[] {
@@ -232,50 +233,189 @@ export class AddItemComponent implements OnInit {
     return names;
   }
 
-  getItemName(): void {
-    this.SI = 0;
-    this.n = this.SimpleItemSearch!;
-    console.log(this.n);
+  getItemName(form: FormGroup, x: string): void {
+    if (x === 'composite') {
+      this.SI = 0;
+      this.SIC = 0;
+      this.n = this.SimpleItemSearch!;
+      this.CompositeurItemSearch = '';
+    }
+    if (x === 'compositeur') {
+      this.SIC = 0;
+      this.n = this.CompositeurItemSearch!;
+    }
     for (let i = 0; i < this.itemsWithNature.length; i++) {
       if (this.itemsWithNature[i].name!.includes(this.n) && this.itemsWithNature[i].name!.length === this.n.length) {
         this.item = this.itemsWithNature[i];
-        this.SI = -1;
+        if (x === 'composite') {
+          this.SI = -1;
+        }
+        if (x === 'compositeur') {
+          this.SIC = -1;
+        }
       }
     }
 
     console.log(this.item);
-    if (this.SI === -1) {
+    if (this.SI === -1 || this.SIC === -1) {
       this.itemValueService.findItem(this.item!.id!).subscribe({
         next: (res: HttpResponse<IItemValue>) => {
           this.itemValue = res.body!;
           console.log(this.itemValue);
-          this.simpleItemForm.patchValue({
-            name: this.item!.name,
-            urlPhoto: this.item!.urlPhoto!,
-            urlPhotoContentType: this.item!.urlPhotoContentType!,
-            gender: this.item!.gender,
-            price: this.itemValue.price!,
-            priceDate: this.itemValue.priceDate!,
-            quantity: 1,
-          });
+          if (form === this.simpleItemForm || form === this.compositeurItemForm) {
+            form.patchValue({
+              name: this.item!.name,
+              urlPhoto: this.item!.urlPhoto!,
+              urlPhotoContentType: this.item!.urlPhotoContentType!,
+              gender: this.item!.gender,
+              price: this.itemValue.price!,
+              priceDate: this.itemValue.priceDate!,
+              quantity: 1,
+            });
+          }
+          if (form === this.compositeItemForm) {
+            this.compositeItemForm.patchValue({
+              name: this.item!.name,
+              urlPhoto: this.item!.urlPhoto!,
+              urlPhotoContentType: this.item!.urlPhotoContentType!,
+              gender: this.item!.gender,
+            });
+          }
         },
         error: e => console.error(e),
       });
-      this.SI = 1;
+
+      if (x === 'composite') {
+        this.SI = 1;
+        if (this.itemNature === '2' && this.itemType === '1') {
+          this.router.navigateByUrl('item/add/composite', { state: { item: this.item, price: this.itemValue } });
+        }
+      }
+      if (x === 'compositeur') {
+        this.SIC = 1;
+      }
+      console.log('SI', this.SI);
+      console.log('SIC', this.SIC);
     }
 
-    if (this.SI === 0) {
-      this.SI = 2;
-      this.simpleItemForm.patchValue({
-        name: this.n,
-        urlPhoto: '',
-        urlPhotoContentType: '',
-        gender: '',
-        price: '',
-        priceDate: '',
-        quantity: 1,
+    if (x === 'composite') {
+      if (this.SI === 0) {
+        this.SI = 2;
+        if (form === this.simpleItemForm) {
+          this.initForm();
+        }
+        if (form === this.compositeItemForm) {
+          this.initForm1();
+        }
+
+        console.log('X', x);
+        console.log(this.SI);
+      }
+    }
+
+    if (x === 'compositeur') {
+      if (this.SIC === 0) {
+        this.SIC = 2;
+        if (form === this.compositeurItemForm) {
+          this.initForm2();
+        }
+
+        console.log('SI', this.SI);
+        console.log('SIC', this.SIC);
+      }
+    }
+  }
+
+  getSchoolItemName(form: FormGroup, x: string): void {
+    if (x === 'composite') {
+      this.SI = 0;
+      this.SIC = 0;
+      this.n = this.SimpleItemSearch!;
+      this.CompositeurItemSearch = '';
+    }
+    if (x === 'compositeur') {
+      this.SIC = 0;
+      this.n = this.CompositeurItemSearch!;
+    }
+    for (let i = 0; i < this.itemsWithNature.length; i++) {
+      if (this.itemsWithNature[i].name!.includes(this.n) && this.itemsWithNature[i].name!.length === this.n.length) {
+        this.item = this.itemsWithNature[i];
+        if (x === 'composite') {
+          this.SI = -1;
+        }
+        if (x === 'compositeur') {
+          this.SIC = -1;
+        }
+      }
+    }
+
+    console.log(this.item);
+    if (this.SI === -1 || this.SIC === -1) {
+      this.itemValueService.findItem(this.item!.id!).subscribe({
+        next: (res: HttpResponse<IItemValue>) => {
+          this.itemValue = res.body!;
+          console.log(this.itemValue);
+          if (form === this.simpleSchoolItemForm || form === this.compositeurSchoolItemForm) {
+            form.patchValue({
+              name: this.item!.name,
+              urlPhoto: this.item!.urlPhoto!,
+              urlPhotoContentType: this.item!.urlPhotoContentType!,
+              gender: this.item!.gender,
+              price: this.itemValue.price!,
+              priceDate: this.itemValue.priceDate!,
+              quantity: 1,
+            });
+          }
+          if (form === this.compositeSchoolItemForm) {
+            this.compositeSchoolItemForm.patchValue({
+              name: this.item!.name,
+              urlPhoto: this.item!.urlPhoto!,
+              urlPhotoContentType: this.item!.urlPhotoContentType!,
+              gender: this.item!.gender,
+            });
+          }
+        },
+        error: e => console.error(e),
       });
-      console.log(this.SI);
+
+      if (x === 'composite') {
+        this.SI = 1;
+        if (this.itemNature === '1' && this.itemType === '1') {
+          this.router.navigateByUrl('item/add/composite-school-item', { state: { item: this.item, price: this.itemValue } });
+        }
+      }
+      if (x === 'compositeur') {
+        this.SIC = 1;
+      }
+      console.log('SI', this.SI);
+      console.log('SIC', this.SIC);
+    }
+
+    if (x === 'composite') {
+      if (this.SI === 0) {
+        this.SI = 2;
+        if (form === this.simpleSchoolItemForm) {
+          this.initForm3();
+        }
+        if (form === this.compositeSchoolItemForm) {
+          this.initForm5();
+        }
+
+        console.log('X', x);
+        console.log(this.SI);
+      }
+    }
+
+    if (x === 'compositeur') {
+      if (this.SIC === 0) {
+        this.SIC = 2;
+        if (form === this.compositeurSchoolItemForm) {
+          this.initForm4();
+        }
+
+        console.log('SI', this.SI);
+        console.log('SIC', this.SIC);
+      }
     }
   }
 
@@ -362,14 +502,12 @@ export class AddItemComponent implements OnInit {
     }
     if (this.textParam && this.itemNature === '1' && this.itemType === '1') {
       this.step = 5;
-      this.initForm2();
     }
     if (this.textParam && this.itemNature === '2' && this.itemType === '2') {
       this.step = 2;
     }
     if (this.textParam && this.itemNature === '2' && this.itemType === '1') {
       this.step = 3;
-      this.initForm1();
     }
   }
 
@@ -379,6 +517,10 @@ export class AddItemComponent implements OnInit {
     } else {
       this.SI = 0;
     }
+  }
+
+  previous2(): void {
+    this.SIC = 0;
   }
 
   nextStep(): void {
@@ -501,15 +643,72 @@ export class AddItemComponent implements OnInit {
     this.isSaving = false;
   }
 
+  protected initForm(): void {
+    this.simpleItemForm.patchValue({
+      name: this.SimpleItemSearch,
+      urlPhoto: '',
+      urlPhotoContentType: '',
+      gender: '',
+      price: '',
+      priceDate: '',
+      quantity: 1,
+    });
+    console.log(this.SI);
+  }
   protected initForm1(): void {
-    this.compositeurItemForm.patchValue({
-      nature: this.textParam,
+    this.compositeItemForm.patchValue({
+      name: this.SimpleItemSearch,
+      urlPhoto: '',
+      urlPhotoContentType: '',
+      gender: '',
     });
   }
 
   protected initForm2(): void {
-    this.compositeurSchoolItemForm.patchValue({
+    this.compositeurItemForm.patchValue({
+      name: this.CompositeurItemSearch,
+      urlPhoto: '',
+      urlPhotoContentType: '',
+      gender: '',
+      price: '',
+      priceDate: '',
+      quantity: 1,
       nature: this.textParam,
+    });
+  }
+
+  protected initForm3(): void {
+    this.simpleSchoolItemForm.patchValue({
+      name: this.SimpleItemSearch,
+      urlPhoto: '',
+      urlPhotoContentType: '',
+      gender: '',
+      price: '',
+      priceDate: '',
+      quantity: 1,
+      nature: this.textParam,
+    });
+  }
+
+  protected initForm4(): void {
+    this.compositeurSchoolItemForm.patchValue({
+      name: this.CompositeurItemSearch,
+      urlPhoto: '',
+      urlPhotoContentType: '',
+      gender: '',
+      price: '',
+      priceDate: '',
+      quantity: 1,
+      nature: this.textParam,
+    });
+  }
+
+  protected initForm5(): void {
+    this.compositeSchoolItemForm.patchValue({
+      name: this.SimpleItemSearch,
+      urlPhoto: '',
+      urlPhotoContentType: '',
+      gender: '',
     });
   }
 

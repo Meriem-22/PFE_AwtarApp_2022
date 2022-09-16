@@ -98,4 +98,22 @@ public class ItemServiceImpl implements ItemService {
         List<Item> items = itemRepository.findAllItems();
         return itemMapper.toDto(items);
     }
+
+    @Override
+    public List<ItemDTO> findAllDetailsItems() {
+        List<ItemDTO> items = itemRepository.findAllDetailsItems();
+        return items;
+    }
+
+    @Override
+    public List<ItemDTO> findAllSchoolItemsDetails() {
+        List<ItemDTO> items = itemRepository.findAllSchoolItemsDetails();
+        return items;
+    }
+
+    @Override
+    public List<ItemDTO> findAllCompositeurItemsDetails(Long id) {
+        List<ItemDTO> items = itemRepository.findAllCompositeurDetailItems(id);
+        return items;
+    }
 }

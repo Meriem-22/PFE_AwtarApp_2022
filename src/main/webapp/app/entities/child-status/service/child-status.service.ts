@@ -9,6 +9,7 @@ import { IChildStatus, getChildStatusIdentifier } from '../child-status.model';
 
 export type EntityResponseType = HttpResponse<IChildStatus>;
 export type EntityArrayResponseType = HttpResponse<IChildStatus[]>;
+export type EntityArrayResponseAnyType = HttpResponse<any[]>;
 
 @Injectable({ providedIn: 'root' })
 export class ChildStatusService {
