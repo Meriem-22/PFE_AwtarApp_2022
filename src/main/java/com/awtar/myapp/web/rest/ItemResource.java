@@ -254,4 +254,44 @@ public class ItemResource {
         List<ItemDTO> itemDTO = itemService.findAllCompositeurItemsDetails(id);
         return ResponseEntity.ok().body(itemDTO);
     }
+
+    /**
+     * {@code POST  /items} : Create a new item.
+     *
+     * @param itemDTO the itemDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new itemDTO, or with status {@code 400 (Bad Request)} if the item has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/items/simple-item")
+    public ResponseEntity<ItemDTO> createItemSimpleItem(@Valid @RequestBody ItemDTO itemDTO) throws URISyntaxException {
+        log.debug("REST request to save Item : {}", itemDTO);
+        if (itemDTO.getId() != null) {
+            throw new BadRequestAlertException("A new item cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        ItemDTO result = itemService.addSimpleItem(itemDTO);
+        return ResponseEntity
+            .created(new URI("/api/items/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * {@code POST  /items} : Create a new item.
+     *
+     * @param itemDTO the itemDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new itemDTO, or with status {@code 400 (Bad Request)} if the item has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/items/simple-school-item")
+    public ResponseEntity<ItemDTO> createItemSimpleSchoolItem(@Valid @RequestBody ItemDTO itemDTO) throws URISyntaxException {
+        log.debug("REST request to save Item : {}", itemDTO);
+        if (itemDTO.getId() != null) {
+            throw new BadRequestAlertException("A new item cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        ItemDTO result = itemService.addSimpleSchoolItem(itemDTO);
+        return ResponseEntity
+            .created(new URI("/api/items/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
 }

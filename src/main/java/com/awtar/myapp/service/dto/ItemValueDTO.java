@@ -24,6 +24,8 @@ public class ItemValueDTO implements Serializable {
 
     private ItemDTO item;
 
+    private Long idPrice;
+
     public Long getId() {
         return id;
     }
@@ -70,6 +72,14 @@ public class ItemValueDTO implements Serializable {
 
     public void setItem(ItemDTO item) {
         this.item = item;
+    }
+
+    public Long getIdPrice() {
+        return idPrice;
+    }
+
+    public void setIdPrice(Long idPrice) {
+        this.idPrice = idPrice;
     }
 
     @Override

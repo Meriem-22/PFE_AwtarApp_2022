@@ -5,7 +5,7 @@ import { IDonationsReceivedItem } from 'app/entities/donations-received-item/don
 import { IChildStatusItem } from 'app/entities/child-status-item/child-status-item.model';
 import { ISchoolLevelItem } from 'app/entities/school-level-item/school-level-item.model';
 import { ItemGender } from 'app/entities/enumerations/item-gender.model';
-import dayjs from 'dayjs';
+import dayjs from 'dayjs/esm';
 import { Status } from '../enumerations/status.model';
 
 export interface IItem {
@@ -25,16 +25,22 @@ export interface IItem {
   childStatuses?: IChildStatusItem[] | null;
   schoolLevels?: ISchoolLevelItem[] | null;
 
+  idPrice?: number;
   price?: number;
   priceDate?: dayjs.Dayjs;
-  schoolLevel?: string;
+  schoolLevelDetails?: { id: number; qt: number }[];
   isSchoolItem?: boolean | null;
   quantityNeeded?: number | null;
   staus?: Status;
+  allStaus?: Status[];
+
   simple?: boolean | null;
-  compositeSimpleItem?: ICompositeItem[] | null;
-  compositeSchoolItem?: ICompositeSchoolItem[] | null;
+  compositeurSimpleItems?: ICompositeItem[] | null;
+  compositeurSchoolItems?: ICompositeSchoolItem[] | null;
   quantity?: number;
+  quantityToAdd?: number;
+  quantitySchoolItemTab?: number[] | null;
+  schoolLevelIemTab?: number[] | null;
 }
 
 export interface ICompositeItem {
@@ -107,16 +113,22 @@ export class Item implements IItem {
     public donationsReceiveds?: IDonationsReceivedItem[] | null,
     public childStatuses?: IChildStatusItem[] | null,
     public schoolLevels?: ISchoolLevelItem[] | null,
+    public idPrice?: number,
     public price?: number,
     public priceDate?: dayjs.Dayjs,
-    public schoolLevel?: string,
+    public schoolLevelDetails?: { id: number; qt: number }[],
     public isSchoolItem?: boolean | null,
     public quantityNeeded?: number | null,
     public staus?: Status,
+    public allStaus?: Status[],
+
     public simple?: boolean | null,
-    public compositeItem?: IItem[] | null,
-    public compositeSchoolItem?: IItem[] | null,
-    public quantity?: number
+    public compositeurItems?: IItem[] | null,
+    public compositeurSchoolItems?: IItem[] | null,
+    public quantity?: number,
+    public quantityToAdd?: number,
+    public quantitySchoolItemTab?: number[] | null,
+    public schoolLevelIemTab?: number[] | null
   ) {
     this.composed = this.composed ?? false;
     this.archivated = this.archivated ?? false;

@@ -7,63 +7,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
 
     <title>AdminLTE 3 | Dashboard</title>
-
-    <script nonce="33a2bf22-55fb-4fb7-baea-4b8bb2a21cdd">
-      (function (w, d) {
-        !(function (a, e, t, r) {
-          (a.zarazData = a.zarazData || {}),
-            (a.zarazData.executed = []),
-            (a.zaraz = { deferred: [] }),
-            (a.zaraz.q = []),
-            (a.zaraz._f = function (e) {
-              return function () {
-                var t = Array.prototype.slice.call(arguments);
-                a.zaraz.q.push({ m: e, a: t });
-              };
-            });
-          for (const e of ['track', 'set', 'ecommerce', 'debug']) a.zaraz[e] = a.zaraz._f(e);
-          (a.zaraz.init = () => {
-            var t = e.getElementsByTagName(r)[0],
-              z = e.createElement(r),
-              n = e.getElementsByTagName('title')[0];
-            for (
-              n && (a.zarazData.t = e.getElementsByTagName('title')[0].text),
-                a.zarazData.x = Math.random(),
-                a.zarazData.w = a.screen.width,
-                a.zarazData.h = a.screen.height,
-                a.zarazData.j = a.innerHeight,
-                a.zarazData.e = a.innerWidth,
-                a.zarazData.l = a.location.href,
-                a.zarazData.r = e.referrer,
-                a.zarazData.k = a.screen.colorDepth,
-                a.zarazData.n = e.characterSet,
-                a.zarazData.o = new Date().getTimezoneOffset(),
-                a.zarazData.q = [];
-              a.zaraz.q.length;
-
-            ) {
-              const e = a.zaraz.q.shift();
-              a.zarazData.q.push(e);
-            }
-            z.defer = !0;
-            for (const e of [localStorage, sessionStorage])
-              Object.keys(e || {})
-                .filter(a => a.startsWith('_zaraz_'))
-                .forEach(t => {
-                  try {
-                    a.zarazData['z_' + t.slice(7)] = JSON.parse(e.getItem(t));
-                  } catch {
-                    a.zarazData['z_' + t.slice(7)] = e.getItem(t);
-                  }
-                });
-            (z.referrerPolicy = 'origin'),
-              (z.src = '/cdn-cgi/zaraz/s.js?z=' + btoa(encodeURIComponent(JSON.stringify(a.zarazData)))),
-              t.parentNode.insertBefore(z, t);
-          }),
-            ['complete', 'interactive'].includes(e.readyState) ? zaraz.init() : a.addEventListener('DOMContentLoaded', zaraz.init);
-        })(w, d, 0, 'script');
-      })(window, document);
-    </script>
   </head>
 
   <style>
@@ -436,6 +379,7 @@
                   <!-- progressbar -->
 
                   <!-- fieldsets -->
+                  <jhi-alert></jhi-alert>
 
                   <fieldset *ngIf="step == 1">
                     <div class="card card-primary" style="background-color: rgb(255, 202, 249)">
@@ -494,7 +438,7 @@
                   </fieldset>
 
                   <fieldset *ngIf="step == 2">
-                    <div class="card card-primary" style="background-color: rgb(255, 202, 249)">
+                    <div class="card card-primary">
                       <div class="card-header">
                         <h3 class="card-title">Simple Item Details</h3>
                       </div>
@@ -535,19 +479,28 @@
                       </div>
 
                       <div *ngIf="SI == 2">
+                        <div class="field align-items-center" style="display: flex; margin: 1rem">
+                          <label for="quantity" style="margin-right: 1rem; margin-left: 50rem">Quantity To Add</label>
+                          <input
+                            type="number"
+                            name="quantity"
+                            id="field_quantity"
+                            style="width: 5rem; text-align: center"
+                            [(ngModel)]="quantityToAdd"
+                            data-cy="quantity"
+                            class="form-control"
+                          />
+                          <button
+                            pButton
+                            pRipple
+                            icon="pi pi-plus"
+                            class="p-button-success mr-2"
+                            (click)="save()"
+                            style="margin-left: 1rem"
+                          ></button>
+                        </div>
                         <form name="simpleItemForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="simpleItemForm">
                           <div class="item" style="margin-top: 1rem; margin-right: 1rem">
-                            <div class="item text-right" style="display: flex">
-                              <label style="margin-left: 1rem; margin-right: 1rem" for="horizontal">Quantity</label>
-                              <input
-                                type="number"
-                                style="width: 5rem"
-                                class="form-control"
-                                formControlName="quantity"
-                                id="field_quantity"
-                                name="quantity"
-                              />
-                            </div>
                             <div
                               style="margin-left: 6rem"
                               *ngIf="
@@ -781,7 +734,6 @@
 
                             <div class="card-footer text-right" style="margin-top: 1rem">
                               <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                              <button type="button" name="next" class="btn btn-success">Save</button>
                               <button (click)="nextStep()" type="button" name="next" class="btn btn-primary">Next</button>
                             </div>
                           </div>
@@ -789,6 +741,7 @@
                       </div>
 
                       <div *ngIf="SI == 1">
+                        <!--
                         <form name="simpleItemForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="simpleItemForm">
                           <div class="item text-right" style="margin-top: 1rem; margin-right: 1rem">
                             <div class="item text-right" style="display: flex">
@@ -1001,6 +954,83 @@
                             </div>
                           </div>
                         </form>
+                         -->
+                        <p-toolbar *ngIf="item">
+                          <dl>
+                            <div class="flex align-items-left justify-content-between" style="display: flex">
+                              <div>
+                                <dd>
+                                  <div *ngIf="item.urlPhoto">
+                                    <a (click)="openFile(item.urlPhoto, item.urlPhotoContentType)">
+                                      <img
+                                        [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto"
+                                        style="max-width: 100px; max-height: 130px"
+                                        alt="item image"
+                                      />
+                                    </a>
+                                  </div>
+                                </dd>
+                              </div>
+                              <div>
+                                <div style="margin: 1rem">
+                                  <dt><span jhiTranslate="awtarApp.item.name">Name</span></dt>
+                                  <dd>
+                                    <span>{{ item.name }}</span>
+                                  </dd>
+
+                                  <dt><span jhiTranslate="awtarApp.item.gender">Gender</span></dt>
+                                  <dd>
+                                    <span jhiTranslate="{{ 'awtarApp.ItemGender.' + item.gender }}">{{ item.gender }}</span>
+                                  </dd>
+                                </div>
+                              </div>
+                              <div>
+                                <div class="flex align-items-center justify-content-between" style="margin: 1rem">
+                                  <dt><span>Price</span></dt>
+                                  <dd>
+                                    <span>{{ itemValue.price }}</span>
+                                  </dd>
+
+                                  <dt><span>PriceDate</span></dt>
+                                  <dd>
+                                    <span>{{ itemValue.priceDate | formatMediumDate }}</span>
+                                  </dd>
+                                </div>
+                              </div>
+                              <div>
+                                <div class="flex align-items-center justify-content-between" style="margin: 1rem">
+                                  <dt><span jhiTranslate="awtarApp.item.nature">Nature</span></dt>
+                                  <dd>
+                                    <div *ngIf="item.nature">
+                                      <span>{{ item.nature?.name }}</span>
+                                      <i
+                                        class="far fa-eye"
+                                        [routerLink]="['/nature', item.nature?.id, 'view']"
+                                        style="cursor: pointer; color: rgb(239, 47, 223)"
+                                      ></i>
+                                    </div>
+                                  </dd>
+                                  <dt><span jhiTranslate="awtarApp.itemValue.availableStockQuantity">Available Stock Quantity</span></dt>
+                                  <dd>
+                                    <span>{{ item.price }}</span>
+                                  </dd>
+                                </div>
+                              </div>
+                            </div>
+                          </dl>
+                          <div class="flex align-items-right justify-content-between">
+                            <label for="quantityToAdd" style="margin-right: 1rem">Quantity To Add</label>
+                            <input
+                              type="number"
+                              name="quantityToAdd"
+                              id="field_quantityToAdd"
+                              style="width: 5rem; text-align: center; border-radius: 30%"
+                              [(ngModel)]="quantityToAdd"
+                              data-cy="quantityToAdd"
+                            />
+                            <button pButton pRipple icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+                          </div>
+                        </p-toolbar>
                       </div>
                     </div>
                   </fieldset>
@@ -1902,6 +1932,28 @@
                         <div class="card-body">
                           <div class="card">
                             <div class="card-body">
+                              <div class="item text-right">
+                                <button
+                                  style="margin-bottom: 1rem"
+                                  (click)="finaleTable()"
+                                  type="button"
+                                  name="next"
+                                  class="btn btn-primary"
+                                >
+                                  Add Item
+                                </button>
+                              </div>
+                              <div class="item text-right" style="display: flex; margin-top: -1rem">
+                                <label for="horizontal">Quantity</label>
+                                <input
+                                  type="number"
+                                  style="width: 5rem; margin-left: 1rem; margin-bottom: 3rem"
+                                  class="form-control"
+                                  id="field_quantity"
+                                  name="quantityToAdd"
+                                  [(ngModel)]="quantityToAdd"
+                                />
+                              </div>
                               <form
                                 name="simpleSchoolItemForm"
                                 role="form"
@@ -1909,23 +1961,6 @@
                                 (ngSubmit)="save()"
                                 [formGroup]="simpleSchoolItemForm"
                               >
-                                <div class="item text-right">
-                                  <button style="margin-bottom: 1rem" (click)="next()" type="button" name="next" class="btn btn-primary">
-                                    Add Item
-                                  </button>
-                                </div>
-                                <div class="item text-right" style="display: flex; margin-top: -1rem">
-                                  <label for="horizontal">Quantity</label>
-                                  <input
-                                    type="number"
-                                    style="width: 5rem; margin-left: 1rem; margin-bottom: 3rem"
-                                    class="form-control"
-                                    formControlName="quantity"
-                                    id="field_quantity"
-                                    name="quantity"
-                                  />
-                                </div>
-
                                 <div class="row" style="display: flex">
                                   <div class="card-body col-md-3 text-left" style="display: grid; margin-right: 4rem">
                                     <div>
@@ -2004,9 +2039,6 @@
                                             (completeMethod)="SearchNature($event)"
                                             [forceSelection]="true"
                                           ></p-autoComplete>
-                                          <div *ngIf="invalide === true" style="margin-left: 1rem">
-                                            <p-message severity="error"></p-message>
-                                          </div>
                                         </div>
                                       </div>
                                     </div>
@@ -2162,7 +2194,6 @@
                                               id="{{ selectedLevel.id }}"
                                               (change)="updateTable($event)"
                                               data-cy="quantityNeeded"
-                                              formControlName="selectedLevel.schoolLevel"
                                             />
                                           </form>
                                         </td>
@@ -3059,7 +3090,13 @@
                                 [formGroup]="compositeurSchoolItemForm"
                               >
                                 <div class="item text-right">
-                                  <button style="margin-bottom: 1rem" (click)="next()" type="button" name="next" class="btn btn-primary">
+                                  <button
+                                    style="margin-bottom: 1rem"
+                                    (click)="finaleTable()"
+                                    type="button"
+                                    name="next"
+                                    class="btn btn-primary"
+                                  >
                                     Add Item
                                   </button>
                                 </div>
@@ -3643,9 +3680,6 @@
                       </div>
                     </div>
                   </fieldset>
-
-                  {{ SelectedLevel }}
-                  {{ finalquantitytable }}
                 </div>
               </div>
             </div>

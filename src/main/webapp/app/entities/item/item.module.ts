@@ -25,6 +25,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { AddCompositeSchoolItemComponent } from './add-composite-school-item/add-composite-school-item.component';
+import { AddSimpleItemComponent } from './add-simple-item/add-simple-item.component';
 
 @NgModule({
   imports: [
@@ -56,6 +57,7 @@ import { AddCompositeSchoolItemComponent } from './add-composite-school-item/add
     AddItemComponent,
     AddCompositeItemComponent,
     AddCompositeSchoolItemComponent,
+    AddSimpleItemComponent,
   ],
   entryComponents: [ItemDeleteDialogComponent],
 })

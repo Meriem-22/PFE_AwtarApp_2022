@@ -471,22 +471,23 @@
                       </div>
                     </div>
                     <div>
-                      <div class="field align-items-right" style="display: flex; margin: 1rem">
+                      <div class="field align-items-center" style="display: flex; margin: 1rem">
                         <label for="quantity" style="margin-right: 1rem">Quantity To Add</label>
                         <input
                           type="number"
                           name="quantity"
                           id="field_quantity"
-                          style="width: 5rem; text-align: center; border-radius: 30%"
+                          style="width: 5rem; text-align: center"
                           [(ngModel)]="quantity"
                           data-cy="quantity"
+                          class="form-control"
                         />
                         <button
                           pButton
                           pRipple
                           icon="pi pi-plus"
                           class="p-button-success mr-2"
-                          (click)="openNew()"
+                          (click)="AddItem()"
                           style="margin-left: 1rem"
                         ></button>
                       </div>
@@ -617,7 +618,7 @@
                 </ng-template>
               </p-table>
             </div>
-            <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <form name="editForm" role="form" novalidate [formGroup]="editForm">
               <p-dialog [(visible)]="productDialog" [style]="{ width: '450px' }" header="Price Details" [modal]="true" styleClass="p-fluid">
                 <ng-template pTemplate="content">
                   <div class="img text-center">
@@ -667,15 +668,22 @@
                     <div class="field col">
                       <label class="form-label" jhiTranslate="awtarApp.itemValue.priceDate" for="field_priceDate">Price Date</label>
 
-                      <input
-                        id="field_priceDate"
-                        data-cy="priceDate"
-                        type="date"
-                        class="form-control"
-                        name="priceDate"
-                        formControlName="priceDate"
-                        [(ngModel)]="product.priceDate"
-                      />
+                      <div class="input-group">
+                        <input
+                          id="field_priceDate"
+                          data-cy="priceDate"
+                          type="text"
+                          class="form-control"
+                          name="priceDate"
+                          ngbDatepicker
+                          #priceDateDp="ngbDatepicker"
+                          formControlName="priceDate"
+                          [(ngModel)]="product.priceDate"
+                        />
+                        <button type="button" class="btn btn-secondary" (click)="priceDateDp.toggle()">
+                          <fa-icon icon="calendar-alt"></fa-icon>
+                        </button>
+                      </div>
 
                       <div
                         *ngIf="
@@ -696,7 +704,7 @@
 
                 <ng-template pTemplate="footer">
                   <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                  <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+                  <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="(saveProduct)"></button>
                 </ng-template>
               </p-dialog>
 

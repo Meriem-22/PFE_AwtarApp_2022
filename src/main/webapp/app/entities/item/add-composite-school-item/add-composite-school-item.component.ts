@@ -3,19 +3,21 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { EventManager } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { DATE_FORMAT } from 'app/config/input.constants';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { IChildStatusItem } from 'app/entities/child-status-item/child-status-item.model';
 import { ChildStatusItemService } from 'app/entities/child-status-item/service/child-status-item.service';
 import { ChildStatus } from 'app/entities/child-status/child-status.model';
 import { ChildStatusService } from 'app/entities/child-status/service/child-status.service';
 import { ItemGender } from 'app/entities/enumerations/item-gender.model';
-import { IItemValue } from 'app/entities/item-value/item-value.model';
+import { IItemValue, ItemValue } from 'app/entities/item-value/item-value.model';
 import { ItemValueService } from 'app/entities/item-value/service/item-value.service';
 import { INature } from 'app/entities/nature/nature.model';
 import { NatureService } from 'app/entities/nature/service/nature.service';
 import { SchoolLevelItem } from 'app/entities/school-level-item/school-level-item.model';
 import { SchoolLevelItemService } from 'app/entities/school-level-item/service/school-level-item.service';
 import { SchoolLevelService } from 'app/entities/school-level/service/school-level.service';
+import dayjs from 'dayjs/esm';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, finalize, map } from 'rxjs';
 import { IItem, Item } from '../item.model';
@@ -28,11 +30,11 @@ import { ItemService } from '../service/item.service';
 })
 export class AddCompositeSchoolItemComponent implements OnInit {
   naturesSharedCollection: INature[] = [];
-  productDialog?: boolean;
   products!: IItem[];
   product!: IItem;
   item!: IItem;
   selectedProducts?: IItem[] | null;
+  productDialog?: boolean;
   submitted?: boolean;
   statuses?: any[];
   isSaving = false;
@@ -107,8 +109,6 @@ export class AddCompositeSchoolItemComponent implements OnInit {
       },
       error: e => console.error(e),
     });
-
-    this.loadRelationshipsOptions();
   }
 
   findSchoolLevelInfo(): void {
@@ -136,36 +136,39 @@ export class AddCompositeSchoolItemComponent implements OnInit {
     this.productDialog = true;
   }
 
-  deleteSelectedProducts(): void {
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected products?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.products = this.products.filter(val => !this.selectedProducts!.includes(val));
-        this.selectedProducts = null;
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
-      },
-    });
-  }
-
   editProduct(product: IItem): void {
     console.log(product);
     this.product = { ...product };
     this.productDialog = true;
   }
 
-  deleteProduct(product: IItem): void {
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + 'product.name?.toString' + '?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.products = this.products.filter(val => val.id !== product.id);
-        this.product = {};
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
-      },
-    });
+  updatePrice = (): void => {
+    const Compositeur = this.createFromFormPrice2();
+    this.updateCompositeurValue(Compositeur);
+
+    let s = 0;
+    for (let i = 0; i < this.products.length; i++) {
+      s = s + this.products[i].price!;
+    }
+
+    const Composite = this.createFromFormPrice(this.price, s, dayjs());
+    this.save(Composite);
+  };
+
+  saveProduct(): void {
+    this.submitted = true;
+    if (this.product.name!.trim()) {
+      if (this.product.id) {
+        this.products[this.findIndexById(this.product.id)] = this.convertDateFromClient(this.product);
+
+        console.log(this.product);
+        this.updatePrice();
+      }
+
+      this.products = [...this.products];
+      this.productDialog = false;
+      this.product = {};
+    }
   }
 
   hideDialog(): void {
@@ -173,25 +176,20 @@ export class AddCompositeSchoolItemComponent implements OnInit {
     this.submitted = false;
   }
 
-  saveProduct(): void {
-    this.submitted = true;
+  showPrice(): void {
+    this.itemValueService.findItem(this.item.id!).subscribe({
+      next: (res: HttpResponse<IItemValue>) => {
+        this.price = res.body!;
+        this.editForm.patchValue({
+          price: this.price.price,
+          priceDate: this.price.priceDate,
+          availableStockQuantity: this.price.availableStockQuantity,
+        });
+      },
+      error: e => console.error(e),
+    });
 
-    if (this.product.name!.trim()) {
-      if (this.product.id) {
-        this.products[this.findIndexById(this.product.id)] = this.product;
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
-      } else {
-        /*this.product!.id! = this.createId();
-          this.product.image = 'product-placeholder.svg';
-          this.products.push(this.product);
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
-      */
-      }
-
-      this.products = [...this.products];
-      this.productDialog = false;
-      this.product = {};
-    }
+    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
   }
 
   trackNatureById(_index: number, item: INature): number {
@@ -242,22 +240,50 @@ export class AddCompositeSchoolItemComponent implements OnInit {
   }
 
   previousState(): void {
-    window.history.back();
+    this.isSaving = true;
   }
 
-  save(): void {
+  AddItem(): void {
     this.isSaving = true;
-    const item = this.createFromForm();
-    if (item.id !== undefined) {
-      this.subscribeToSaveResponse(this.itemService.update(item));
+    const itemValue = this.createFromToAddItem();
+    if (itemValue.id !== undefined) {
+      this.subscribeToSaveResponse(this.itemValueService.update(itemValue));
     } else {
-      this.subscribeToSaveResponse(this.itemService.create(item));
+      this.subscribeToSaveResponse(this.itemValueService.create(itemValue));
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IItem>>): void {
+  save(item: IItemValue): void {
+    this.isSaving = true;
+    if (item.id !== undefined) {
+      this.subscribeToSaveResponseAdd(this.itemValueService.update(item));
+    } else {
+      this.subscribeToSaveResponseAdd(this.itemValueService.create(item));
+    }
+  }
+
+  updateCompositeurValue(item: IItemValue): void {
+    this.isSaving = true;
+    this.subscribeToSaveResponseUpdate(this.itemValueService.updatePrice(item));
+  }
+
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IItemValue>>): void {
+    result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
+      next: () => this.showPrice(),
+      error: () => this.onSaveError(),
+    });
+  }
+
+  protected subscribeToSaveResponseAdd(result: Observable<HttpResponse<IItem>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
+      error: () => this.onSaveError(),
+    });
+  }
+
+  protected subscribeToSaveResponseUpdate(result: Observable<HttpResponse<IItem>>): void {
+    result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
+      next: () => this.showPrice(),
       error: () => this.onSaveError(),
     });
   }
@@ -274,41 +300,43 @@ export class AddCompositeSchoolItemComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected loadRelationshipsOptions(): void {
-    this.natureService
-      .query()
-      .pipe(map((res: HttpResponse<INature[]>) => res.body ?? []))
-      .pipe(map((natures: INature[]) => this.natureService.addNatureToCollectionIfMissing(natures, this.editForm.get('nature')!.value)))
-      .subscribe((natures: INature[]) => (this.naturesSharedCollection = natures));
-  }
-  protected createFromForm(): IItem {
+  protected createFromFormPrice(priceItem: IItemValue, nPrice: number, nDate: dayjs.Dayjs): IItemValue {
     return {
-      ...new Item(),
-      id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      urlPhotoContentType: this.editForm.get(['urlPhotoContentType'])!.value,
-      urlPhoto: this.editForm.get(['urlPhoto'])!.value,
-      gender: this.editForm.get(['gender'])!.value,
-      composed: this.editForm.get(['composed'])!.value,
-      archivated: this.editForm.get(['archivated'])!.value,
-      nature: this.editForm.get(['nature'])!.value,
+      ...new ItemValue(),
+
+      id: priceItem.id,
+      price: nPrice,
+      priceDate: nDate,
+      availableStockQuantity: priceItem.availableStockQuantity,
+      archivated: priceItem.archivated,
+      item: priceItem.item,
     };
   }
 
-  protected updateForm(item: IItem): void {
-    this.editForm.patchValue({
-      id: item.id,
-      name: item.name,
-      urlPhoto: item.urlPhoto,
-      urlPhotoContentType: item.urlPhotoContentType,
-      gender: item.gender,
-      composed: item.composed,
-      archivated: item.archivated,
-      nature: item.nature,
-      price: item.price,
-      priceDate: item.priceDate,
-    });
+  protected createFromFormPrice2(): IItemValue {
+    return {
+      ...new ItemValue(),
+      id: this.product.idPrice,
+      price: this.product.price,
+      priceDate: this.product.priceDate,
+    };
+  }
 
-    this.naturesSharedCollection = this.natureService.addNatureToCollectionIfMissing(this.naturesSharedCollection, item.nature);
+  protected convertDateFromClient(itemValue: IItem): IItem {
+    return Object.assign({}, itemValue, {
+      priceDate: itemValue.priceDate?.isValid() ? itemValue.priceDate.format(DATE_FORMAT) : undefined,
+    });
+  }
+
+  protected createFromToAddItem(): IItemValue {
+    return {
+      ...new ItemValue(),
+      id: this.price.id,
+      price: this.price.price,
+      priceDate: this.price.priceDate,
+      availableStockQuantity: this.price.availableStockQuantity! + this.quantity,
+      archivated: this.price.archivated,
+      item: this.price.item,
+    };
   }
 }

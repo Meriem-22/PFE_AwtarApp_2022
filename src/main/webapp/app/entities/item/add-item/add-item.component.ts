@@ -21,6 +21,9 @@ import { Table } from 'primeng/table';
 import { map, Observable, finalize } from 'rxjs';
 import { CompositeItem, ICompositeItem, ICompositeSchoolItem, IItem, Item } from '../item.model';
 import { ItemService } from '../service/item.service';
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import { ISchoolLevelItem } from 'app/entities/school-level-item/school-level-item.model';
 
 @Component({
   selector: 'jhi-add-item',
@@ -30,6 +33,10 @@ import { ItemService } from '../service/item.service';
 export class AddItemComponent implements OnInit {
   isSaving = false;
   itemGenderValues = Object.keys(ItemGender);
+  itemDialog?: boolean;
+  submitted?: boolean;
+  quantityToAdd = 1;
+  idToSend!: string;
 
   naturesSharedCollection: INature[] = [];
   natures: INature[] = [];
@@ -42,6 +49,7 @@ export class AddItemComponent implements OnInit {
   quantity: { id: number; qt: number }[] = [];
   finalquantitytable: { id: number; qt: number }[] = [];
   nature!: INature[];
+  selectedNature!: INature;
   natureNames!: string[];
   text!: string;
   textParamNature!: string[];
@@ -61,6 +69,10 @@ export class AddItemComponent implements OnInit {
   itemValue!: IItemValue;
   SimpleItemSearch?: string;
   CompositeurItemSearch?: string;
+  schoolLevelDetails: ISchoolLevelItem[] = [];
+  level!: ISchoolLevel;
+  quantitySchoolItemTab: number[] = [];
+  schoolLevelIemTab: number[] = [];
 
   SI = 0;
   SIC = 0;
@@ -73,8 +85,8 @@ export class AddItemComponent implements OnInit {
   k = false;
 
   t?: number;
-  x?: number;
-  y?: number;
+  x = 0;
+  y = 0;
   s?: number;
   z?: number;
   f?: number;
@@ -127,10 +139,8 @@ export class AddItemComponent implements OnInit {
     price: [null, [Validators.required]],
     priceDate: [null, [Validators.required]],
     schoolLevel: [null, [Validators.required]],
-    nature: [null, [Validators.required]],
-    quantityNeeded: [],
+    nature: [],
     staus: [null, [Validators.required]],
-    quantity: [null, [Validators.required]],
   });
 
   compositeSchoolItemForm = this.fb.group({
@@ -164,7 +174,9 @@ export class AddItemComponent implements OnInit {
     protected fb: FormBuilder,
     protected schoolLevelService: SchoolLevelService,
     protected itemValueService: ItemValueService,
-    protected router: Router
+    protected router: Router,
+    protected messageService: MessageService,
+    protected confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -217,6 +229,7 @@ export class AddItemComponent implements OnInit {
         this.naturesSharedCollection[i].name!.length === this.textParam.length
       ) {
         this.id1 = this.naturesSharedCollection[i].id!;
+        this.selectedNature = this.naturesSharedCollection[i];
       }
       console.log(this.id1);
     }
@@ -289,6 +302,11 @@ export class AddItemComponent implements OnInit {
         this.SI = 1;
         if (this.itemNature === '2' && this.itemType === '1') {
           this.router.navigateByUrl('item/add/composite', { state: { item: this.item, price: this.itemValue } });
+        }
+
+        if (this.itemNature === '2' && this.itemType === '2') {
+          this.idToSend = this.item!.id!.toString();
+          this.router.navigateByUrl('item/add/simple-item/' + this.idToSend, { state: { itemId: this.item!.id!, schoolItem: 'false' } });
         }
       }
       if (x === 'compositeur') {
@@ -383,6 +401,11 @@ export class AddItemComponent implements OnInit {
         if (this.itemNature === '1' && this.itemType === '1') {
           this.router.navigateByUrl('item/add/composite-school-item', { state: { item: this.item, price: this.itemValue } });
         }
+
+        if (this.itemNature === '1' && this.itemType === '2') {
+          this.idToSend = this.item!.id!.toString();
+          this.router.navigateByUrl('item/add/simple-item/' + this.idToSend, { state: { itemId: this.item!.id!, schoolItem: 'yes' } });
+        }
       }
       if (x === 'compositeur') {
         this.SIC = 1;
@@ -419,6 +442,12 @@ export class AddItemComponent implements OnInit {
     }
   }
 
+  openNew(): void {
+    this.item = {};
+    this.submitted = false;
+    this.itemDialog = true;
+  }
+
   updateTable($event: any): any {
     this.id = $event.target.id;
     const q = $event.target.value;
@@ -428,27 +457,50 @@ export class AddItemComponent implements OnInit {
       }
     }
 
-    console.log(this.quantity);
-
     return this.id;
   }
 
   finaleTable(): void {
-    this.y = 0;
-    console.log(this.SelectedLevel);
-    console.log(this.quantity);
-
     for (this.t = 0; this.t < this.SelectedLevel.length; this.t++) {
       for (this.x = 0; this.x < this.quantity.length; this.x++) {
         if (this.quantity[this.x].id - this.SelectedLevel[this.t].id! === 0) {
-          this.finalquantitytable[this.y] = { id: this.quantity[this.x].id, qt: this.quantity[this.x].qt };
+          //this.finalquantitytable[this.y] = { id: this.quantity[this.x].id, qt: this.quantity[this.x].qt };
+          this.quantitySchoolItemTab[this.y] = this.quantity[this.x].qt;
+          this.schoolLevelIemTab[this.y] = this.quantity[this.x].id;
+
           this.y++;
         }
       }
     }
+    console.log(this.quantitySchoolItemTab);
+    console.log(this.schoolLevelIemTab);
 
-    console.log(this.finalquantitytable);
+    this.add();
   }
+  /*
+  getSelectedSchoolLevel(): void{
+
+    this.finaleTable();
+    for (this.x = 0; this.x < this.finalquantitytable.length; this.x++) {
+      this.schoolLevelService.find(this.finalquantitytable[this.x].id).subscribe({
+        next: (res: HttpResponse<ISchoolLevel>) => {
+          this.level =res.body!
+          console.log(this.finalquantitytable[this.x].id)
+          console.log(this.level)
+          for (this.t = 0; this.t <= this.x; this.t++) {
+            this.schoolLevelDetails[this.t].schoolLevel = this.level
+            this.schoolLevelDetails[this.t].archivated = false
+            this.schoolLevelDetails[this.t].isSchoolItem = true
+            this.schoolLevelDetails[this.t].quantityNeeded = this.finalquantitytable[this.x].qt
+          }
+        },
+        error: e => console.error(e),
+      });
+
+      
+    }
+
+  }*/
 
   removevalue(i: any): void {
     this.values.splice(i, 1);
@@ -587,17 +639,19 @@ export class AddItemComponent implements OnInit {
   }
 
   add(): void {
-    if (this.step === 3) {
-      if (this.simpleItemForm.invalid) {
-        return;
-      }
-      this.compositeurItemCollection.push(this.createFromCompositeurItemForm());
+    if (this.step === 4) {
+      const schoolItem = this.createFromSimpleSchoolItemForm();
+      console.log(schoolItem);
+      this.save();
     }
+
     if (this.step === 5) {
-      if (this.simpleItemForm.invalid) {
+      if (this.compositeurSchoolItemForm.invalid) {
         return;
       }
+      this.finaleTable();
       this.compositeurSchoolItemCollection.push(this.createFromCompositeurSchoolItemForm());
+      console.log(this.compositeurSchoolItemCollection);
     }
   }
 
@@ -608,12 +662,14 @@ export class AddItemComponent implements OnInit {
   save(): void {
     if (this.step === 2) {
       const item = this.createFromSimpleItemForm();
+      this.subscribeToSaveResponse(this.itemService.addSimpleItem(item));
     }
     if (this.step === 3) {
       const item = this.createFromCompositeItemForm();
     }
     if (this.step === 4) {
       const item = this.createFromSimpleSchoolItemForm();
+      this.subscribeToSaveResponse(this.itemService.addSimpleSchoolItem(item));
     }
     if (this.step === 5) {
       const item = this.createFromCompositeSchoolItemForm();
@@ -632,7 +688,7 @@ export class AddItemComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    this.isSaving = true;
   }
 
   protected onSaveError(): void {
@@ -728,8 +784,9 @@ export class AddItemComponent implements OnInit {
       urlPhoto: this.simpleItemForm.get(['urlPhoto'])!.value,
       gender: this.simpleItemForm.get(['gender'])!.value,
       price: this.simpleItemForm.get(['price'])!.value,
+      nature: this.selectedNature,
       priceDate: this.simpleItemForm.get(['priceDate'])!.value,
-      quantity: this.compositeurItemForm.get(['quantity'])!.value,
+      quantityToAdd: this.quantityToAdd,
     };
   }
   protected createFromCompositeItemForm(): IItem {
@@ -739,7 +796,9 @@ export class AddItemComponent implements OnInit {
       urlPhotoContentType: this.compositeItemForm.get(['urlPhotoContentType'])!.value,
       urlPhoto: this.compositeItemForm.get(['urlPhoto'])!.value,
       gender: this.compositeItemForm.get(['gender'])!.value,
-      compositeSimpleItem: this.compositeurItemCollection.slice(),
+      nature: this.selectedNature,
+      compositeurSimpleItems: this.compositeurItemCollection.slice(),
+      quantityToAdd: this.quantityToAdd,
     };
   }
 
@@ -753,7 +812,6 @@ export class AddItemComponent implements OnInit {
       nature: this.compositeurItemForm.get(['nature'])!.value,
       price: this.compositeurItemForm.get(['price'])!.value,
       priceDate: this.compositeurItemForm.get(['priceDate'])!.value,
-      quantity: this.compositeurItemForm.get(['quantity'])!.value,
     };
   }
   protected createFromSimpleSchoolItemForm(): IItem {
@@ -765,10 +823,11 @@ export class AddItemComponent implements OnInit {
       gender: this.simpleSchoolItemForm.get(['gender'])!.value,
       price: this.simpleSchoolItemForm.get(['price'])!.value,
       priceDate: this.simpleSchoolItemForm.get(['priceDate'])!.value,
-      schoolLevel: this.simpleSchoolItemForm.get(['schoolLevel'])!.value,
-      quantityNeeded: this.simpleSchoolItemForm.get(['quantityNeeded'])!.value,
-      staus: this.simpleSchoolItemForm.get(['staus'])!.value,
-      quantity: this.compositeurItemForm.get(['quantity'])!.value,
+      nature: this.selectedNature,
+      allStaus: this.simpleSchoolItemForm.get(['staus'])!.value,
+      quantitySchoolItemTab: this.quantitySchoolItemTab.slice(),
+      schoolLevelIemTab: this.schoolLevelIemTab.slice(),
+      quantityToAdd: this.quantityToAdd,
     };
   }
   protected createFromCompositeSchoolItemForm(): IItem {
@@ -778,7 +837,9 @@ export class AddItemComponent implements OnInit {
       urlPhotoContentType: this.compositeSchoolItemForm.get(['urlPhotoContentType'])!.value,
       urlPhoto: this.compositeSchoolItemForm.get(['urlPhoto'])!.value,
       gender: this.compositeSchoolItemForm.get(['gender'])!.value,
-      compositeSchoolItem: this.compositeurSchoolItemCollection.slice(),
+      nature: this.selectedNature,
+      compositeurSchoolItems: this.compositeurSchoolItemCollection.slice(),
+      quantityToAdd: this.quantityToAdd,
     };
   }
   protected createFromCompositeurSchoolItemForm(): IItem {
@@ -791,10 +852,8 @@ export class AddItemComponent implements OnInit {
       price: this.compositeurSchoolItemForm.get(['price'])!.value,
       priceDate: this.compositeurSchoolItemForm.get(['priceDate'])!.value,
       nature: this.compositeurSchoolItemForm.get(['nature'])!.value,
-      schoolLevel: this.compositeurSchoolItemForm.get(['schoolLevel'])!.value,
-      quantityNeeded: this.compositeurSchoolItemForm.get(['quantityNeeded'])!.value,
+      schoolLevelDetails: this.finalquantitytable.slice(),
       staus: this.compositeurSchoolItemForm.get(['staus'])!.value,
-      quantity: this.compositeurItemForm.get(['quantity'])!.value,
     };
   }
 }

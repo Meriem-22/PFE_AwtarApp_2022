@@ -2,6 +2,7 @@ package com.awtar.myapp.web.rest;
 
 import com.awtar.myapp.repository.ItemValueRepository;
 import com.awtar.myapp.service.ItemValueService;
+import com.awtar.myapp.service.dto.ItemDTO;
 import com.awtar.myapp.service.dto.ItemValueDTO;
 import com.awtar.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -201,5 +202,28 @@ public class ItemValueResource {
         log.debug("REST request to get ItemValue : {}", id);
         Optional<ItemValueDTO> itemValueDTO = itemValueService.findItem(id);
         return ResponseUtil.wrapOrNotFound(itemValueDTO);
+    }
+
+    @PutMapping("/item-values/{id}/update-price")
+    public ResponseEntity<ItemValueDTO> updateValue(
+        @PathVariable(value = "id", required = false) final Long id,
+        @RequestBody ItemValueDTO itemValueDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to partial update ItemValue partially : {}, {}", id, itemValueDTO);
+        if (itemValueDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, itemValueDTO.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!itemValueRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+        ItemValueDTO result = itemValueService.updatePrice(itemValueDTO);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, itemValueDTO.getId().toString()))
+            .body(result);
     }
 }

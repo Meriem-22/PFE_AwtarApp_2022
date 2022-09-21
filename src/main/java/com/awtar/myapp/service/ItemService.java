@@ -104,4 +104,20 @@ public interface ItemService {
      * @return the entity.
      */
     List<ItemDTO> findAllCompositeurItemsDetails(Long id);
+
+    /**
+     * Save a item.
+     *
+     * @param itemDTO the entity to save.
+     * @return the persisted entity.
+     */
+    ItemDTO addSimpleItem(ItemDTO itemDTO);
+
+    /**
+     * Save a item.
+     *
+     * @param itemDTO the entity to save.
+     * @return the persisted entity.
+     */
+    ItemDTO addSimpleSchoolItem(ItemDTO itemDTO);
 }

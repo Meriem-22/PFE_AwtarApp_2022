@@ -1,0 +1,267 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------  ---------->
+
+<div class="container emp-profile" *ngIf="item">
+  <jhi-alert></jhi-alert>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="profile-img">
+        <img
+          *ngIf="!item.urlPhoto"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+          alt=""
+        />
+        <img
+          *ngIf="item.urlPhoto"
+          [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto"
+          style="max-width: 100px; max-height: 130px"
+          alt="item image"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="profile-head">
+        <div style="display: flex">
+          <h5>Quantity To Add</h5>
+          <h6>
+            <input
+              type="number"
+              name="quantity"
+              id="field_quantity"
+              style="width: 5rem; text-align: center; border-radius: 30%; margin-left: 1rem"
+              [(ngModel)]="quantity"
+              data-cy="quantity"
+            />
+          </h6>
+        </div>
+        <h5 jhiTranslate="awtarApp.item.name">Name</h5>
+        <h6>
+          {{ item.name }}
+        </h6>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"
+              >About</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="schoolItem">
+            <a
+              class="nav-link"
+              id="schoolItem-tab"
+              data-toggle="tab"
+              href="#schoolItem"
+              role="tab"
+              aria-controls="schoolItem"
+              aria-selected="false"
+              >School Item Details</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"
+              >Update Price</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <button
+        pButton
+        pRipple
+        icon="pi pi-plus"
+        class="p-button-success mr-2"
+        label="{{ 'global.button.add.placeholder' | translate }}"
+        (click)="save()"
+      ></button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="profile-work text-center"></div>
+    </div>
+    <div class="col-md-8">
+      <div class="tab-content profile-tab" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <div class="row">
+            <div class="col-md-6">
+              <label jhiTranslate="awtarApp.item.name">Name</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{ item.name }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label jhiTranslate="awtarApp.item.gender">Gender</label>
+            </div>
+            <div class="col-md-6">
+              <p jhiTranslate="{{ 'awtarApp.ItemGender.' + item.gender }}">{{ item.gender }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label jhiTranslate="awtarApp.item.nature">Nature</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{ item.nature?.name }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label><span>Price</span></label>
+            </div>
+            <div class="col-md-6">
+              <p>{{ priceItem.price }}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label>PriceDate</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{ priceItem.priceDate | formatMediumDate }}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label jhiTranslate="awtarApp.itemValue.availableStockQuantity">Available Stock Quantity</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{ priceItem.availableStockQuantity }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <form class="form-horizontal" name="editForm" role="form" novalidate [formGroup]="editForm">
+            <div class="card card-info">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label" jhiTranslate="awtarApp.itemValue.price" for="field_price">Price</label>
+
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
+                    <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="editForm.get('price')?.errors?.required"
+                        jhiTranslate="entity.validation.required"
+                      >
+                        This field is required.
+                      </small>
+                      <small
+                        class="form-text text-danger"
+                        [hidden]="!editForm.get('price')?.errors?.number"
+                        jhiTranslate="entity.validation.number"
+                      >
+                        This field should be a number.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label" jhiTranslate="awtarApp.itemValue.priceDate" for="field_priceDate"
+                    >Price Date</label
+                  >
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <input
+                        id="field_priceDate"
+                        data-cy="priceDate"
+                        type="text"
+                        class="form-control"
+                        name="priceDate"
+                        ngbDatepicker
+                        #priceDateDp="ngbDatepicker"
+                        formControlName="priceDate"
+                      />
+                      <button type="button" class="btn btn-secondary" (click)="priceDateDp.toggle()">
+                        <fa-icon icon="calendar-alt"></fa-icon>
+                      </button>
+                    </div>
+                    <div
+                      *ngIf="editForm.get('priceDate')!.invalid && (editForm.get('priceDate')!.dirty || editForm.get('priceDate')!.touched)"
+                    >
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="editForm.get('priceDate')?.errors?.required"
+                        jhiTranslate="entity.validation.required"
+                      >
+                        This field is required.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="offset-sm-2 col-sm-10"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer text-right" style="margin-top: 2rem">
+              <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+              <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="editPrice()"></button>
+            </div>
+          </form>
+        </div>
+
+        <div class="tab-pane fade" id="schoolItem" role="tabpanel" aria-labelledby="schoolItem-tab">
+          <div class="card">
+            <div *ngIf="childStatusItem" style="margin: 1rem">
+              <dt><span jhiTranslate="awtarApp.childStatus.staus">Staus</span></dt>
+              <div *ngFor="let status of childStatusItem">
+                <div style="display: flex">
+                  <span jhiTranslate="{{ 'awtarApp.Status.' + status.staus }}">{{ status.staus }}</span>
+                </div>
+              </div>
+            </div>
+            <p-table
+              #dt
+              [value]="SchoolLevelInfo!"
+              styleClass="p-datatable-sm"
+              [rows]="3"
+              [showCurrentPageReport]="true"
+              [rowsPerPageOptions]="[3, 5, 10]"
+              [paginator]="true"
+              [globalFilterFields]="['schoolLevelItem', 'quantityNeeded']"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            >
+              <ng-template pTemplate="caption" style="background-color: rgb(241, 148, 235)">
+                <div class="flex align-items-center justify-content-between" style="display: flex">
+                  <h5 class="m-0" style="color: rgb(219, 28, 158)">School Level Item Details</h5>
+                  <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                      pInputText
+                      type="text"
+                      (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                      placeholder="Search..."
+                    />
+                  </span>
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th pSortableColumn="schoolLevelItem">School Level<p-sortIcon field="schoolLevelItem"></p-sortIcon></th>
+                  <th pSortableColumn="quantityNeeded">Quantity Needed<p-sortIcon field="quantityNeeded"></p-sortIcon></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-s>
+                <tr>
+                  <td>{{ s.schoolLevelItem }}</td>
+                  <td>{{ s.quantityNeeded }}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

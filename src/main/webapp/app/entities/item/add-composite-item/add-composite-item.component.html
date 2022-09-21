@@ -419,80 +419,88 @@
 
             <div class="card" style="margin: 1rem">
               <p-toolbar styleClass="mb-4" *ngIf="item">
-                <dl>
-                  <div class="flex align-items-center justify-content-between" style="display: flex">
-                    <div>
-                      <dd>
-                        <div *ngIf="item.urlPhoto">
-                          <a (click)="openFile(item.urlPhoto, item.urlPhotoContentType)">
-                            <img
-                              [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto"
-                              style="max-width: 100px; max-height: 130px"
-                              alt="item image"
-                            />
-                          </a>
-                        </div>
-                      </dd>
-                    </div>
-                    <div>
-                      <div style="margin: 1rem">
-                        <dt><span jhiTranslate="awtarApp.item.name">Name</span></dt>
+                <ng-template pTemplate="left">
+                  <dl>
+                    <div class="flex align-items-center justify-content-between" style="display: flex">
+                      <div>
                         <dd>
-                          <span>{{ item.name }}</span>
-                        </dd>
-
-                        <dt><span jhiTranslate="awtarApp.item.gender">Gender</span></dt>
-                        <dd>
-                          <span jhiTranslate="{{ 'awtarApp.ItemGender.' + item.gender }}">{{ item.gender }}</span>
-                        </dd>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="flex align-items-center justify-content-between" style="margin: 1rem">
-                        <dt><span>Price</span></dt>
-                        <dd>
-                          <span>{{ price.price }}</span>
-                        </dd>
-
-                        <dt><span>PriceDate</span></dt>
-                        <dd>
-                          <span>{{ price.priceDate | formatMediumDate }}</span>
-                        </dd>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="flex align-items-center justify-content-between" style="margin: 1rem">
-                        <dt><span jhiTranslate="awtarApp.item.nature">Nature</span></dt>
-                        <dd>
-                          <div *ngIf="item.nature">
-                            <span>{{ item.nature?.name }}</span>
-                            <i
-                              class="far fa-eye"
-                              [routerLink]="['/nature', item.nature?.id, 'view']"
-                              style="cursor: pointer; color: rgb(239, 47, 223)"
-                            ></i>
+                          <div *ngIf="item.urlPhoto">
+                            <a (click)="openFile(item.urlPhoto, item.urlPhotoContentType)">
+                              <img
+                                [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto"
+                                style="max-width: 100px; max-height: 130px"
+                                alt="item image"
+                              />
+                            </a>
                           </div>
                         </dd>
-                        <dt><span jhiTranslate="awtarApp.itemValue.availableStockQuantity">Available Stock Quantity</span></dt>
-                        <dd>
-                          <span>{{ price.availableStockQuantity }}</span>
-                        </dd>
+                      </div>
+                      <div>
+                        <div style="margin: 1rem">
+                          <dt><span jhiTranslate="awtarApp.item.name">Name</span></dt>
+                          <dd>
+                            <span>{{ item.name }}</span>
+                          </dd>
+
+                          <dt><span jhiTranslate="awtarApp.item.gender">Gender</span></dt>
+                          <dd>
+                            <span jhiTranslate="{{ 'awtarApp.ItemGender.' + item.gender }}">{{ item.gender }}</span>
+                          </dd>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="flex align-items-center justify-content-between" style="margin: 1rem">
+                          <dt><span>Price</span></dt>
+                          <dd>
+                            <span>{{ price.price }}</span>
+                          </dd>
+
+                          <dt><span>PriceDate</span></dt>
+                          <dd>
+                            <span>{{ price.priceDate | formatMediumDate }}</span>
+                          </dd>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="flex align-items-center justify-content-between" style="margin: 1rem">
+                          <dt><span jhiTranslate="awtarApp.item.nature">Nature</span></dt>
+                          <dd>
+                            <div *ngIf="item.nature">
+                              <span>{{ item.nature?.name }}</span>
+                              <i
+                                class="far fa-eye"
+                                [routerLink]="['/nature', item.nature?.id, 'view']"
+                                style="cursor: pointer; color: rgb(239, 47, 223)"
+                              ></i>
+                            </div>
+                          </dd>
+                          <dt><span jhiTranslate="awtarApp.itemValue.availableStockQuantity">Available Stock Quantity</span></dt>
+                          <dd>
+                            <span>{{ price.availableStockQuantity }}</span>
+                          </dd>
+                        </div>
                       </div>
                     </div>
+                  </dl>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                  <div class="field text-center" style="display: flex">
+                    <div style="display: grid; text-align: center; margin-right: 1rem">
+                      <label for="quantity" style="margin-right: 1rem">Quantity To Add</label>
+                      <input
+                        type="number"
+                        name="quantity"
+                        id="field_quantity"
+                        [(ngModel)]="quantity"
+                        data-cy="quantity"
+                        class="form-control"
+                        style="width: 9rem; text-align: center"
+                      />
+                    </div>
+                    <button pButton pRipple icon="pi pi-plus" class="p-button-success mr-2" (click)="AddItem()"></button>
                   </div>
-                </dl>
-                <div class="field text-center">
-                  <label for="quantity" style="margin-right: 1rem">Quantity To Add</label>
-                  <p-inputNumber
-                    name="quantity"
-                    id="field_quantity"
-                    [showButtons]="true"
-                    [(ngModel)]="quantity"
-                    data-cy="quantity"
-                  ></p-inputNumber>
-                  <button pButton pRipple icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-                </div>
-                <div></div>
+                </ng-template>
               </p-toolbar>
 
               <p-table
@@ -573,7 +581,7 @@
                 </ng-template>
               </p-table>
             </div>
-            <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <form name="editForm" role="form" novalidate [formGroup]="editForm">
               <p-dialog [(visible)]="productDialog" [style]="{ width: '450px' }" header="Price Details" [modal]="true" styleClass="p-fluid">
                 <ng-template pTemplate="content">
                   <div class="img text-center">
@@ -622,17 +630,22 @@
                     </div>
                     <div class="field col">
                       <label class="form-label" jhiTranslate="awtarApp.itemValue.priceDate" for="field_priceDate">Price Date</label>
-
-                      <input
-                        id="field_priceDate"
-                        data-cy="priceDate"
-                        type="date"
-                        class="form-control"
-                        name="priceDate"
-                        formControlName="priceDate"
-                        [(ngModel)]="product.priceDate"
-                      />
-
+                      <div class="input-group">
+                        <input
+                          id="field_priceDate"
+                          data-cy="priceDate"
+                          type="text"
+                          class="form-control"
+                          name="priceDate"
+                          ngbDatepicker
+                          #priceDateDp="ngbDatepicker"
+                          formControlName="priceDate"
+                          [(ngModel)]="product.priceDate"
+                        />
+                        <button type="button" class="btn btn-secondary" (click)="priceDateDp.toggle()">
+                          <fa-icon icon="calendar-alt"></fa-icon>
+                        </button>
+                      </div>
                       <div
                         *ngIf="
                           editForm.get('priceDate')!.invalid && (editForm.get('priceDate')!.dirty || editForm.get('priceDate')!.touched)

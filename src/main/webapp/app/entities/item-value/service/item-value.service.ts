@@ -8,7 +8,8 @@ import { isPresent } from 'app/core/util/operators';
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IItemValue, getItemValueIdentifier } from '../item-value.model';
+import { IItemValue, getItemValueIdentifier, getItemValueIdentifierFromItem } from '../item-value.model';
+import { IItem } from 'app/entities/item/item.model';
 
 export type EntityResponseType = HttpResponse<IItemValue>;
 export type EntityArrayResponseType = HttpResponse<IItemValue[]>;
@@ -31,6 +32,13 @@ export class ItemValueService {
     return this.http
       .put<IItemValue>(`${this.resourceUrl}/${getItemValueIdentifier(itemValue) as number}`, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  updatePrice(itemValue: IItemValue): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(itemValue);
+    return this.http.put<IItemValue>(`${this.resourceUrl}/${getItemValueIdentifier(itemValue) as number}` + '/update-price', copy, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(itemValue: IItemValue): Observable<EntityResponseType> {

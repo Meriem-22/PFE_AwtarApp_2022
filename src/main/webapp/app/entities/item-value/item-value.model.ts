@@ -26,3 +26,6 @@ export class ItemValue implements IItemValue {
 export function getItemValueIdentifier(itemValue: IItemValue): number | undefined {
   return itemValue.id;
 }
+export function getItemValueIdentifierFromItem(itemValue: IItem): number | undefined {
+  return itemValue.idPrice;
+}

@@ -73,6 +73,13 @@
       "email.label": "Email",
       "email.placeholder": "Your email"
     },
+
+    "button": {
+      "save.placeholder": "Save",
+      "add.placeholder": "Add",
+      "edit.placeholder": "Edit",
+      "delete.placeholder": "Delete"
+    },
     "messages": {
       "info": {
         "authenticated": {

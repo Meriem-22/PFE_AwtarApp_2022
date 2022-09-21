@@ -108,6 +108,12 @@
         }
       }
     },
+    "button": {
+      "save.placeholder": "Enregistrer",
+      "add.placeholder": "Ajouter",
+      "edit.placeholder": "Modifier",
+      "delete.placeholder": "Supprimer"
+    },
     "field": {
       "id": "ID"
     },

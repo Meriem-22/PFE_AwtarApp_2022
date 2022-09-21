@@ -1,6 +1,7 @@
 package com.awtar.myapp.service.dto;
 
 import com.awtar.myapp.domain.enumeration.ItemGender;
+import com.awtar.myapp.domain.enumeration.Status;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -44,6 +45,18 @@ public class ItemDTO implements Serializable {
     private Integer quantityNeeded;
 
     private Integer quantity;
+
+    private Long quantityToAdd;
+
+    private Integer quantitySchoolItemTab[];
+
+    private Long schoolLevelIemTab[];
+
+    private Status staus;
+
+    private Status allStaus[];
+
+    private Long idPrice;
 
     public ItemDTO() {}
 
@@ -106,6 +119,7 @@ public class ItemDTO implements Serializable {
         String urlPhotoContentType,
         ItemGender gender,
         Boolean composed,
+        Long idPrice,
         Double price,
         LocalDate priceDate,
         Long availableStockQuantity,
@@ -117,6 +131,7 @@ public class ItemDTO implements Serializable {
         this.urlPhotoContentType = urlPhotoContentType;
         this.gender = gender;
         this.composed = composed;
+        this.idPrice = idPrice;
         this.price = price;
         this.priceDate = priceDate;
         this.price = price;
@@ -304,6 +319,54 @@ public class ItemDTO implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Long getIdPrice() {
+        return idPrice;
+    }
+
+    public void setIdPrice(Long idPrice) {
+        this.idPrice = idPrice;
+    }
+
+    public Long getQuantityToAdd() {
+        return quantityToAdd;
+    }
+
+    public void setQuantityToAdd(Long quantityToAdd) {
+        this.quantityToAdd = quantityToAdd;
+    }
+
+    public Integer[] getQuantitySchoolItemTab() {
+        return quantitySchoolItemTab;
+    }
+
+    public void setQuantitySchoolItemTab(Integer[] quantitySchoolItemTab) {
+        this.quantitySchoolItemTab = quantitySchoolItemTab;
+    }
+
+    public Long[] getSchoolLevelIemTab() {
+        return schoolLevelIemTab;
+    }
+
+    public void setSchoolLevelIemTab(Long[] schoolLevelIemTab) {
+        this.schoolLevelIemTab = schoolLevelIemTab;
+    }
+
+    public Status getStaus() {
+        return staus;
+    }
+
+    public void setStaus(Status staus) {
+        this.staus = staus;
+    }
+
+    public Status[] getAllStaus() {
+        return allStaus;
+    }
+
+    public void setAllStaus(Status[] allStaus) {
+        this.allStaus = allStaus;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.awtar.myapp.service.impl;
 import com.awtar.myapp.domain.ItemValue;
 import com.awtar.myapp.repository.ItemValueRepository;
 import com.awtar.myapp.service.ItemValueService;
+import com.awtar.myapp.service.dto.ItemDTO;
 import com.awtar.myapp.service.dto.ItemValueDTO;
 import com.awtar.myapp.service.mapper.ItemValueMapper;
 import java.util.Optional;
@@ -89,5 +90,14 @@ public class ItemValueServiceImpl implements ItemValueService {
     @Override
     public Optional<ItemValueDTO> findItem(Long id) {
         return itemValueRepository.findwithItem(id).map(itemValueMapper::toDto);
+    }
+
+    @Override
+    public ItemValueDTO updatePrice(ItemValueDTO itemValueDTO) {
+        ItemValue value = itemValueRepository.getById(itemValueDTO.getId());
+        value.setPrice(itemValueDTO.getPrice());
+        value.setPriceDate(itemValueDTO.getPriceDate());
+        value = itemValueRepository.save(value);
+        return itemValueMapper.toDto(value);
     }
 }

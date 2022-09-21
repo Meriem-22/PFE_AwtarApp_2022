@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IItem, getItemIdentifier } from '../item.model';
+import { DATE_FORMAT } from 'app/config/input.constants';
 
 export type EntityResponseType = HttpResponse<IItem>;
 export type EntityArrayResponseType = HttpResponse<IItem[]>;
@@ -19,6 +20,16 @@ export class ItemService {
 
   create(item: IItem): Observable<EntityResponseType> {
     return this.http.post<IItem>(this.resourceUrl, item, { observe: 'response' });
+  }
+
+  addSimpleItem(item: IItem): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(item);
+    return this.http.post<IItem>(this.resourceUrl + '/simple-item', copy, { observe: 'response' });
+  }
+
+  addSimpleSchoolItem(item: IItem): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(item);
+    return this.http.post<IItem>(this.resourceUrl + '/simple-school-item', copy, { observe: 'response' });
   }
 
   update(item: IItem): Observable<EntityResponseType> {
@@ -77,5 +88,11 @@ export class ItemService {
       return [...itemsToAdd, ...itemCollection];
     }
     return itemCollection;
+  }
+
+  protected convertDateFromClient(itemValue: IItem): IItem {
+    return Object.assign({}, itemValue, {
+      priceDate: itemValue.priceDate?.isValid() ? itemValue.priceDate.format(DATE_FORMAT) : undefined,
+    });
   }
 }

@@ -56,7 +56,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<ItemDTO> findAllSchoolItemsDetails();
 
     @Query(
-        "select new com.awtar.myapp.service.dto.ItemDTO (item.id, item.name, item.urlPhoto, item.urlPhotoContentType, item.gender, item.composed, ip.price, ip.priceDate, ip.availableStockQuantity, ci.quantity) from ItemValue ip, Item item, CompositeItem ci where ((item.archivated != true) and (ip.item.id = item.id) and (ci.composant.id =:id) and (ci.composer.id = item.id))"
+        "select new com.awtar.myapp.service.dto.ItemDTO (item.id, item.name, item.urlPhoto, item.urlPhotoContentType, item.gender, item.composed, ip.id, ip.price, ip.priceDate, ip.availableStockQuantity, ci.quantity) from ItemValue ip, Item item, CompositeItem ci where ((item.archivated != true) and (ip.item.id = item.id) and (ci.composant.id =:id) and (ci.composer.id = item.id))"
     )
     List<ItemDTO> findAllCompositeurDetailItems(@Param("id") Long id);
     /*
