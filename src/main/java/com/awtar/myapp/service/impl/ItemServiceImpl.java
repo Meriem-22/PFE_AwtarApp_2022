@@ -1,5 +1,6 @@
 package com.awtar.myapp.service.impl;
 
+import com.awtar.myapp.domain.ChildStatus;
 import com.awtar.myapp.domain.ChildStatusItem;
 import com.awtar.myapp.domain.Item;
 import com.awtar.myapp.domain.ItemValue;
@@ -174,8 +175,7 @@ public class ItemServiceImpl implements ItemService {
         Item item = itemMapper.toEntity(itemDTO);
         Long levelsId[];
         Integer qtOfLevel[];
-        Status status[];
-        ChildStatusItem childStatus = new ChildStatusItem();
+        ChildStatus status[];
         item = itemRepository.save(item);
         value.setPrice(itemDTO.getPrice());
         value.setPriceDate(itemDTO.getPriceDate());
@@ -186,12 +186,16 @@ public class ItemServiceImpl implements ItemService {
         levelsId = itemDTO.getSchoolLevelIemTab();
         qtOfLevel = itemDTO.getQuantitySchoolItemTab();
 
-        status = itemDTO.getAllStaus();
+        status = itemDTO.getChildStatus();
+
         for (int i = 0; i < status.length; i++) {
+            ChildStatusItem childStatus = new ChildStatusItem();
+            ChildStatus s = status[i];
             childStatus.setAffected(true);
             childStatus.setArchivated(false);
             childStatus.setItem(item);
-            // childStatus.setChildStatus(childStatusRepository.);
+            childStatus.setChildStatus(s);
+            childStatus = childStatusItemRepository.save(childStatus);
         }
 
         for (int j = 0; j < qtOfLevel.length; j++) {

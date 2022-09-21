@@ -24,6 +24,7 @@ import { ItemService } from '../service/item.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { ISchoolLevelItem } from 'app/entities/school-level-item/school-level-item.model';
+import { ChildStatusService } from 'app/entities/child-status/service/child-status.service';
 
 @Component({
   selector: 'jhi-add-item',
@@ -37,6 +38,7 @@ export class AddItemComponent implements OnInit {
   submitted?: boolean;
   quantityToAdd = 1;
   idToSend!: string;
+  childStatusesSharedCollection: IChildStatus[] = [];
 
   naturesSharedCollection: INature[] = [];
   natures: INature[] = [];
@@ -140,7 +142,7 @@ export class AddItemComponent implements OnInit {
     priceDate: [null, [Validators.required]],
     schoolLevel: [null, [Validators.required]],
     nature: [],
-    staus: [null, [Validators.required]],
+    childStatus: [null, Validators.required],
   });
 
   compositeSchoolItemForm = this.fb.group({
@@ -176,7 +178,8 @@ export class AddItemComponent implements OnInit {
     protected itemValueService: ItemValueService,
     protected router: Router,
     protected messageService: MessageService,
-    protected confirmationService: ConfirmationService
+    protected confirmationService: ConfirmationService,
+    protected childStatusService: ChildStatusService
   ) {}
 
   ngOnInit(): void {
@@ -190,6 +193,7 @@ export class AddItemComponent implements OnInit {
       },
       error: e => console.error(e),
     });
+    this.loadRelationships();
   }
 
   getSearch(event: any): void {
@@ -659,6 +663,10 @@ export class AddItemComponent implements OnInit {
     window.history.back();
   }
 
+  trackChildStatusById(_index: number, item: IChildStatus): number {
+    return item.id!;
+  }
+
   save(): void {
     if (this.step === 2) {
       const item = this.createFromSimpleItemForm();
@@ -678,6 +686,18 @@ export class AddItemComponent implements OnInit {
 
   trackNatureById(_index: number, item: INature): number {
     return item.id!;
+  }
+
+  protected loadRelationships(): void {
+    this.childStatusService
+      .query()
+      .pipe(map((res: HttpResponse<IChildStatus[]>) => res.body ?? []))
+      .pipe(
+        map((childStatuses: IChildStatus[]) =>
+          this.childStatusService.addChildStatusToCollectionIfMissing(childStatuses, this.simpleSchoolItemForm.get('childStatus')!.value)
+        )
+      )
+      .subscribe((childStatuses: IChildStatus[]) => (this.childStatusesSharedCollection = childStatuses));
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IItem>>): void {
@@ -824,7 +844,7 @@ export class AddItemComponent implements OnInit {
       price: this.simpleSchoolItemForm.get(['price'])!.value,
       priceDate: this.simpleSchoolItemForm.get(['priceDate'])!.value,
       nature: this.selectedNature,
-      allStaus: this.simpleSchoolItemForm.get(['staus'])!.value,
+      childStatus: this.simpleSchoolItemForm.get(['childStatus'])!.value,
       quantitySchoolItemTab: this.quantitySchoolItemTab.slice(),
       schoolLevelIemTab: this.schoolLevelIemTab.slice(),
       quantityToAdd: this.quantityToAdd,

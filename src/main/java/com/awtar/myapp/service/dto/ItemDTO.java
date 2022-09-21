@@ -1,5 +1,6 @@
 package com.awtar.myapp.service.dto;
 
+import com.awtar.myapp.domain.ChildStatus;
 import com.awtar.myapp.domain.enumeration.ItemGender;
 import com.awtar.myapp.domain.enumeration.Status;
 import java.io.Serializable;
@@ -54,7 +55,7 @@ public class ItemDTO implements Serializable {
 
     private Status staus;
 
-    private Status allStaus[];
+    private ChildStatus childStatus[];
 
     private Long idPrice;
 
@@ -361,12 +362,12 @@ public class ItemDTO implements Serializable {
         this.staus = staus;
     }
 
-    public Status[] getAllStaus() {
-        return allStaus;
+    public ChildStatus[] getChildStatus() {
+        return childStatus;
     }
 
-    public void setAllStaus(Status[] allStaus) {
-        this.allStaus = allStaus;
+    public void setChildStatus(ChildStatus[] childStatus) {
+        this.childStatus = childStatus;
     }
 
     @Override

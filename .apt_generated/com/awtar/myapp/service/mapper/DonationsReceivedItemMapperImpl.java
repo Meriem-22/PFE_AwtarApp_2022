@@ -18,52 +18,52 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-21T08:01:11+0200",
+    date = "2022-09-21T09:01:57+0200",
     comments = "version: 1.4.2.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220719-0747, environment: Java 17.0.4 (Eclipse Adoptium)"
 )
 @Component
 public class DonationsReceivedItemMapperImpl implements DonationsReceivedItemMapper {
 
     @Override
-    public DonationsReceivedItem toEntity(DonationsReceivedItemDTO dto) {
-        if ( dto == null ) {
-            return null;
+    public void partialUpdate(DonationsReceivedItem arg0, DonationsReceivedItemDTO arg1) {
+        if ( arg1 == null ) {
+            return;
         }
 
-        DonationsReceivedItem donationsReceivedItem = new DonationsReceivedItem();
-
-        donationsReceivedItem.setId( dto.getId() );
-        donationsReceivedItem.setQuantity( dto.getQuantity() );
-        donationsReceivedItem.setDate( dto.getDate() );
-        donationsReceivedItem.setArchivated( dto.getArchivated() );
-        donationsReceivedItem.item( itemDTOToItem( dto.getItem() ) );
-        donationsReceivedItem.donationsReceived( donationsReceivedDTOToDonationsReceived( dto.getDonationsReceived() ) );
-
-        return donationsReceivedItem;
+        if ( arg1.getArchivated() != null ) {
+            arg0.setArchivated( arg1.getArchivated() );
+        }
+        if ( arg1.getDate() != null ) {
+            arg0.setDate( arg1.getDate() );
+        }
+        if ( arg1.getDonationsReceived() != null ) {
+            if ( arg0.getDonationsReceived() == null ) {
+                arg0.setDonationsReceived( new DonationsReceived() );
+            }
+            donationsReceivedDTOToDonationsReceived( arg1.getDonationsReceived(), arg0.getDonationsReceived() );
+        }
+        if ( arg1.getId() != null ) {
+            arg0.setId( arg1.getId() );
+        }
+        if ( arg1.getItem() != null ) {
+            if ( arg0.getItem() == null ) {
+                arg0.setItem( new Item() );
+            }
+            itemDTOToItem( arg1.getItem(), arg0.getItem() );
+        }
+        if ( arg1.getQuantity() != null ) {
+            arg0.setQuantity( arg1.getQuantity() );
+        }
     }
 
     @Override
-    public List<DonationsReceivedItem> toEntity(List<DonationsReceivedItemDTO> dtoList) {
-        if ( dtoList == null ) {
+    public List<DonationsReceivedItemDTO> toDto(List<DonationsReceivedItem> arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
-        List<DonationsReceivedItem> list = new ArrayList<DonationsReceivedItem>( dtoList.size() );
-        for ( DonationsReceivedItemDTO donationsReceivedItemDTO : dtoList ) {
-            list.add( toEntity( donationsReceivedItemDTO ) );
-        }
-
-        return list;
-    }
-
-    @Override
-    public List<DonationsReceivedItemDTO> toDto(List<DonationsReceivedItem> entityList) {
-        if ( entityList == null ) {
-            return null;
-        }
-
-        List<DonationsReceivedItemDTO> list = new ArrayList<DonationsReceivedItemDTO>( entityList.size() );
-        for ( DonationsReceivedItem donationsReceivedItem : entityList ) {
+        List<DonationsReceivedItemDTO> list = new ArrayList<DonationsReceivedItemDTO>( arg0.size() );
+        for ( DonationsReceivedItem donationsReceivedItem : arg0 ) {
             list.add( toDto( donationsReceivedItem ) );
         }
 
@@ -71,35 +71,35 @@ public class DonationsReceivedItemMapperImpl implements DonationsReceivedItemMap
     }
 
     @Override
-    public void partialUpdate(DonationsReceivedItem entity, DonationsReceivedItemDTO dto) {
-        if ( dto == null ) {
-            return;
+    public DonationsReceivedItem toEntity(DonationsReceivedItemDTO arg0) {
+        if ( arg0 == null ) {
+            return null;
         }
 
-        if ( dto.getId() != null ) {
-            entity.setId( dto.getId() );
+        DonationsReceivedItem donationsReceivedItem = new DonationsReceivedItem();
+
+        donationsReceivedItem.setArchivated( arg0.getArchivated() );
+        donationsReceivedItem.setDate( arg0.getDate() );
+        donationsReceivedItem.setDonationsReceived( donationsReceivedDTOToDonationsReceived1( arg0.getDonationsReceived() ) );
+        donationsReceivedItem.setId( arg0.getId() );
+        donationsReceivedItem.setItem( itemDTOToItem1( arg0.getItem() ) );
+        donationsReceivedItem.setQuantity( arg0.getQuantity() );
+
+        return donationsReceivedItem;
+    }
+
+    @Override
+    public List<DonationsReceivedItem> toEntity(List<DonationsReceivedItemDTO> arg0) {
+        if ( arg0 == null ) {
+            return null;
         }
-        if ( dto.getQuantity() != null ) {
-            entity.setQuantity( dto.getQuantity() );
+
+        List<DonationsReceivedItem> list = new ArrayList<DonationsReceivedItem>( arg0.size() );
+        for ( DonationsReceivedItemDTO donationsReceivedItemDTO : arg0 ) {
+            list.add( toEntity( donationsReceivedItemDTO ) );
         }
-        if ( dto.getDate() != null ) {
-            entity.setDate( dto.getDate() );
-        }
-        if ( dto.getArchivated() != null ) {
-            entity.setArchivated( dto.getArchivated() );
-        }
-        if ( dto.getItem() != null ) {
-            if ( entity.getItem() == null ) {
-                entity.item( new Item() );
-            }
-            itemDTOToItem1( dto.getItem(), entity.getItem() );
-        }
-        if ( dto.getDonationsReceived() != null ) {
-            if ( entity.getDonationsReceived() == null ) {
-                entity.donationsReceived( new DonationsReceived() );
-            }
-            donationsReceivedDTOToDonationsReceived1( dto.getDonationsReceived(), entity.getDonationsReceived() );
-        }
+
+        return list;
     }
 
     @Override
@@ -147,149 +147,19 @@ public class DonationsReceivedItemMapperImpl implements DonationsReceivedItemMap
         return donationsReceivedDTO;
     }
 
-    protected Nature natureDTOToNature(NatureDTO natureDTO) {
-        if ( natureDTO == null ) {
-            return null;
-        }
-
-        Nature nature = new Nature();
-
-        nature.setId( natureDTO.getId() );
-        nature.setName( natureDTO.getName() );
-        nature.setDestinedTo( natureDTO.getDestinedTo() );
-        nature.setNecessityValue( natureDTO.getNecessityValue() );
-        nature.setArchivated( natureDTO.getArchivated() );
-
-        return nature;
-    }
-
-    protected Item itemDTOToItem(ItemDTO itemDTO) {
-        if ( itemDTO == null ) {
-            return null;
-        }
-
-        Item item = new Item();
-
-        item.setId( itemDTO.getId() );
-        item.setName( itemDTO.getName() );
-        byte[] urlPhoto = itemDTO.getUrlPhoto();
-        if ( urlPhoto != null ) {
-            item.setUrlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
-        }
-        item.setUrlPhotoContentType( itemDTO.getUrlPhotoContentType() );
-        item.setGender( itemDTO.getGender() );
-        item.setComposed( itemDTO.getComposed() );
-        item.setArchivated( itemDTO.getArchivated() );
-        item.nature( natureDTOToNature( itemDTO.getNature() ) );
-
-        return item;
-    }
-
-    protected AuthorizingOfficer authorizingOfficerDTOToAuthorizingOfficer(AuthorizingOfficerDTO authorizingOfficerDTO) {
-        if ( authorizingOfficerDTO == null ) {
-            return null;
-        }
-
-        AuthorizingOfficer authorizingOfficer = new AuthorizingOfficer();
-
-        authorizingOfficer.setId( authorizingOfficerDTO.getId() );
-        authorizingOfficer.setAbbreviation( authorizingOfficerDTO.getAbbreviation() );
-        authorizingOfficer.setActivity( authorizingOfficerDTO.getActivity() );
-        authorizingOfficer.setManager( authorizingOfficerDTO.getManager() );
-        authorizingOfficer.setManagerCin( authorizingOfficerDTO.getManagerCin() );
-
-        return authorizingOfficer;
-    }
-
-    protected DonationsReceived donationsReceivedDTOToDonationsReceived(DonationsReceivedDTO donationsReceivedDTO) {
-        if ( donationsReceivedDTO == null ) {
-            return null;
-        }
-
-        DonationsReceived donationsReceived = new DonationsReceived();
-
-        donationsReceived.setId( donationsReceivedDTO.getId() );
-        byte[] urlPhoto = donationsReceivedDTO.getUrlPhoto();
-        if ( urlPhoto != null ) {
-            donationsReceived.setUrlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
-        }
-        donationsReceived.setUrlPhotoContentType( donationsReceivedDTO.getUrlPhotoContentType() );
-        donationsReceived.setArchivated( donationsReceivedDTO.getArchivated() );
-        donationsReceived.authorizingOfficer( authorizingOfficerDTOToAuthorizingOfficer( donationsReceivedDTO.getAuthorizingOfficer() ) );
-
-        return donationsReceived;
-    }
-
-    protected void natureDTOToNature1(NatureDTO natureDTO, Nature mappingTarget) {
-        if ( natureDTO == null ) {
-            return;
-        }
-
-        if ( natureDTO.getId() != null ) {
-            mappingTarget.setId( natureDTO.getId() );
-        }
-        if ( natureDTO.getName() != null ) {
-            mappingTarget.setName( natureDTO.getName() );
-        }
-        if ( natureDTO.getDestinedTo() != null ) {
-            mappingTarget.setDestinedTo( natureDTO.getDestinedTo() );
-        }
-        if ( natureDTO.getNecessityValue() != null ) {
-            mappingTarget.setNecessityValue( natureDTO.getNecessityValue() );
-        }
-        if ( natureDTO.getArchivated() != null ) {
-            mappingTarget.setArchivated( natureDTO.getArchivated() );
-        }
-    }
-
-    protected void itemDTOToItem1(ItemDTO itemDTO, Item mappingTarget) {
-        if ( itemDTO == null ) {
-            return;
-        }
-
-        if ( itemDTO.getId() != null ) {
-            mappingTarget.setId( itemDTO.getId() );
-        }
-        if ( itemDTO.getName() != null ) {
-            mappingTarget.setName( itemDTO.getName() );
-        }
-        byte[] urlPhoto = itemDTO.getUrlPhoto();
-        if ( urlPhoto != null ) {
-            mappingTarget.setUrlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
-        }
-        if ( itemDTO.getUrlPhotoContentType() != null ) {
-            mappingTarget.setUrlPhotoContentType( itemDTO.getUrlPhotoContentType() );
-        }
-        if ( itemDTO.getGender() != null ) {
-            mappingTarget.setGender( itemDTO.getGender() );
-        }
-        if ( itemDTO.getComposed() != null ) {
-            mappingTarget.setComposed( itemDTO.getComposed() );
-        }
-        if ( itemDTO.getArchivated() != null ) {
-            mappingTarget.setArchivated( itemDTO.getArchivated() );
-        }
-        if ( itemDTO.getNature() != null ) {
-            if ( mappingTarget.getNature() == null ) {
-                mappingTarget.nature( new Nature() );
-            }
-            natureDTOToNature1( itemDTO.getNature(), mappingTarget.getNature() );
-        }
-    }
-
-    protected void authorizingOfficerDTOToAuthorizingOfficer1(AuthorizingOfficerDTO authorizingOfficerDTO, AuthorizingOfficer mappingTarget) {
+    protected void authorizingOfficerDTOToAuthorizingOfficer(AuthorizingOfficerDTO authorizingOfficerDTO, AuthorizingOfficer mappingTarget) {
         if ( authorizingOfficerDTO == null ) {
             return;
         }
 
-        if ( authorizingOfficerDTO.getId() != null ) {
-            mappingTarget.setId( authorizingOfficerDTO.getId() );
-        }
         if ( authorizingOfficerDTO.getAbbreviation() != null ) {
             mappingTarget.setAbbreviation( authorizingOfficerDTO.getAbbreviation() );
         }
         if ( authorizingOfficerDTO.getActivity() != null ) {
             mappingTarget.setActivity( authorizingOfficerDTO.getActivity() );
+        }
+        if ( authorizingOfficerDTO.getId() != null ) {
+            mappingTarget.setId( authorizingOfficerDTO.getId() );
         }
         if ( authorizingOfficerDTO.getManager() != null ) {
             mappingTarget.setManager( authorizingOfficerDTO.getManager() );
@@ -299,29 +169,159 @@ public class DonationsReceivedItemMapperImpl implements DonationsReceivedItemMap
         }
     }
 
-    protected void donationsReceivedDTOToDonationsReceived1(DonationsReceivedDTO donationsReceivedDTO, DonationsReceived mappingTarget) {
+    protected void donationsReceivedDTOToDonationsReceived(DonationsReceivedDTO donationsReceivedDTO, DonationsReceived mappingTarget) {
         if ( donationsReceivedDTO == null ) {
             return;
         }
 
-        if ( donationsReceivedDTO.getId() != null ) {
-            mappingTarget.setId( donationsReceivedDTO.getId() );
-        }
-        byte[] urlPhoto = donationsReceivedDTO.getUrlPhoto();
-        if ( urlPhoto != null ) {
-            mappingTarget.setUrlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
-        }
-        if ( donationsReceivedDTO.getUrlPhotoContentType() != null ) {
-            mappingTarget.setUrlPhotoContentType( donationsReceivedDTO.getUrlPhotoContentType() );
-        }
         if ( donationsReceivedDTO.getArchivated() != null ) {
             mappingTarget.setArchivated( donationsReceivedDTO.getArchivated() );
         }
         if ( donationsReceivedDTO.getAuthorizingOfficer() != null ) {
             if ( mappingTarget.getAuthorizingOfficer() == null ) {
-                mappingTarget.authorizingOfficer( new AuthorizingOfficer() );
+                mappingTarget.setAuthorizingOfficer( new AuthorizingOfficer() );
             }
-            authorizingOfficerDTOToAuthorizingOfficer1( donationsReceivedDTO.getAuthorizingOfficer(), mappingTarget.getAuthorizingOfficer() );
+            authorizingOfficerDTOToAuthorizingOfficer( donationsReceivedDTO.getAuthorizingOfficer(), mappingTarget.getAuthorizingOfficer() );
         }
+        if ( donationsReceivedDTO.getId() != null ) {
+            mappingTarget.setId( donationsReceivedDTO.getId() );
+        }
+        byte[] urlPhoto = donationsReceivedDTO.getUrlPhoto();
+        if ( urlPhoto != null ) {
+            mappingTarget.urlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
+        }
+        if ( donationsReceivedDTO.getUrlPhotoContentType() != null ) {
+            mappingTarget.urlPhotoContentType( donationsReceivedDTO.getUrlPhotoContentType() );
+        }
+    }
+
+    protected void natureDTOToNature(NatureDTO natureDTO, Nature mappingTarget) {
+        if ( natureDTO == null ) {
+            return;
+        }
+
+        if ( natureDTO.getArchivated() != null ) {
+            mappingTarget.setArchivated( natureDTO.getArchivated() );
+        }
+        if ( natureDTO.getDestinedTo() != null ) {
+            mappingTarget.setDestinedTo( natureDTO.getDestinedTo() );
+        }
+        if ( natureDTO.getId() != null ) {
+            mappingTarget.setId( natureDTO.getId() );
+        }
+        if ( natureDTO.getName() != null ) {
+            mappingTarget.setName( natureDTO.getName() );
+        }
+        if ( natureDTO.getNecessityValue() != null ) {
+            mappingTarget.setNecessityValue( natureDTO.getNecessityValue() );
+        }
+    }
+
+    protected void itemDTOToItem(ItemDTO itemDTO, Item mappingTarget) {
+        if ( itemDTO == null ) {
+            return;
+        }
+
+        if ( itemDTO.getArchivated() != null ) {
+            mappingTarget.setArchivated( itemDTO.getArchivated() );
+        }
+        if ( itemDTO.getComposed() != null ) {
+            mappingTarget.setComposed( itemDTO.getComposed() );
+        }
+        if ( itemDTO.getGender() != null ) {
+            mappingTarget.setGender( itemDTO.getGender() );
+        }
+        if ( itemDTO.getId() != null ) {
+            mappingTarget.setId( itemDTO.getId() );
+        }
+        if ( itemDTO.getName() != null ) {
+            mappingTarget.setName( itemDTO.getName() );
+        }
+        if ( itemDTO.getNature() != null ) {
+            if ( mappingTarget.getNature() == null ) {
+                mappingTarget.setNature( new Nature() );
+            }
+            natureDTOToNature( itemDTO.getNature(), mappingTarget.getNature() );
+        }
+        byte[] urlPhoto = itemDTO.getUrlPhoto();
+        if ( urlPhoto != null ) {
+            mappingTarget.urlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
+        }
+        if ( itemDTO.getUrlPhotoContentType() != null ) {
+            mappingTarget.urlPhotoContentType( itemDTO.getUrlPhotoContentType() );
+        }
+    }
+
+    protected AuthorizingOfficer authorizingOfficerDTOToAuthorizingOfficer1(AuthorizingOfficerDTO authorizingOfficerDTO) {
+        if ( authorizingOfficerDTO == null ) {
+            return null;
+        }
+
+        AuthorizingOfficer authorizingOfficer = new AuthorizingOfficer();
+
+        authorizingOfficer.setAbbreviation( authorizingOfficerDTO.getAbbreviation() );
+        authorizingOfficer.setActivity( authorizingOfficerDTO.getActivity() );
+        authorizingOfficer.setId( authorizingOfficerDTO.getId() );
+        authorizingOfficer.setManager( authorizingOfficerDTO.getManager() );
+        authorizingOfficer.setManagerCin( authorizingOfficerDTO.getManagerCin() );
+
+        return authorizingOfficer;
+    }
+
+    protected DonationsReceived donationsReceivedDTOToDonationsReceived1(DonationsReceivedDTO donationsReceivedDTO) {
+        if ( donationsReceivedDTO == null ) {
+            return null;
+        }
+
+        DonationsReceived donationsReceived = new DonationsReceived();
+
+        donationsReceived.setArchivated( donationsReceivedDTO.getArchivated() );
+        donationsReceived.setAuthorizingOfficer( authorizingOfficerDTOToAuthorizingOfficer1( donationsReceivedDTO.getAuthorizingOfficer() ) );
+        donationsReceived.setId( donationsReceivedDTO.getId() );
+        byte[] urlPhoto = donationsReceivedDTO.getUrlPhoto();
+        if ( urlPhoto != null ) {
+            donationsReceived.urlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
+        }
+        donationsReceived.urlPhotoContentType( donationsReceivedDTO.getUrlPhotoContentType() );
+
+        return donationsReceived;
+    }
+
+    protected Nature natureDTOToNature1(NatureDTO natureDTO) {
+        if ( natureDTO == null ) {
+            return null;
+        }
+
+        Nature nature = new Nature();
+
+        nature.setArchivated( natureDTO.getArchivated() );
+        nature.setDestinedTo( natureDTO.getDestinedTo() );
+        nature.setId( natureDTO.getId() );
+        nature.setName( natureDTO.getName() );
+        nature.setNecessityValue( natureDTO.getNecessityValue() );
+
+        return nature;
+    }
+
+    protected Item itemDTOToItem1(ItemDTO itemDTO) {
+        if ( itemDTO == null ) {
+            return null;
+        }
+
+        Item item = new Item();
+
+        item.setArchivated( itemDTO.getArchivated() );
+        item.setComposed( itemDTO.getComposed() );
+        item.setGender( itemDTO.getGender() );
+        item.setId( itemDTO.getId() );
+        item.setName( itemDTO.getName() );
+        item.setNature( natureDTOToNature1( itemDTO.getNature() ) );
+        byte[] urlPhoto = itemDTO.getUrlPhoto();
+        if ( urlPhoto != null ) {
+            item.urlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
+        }
+        item.urlPhotoContentType( itemDTO.getUrlPhotoContentType() );
+
+        return item;
     }
 }

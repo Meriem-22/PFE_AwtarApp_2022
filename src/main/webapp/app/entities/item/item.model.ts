@@ -7,6 +7,7 @@ import { ISchoolLevelItem } from 'app/entities/school-level-item/school-level-it
 import { ItemGender } from 'app/entities/enumerations/item-gender.model';
 import dayjs from 'dayjs/esm';
 import { Status } from '../enumerations/status.model';
+import { IChildStatus } from '../child-status/child-status.model';
 
 export interface IItem {
   id?: number;
@@ -29,6 +30,8 @@ export interface IItem {
   price?: number;
   priceDate?: dayjs.Dayjs;
   schoolLevelDetails?: { id: number; qt: number }[];
+  childStatus?: IChildStatus[];
+
   isSchoolItem?: boolean | null;
   quantityNeeded?: number | null;
   staus?: Status;
@@ -117,6 +120,7 @@ export class Item implements IItem {
     public price?: number,
     public priceDate?: dayjs.Dayjs,
     public schoolLevelDetails?: { id: number; qt: number }[],
+    public childStatus?: IChildStatus[],
     public isSchoolItem?: boolean | null,
     public quantityNeeded?: number | null,
     public staus?: Status,
