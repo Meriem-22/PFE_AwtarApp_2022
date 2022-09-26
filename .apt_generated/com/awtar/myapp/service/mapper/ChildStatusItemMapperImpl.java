@@ -16,49 +16,51 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-21T09:01:57+0200",
+    date = "2022-09-26T08:25:01+0200",
     comments = "version: 1.4.2.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220719-0747, environment: Java 17.0.4 (Eclipse Adoptium)"
 )
 @Component
 public class ChildStatusItemMapperImpl implements ChildStatusItemMapper {
 
     @Override
-    public void partialUpdate(ChildStatusItem arg0, ChildStatusItemDTO arg1) {
-        if ( arg1 == null ) {
-            return;
-        }
-
-        if ( arg1.getAffected() != null ) {
-            arg0.setAffected( arg1.getAffected() );
-        }
-        if ( arg1.getArchivated() != null ) {
-            arg0.setArchivated( arg1.getArchivated() );
-        }
-        if ( arg1.getChildStatus() != null ) {
-            if ( arg0.getChildStatus() == null ) {
-                arg0.setChildStatus( new ChildStatus() );
-            }
-            childStatusDTOToChildStatus( arg1.getChildStatus(), arg0.getChildStatus() );
-        }
-        if ( arg1.getId() != null ) {
-            arg0.setId( arg1.getId() );
-        }
-        if ( arg1.getItem() != null ) {
-            if ( arg0.getItem() == null ) {
-                arg0.setItem( new Item() );
-            }
-            itemDTOToItem( arg1.getItem(), arg0.getItem() );
-        }
-    }
-
-    @Override
-    public List<ChildStatusItemDTO> toDto(List<ChildStatusItem> arg0) {
-        if ( arg0 == null ) {
+    public ChildStatusItem toEntity(ChildStatusItemDTO dto) {
+        if ( dto == null ) {
             return null;
         }
 
-        List<ChildStatusItemDTO> list = new ArrayList<ChildStatusItemDTO>( arg0.size() );
-        for ( ChildStatusItem childStatusItem : arg0 ) {
+        ChildStatusItem childStatusItem = new ChildStatusItem();
+
+        childStatusItem.setId( dto.getId() );
+        childStatusItem.setAffected( dto.getAffected() );
+        childStatusItem.setArchivated( dto.getArchivated() );
+        childStatusItem.item( itemDTOToItem( dto.getItem() ) );
+        childStatusItem.childStatus( childStatusDTOToChildStatus( dto.getChildStatus() ) );
+
+        return childStatusItem;
+    }
+
+    @Override
+    public List<ChildStatusItem> toEntity(List<ChildStatusItemDTO> dtoList) {
+        if ( dtoList == null ) {
+            return null;
+        }
+
+        List<ChildStatusItem> list = new ArrayList<ChildStatusItem>( dtoList.size() );
+        for ( ChildStatusItemDTO childStatusItemDTO : dtoList ) {
+            list.add( toEntity( childStatusItemDTO ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<ChildStatusItemDTO> toDto(List<ChildStatusItem> entityList) {
+        if ( entityList == null ) {
+            return null;
+        }
+
+        List<ChildStatusItemDTO> list = new ArrayList<ChildStatusItemDTO>( entityList.size() );
+        for ( ChildStatusItem childStatusItem : entityList ) {
             list.add( toDto( childStatusItem ) );
         }
 
@@ -66,34 +68,32 @@ public class ChildStatusItemMapperImpl implements ChildStatusItemMapper {
     }
 
     @Override
-    public ChildStatusItem toEntity(ChildStatusItemDTO arg0) {
-        if ( arg0 == null ) {
-            return null;
+    public void partialUpdate(ChildStatusItem entity, ChildStatusItemDTO dto) {
+        if ( dto == null ) {
+            return;
         }
 
-        ChildStatusItem childStatusItem = new ChildStatusItem();
-
-        childStatusItem.setAffected( arg0.getAffected() );
-        childStatusItem.setArchivated( arg0.getArchivated() );
-        childStatusItem.setChildStatus( childStatusDTOToChildStatus1( arg0.getChildStatus() ) );
-        childStatusItem.setId( arg0.getId() );
-        childStatusItem.setItem( itemDTOToItem1( arg0.getItem() ) );
-
-        return childStatusItem;
-    }
-
-    @Override
-    public List<ChildStatusItem> toEntity(List<ChildStatusItemDTO> arg0) {
-        if ( arg0 == null ) {
-            return null;
+        if ( dto.getId() != null ) {
+            entity.setId( dto.getId() );
         }
-
-        List<ChildStatusItem> list = new ArrayList<ChildStatusItem>( arg0.size() );
-        for ( ChildStatusItemDTO childStatusItemDTO : arg0 ) {
-            list.add( toEntity( childStatusItemDTO ) );
+        if ( dto.getAffected() != null ) {
+            entity.setAffected( dto.getAffected() );
         }
-
-        return list;
+        if ( dto.getArchivated() != null ) {
+            entity.setArchivated( dto.getArchivated() );
+        }
+        if ( dto.getItem() != null ) {
+            if ( entity.getItem() == null ) {
+                entity.item( new Item() );
+            }
+            itemDTOToItem1( dto.getItem(), entity.getItem() );
+        }
+        if ( dto.getChildStatus() != null ) {
+            if ( entity.getChildStatus() == null ) {
+                entity.childStatus( new ChildStatus() );
+            }
+            childStatusDTOToChildStatus1( dto.getChildStatus(), entity.getChildStatus() );
+        }
     }
 
     @Override
@@ -141,128 +141,128 @@ public class ChildStatusItemMapperImpl implements ChildStatusItemMapper {
         return childStatusDTO;
     }
 
-    protected void childStatusDTOToChildStatus(ChildStatusDTO childStatusDTO, ChildStatus mappingTarget) {
-        if ( childStatusDTO == null ) {
-            return;
-        }
-
-        if ( childStatusDTO.getArchivated() != null ) {
-            mappingTarget.setArchivated( childStatusDTO.getArchivated() );
-        }
-        if ( childStatusDTO.getId() != null ) {
-            mappingTarget.setId( childStatusDTO.getId() );
-        }
-        if ( childStatusDTO.getStaus() != null ) {
-            mappingTarget.staus( childStatusDTO.getStaus() );
-        }
-    }
-
-    protected void natureDTOToNature(NatureDTO natureDTO, Nature mappingTarget) {
-        if ( natureDTO == null ) {
-            return;
-        }
-
-        if ( natureDTO.getArchivated() != null ) {
-            mappingTarget.setArchivated( natureDTO.getArchivated() );
-        }
-        if ( natureDTO.getDestinedTo() != null ) {
-            mappingTarget.setDestinedTo( natureDTO.getDestinedTo() );
-        }
-        if ( natureDTO.getId() != null ) {
-            mappingTarget.setId( natureDTO.getId() );
-        }
-        if ( natureDTO.getName() != null ) {
-            mappingTarget.setName( natureDTO.getName() );
-        }
-        if ( natureDTO.getNecessityValue() != null ) {
-            mappingTarget.setNecessityValue( natureDTO.getNecessityValue() );
-        }
-    }
-
-    protected void itemDTOToItem(ItemDTO itemDTO, Item mappingTarget) {
-        if ( itemDTO == null ) {
-            return;
-        }
-
-        if ( itemDTO.getArchivated() != null ) {
-            mappingTarget.setArchivated( itemDTO.getArchivated() );
-        }
-        if ( itemDTO.getComposed() != null ) {
-            mappingTarget.setComposed( itemDTO.getComposed() );
-        }
-        if ( itemDTO.getGender() != null ) {
-            mappingTarget.setGender( itemDTO.getGender() );
-        }
-        if ( itemDTO.getId() != null ) {
-            mappingTarget.setId( itemDTO.getId() );
-        }
-        if ( itemDTO.getName() != null ) {
-            mappingTarget.setName( itemDTO.getName() );
-        }
-        if ( itemDTO.getNature() != null ) {
-            if ( mappingTarget.getNature() == null ) {
-                mappingTarget.setNature( new Nature() );
-            }
-            natureDTOToNature( itemDTO.getNature(), mappingTarget.getNature() );
-        }
-        byte[] urlPhoto = itemDTO.getUrlPhoto();
-        if ( urlPhoto != null ) {
-            mappingTarget.urlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
-        }
-        if ( itemDTO.getUrlPhotoContentType() != null ) {
-            mappingTarget.urlPhotoContentType( itemDTO.getUrlPhotoContentType() );
-        }
-    }
-
-    protected ChildStatus childStatusDTOToChildStatus1(ChildStatusDTO childStatusDTO) {
-        if ( childStatusDTO == null ) {
-            return null;
-        }
-
-        ChildStatus childStatus = new ChildStatus();
-
-        childStatus.setArchivated( childStatusDTO.getArchivated() );
-        childStatus.setId( childStatusDTO.getId() );
-        childStatus.staus( childStatusDTO.getStaus() );
-
-        return childStatus;
-    }
-
-    protected Nature natureDTOToNature1(NatureDTO natureDTO) {
+    protected Nature natureDTOToNature(NatureDTO natureDTO) {
         if ( natureDTO == null ) {
             return null;
         }
 
         Nature nature = new Nature();
 
-        nature.setArchivated( natureDTO.getArchivated() );
-        nature.setDestinedTo( natureDTO.getDestinedTo() );
         nature.setId( natureDTO.getId() );
         nature.setName( natureDTO.getName() );
+        nature.setDestinedTo( natureDTO.getDestinedTo() );
         nature.setNecessityValue( natureDTO.getNecessityValue() );
+        nature.setArchivated( natureDTO.getArchivated() );
 
         return nature;
     }
 
-    protected Item itemDTOToItem1(ItemDTO itemDTO) {
+    protected Item itemDTOToItem(ItemDTO itemDTO) {
         if ( itemDTO == null ) {
             return null;
         }
 
         Item item = new Item();
 
-        item.setArchivated( itemDTO.getArchivated() );
-        item.setComposed( itemDTO.getComposed() );
-        item.setGender( itemDTO.getGender() );
         item.setId( itemDTO.getId() );
         item.setName( itemDTO.getName() );
-        item.setNature( natureDTOToNature1( itemDTO.getNature() ) );
         byte[] urlPhoto = itemDTO.getUrlPhoto();
         if ( urlPhoto != null ) {
-            item.urlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
+            item.setUrlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
         }
-        item.urlPhotoContentType( itemDTO.getUrlPhotoContentType() );
+        item.setUrlPhotoContentType( itemDTO.getUrlPhotoContentType() );
+        item.setGender( itemDTO.getGender() );
+        item.setComposed( itemDTO.getComposed() );
+        item.setArchivated( itemDTO.getArchivated() );
+        item.nature( natureDTOToNature( itemDTO.getNature() ) );
 
         return item;
+    }
+
+    protected ChildStatus childStatusDTOToChildStatus(ChildStatusDTO childStatusDTO) {
+        if ( childStatusDTO == null ) {
+            return null;
+        }
+
+        ChildStatus childStatus = new ChildStatus();
+
+        childStatus.setId( childStatusDTO.getId() );
+        childStatus.setStaus( childStatusDTO.getStaus() );
+        childStatus.setArchivated( childStatusDTO.getArchivated() );
+
+        return childStatus;
+    }
+
+    protected void natureDTOToNature1(NatureDTO natureDTO, Nature mappingTarget) {
+        if ( natureDTO == null ) {
+            return;
+        }
+
+        if ( natureDTO.getId() != null ) {
+            mappingTarget.setId( natureDTO.getId() );
+        }
+        if ( natureDTO.getName() != null ) {
+            mappingTarget.setName( natureDTO.getName() );
+        }
+        if ( natureDTO.getDestinedTo() != null ) {
+            mappingTarget.setDestinedTo( natureDTO.getDestinedTo() );
+        }
+        if ( natureDTO.getNecessityValue() != null ) {
+            mappingTarget.setNecessityValue( natureDTO.getNecessityValue() );
+        }
+        if ( natureDTO.getArchivated() != null ) {
+            mappingTarget.setArchivated( natureDTO.getArchivated() );
+        }
+    }
+
+    protected void itemDTOToItem1(ItemDTO itemDTO, Item mappingTarget) {
+        if ( itemDTO == null ) {
+            return;
+        }
+
+        if ( itemDTO.getId() != null ) {
+            mappingTarget.setId( itemDTO.getId() );
+        }
+        if ( itemDTO.getName() != null ) {
+            mappingTarget.setName( itemDTO.getName() );
+        }
+        byte[] urlPhoto = itemDTO.getUrlPhoto();
+        if ( urlPhoto != null ) {
+            mappingTarget.setUrlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
+        }
+        if ( itemDTO.getUrlPhotoContentType() != null ) {
+            mappingTarget.setUrlPhotoContentType( itemDTO.getUrlPhotoContentType() );
+        }
+        if ( itemDTO.getGender() != null ) {
+            mappingTarget.setGender( itemDTO.getGender() );
+        }
+        if ( itemDTO.getComposed() != null ) {
+            mappingTarget.setComposed( itemDTO.getComposed() );
+        }
+        if ( itemDTO.getArchivated() != null ) {
+            mappingTarget.setArchivated( itemDTO.getArchivated() );
+        }
+        if ( itemDTO.getNature() != null ) {
+            if ( mappingTarget.getNature() == null ) {
+                mappingTarget.nature( new Nature() );
+            }
+            natureDTOToNature1( itemDTO.getNature(), mappingTarget.getNature() );
+        }
+    }
+
+    protected void childStatusDTOToChildStatus1(ChildStatusDTO childStatusDTO, ChildStatus mappingTarget) {
+        if ( childStatusDTO == null ) {
+            return;
+        }
+
+        if ( childStatusDTO.getId() != null ) {
+            mappingTarget.setId( childStatusDTO.getId() );
+        }
+        if ( childStatusDTO.getStaus() != null ) {
+            mappingTarget.setStaus( childStatusDTO.getStaus() );
+        }
+        if ( childStatusDTO.getArchivated() != null ) {
+            mappingTarget.setArchivated( childStatusDTO.getArchivated() );
+        }
     }
 }

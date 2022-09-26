@@ -294,4 +294,17 @@ public class ItemResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+    /**
+     * {@code GET  /items/:id} : get the "id" item.
+     *
+     * @param id the id of the itemDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the itemDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/items/price-details/with-nature/{id}")
+    public ResponseEntity<List<ItemDTO>> getItemsDetailsBynature(@PathVariable Long id) {
+        log.debug("REST request to get Items : {}");
+        List<ItemDTO> itemDTO = itemService.findItemsDetailsWithNature(id);
+        return ResponseEntity.ok().body(itemDTO);
+    }
 }

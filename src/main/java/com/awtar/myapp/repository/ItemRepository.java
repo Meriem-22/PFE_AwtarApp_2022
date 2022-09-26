@@ -59,6 +59,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
         "select new com.awtar.myapp.service.dto.ItemDTO (item.id, item.name, item.urlPhoto, item.urlPhotoContentType, item.gender, item.composed, ip.id, ip.price, ip.priceDate, ip.availableStockQuantity, ci.quantity) from ItemValue ip, Item item, CompositeItem ci where ((item.archivated != true) and (ip.item.id = item.id) and (ci.composant.id =:id) and (ci.composer.id = item.id))"
     )
     List<ItemDTO> findAllCompositeurDetailItems(@Param("id") Long id);
+
     /*
     @Query("select new com.awtar.myapp.service.dto.ItemDTO (item.id, item.name, item.urlPhoto,item.urlPhotoContentType, item.gender, item.composed,ip.price, ip.priceDate, ip.availableStockQuantity, si.isSchoolItem,  sl.schoolLevel, si.quantityNeeded, ci.quantity) from ItemValue ip,CompositeItem ci, SchoolLevelItem si, SchoolLevel sl, Item item where ((item.archivated != true) and (ip.item.id = item.id) and (si.item.id = item.id) and (si.item.id = ip.item.id) and (sl.schoolLevel.id = si.schoolLevel.id) and (si.isSchoolItem = true) and (ci.composer.id =:id) and (ci.composer.id = item.id) )")
     List<ItemDTO> findAllCompositeurSchoolItemsDetailsold(@Param("id") Long id);
@@ -66,4 +67,8 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query("select new com.awtar.myapp.service.dto.ItemDTO (item.id, item.name, item.urlPhoto,item.urlPhotoContentType, item.gender, item.composed, ci.quantity, ip.priceDate, ip.price, ip.availableStockQuantity, (select( si.isSchoolItem,  sl.schoolLevel, si.quantityNeeded)from SchoolLevelItem si, SchoolLevel sl where (sl.schoolLevel.id = si.schoolLevel.id) and (si.isSchoolItem = true)))from ItemValue ip,CompositeItem ci, SchoolLevelItem si, SchoolLevel sl, Item item where ((item.archivated != true) and (ip.item.id = item.id) and (si.item.id = item.id) and (si.item.id = ip.item.id) and (sl.schoolLevel.id = si.schoolLevel.id) and (si.isSchoolItem = true) and (ci.composer.id =:id) and (ci.composer.id = item.id) )")
     List<ItemDTO> findAllCompositeurSchoolItemsDetails(@Param("id") Long id);*/
 
+    @Query(
+        "select new com.awtar.myapp.service.dto.ItemDTO (item.id, item.name, item.urlPhoto, item.urlPhotoContentType, item.gender, item.composed, ip.price, ip.priceDate, ip.availableStockQuantity) from ItemValue ip, Item item where ((item.archivated != true) and (ip.item.id = item.id) and (item.nature.id =:id) )"
+    )
+    List<ItemDTO> findDetailsItemsWithNature(@Param("id") Long id);
 }

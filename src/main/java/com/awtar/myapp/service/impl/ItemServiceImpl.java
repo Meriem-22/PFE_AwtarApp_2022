@@ -209,4 +209,9 @@ public class ItemServiceImpl implements ItemService {
         }
         return itemMapper.toDto(item);
     }
+
+    @Override
+    public List<ItemDTO> findItemsDetailsWithNature(Long id) {
+        return itemRepository.findDetailsItemsWithNature(id);
+    }
 }

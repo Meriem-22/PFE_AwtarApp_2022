@@ -7,6 +7,7 @@ import { DonationsIssuedDetailComponent } from '../detail/donations-issued-detai
 import { DonationsIssuedUpdateComponent } from '../update/donations-issued-update.component';
 import { DonationsIssuedRoutingResolveService } from './donations-issued-routing-resolve.service';
 import { AddDonationsIssuedComponent } from '../add-donations-issued/add-donations-issued.component';
+import { AddAnyDonationsComponent } from '../add-any-donations/add-any-donations.component';
 
 const donationsIssuedRoute: Routes = [
   {
@@ -44,6 +45,14 @@ const donationsIssuedRoute: Routes = [
   {
     path: 'add',
     component: AddDonationsIssuedComponent,
+    resolve: {
+      donationsIssued: DonationsIssuedRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'add-any-donations',
+    component: AddAnyDonationsComponent,
     resolve: {
       donationsIssued: DonationsIssuedRoutingResolveService,
     },

@@ -18,7 +18,7 @@
         "title": "Donation Details"
       },
       "id": "ID",
-      "description": "Description",
+      "description": "Donation Description",
       "archivated": "Archivated",
       "donationsIssued": "Donations Issued",
       "nature": "Nature",

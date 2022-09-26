@@ -16,6 +16,7 @@ import com.awtar.myapp.service.dto.ProfileDTO;
 import com.awtar.myapp.service.mapper.ChildMapper;
 import com.awtar.myapp.service.mapper.FamilyMapper;
 import com.awtar.myapp.service.mapper.ProfileMapper;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -216,5 +217,25 @@ public class ChildServiceImpl implements ChildService {
         profile.setChild(child);
         profileRepository.save(profile);
         return childMapper.toDto(child);
+    }
+
+    @Override
+    public List<ChildDTO> getAllChildrenDetails(String beginningYear) {
+        return childRepository.findAllChildrenDetails(beginningYear);
+    }
+
+    @Override
+    public List<ChildDTO> getChildrenDetails() {
+        return childRepository.findChildrenDetails();
+    }
+
+    @Override
+    public List<ChildDTO> getAllChildrenSchoolDetails(String beginningYear) {
+        return childRepository.findChildEducationDetails(beginningYear);
+    }
+
+    @Override
+    public List<ChildDTO> getChildrenWithoutFamilyDetails() {
+        return childRepository.findChildrenWithoutFamilyDetails();
     }
 }

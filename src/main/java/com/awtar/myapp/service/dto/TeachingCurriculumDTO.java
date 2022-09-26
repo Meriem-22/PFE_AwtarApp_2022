@@ -30,6 +30,7 @@ public class TeachingCurriculumDTO implements Serializable {
     private byte[] attachedFile;
 
     private String attachedFileContentType;
+
     private Boolean archivated;
 
     private SchoolLevelDTO schoolLevel;

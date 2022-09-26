@@ -2,6 +2,7 @@ package com.awtar.myapp.service.dto;
 
 import com.awtar.myapp.domain.Family;
 import com.awtar.myapp.domain.enumeration.Gender;
+import com.awtar.myapp.domain.enumeration.Status;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -38,6 +39,7 @@ public class ProfileDTO implements Serializable {
     private byte[] urlPhoto;
 
     private String urlPhotoContentType;
+
     private String address;
 
     private String phone;
@@ -48,6 +50,7 @@ public class ProfileDTO implements Serializable {
     private byte[] urlCinAttached;
 
     private String urlCinAttachedContentType;
+
     private Boolean archivated;
 
     private ParentDTO parent;

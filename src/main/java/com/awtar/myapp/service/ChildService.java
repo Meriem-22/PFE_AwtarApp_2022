@@ -70,4 +70,36 @@ public interface ChildService {
      * @return the persisted entity.
      */
     ChildDTO saveChildAllDetails(ChildDTO childDTO);
+
+    /**
+     * Get the "id" profile.
+     *
+     * @param year the entity to save.
+     * @return the entity.
+     */
+    List<ChildDTO> getAllChildrenDetails(String beginningYear);
+
+    /**
+     * Get the "id" profile.
+     *
+     *
+     * @return the entity.
+     */
+    List<ChildDTO> getChildrenDetails();
+
+    /**
+     * Get the "id" profile.
+     *
+     * @param year the entity to save.
+     * @return the entity.
+     */
+    List<ChildDTO> getAllChildrenSchoolDetails(String beginningYear);
+
+    /**
+     * Get the "id" profile.
+     *
+     *
+     * @return the entity.
+     */
+    List<ChildDTO> getChildrenWithoutFamilyDetails();
 }

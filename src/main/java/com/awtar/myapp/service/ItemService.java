@@ -120,4 +120,12 @@ public interface ItemService {
      * @return the persisted entity.
      */
     ItemDTO addSimpleSchoolItem(ItemDTO itemDTO);
+
+    /**
+     * Get the "id" item.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    List<ItemDTO> findItemsDetailsWithNature(Long id);
 }

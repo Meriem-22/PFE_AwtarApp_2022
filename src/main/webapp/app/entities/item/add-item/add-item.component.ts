@@ -47,22 +47,24 @@ export class AddItemComponent implements OnInit {
   compositeurItemCollection: ICompositeItem[] = [];
   compositeurSchoolItemCollection: ICompositeSchoolItem[] = [];
   SelectedLevel: ISchoolLevel[] = [];
-  values: string[] = [];
   quantity: { id: number; qt: number }[] = [];
   finalquantitytable: { id: number; qt: number }[] = [];
+  values: string[] = [];
   nature!: INature[];
   selectedNature!: INature;
   natureNames!: string[];
+  results!: string[];
+  itemsWithNature: IItem[] = [];
+
   text!: string;
   textParamNature!: string[];
   itemType = '2';
   itemNature = '2';
   textParam!: string;
   msgs1!: Message[];
-  results!: string[];
   invalide = false;
+  invalideItemName = false;
   selecteditemGender?: Gender;
-  itemsWithNature: IItem[] = [];
   items?: IItem[];
   item?: IItem | null;
   a!: string;
@@ -89,6 +91,7 @@ export class AddItemComponent implements OnInit {
   t?: number;
   x = 0;
   y = 0;
+
   s?: number;
   z?: number;
   f?: number;
@@ -104,6 +107,10 @@ export class AddItemComponent implements OnInit {
 
   SchoolItemQuantityForm = this.fb.group({
     quantityNeeded: [],
+  });
+
+  editForm = this.fb.group({
+    name: [null, [Validators.required]],
   });
 
   simpleItemForm = this.fb.group({
@@ -161,7 +168,6 @@ export class AddItemComponent implements OnInit {
     priceDate: [null, [Validators.required]],
     schoolLevel: [null, [Validators.required]],
     nature: [null, [Validators.required]],
-    quantityNeeded: [],
     staus: [null, [Validators.required]],
     quantity: [null, [Validators.required]],
   });
@@ -272,7 +278,6 @@ export class AddItemComponent implements OnInit {
         }
       }
     }
-
     console.log(this.item);
     if (this.SI === -1 || this.SIC === -1) {
       this.itemValueService.findItem(this.item!.id!).subscribe({
@@ -481,30 +486,6 @@ export class AddItemComponent implements OnInit {
 
     this.add();
   }
-  /*
-  getSelectedSchoolLevel(): void{
-
-    this.finaleTable();
-    for (this.x = 0; this.x < this.finalquantitytable.length; this.x++) {
-      this.schoolLevelService.find(this.finalquantitytable[this.x].id).subscribe({
-        next: (res: HttpResponse<ISchoolLevel>) => {
-          this.level =res.body!
-          console.log(this.finalquantitytable[this.x].id)
-          console.log(this.level)
-          for (this.t = 0; this.t <= this.x; this.t++) {
-            this.schoolLevelDetails[this.t].schoolLevel = this.level
-            this.schoolLevelDetails[this.t].archivated = false
-            this.schoolLevelDetails[this.t].isSchoolItem = true
-            this.schoolLevelDetails[this.t].quantityNeeded = this.finalquantitytable[this.x].qt
-          }
-        },
-        error: e => console.error(e),
-      });
-
-      
-    }
-
-  }*/
 
   removevalue(i: any): void {
     this.values.splice(i, 1);

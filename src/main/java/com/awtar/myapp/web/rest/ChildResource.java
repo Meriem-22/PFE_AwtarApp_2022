@@ -208,4 +208,56 @@ public class ChildResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the childDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/children/{beginningYear}/details")
+    public ResponseEntity<List<ChildDTO>> getAllChildrenDetails(@PathVariable String beginningYear) {
+        log.debug("REST request to get  all children  : {}");
+        List<ChildDTO> childDTOC = childService.getAllChildrenDetails(beginningYear);
+        return ResponseEntity.ok().body(childDTOC);
+    }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the childDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/children/details")
+    public ResponseEntity<List<ChildDTO>> getChildrenDetails() {
+        log.debug("REST request to get  all children  : {}");
+        List<ChildDTO> childDTOC = childService.getChildrenDetails();
+        return ResponseEntity.ok().body(childDTOC);
+    }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the childDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/children/{beginningYear}/school-details")
+    public ResponseEntity<List<ChildDTO>> getAllChildrenSchoolDetails(@PathVariable String beginningYear) {
+        log.debug("REST request to get  all children  : {}");
+        List<ChildDTO> childDTOC = childService.getAllChildrenSchoolDetails(beginningYear);
+        return ResponseEntity.ok().body(childDTOC);
+    }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the childDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/children/without-family/details")
+    public ResponseEntity<List<ChildDTO>> getChildrenWithoutFamilyDetails() {
+        log.debug("REST request to get  all children  : {}");
+        List<ChildDTO> childDTOC = childService.getChildrenWithoutFamilyDetails();
+        return ResponseEntity.ok().body(childDTOC);
+    }
 }

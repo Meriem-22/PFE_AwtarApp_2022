@@ -14,49 +14,52 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-21T09:01:57+0200",
+    date = "2022-09-26T08:25:00+0200",
     comments = "version: 1.4.2.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220719-0747, environment: Java 17.0.4 (Eclipse Adoptium)"
 )
 @Component
 public class ItemValueMapperImpl implements ItemValueMapper {
 
     @Override
-    public void partialUpdate(ItemValue arg0, ItemValueDTO arg1) {
-        if ( arg1 == null ) {
-            return;
-        }
-
-        if ( arg1.getArchivated() != null ) {
-            arg0.setArchivated( arg1.getArchivated() );
-        }
-        if ( arg1.getAvailableStockQuantity() != null ) {
-            arg0.setAvailableStockQuantity( arg1.getAvailableStockQuantity() );
-        }
-        if ( arg1.getId() != null ) {
-            arg0.setId( arg1.getId() );
-        }
-        if ( arg1.getItem() != null ) {
-            if ( arg0.getItem() == null ) {
-                arg0.setItem( new Item() );
-            }
-            itemDTOToItem( arg1.getItem(), arg0.getItem() );
-        }
-        if ( arg1.getPrice() != null ) {
-            arg0.setPrice( arg1.getPrice() );
-        }
-        if ( arg1.getPriceDate() != null ) {
-            arg0.setPriceDate( arg1.getPriceDate() );
-        }
-    }
-
-    @Override
-    public List<ItemValueDTO> toDto(List<ItemValue> arg0) {
-        if ( arg0 == null ) {
+    public ItemValue toEntity(ItemValueDTO dto) {
+        if ( dto == null ) {
             return null;
         }
 
-        List<ItemValueDTO> list = new ArrayList<ItemValueDTO>( arg0.size() );
-        for ( ItemValue itemValue : arg0 ) {
+        ItemValue itemValue = new ItemValue();
+
+        itemValue.setId( dto.getId() );
+        itemValue.setPrice( dto.getPrice() );
+        itemValue.setPriceDate( dto.getPriceDate() );
+        itemValue.setAvailableStockQuantity( dto.getAvailableStockQuantity() );
+        itemValue.setArchivated( dto.getArchivated() );
+        itemValue.item( itemDTOToItem( dto.getItem() ) );
+
+        return itemValue;
+    }
+
+    @Override
+    public List<ItemValue> toEntity(List<ItemValueDTO> dtoList) {
+        if ( dtoList == null ) {
+            return null;
+        }
+
+        List<ItemValue> list = new ArrayList<ItemValue>( dtoList.size() );
+        for ( ItemValueDTO itemValueDTO : dtoList ) {
+            list.add( toEntity( itemValueDTO ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<ItemValueDTO> toDto(List<ItemValue> entityList) {
+        if ( entityList == null ) {
+            return null;
+        }
+
+        List<ItemValueDTO> list = new ArrayList<ItemValueDTO>( entityList.size() );
+        for ( ItemValue itemValue : entityList ) {
             list.add( toDto( itemValue ) );
         }
 
@@ -64,35 +67,32 @@ public class ItemValueMapperImpl implements ItemValueMapper {
     }
 
     @Override
-    public ItemValue toEntity(ItemValueDTO arg0) {
-        if ( arg0 == null ) {
-            return null;
+    public void partialUpdate(ItemValue entity, ItemValueDTO dto) {
+        if ( dto == null ) {
+            return;
         }
 
-        ItemValue itemValue = new ItemValue();
-
-        itemValue.setArchivated( arg0.getArchivated() );
-        itemValue.setAvailableStockQuantity( arg0.getAvailableStockQuantity() );
-        itemValue.setId( arg0.getId() );
-        itemValue.setItem( itemDTOToItem1( arg0.getItem() ) );
-        itemValue.setPrice( arg0.getPrice() );
-        itemValue.setPriceDate( arg0.getPriceDate() );
-
-        return itemValue;
-    }
-
-    @Override
-    public List<ItemValue> toEntity(List<ItemValueDTO> arg0) {
-        if ( arg0 == null ) {
-            return null;
+        if ( dto.getId() != null ) {
+            entity.setId( dto.getId() );
         }
-
-        List<ItemValue> list = new ArrayList<ItemValue>( arg0.size() );
-        for ( ItemValueDTO itemValueDTO : arg0 ) {
-            list.add( toEntity( itemValueDTO ) );
+        if ( dto.getPrice() != null ) {
+            entity.setPrice( dto.getPrice() );
         }
-
-        return list;
+        if ( dto.getPriceDate() != null ) {
+            entity.setPriceDate( dto.getPriceDate() );
+        }
+        if ( dto.getAvailableStockQuantity() != null ) {
+            entity.setAvailableStockQuantity( dto.getAvailableStockQuantity() );
+        }
+        if ( dto.getArchivated() != null ) {
+            entity.setArchivated( dto.getArchivated() );
+        }
+        if ( dto.getItem() != null ) {
+            if ( entity.getItem() == null ) {
+                entity.item( new Item() );
+            }
+            itemDTOToItem1( dto.getItem(), entity.getItem() );
+        }
     }
 
     @Override
@@ -127,98 +127,98 @@ public class ItemValueMapperImpl implements ItemValueMapper {
         return itemDTO;
     }
 
-    protected void natureDTOToNature(NatureDTO natureDTO, Nature mappingTarget) {
-        if ( natureDTO == null ) {
-            return;
-        }
-
-        if ( natureDTO.getArchivated() != null ) {
-            mappingTarget.setArchivated( natureDTO.getArchivated() );
-        }
-        if ( natureDTO.getDestinedTo() != null ) {
-            mappingTarget.setDestinedTo( natureDTO.getDestinedTo() );
-        }
-        if ( natureDTO.getId() != null ) {
-            mappingTarget.setId( natureDTO.getId() );
-        }
-        if ( natureDTO.getName() != null ) {
-            mappingTarget.setName( natureDTO.getName() );
-        }
-        if ( natureDTO.getNecessityValue() != null ) {
-            mappingTarget.setNecessityValue( natureDTO.getNecessityValue() );
-        }
-    }
-
-    protected void itemDTOToItem(ItemDTO itemDTO, Item mappingTarget) {
-        if ( itemDTO == null ) {
-            return;
-        }
-
-        if ( itemDTO.getArchivated() != null ) {
-            mappingTarget.setArchivated( itemDTO.getArchivated() );
-        }
-        if ( itemDTO.getComposed() != null ) {
-            mappingTarget.setComposed( itemDTO.getComposed() );
-        }
-        if ( itemDTO.getGender() != null ) {
-            mappingTarget.setGender( itemDTO.getGender() );
-        }
-        if ( itemDTO.getId() != null ) {
-            mappingTarget.setId( itemDTO.getId() );
-        }
-        if ( itemDTO.getName() != null ) {
-            mappingTarget.setName( itemDTO.getName() );
-        }
-        if ( itemDTO.getNature() != null ) {
-            if ( mappingTarget.getNature() == null ) {
-                mappingTarget.setNature( new Nature() );
-            }
-            natureDTOToNature( itemDTO.getNature(), mappingTarget.getNature() );
-        }
-        byte[] urlPhoto = itemDTO.getUrlPhoto();
-        if ( urlPhoto != null ) {
-            mappingTarget.urlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
-        }
-        if ( itemDTO.getUrlPhotoContentType() != null ) {
-            mappingTarget.urlPhotoContentType( itemDTO.getUrlPhotoContentType() );
-        }
-    }
-
-    protected Nature natureDTOToNature1(NatureDTO natureDTO) {
+    protected Nature natureDTOToNature(NatureDTO natureDTO) {
         if ( natureDTO == null ) {
             return null;
         }
 
         Nature nature = new Nature();
 
-        nature.setArchivated( natureDTO.getArchivated() );
-        nature.setDestinedTo( natureDTO.getDestinedTo() );
         nature.setId( natureDTO.getId() );
         nature.setName( natureDTO.getName() );
+        nature.setDestinedTo( natureDTO.getDestinedTo() );
         nature.setNecessityValue( natureDTO.getNecessityValue() );
+        nature.setArchivated( natureDTO.getArchivated() );
 
         return nature;
     }
 
-    protected Item itemDTOToItem1(ItemDTO itemDTO) {
+    protected Item itemDTOToItem(ItemDTO itemDTO) {
         if ( itemDTO == null ) {
             return null;
         }
 
         Item item = new Item();
 
-        item.setArchivated( itemDTO.getArchivated() );
-        item.setComposed( itemDTO.getComposed() );
-        item.setGender( itemDTO.getGender() );
         item.setId( itemDTO.getId() );
         item.setName( itemDTO.getName() );
-        item.setNature( natureDTOToNature1( itemDTO.getNature() ) );
         byte[] urlPhoto = itemDTO.getUrlPhoto();
         if ( urlPhoto != null ) {
-            item.urlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
+            item.setUrlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
         }
-        item.urlPhotoContentType( itemDTO.getUrlPhotoContentType() );
+        item.setUrlPhotoContentType( itemDTO.getUrlPhotoContentType() );
+        item.setGender( itemDTO.getGender() );
+        item.setComposed( itemDTO.getComposed() );
+        item.setArchivated( itemDTO.getArchivated() );
+        item.nature( natureDTOToNature( itemDTO.getNature() ) );
 
         return item;
+    }
+
+    protected void natureDTOToNature1(NatureDTO natureDTO, Nature mappingTarget) {
+        if ( natureDTO == null ) {
+            return;
+        }
+
+        if ( natureDTO.getId() != null ) {
+            mappingTarget.setId( natureDTO.getId() );
+        }
+        if ( natureDTO.getName() != null ) {
+            mappingTarget.setName( natureDTO.getName() );
+        }
+        if ( natureDTO.getDestinedTo() != null ) {
+            mappingTarget.setDestinedTo( natureDTO.getDestinedTo() );
+        }
+        if ( natureDTO.getNecessityValue() != null ) {
+            mappingTarget.setNecessityValue( natureDTO.getNecessityValue() );
+        }
+        if ( natureDTO.getArchivated() != null ) {
+            mappingTarget.setArchivated( natureDTO.getArchivated() );
+        }
+    }
+
+    protected void itemDTOToItem1(ItemDTO itemDTO, Item mappingTarget) {
+        if ( itemDTO == null ) {
+            return;
+        }
+
+        if ( itemDTO.getId() != null ) {
+            mappingTarget.setId( itemDTO.getId() );
+        }
+        if ( itemDTO.getName() != null ) {
+            mappingTarget.setName( itemDTO.getName() );
+        }
+        byte[] urlPhoto = itemDTO.getUrlPhoto();
+        if ( urlPhoto != null ) {
+            mappingTarget.setUrlPhoto( Arrays.copyOf( urlPhoto, urlPhoto.length ) );
+        }
+        if ( itemDTO.getUrlPhotoContentType() != null ) {
+            mappingTarget.setUrlPhotoContentType( itemDTO.getUrlPhotoContentType() );
+        }
+        if ( itemDTO.getGender() != null ) {
+            mappingTarget.setGender( itemDTO.getGender() );
+        }
+        if ( itemDTO.getComposed() != null ) {
+            mappingTarget.setComposed( itemDTO.getComposed() );
+        }
+        if ( itemDTO.getArchivated() != null ) {
+            mappingTarget.setArchivated( itemDTO.getArchivated() );
+        }
+        if ( itemDTO.getNature() != null ) {
+            if ( mappingTarget.getNature() == null ) {
+                mappingTarget.nature( new Nature() );
+            }
+            natureDTOToNature1( itemDTO.getNature(), mappingTarget.getNature() );
+        }
     }
 }

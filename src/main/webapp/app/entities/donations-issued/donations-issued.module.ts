@@ -13,6 +13,8 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { PickListModule } from 'primeng/picklist';
+import { AddAnyDonationsComponent } from './add-any-donations/add-any-donations.component';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
   imports: [
@@ -25,6 +27,7 @@ import { PickListModule } from 'primeng/picklist';
     DialogModule,
     AutoCompleteModule,
     PickListModule,
+    ToolbarModule,
   ],
   declarations: [
     DonationsIssuedComponent,
@@ -32,6 +35,7 @@ import { PickListModule } from 'primeng/picklist';
     DonationsIssuedUpdateComponent,
     DonationsIssuedDeleteDialogComponent,
     AddDonationsIssuedComponent,
+    AddAnyDonationsComponent,
   ],
   entryComponents: [DonationsIssuedDeleteDialogComponent],
 })

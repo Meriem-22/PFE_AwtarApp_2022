@@ -71,7 +71,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
     List<Profile> findProfileAuthorizingOfficer();
 
     @Query(
-        "select profile from Profile profile left join fetch profile.birthPlace left join fetch profile.placeOfResidence where profile.authorizingOfficer.id =:id or profile.tutor.id =:id  or profile.parent.id =:id or profile.child.id =:id"
+        "select profile from Profile profile where ((profile.authorizingOfficer.id =:id) or (profile.tutor.id =:id)  or (profile.parent.id =:id) or (profile.child.id =:id))"
     )
     Optional<Profile> findProfileX(@Param("id") Long id);
 
