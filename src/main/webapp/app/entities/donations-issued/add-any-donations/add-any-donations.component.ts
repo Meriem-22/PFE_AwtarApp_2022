@@ -114,6 +114,7 @@ export class AddAnyDonationsComponent implements OnInit {
   x = 0;
   y = 0;
   id = -1;
+  stepC = 0;
 
   myDate!: number;
   textParamNatureDon!: string[];

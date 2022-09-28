@@ -650,7 +650,23 @@
                                 <div class="col flex align-items-center justify-content-center">
                                   <fieldset *ngIf="step2 == 1">
                                     <p-toolbar styleClass="mb-4">
-                                      <ng-template pTemplate="left"> </ng-template>
+                                      <ng-template pTemplate="left">
+                                        <div>
+                                          <div class="card">
+                                            <div class="card-body">
+                                              <nav class="nav grid-column nav-pills nav-gap-y-1">
+                                                <a
+                                                  href="#children"
+                                                  data-toggle="tab"
+                                                  class="nav-item nav-link has-icon nav-link-faded active"
+                                                >
+                                                  Children
+                                                </a>
+                                              </nav>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </ng-template>
 
                                       <ng-template pTemplate="right">
                                         <button
@@ -666,7 +682,7 @@
 
                                     <p-table
                                       #dt
-                                      [value]="allchildren!"
+                                      [value]="allchildren"
                                       [(selection)]="selectedChildren"
                                       dataKey="id"
                                       styleClass="p-datatable-sm"
@@ -886,7 +902,23 @@
 
                                   <fieldset *ngIf="step2 == 2">
                                     <p-toolbar styleClass="mb-4">
-                                      <ng-template pTemplate="left"> </ng-template>
+                                      <ng-template pTemplate="left">
+                                        <div>
+                                          <div class="card">
+                                            <div class="card-body">
+                                              <nav class="nav grid-column nav-pills nav-gap-y-1" *ngIf="step2 == 2">
+                                                <a
+                                                  href="#families"
+                                                  data-toggle="tab"
+                                                  class="nav-item nav-link has-icon nav-link-faded active"
+                                                >
+                                                  Families
+                                                </a>
+                                              </nav>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </ng-template>
 
                                       <ng-template pTemplate="right">
                                         <button
@@ -1282,7 +1314,23 @@
 
                                   <fieldset *ngIf="step2 == 3">
                                     <p-toolbar styleClass="mb-4">
-                                      <ng-template pTemplate="left"> </ng-template>
+                                      <ng-template pTemplate="left">
+                                        <div>
+                                          <div class="card">
+                                            <div class="card-body">
+                                              <nav class="nav grid-column nav-pills nav-gap-y-1" *ngIf="step2 == 3">
+                                                <a
+                                                  href="#establishments"
+                                                  data-toggle="tab"
+                                                  class="nav-item nav-link has-icon nav-link-faded active"
+                                                >
+                                                  Establishments
+                                                </a>
+                                              </nav>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </ng-template>
 
                                       <ng-template pTemplate="right">
                                         <button
@@ -1469,60 +1517,21 @@
                                               <div class="card-body">
                                                 <nav class="nav grid-column nav-pills nav-gap-y-1">
                                                   <a
-                                                    href="#profile"
+                                                    href="#children"
                                                     data-toggle="tab"
                                                     class="nav-item nav-link has-icon nav-link-faded active"
                                                   >
-                                                    <svg
-                                                      xmlns="http://www.w3.org/2000/svg"
-                                                      width="24"
-                                                      height="24"
-                                                      viewBox="0 0 24 24"
-                                                      fill="none"
-                                                      stroke="currentColor"
-                                                      stroke-width="2"
-                                                      stroke-linecap="round"
-                                                      stroke-linejoin="round"
-                                                      class="feather feather-user mr-2"
-                                                    >
-                                                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                                      <circle cx="12" cy="7" r="4"></circle></svg
-                                                    >Profile Information
+                                                    Children
                                                   </a>
-                                                  <a href="#account" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
-                                                    <svg
-                                                      xmlns="http://www.w3.org/2000/svg"
-                                                      width="24"
-                                                      height="24"
-                                                      viewBox="0 0 24 24"
-                                                      fill="none"
-                                                      stroke="currentColor"
-                                                      stroke-width="2"
-                                                      stroke-linecap="round"
-                                                      stroke-linejoin="round"
-                                                      class="feather feather-settings mr-2"
-                                                    >
-                                                      <circle cx="12" cy="12" r="3"></circle>
-                                                      <path
-                                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-                                                      ></path></svg
-                                                    >Account Settings
+                                                  <a href="#families" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                                                    Families
                                                   </a>
-                                                  <a href="#security" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
-                                                    <svg
-                                                      xmlns="http://www.w3.org/2000/svg"
-                                                      width="24"
-                                                      height="24"
-                                                      viewBox="0 0 24 24"
-                                                      fill="none"
-                                                      stroke="currentColor"
-                                                      stroke-width="2"
-                                                      stroke-linecap="round"
-                                                      stroke-linejoin="round"
-                                                      class="feather feather-shield mr-2"
-                                                    >
-                                                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg
-                                                    >Security
+                                                  <a
+                                                    href="#establishments"
+                                                    data-toggle="tab"
+                                                    class="nav-item nav-link has-icon nav-link-faded"
+                                                  >
+                                                    Establishments
                                                   </a>
                                                 </nav>
                                               </div>
@@ -1605,8 +1614,8 @@
                                               </ul>
                                             </div>
                                             <div class="card-body tab-content">
-                                              <div class="tab-pane active" id="profile">
-                                                <h6>YOUR PROFILE INFORMATION</h6>
+                                              <div class="tab-pane active" id="children">
+                                                <h6>YOUR CHILDREN BENEFICIARYS INFORMATION</h6>
 
                                                 <p-table
                                                   #dt
@@ -1840,7 +1849,9 @@
                                                 </p-dialog>
                                               </div>
 
-                                              <div class="tab-pane" id="account">
+                                              <div class="tab-pane" id="families">
+                                                <h6>YOUR FAMILIES BENEFICIARIES INFORMATION</h6>
+
                                                 <p-table
                                                   #dt
                                                   [value]="familys!"
@@ -2249,7 +2260,9 @@
                                                 </p-dialog>
                                               </div>
 
-                                              <div class="tab-pane" id="security">
+                                              <div class="tab-pane" id="establishments">
+                                                <h6>YOUR ESTABLISHMENTS BENEFICIARYS INFORMATION</h6>
+
                                                 <p-table
                                                   #dt
                                                   [value]="establishments!"
