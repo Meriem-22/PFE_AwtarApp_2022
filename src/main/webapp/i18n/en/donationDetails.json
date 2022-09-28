@@ -23,7 +23,8 @@
       "donationsIssued": "Donations Issued",
       "nature": "Nature",
       "beneficiary": "Beneficiary",
-      "item": "Item"
+      "item": "Item",
+      "natureDon": "Donation Nature"
     }
   }
 }

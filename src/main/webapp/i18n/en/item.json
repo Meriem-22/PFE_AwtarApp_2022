@@ -31,7 +31,8 @@
       "composant": "Composant",
       "donationsReceived": "Donations Received",
       "childStatus": "Child Status",
-      "schoolLevel": "School Level"
+      "schoolLevel": "School Level",
+      "natureItem": "Item Nature"
     }
   }
 }

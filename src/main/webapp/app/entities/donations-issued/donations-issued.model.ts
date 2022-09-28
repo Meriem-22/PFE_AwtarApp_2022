@@ -18,8 +18,7 @@ export interface IDonationsIssued {
   recurrence?: number | null;
   archivated?: boolean | null;
   donationsDetails?: IDonationDetails[] | null;
-  donationsDetailsN?: IDonationDetails | null;
-  idsBeneficiary?: number[] | null;
+  donationsDetailsN?: IDonationDetails[] | null;
 }
 
 export class DonationsIssued implements IDonationsIssued {
@@ -39,8 +38,7 @@ export class DonationsIssued implements IDonationsIssued {
     public recurrence?: number | null,
     public archivated?: boolean | null,
     public donationsDetails?: IDonationDetails[] | null,
-    public donationsDetailsN?: IDonationDetails | null,
-    public idsBeneficiary?: number[] | null
+    public donationsDetailsN?: IDonationDetails[] | null
   ) {
     this.isValidated = this.isValidated ?? false;
     this.canceledDonations = this.canceledDonations ?? false;

@@ -23,7 +23,8 @@
       "donationsIssued": "Dons émis",
       "nature": "Nature",
       "beneficiary": "Bénéficiaire",
-      "item": "Article"
+      "item": "Article",
+      "natureDon": "Nature du Don"
     }
   }
 }

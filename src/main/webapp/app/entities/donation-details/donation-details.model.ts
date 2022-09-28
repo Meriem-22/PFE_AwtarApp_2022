@@ -11,7 +11,8 @@ export interface IDonationDetails {
   nature?: INature;
   beneficiary?: IBeneficiary;
   items?: IDonationItemDetails[] | null;
-  donationItemDetails?: IDonationItemDetails[] | null;
+  donationItemDetails?: IDonationItemDetails;
+  idsBeneficiary?: number[] | null;
 }
 
 export class DonationDetails implements IDonationDetails {
@@ -23,7 +24,8 @@ export class DonationDetails implements IDonationDetails {
     public nature?: INature,
     public beneficiary?: IBeneficiary,
     public items?: IDonationItemDetails[] | null,
-    public donationItemDetails?: IDonationItemDetails[] | null
+    public donationItemDetails?: IDonationItemDetails,
+    public idsBeneficiary?: number[] | null
   ) {
     this.archivated = this.archivated ?? false;
   }

@@ -9,6 +9,9 @@ export interface IDonationItemDetails {
   archivated?: boolean | null;
   donationDetails?: IDonationDetails;
   item?: IItem;
+  itemsWithQuantitys?: number[];
+  quantityOfItems?: number[];
+  itemsWithoutQuantitys?: number[];
 }
 
 export class DonationItemDetails implements IDonationItemDetails {
@@ -18,7 +21,10 @@ export class DonationItemDetails implements IDonationItemDetails {
     public date?: dayjs.Dayjs,
     public archivated?: boolean | null,
     public donationDetails?: IDonationDetails,
-    public item?: IItem
+    public item?: IItem,
+    public itemsWithQuantitys?: number[],
+    public quantityOfItems?: number[],
+    public itemsWithoutQuantitys?: number[]
   ) {
     this.archivated = this.archivated ?? false;
   }

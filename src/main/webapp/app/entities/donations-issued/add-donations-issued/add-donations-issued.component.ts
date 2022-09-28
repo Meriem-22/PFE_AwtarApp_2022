@@ -453,8 +453,8 @@ export class AddDonationsIssuedComponent implements OnInit {
       periodicity: this.DonationsIssued.get(['periodicity'])!.value,
       recurrence: this.DonationsIssued.get(['recurrence'])!.value,
       archivated: this.DonationsIssued.get(['archivated'])!.value,
-      donationsDetailsN: this.createFromFormDonationDetails(),
-      idsBeneficiary: this.beneficiaries.slice(),
+      // donationsDetailsN: this.createFromFormDonationDetails(),
+      //idsBeneficiary: this.beneficiaries.slice(),
     };
   }
 
@@ -464,7 +464,7 @@ export class AddDonationsIssuedComponent implements OnInit {
       description: this.DonationsDetails.get(['description'])!.value,
       archivated: this.DonationsDetails.get(['archivated'])!.value,
       /*nature: this.DonationsIssued.get(['nature'])!.value,*/
-      donationItemDetails: this.AddedItems.slice(),
+      //donationItemDetails: this.AddedItems.slice(),
     };
   }
 }

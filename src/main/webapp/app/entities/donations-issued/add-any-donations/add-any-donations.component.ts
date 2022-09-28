@@ -21,6 +21,7 @@ import { INature } from 'app/entities/nature/nature.model';
 import { NatureService } from 'app/entities/nature/service/nature.service';
 import { IProfile } from 'app/entities/profile/profile.model';
 import { ProfileService } from 'app/entities/profile/service/profile.service';
+import { MenuItem } from 'primeng/api';
 import { finalize, map, Observable } from 'rxjs';
 import { DonationsIssued, IDonationsIssued } from '../donations-issued.model';
 import { DonationsIssuedService } from '../service/donations-issued.service';
@@ -91,6 +92,8 @@ export class AddAnyDonationsComponent implements OnInit {
   Tuteur!: IProfile;
   parents?: any[] = [];
   children?: IProfile[] = [];
+  childrenForDonation: IProfile[] = [];
+  selectedchildrenofFamily: IProfile[] = [];
   childrenDetails: any[] = [];
   selectedChildren: any[] = [];
   childrenSchoolDetails: any[] = [];
@@ -101,6 +104,7 @@ export class AddAnyDonationsComponent implements OnInit {
   df = 0;
   o = 0;
   nbChild = 0;
+  displayMaximizable!: boolean;
 
   DonationsIssued_step = false;
   DonationsDetails_step = false;
@@ -120,13 +124,17 @@ export class AddAnyDonationsComponent implements OnInit {
   recDon = false;
 
   SelectedItem: IItem[] = [];
-  quantitySchoolItemTab: number[] = [];
+  quantityItemTab: number[] = [];
   IemTab: number[] = [];
   TabWithOneItemToAdd: number[] = [];
   quantityOfSelectedItem: { id: number; qt: number }[] = [];
   productDialog?: boolean;
   description?: string;
   natureDetailsDon!: INature;
+  itemss!: MenuItem[];
+  displayChildren = false;
+  natureDescriptionDonation!: INature;
+  DonationDetails?: IDonationDetails[] | null;
 
   QuantityForm = this.formBuilder.group({
     quantity: [null, [Validators.required]],
@@ -272,6 +280,62 @@ export class AddAnyDonationsComponent implements OnInit {
           this.establishments = res.body ?? [];
           console.log(this.establishments);
           this.step2 = 3;
+        },
+        error: () => {
+          this.isLoading = false;
+        },
+      });
+    }
+
+    if (this.beneficiaryType === 'COMMMON') {
+      this.step2 = 4;
+      this.familyService.findFamily().subscribe({
+        next: (res: HttpResponse<IFamily[]>) => {
+          this.isLoading = true;
+          this.familys = res.body ?? [];
+          console.log(this.familys);
+        },
+        error: () => {
+          this.isLoading = false;
+        },
+      });
+
+      this.myDate = new Date().getFullYear();
+
+      for (
+        this.m = 0, this.n = 0, this.z = 0;
+        this.m < this.childrenWithoutFamilyDetails.length + this.childrenDetails.length - 1;
+        this.m++
+      ) {
+        if (this.n < this.childrenDetails.length) {
+          this.allchildren[this.m] = this.childrenDetails[this.n];
+          this.n++;
+        }
+        if (this.n === this.childrenDetails.length) {
+          this.allchildren[this.m + 1] = this.childrenWithoutFamilyDetails[this.z];
+          this.allchildren[this.m + 1].familyName = 'sans famille';
+          this.z++;
+        }
+      }
+      console.log(this.allchildren);
+
+      this.childService.getSchoolChildrenDetails(this.myDate.toString()).subscribe({
+        next: (res: HttpResponse<any[]>) => {
+          this.isLoading = true;
+          this.childrenSchoolDetails = res.body ?? [];
+
+          console.log(this.childrenSchoolDetails);
+        },
+        error: () => {
+          this.isLoading = false;
+        },
+      });
+
+      this.establishmentService.findEstablishments().subscribe({
+        next: (res: HttpResponse<IEstablishment[]>) => {
+          this.isLoading = true;
+          this.establishments = res.body ?? [];
+          console.log(this.establishments);
         },
         error: () => {
           this.isLoading = false;
@@ -459,11 +523,9 @@ export class AddAnyDonationsComponent implements OnInit {
 
   hideDialog(): void {
     this.productDialog = false;
-    /*  this.editForm.patchValue({
-        description: '',
-      });   */
 
     this.editForm.reset();
+    this.natureDon = '';
   }
 
   updateTable($event: any): any {
@@ -488,7 +550,7 @@ export class AddAnyDonationsComponent implements OnInit {
     for (this.t = 0; this.t < this.targetProducts.length; this.t++) {
       for (this.x = 0; this.x < this.quantityOfSelectedItem.length; this.x++) {
         if (this.quantityOfSelectedItem[this.x].id - this.targetProducts[this.t].id! === 0) {
-          this.quantitySchoolItemTab[this.y] = this.quantityOfSelectedItem[this.x].qt;
+          this.quantityItemTab[this.y] = this.quantityOfSelectedItem[this.x].qt;
           this.IemTab[this.y] = this.quantityOfSelectedItem[this.x].id;
 
           this.y++;
@@ -510,10 +572,6 @@ export class AddAnyDonationsComponent implements OnInit {
         }
       }
     }
-
-    console.log(this.quantitySchoolItemTab);
-    console.log(this.IemTab);
-    console.log(this.TabWithOneItemToAdd);
   }
 
   previousState(): void {
@@ -528,19 +586,20 @@ export class AddAnyDonationsComponent implements OnInit {
 
   goToItem(): void {
     this.step = 3;
-    (this.description = this.editForm.get(['description'])!.value), (this.natureDetailsDon = this.editForm.get(['nature'])!.value);
-    /* this.editForm.patchValue({
-    description: '',
-  });*/
+    this.description = this.editForm.get(['description'])!.value;
 
     this.textParam = this.natureDon;
     this.search();
 
     this.editForm.reset();
     this.natureDon = '';
+    this.natureDescriptionDonation = this.selectedNature;
 
-    console.log(this.description);
     this.hideDialog();
+  }
+
+  showMaximizableDialog(): void {
+    this.displayMaximizable = true;
   }
 
   target(item: IItem): boolean {
@@ -588,9 +647,9 @@ export class AddAnyDonationsComponent implements OnInit {
     console.log(this.beneficiaries);
   }
 
-  addItem(item: Item): void {
-    this.AddedItems.push(this.createFromFormItemDetails(item));
-    console.log(this.AddedItems);
+  addDonationDetails(): void {
+    this.DonationDetails!.push(this.createFromFormDonationDetails());
+    console.log(this.DonationDetails);
   }
 
   search(): void {
@@ -607,7 +666,7 @@ export class AddAnyDonationsComponent implements OnInit {
 
   SearchNature(event: any, x: string): void {
     if (x === 'searchNatureDon') {
-      this.textParamNatureDon = this.searchN(event.query, this.naturesSharedCollection);
+      this.textParamNatureDon = this.searchNDon(event.query, this.naturesSharedCollection);
     }
     if (x === 'searchNatureItem') {
       this.textParamNature = this.searchN(event.query, this.naturesSharedCollection);
@@ -615,8 +674,6 @@ export class AddAnyDonationsComponent implements OnInit {
   }
 
   getNatureID(): void {
-    console.log(this.naturesSharedCollection);
-
     for (let i = 0; i < this.naturesSharedCollection.length; i++) {
       if (
         this.naturesSharedCollection[i].name!.includes(this.textParam) &&
@@ -642,6 +699,38 @@ export class AddAnyDonationsComponent implements OnInit {
     return names;
   }
 
+  searchNDon(keyword: string, tab: INature[]): string[] {
+    const names: string[] = [];
+    console.log(this.natureDon);
+    console.log(tab);
+    for (let i = 0; i < tab.length; i++) {
+      if (tab[i].name!.includes(keyword)) {
+        names.push(tab[i].name!);
+      }
+    }
+    return names;
+  }
+
+  getChildren(id: number): void {
+    console.log(id);
+
+    this.profileService.getAllChildrenProfile(id).subscribe({
+      next: (res: HttpResponse<IProfile[]>) => {
+        this.childrenForDonation = res.body ?? [];
+        this.nbChild = this.childrenForDonation.length;
+      },
+      error: e => console.error(e),
+    });
+
+    this.displayChildren = true;
+  }
+
+  getBeneficiaryID(benef: any[]): void {
+    for (let i = 0; i < benef.length; i++) {
+      this.beneficiaries[i] = benef[i].id;
+    }
+  }
+
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IDonationsIssued>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
@@ -655,12 +744,6 @@ export class AddAnyDonationsComponent implements OnInit {
       .pipe(map((res: HttpResponse<INature[]>) => res.body ?? []))
       .subscribe((natures: INature[]) => (this.naturesSharedCollection = natures));
     // this.natures = this.naturesSharedCollection;
-
-    this.natureService
-      .query()
-      .pipe(map((res: HttpResponse<INature[]>) => res.body ?? []))
-      .pipe(map((natures: INature[]) => this.natureService.addNatureToCollectionIfMissing(natures, this.editForm.get('nature')!.value)))
-      .subscribe((natures: INature[]) => (this.naturesSharedCollectionItem = natures));
   }
 
   protected onSaveSuccess(): void {
@@ -684,11 +767,12 @@ export class AddAnyDonationsComponent implements OnInit {
       .subscribe((items: IItem[]) => (this.itemsSharedCollection = items));
   }
 
-  protected createFromFormItemDetails(item: Item): IDonationItemDetails {
+  protected createFromFormItemDetails(): IDonationItemDetails {
     return {
       ...new DonationItemDetails(),
-      quantity: this.DonationsDetails.get(['quantity'])!.value,
-      item,
+      itemsWithQuantitys: this.IemTab,
+      quantityOfItems: this.quantityItemTab,
+      itemsWithoutQuantitys: this.TabWithOneItemToAdd,
     };
   }
 
@@ -701,19 +785,27 @@ export class AddAnyDonationsComponent implements OnInit {
       recurringDonations: this.DonationsIssued.get(['recurringDonations'])!.value,
       periodicity: this.DonationsIssued.get(['periodicity'])!.value,
       recurrence: this.DonationsIssued.get(['recurrence'])!.value,
-      archivated: this.DonationsIssued.get(['archivated'])!.value,
-      donationsDetailsN: this.createFromFormDonationDetails(),
-      idsBeneficiary: this.beneficiaries.slice(),
+      donationsDetailsN: this.DonationDetails,
     };
   }
 
   protected createFromFormDonationDetails(): IDonationDetails {
+    if (this.beneficiaryType === 'FAMILY') {
+      this.getBeneficiaryID(this.selectedFamilys!);
+    }
+    if (this.beneficiaryType === 'CHILD') {
+      this.getBeneficiaryID(this.selectedChildren);
+    }
+    if (this.beneficiaryType === 'ESTABLISHMENT') {
+      this.getBeneficiaryID(this.selectedEstablishments!);
+    }
+
     return {
       ...new DonationDetails(),
-      description: this.DonationsDetails.get(['description'])!.value,
-      archivated: this.DonationsDetails.get(['archivated'])!.value,
-      /*nature: this.DonationsIssued.get(['nature'])!.value,*/
-      donationItemDetails: this.AddedItems.slice(),
+      description: this.description,
+      nature: this.natureDescriptionDonation,
+      donationItemDetails: this.createFromFormItemDetails(),
+      idsBeneficiary: this.beneficiaries,
     };
   }
 }

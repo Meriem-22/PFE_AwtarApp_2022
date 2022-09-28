@@ -15,6 +15,11 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { PickListModule } from 'primeng/picklist';
 import { AddAnyDonationsComponent } from './add-any-donations/add-any-donations.component';
 import { ToolbarModule } from 'primeng/toolbar';
+import { InputTextModule } from 'primeng/inputtext';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { SidebarModule } from 'primeng/sidebar';
+import { ListboxModule } from 'primeng/listbox';
 
 @NgModule({
   imports: [
@@ -28,6 +33,11 @@ import { ToolbarModule } from 'primeng/toolbar';
     AutoCompleteModule,
     PickListModule,
     ToolbarModule,
+    InputTextModule,
+    SplitButtonModule,
+    DynamicDialogModule,
+    SidebarModule,
+    ListboxModule,
   ],
   declarations: [
     DonationsIssuedComponent,
