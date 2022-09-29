@@ -10,6 +10,7 @@ import com.awtar.myapp.repository.DonationItemDetailsRepository;
 import com.awtar.myapp.repository.DonationsIssuedRepository;
 import com.awtar.myapp.repository.EstablishmentRepository;
 import com.awtar.myapp.repository.FamilyRepository;
+import com.awtar.myapp.repository.ItemRepository;
 import com.awtar.myapp.repository.ProfileRepository;
 import com.awtar.myapp.service.DonationsIssuedService;
 import com.awtar.myapp.service.dto.DonationDetailsDTO;
@@ -58,6 +59,8 @@ public class DonationsIssuedServiceImpl implements DonationsIssuedService {
 
     private final ProfileRepository profileRepository;
 
+    private final ItemRepository itemRepository;
+
     public DonationsIssuedServiceImpl(
         DonationsIssuedRepository donationsIssuedRepository,
         DonationsIssuedMapper donationsIssuedMapper,
@@ -68,7 +71,8 @@ public class DonationsIssuedServiceImpl implements DonationsIssuedService {
         FamilyRepository familyRepository,
         EstablishmentRepository establishmentRepository,
         ProfileRepository profileRepository,
-        BeneficiaryRepository beneficiaryRepository
+        BeneficiaryRepository beneficiaryRepository,
+        ItemRepository itemRepository
     ) {
         this.donationsIssuedRepository = donationsIssuedRepository;
         this.donationsIssuedMapper = donationsIssuedMapper;
@@ -80,6 +84,7 @@ public class DonationsIssuedServiceImpl implements DonationsIssuedService {
         this.establishmentRepository = establishmentRepository;
         this.profileRepository = profileRepository;
         this.beneficiaryRepository = beneficiaryRepository;
+        this.itemRepository = itemRepository;
     }
 
     @Override
@@ -138,57 +143,42 @@ public class DonationsIssuedServiceImpl implements DonationsIssuedService {
         log.debug("Request to save DonationsIssued : {}", donationsIssuedDTO);
         DonationsIssued donationsIssued = donationsIssuedMapper.toEntity(donationsIssuedDTO);
         donationsIssued = donationsIssuedRepository.save(donationsIssued);
-
-        DonationDetailsDTO donationDetails;
+        LocalDate localDate = LocalDate.now();
+        DonationDetailsDTO donationDetails[];
         donationDetails = donationsIssuedDTO.getDonationsDetailsN();
 
-        DonationItemDetailsDTO[] detailsItems;
-        detailsItems = donationDetails.getDonationItemDetails();
+        for (int i = 0; i < donationDetails.length; i++) {
+            DonationItemDetailsDTO donationItemDetails = donationDetails[i].getDonationItemDetails();
+            Long[] beneficiarys = donationDetails[i].getIdsBeneficiary();
+            Long[] itemsWithQuantitys = donationItemDetails.getItemsWithQuantitys();
+            Integer[] quantitys = donationItemDetails.getQuantityOfItems();
+            Long[] itemsWithoutQuantitys = donationItemDetails.getItemsWithoutQuantitys();
 
-        Long[] benefID = donationsIssuedDTO.getIdsBeneficiary();
+            DonationDetails donationDetail = donationDetailsMapper.toEntity(donationDetails[i]);
 
-        if (benefID[0] == 1) {
-            for (int i = 1; i < benefID.length; i++) {
-                DonationDetails details = donationDetailsMapper.toEntity(donationDetails);
-                details.setBeneficiary(beneficiaryRepository.getById(benefID[i]));
-                details.setDonationsIssued(donationsIssued);
-                details = donationDetailsRepository.save(details);
-                for (int j = 0; j < detailsItems.length; j++) {
-                    DonationItemDetails donationItemDetails = donationItemDetailsMapper.toEntity(detailsItems[j]);
-                    donationItemDetails.setDonationDetails(details);
-                    donationItemDetails.setDate(donationsIssued.getDonationsDate());
-                    donationItemDetailsRepository.save(donationItemDetails);
+            for (int b = 0; b < beneficiarys.length; b++) {
+                donationDetail.setDonationsIssued(donationsIssued);
+                donationDetail.setBeneficiary(beneficiaryRepository.getById(beneficiarys[b]));
+                donationDetail = donationDetailsRepository.save(donationDetail);
+
+                for (int j = 0; j < itemsWithQuantitys.length; j++) {
+                    DonationItemDetails donationItemDetail1 = new DonationItemDetails();
+                    donationItemDetail1.archivated(false);
+                    donationItemDetail1.setDate(localDate);
+                    donationItemDetail1.setItem(itemRepository.getById(itemsWithQuantitys[j]));
+                    donationItemDetail1.setQuantity(quantitys[j]);
+                    donationItemDetail1.setDonationDetails(donationDetail);
+                    donationItemDetail1 = donationItemDetailsRepository.save(donationItemDetail1);
                 }
-            }
-        }
 
-        if (benefID[0] == 2) {
-            for (int i = 1; i < benefID.length; i++) {
-                DonationDetails details = donationDetailsMapper.toEntity(donationDetails);
-                Long id = profileRepository.getById(benefID[i]).getChild().getId();
-                details.setBeneficiary(beneficiaryRepository.getById(id));
-                details.setDonationsIssued(donationsIssued);
-                details = donationDetailsRepository.save(details);
-                for (int j = 0; j < detailsItems.length; j++) {
-                    DonationItemDetails donationItemDetails = donationItemDetailsMapper.toEntity(detailsItems[j]);
-                    donationItemDetails.setDonationDetails(details);
-                    donationItemDetails.setDate(donationsIssued.getDonationsDate());
-                    donationItemDetailsRepository.save(donationItemDetails);
-                }
-            }
-        }
-
-        if (benefID[0] == 3) {
-            for (int i = 1; i < benefID.length - 1; i++) {
-                DonationDetails details = donationDetailsMapper.toEntity(donationDetails);
-                details.setBeneficiary(beneficiaryRepository.getById(benefID[i]));
-                details.setDonationsIssued(donationsIssued);
-                details = donationDetailsRepository.save(details);
-                for (int j = 0; j < detailsItems.length; j++) {
-                    DonationItemDetails donationItemDetails = donationItemDetailsMapper.toEntity(detailsItems[j]);
-                    donationItemDetails.setDonationDetails(details);
-                    donationItemDetails.setDate(donationsIssued.getDonationsDate());
-                    donationItemDetailsRepository.save(donationItemDetails);
+                for (int k = 0; k < itemsWithoutQuantitys.length; k++) {
+                    DonationItemDetails donationItemDetail2 = new DonationItemDetails();
+                    donationItemDetail2.archivated(false);
+                    donationItemDetail2.setDate(localDate);
+                    donationItemDetail2.setItem(itemRepository.getById(itemsWithoutQuantitys[k]));
+                    donationItemDetail2.setQuantity(1);
+                    donationItemDetail2.setDonationDetails(donationDetail);
+                    donationItemDetail2 = donationItemDetailsRepository.save(donationItemDetail2);
                 }
             }
         }

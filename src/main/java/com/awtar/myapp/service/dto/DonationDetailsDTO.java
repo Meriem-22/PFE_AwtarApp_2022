@@ -23,7 +23,7 @@ public class DonationDetailsDTO implements Serializable {
 
     private BeneficiaryDTO beneficiary;
 
-    private DonationItemDetailsDTO donationItemDetails[];
+    private DonationItemDetailsDTO donationItemDetails;
 
     private String model;
 
@@ -36,6 +36,8 @@ public class DonationDetailsDTO implements Serializable {
     private Double totalPrice;
 
     private Boolean isValidated;
+
+    private Long[] idsBeneficiary;
 
     public DonationDetailsDTO() {}
 
@@ -116,11 +118,11 @@ public class DonationDetailsDTO implements Serializable {
         this.beneficiary = beneficiary;
     }
 
-    public DonationItemDetailsDTO[] getDonationItemDetails() {
+    public DonationItemDetailsDTO getDonationItemDetails() {
         return donationItemDetails;
     }
 
-    public void setDonationItemDetails(DonationItemDetailsDTO[] donationItemDetails) {
+    public void setDonationItemDetails(DonationItemDetailsDTO donationItemDetails) {
         this.donationItemDetails = donationItemDetails;
     }
 
@@ -170,6 +172,14 @@ public class DonationDetailsDTO implements Serializable {
 
     public void setIsValidated(Boolean isValidated) {
         this.isValidated = isValidated;
+    }
+
+    public Long[] getIdsBeneficiary() {
+        return idsBeneficiary;
+    }
+
+    public void setIdsBeneficiary(Long[] idsBeneficiary) {
+        this.idsBeneficiary = idsBeneficiary;
     }
 
     @Override

@@ -40,9 +40,7 @@ public class DonationsIssuedDTO implements Serializable {
 
     private Boolean archivated;
 
-    private DonationDetailsDTO donationsDetailsN;
-
-    private Long idsBeneficiary[];
+    private DonationDetailsDTO donationsDetailsN[];
 
     public Long getId() {
         return id;
@@ -156,20 +154,12 @@ public class DonationsIssuedDTO implements Serializable {
         this.archivated = archivated;
     }
 
-    public DonationDetailsDTO getDonationsDetailsN() {
+    public DonationDetailsDTO[] getDonationsDetailsN() {
         return donationsDetailsN;
     }
 
-    public void setDonationsDetailsN(DonationDetailsDTO donationsDetailsN) {
+    public void setDonationsDetailsN(DonationDetailsDTO[] donationsDetailsN) {
         this.donationsDetailsN = donationsDetailsN;
-    }
-
-    public Long[] getIdsBeneficiary() {
-        return idsBeneficiary;
-    }
-
-    public void setIdsBeneficiary(Long[] idsBeneficiary) {
-        this.idsBeneficiary = idsBeneficiary;
     }
 
     @Override

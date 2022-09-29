@@ -808,9 +808,9 @@ export class AddAnyDonationsComponent implements OnInit {
     return {
       ...new DonationsIssued(),
       model: this.DonationsIssued.get(['model'])!.value,
-      isValidated: this.DonationsIssued.get(['isValidated'])!.value,
+      isValidated: this.DonationsIssued.get(['isValidated'])!.value === true,
       donationsDate: this.DonationsIssued.get(['donationsDate'])!.value,
-      recurringDonations: this.DonationsIssued.get(['recurringDonations'])!.value,
+      recurringDonations: this.DonationsIssued.get(['recurringDonations'])!.value === true,
       periodicity: this.DonationsIssued.get(['periodicity'])!.value,
       recurrence: this.DonationsIssued.get(['recurrence'])!.value,
       donationsDetailsN: this.DonationDetails,

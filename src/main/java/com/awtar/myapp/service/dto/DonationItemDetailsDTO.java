@@ -24,6 +24,12 @@ public class DonationItemDetailsDTO implements Serializable {
 
     private ItemDTO item;
 
+    private Long itemsWithQuantitys[];
+
+    private Integer quantityOfItems[];
+
+    private Long itemsWithoutQuantitys[];
+
     public Long getId() {
         return id;
     }
@@ -70,6 +76,30 @@ public class DonationItemDetailsDTO implements Serializable {
 
     public void setItem(ItemDTO item) {
         this.item = item;
+    }
+
+    public Long[] getItemsWithQuantitys() {
+        return itemsWithQuantitys;
+    }
+
+    public void setItemsWithQuantitys(Long[] itemsWithQuantitys) {
+        this.itemsWithQuantitys = itemsWithQuantitys;
+    }
+
+    public Integer[] getQuantityOfItems() {
+        return quantityOfItems;
+    }
+
+    public void setQuantityOfItems(Integer[] quantityOfItems) {
+        this.quantityOfItems = quantityOfItems;
+    }
+
+    public Long[] getItemsWithoutQuantitys() {
+        return itemsWithoutQuantitys;
+    }
+
+    public void setItemsWithoutQuantitys(Long[] itemsWithoutQuantitys) {
+        this.itemsWithoutQuantitys = itemsWithoutQuantitys;
     }
 
     @Override
