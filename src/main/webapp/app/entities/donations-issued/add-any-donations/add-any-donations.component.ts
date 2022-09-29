@@ -135,7 +135,7 @@ export class AddAnyDonationsComponent implements OnInit {
   itemss!: MenuItem[];
   displayChildren = false;
   natureDescriptionDonation!: INature;
-  DonationDetails?: IDonationDetails[] | null;
+  DonationDetails: IDonationDetails[] = [];
 
   QuantityForm = this.formBuilder.group({
     quantity: [null, [Validators.required]],
@@ -649,8 +649,19 @@ export class AddAnyDonationsComponent implements OnInit {
   }
 
   addDonationDetails(): void {
-    this.DonationDetails!.push(this.createFromFormDonationDetails());
+    this.DonationDetails.push(this.createFromFormDonationDetails());
     console.log(this.DonationDetails);
+    this.step = 2;
+    this.targetProducts = [];
+    this.quantityOfSelectedItem = [];
+    this.TabWithOneItemToAdd = [];
+    this.IemTab = [];
+    this.quantityItemTab = [];
+    this.beneficiaries = [];
+    this.items = [];
+    this.selectedEstablishments = [];
+    this.selectedFamilys = [];
+    this.selectedChildren = [];
   }
 
   search(): void {
@@ -732,6 +743,22 @@ export class AddAnyDonationsComponent implements OnInit {
     }
   }
 
+  getBeneficiaryCommmonID(benef1: any[], benef2: any[], benef3: any[]): void {
+    let nb = 0;
+    for (let i = 0; i < benef1.length; i++) {
+      this.beneficiaries[i] = benef1[i].id;
+      nb++;
+    }
+    for (let i = 0; i < benef2.length; i++) {
+      this.beneficiaries[nb] = benef2[i].id;
+      nb++;
+    }
+    for (let i = 0; i < benef3.length; i++) {
+      this.beneficiaries[nb] = benef3[i].id;
+      nb++;
+    }
+  }
+
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IDonationsIssued>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
@@ -791,6 +818,8 @@ export class AddAnyDonationsComponent implements OnInit {
   }
 
   protected createFromFormDonationDetails(): IDonationDetails {
+    this.finaleTable();
+
     if (this.beneficiaryType === 'FAMILY') {
       this.getBeneficiaryID(this.selectedFamilys!);
     }
@@ -799,6 +828,9 @@ export class AddAnyDonationsComponent implements OnInit {
     }
     if (this.beneficiaryType === 'ESTABLISHMENT') {
       this.getBeneficiaryID(this.selectedEstablishments!);
+    }
+    if (this.beneficiaryType === 'COMMMON') {
+      this.getBeneficiaryCommmonID(this.selectedEstablishments!, this.selectedFamilys!, this.selectedChildren);
     }
 
     return {
