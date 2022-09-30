@@ -22,7 +22,7 @@ import { NatureService } from 'app/entities/nature/service/nature.service';
 import { IProfile } from 'app/entities/profile/profile.model';
 import { ProfileService } from 'app/entities/profile/service/profile.service';
 import { MenuItem } from 'primeng/api';
-import { finalize, map, Observable } from 'rxjs';
+import { empty, finalize, map, Observable } from 'rxjs';
 import { DonationsIssued, IDonationsIssued } from '../donations-issued.model';
 import { DonationsIssuedService } from '../service/donations-issued.service';
 
@@ -136,6 +136,7 @@ export class AddAnyDonationsComponent implements OnInit {
   displayChildren = false;
   natureDescriptionDonation!: INature;
   DonationDetails: IDonationDetails[] = [];
+  nTab: number[] = [];
 
   QuantityForm = this.formBuilder.group({
     quantity: [null, [Validators.required]],
@@ -601,6 +602,11 @@ export class AddAnyDonationsComponent implements OnInit {
 
   showMaximizableDialog(): void {
     this.displayMaximizable = true;
+    this.description = this.editForm.get(['description'])!.value;
+
+    this.textParam = this.natureDon;
+    this.search();
+    this.natureDescriptionDonation = this.selectedNature;
   }
 
   target(item: IItem): boolean {
@@ -662,6 +668,36 @@ export class AddAnyDonationsComponent implements OnInit {
     this.selectedEstablishments = [];
     this.selectedFamilys = [];
     this.selectedChildren = [];
+  }
+
+  addDonationDetailsOfFamilyChildren(): void {
+    this.editForm.reset();
+    this.natureDon = '';
+    this.DonationDetails.push(this.createFromFormDonationDetailsForFamilyChildren());
+    console.log(this.DonationDetails);
+    this.targetProducts = [];
+    this.quantityOfSelectedItem = [];
+    this.TabWithOneItemToAdd = [];
+    this.IemTab = [];
+    this.quantityItemTab = [];
+    this.beneficiaries = [];
+    this.items = [];
+    this.selectedchildrenofFamily = [];
+    this.displayMaximizable = false;
+  }
+
+  clearTable(tab: any): number[] {
+    let j = 0;
+
+    for (let i = 0; i < tab.length; i++) {
+      if (tab[i] > 0) {
+        j = i;
+        break;
+      }
+    }
+
+    this.nTab = tab.slice(j);
+    return this.nTab;
   }
 
   search(): void {
@@ -743,6 +779,12 @@ export class AddAnyDonationsComponent implements OnInit {
     }
   }
 
+  getBeneficiaryIDFromProfile(benef: any[]): void {
+    for (let i = 0; i < benef.length; i++) {
+      this.beneficiaries[i] = benef[i].child.id;
+    }
+  }
+
   getBeneficiaryCommmonID(benef1: any[], benef2: any[], benef3: any[]): void {
     let nb = 0;
     for (let i = 0; i < benef1.length; i++) {
@@ -798,9 +840,9 @@ export class AddAnyDonationsComponent implements OnInit {
   protected createFromFormItemDetails(): IDonationItemDetails {
     return {
       ...new DonationItemDetails(),
-      itemsWithQuantitys: this.IemTab,
-      quantityOfItems: this.quantityItemTab,
-      itemsWithoutQuantitys: this.TabWithOneItemToAdd,
+      itemsWithQuantitys: this.clearTable(this.IemTab),
+      quantityOfItems: this.clearTable(this.quantityItemTab),
+      itemsWithoutQuantitys: this.clearTable(this.TabWithOneItemToAdd),
     };
   }
 
@@ -832,6 +874,19 @@ export class AddAnyDonationsComponent implements OnInit {
     if (this.beneficiaryType === 'COMMMON') {
       this.getBeneficiaryCommmonID(this.selectedEstablishments!, this.selectedFamilys!, this.selectedChildren);
     }
+
+    return {
+      ...new DonationDetails(),
+      description: this.description,
+      nature: this.natureDescriptionDonation,
+      donationItemDetails: this.createFromFormItemDetails(),
+      idsBeneficiary: this.beneficiaries,
+    };
+  }
+
+  protected createFromFormDonationDetailsForFamilyChildren(): IDonationDetails {
+    this.finaleTable();
+    this.getBeneficiaryIDFromProfile(this.selectedchildrenofFamily);
 
     return {
       ...new DonationDetails(),
