@@ -9,6 +9,17 @@
     <title>AdminLTE 3 | Dashboard</title>
 
     <style>
+      input,
+      select {
+        border-left-width: 0.08rem;
+        border-left-color: #d4d1d1;
+      }
+      p-autoComplete,
+      p-inputNumber {
+        border-left-width: 0.001;
+        border-left-color: white;
+      }
+
       .product-item {
         display: flex;
         align-items: center;
@@ -624,6 +635,7 @@
               <div class="row">
                 <div class="col-md-12 col-md-offset-3">
                   <fieldset *ngIf="step == 2">
+                    <jhi-alert></jhi-alert>
                     <p-splitter [style]="{ height: 'auto' }" layout="vertical" styleClass="mb-5">
                       <ng-template pTemplate> </ng-template>
                       <ng-template pTemplate>

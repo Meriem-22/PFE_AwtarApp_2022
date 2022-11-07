@@ -20,6 +20,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { SidebarModule } from 'primeng/sidebar';
 import { ListboxModule } from 'primeng/listbox';
+import { DonationIssuedDetailsComponent } from './donation-issued-details/donation-issued-details.component';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { ListboxModule } from 'primeng/listbox';
     DonationsIssuedDeleteDialogComponent,
     AddDonationsIssuedComponent,
     AddAnyDonationsComponent,
+    DonationIssuedDetailsComponent,
   ],
   entryComponents: [DonationsIssuedDeleteDialogComponent],
 })

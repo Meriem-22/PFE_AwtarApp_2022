@@ -155,7 +155,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
             authorizingOfficer = authorizingOfficerRepository.getById(beneficiaryDTO.getIdContributor());
             String abbreviation = authorizingOfficer.getAbbreviation();
             nRef =
-                String.copyValueOf(ref.toCharArray(), 0, index1 - 1) +
+                String.copyValueOf(ref.toCharArray(), 0, index1 + 1) +
                 abbreviation +
                 String.copyValueOf(ref.toCharArray(), index2, ref.length() - index2);
             tutor = nBeneficiary.getTutor();

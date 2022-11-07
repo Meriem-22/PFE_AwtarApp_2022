@@ -115,6 +115,7 @@ export class ProfileUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const profile = this.createFromForm();
+    console.log(profile);
     if (profile.id !== undefined) {
       this.subscribeToSaveResponse(this.profileService.update(profile));
     } else {

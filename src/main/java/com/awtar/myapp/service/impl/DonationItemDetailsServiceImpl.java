@@ -99,8 +99,8 @@ public class DonationItemDetailsServiceImpl implements DonationItemDetailsServic
     @Override
     public List<DonationItemDetailsDTO> findAllOfOneDonation(Long id) {
         DonationsIssued donation = donationsIssuedRepository.getById(id);
-        List<DonationItemDetails> donationsItem = donationItemDetailsRepository.findAllDetailsItemDonations(donation);
+        List<DonationItemDetailsDTO> donationsItem = donationItemDetailsRepository.findAllDetailsItemDonations(donation);
 
-        return donationItemDetailsMapper.toDto(donationsItem);
+        return donationsItem;
     }
 }

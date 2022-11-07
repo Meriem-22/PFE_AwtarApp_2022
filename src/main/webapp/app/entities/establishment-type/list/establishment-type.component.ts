@@ -62,7 +62,7 @@ export class EstablishmentTypeComponent implements OnInit {
   }
 
   delete(establishmentType: IEstablishmentType): void {
-    const modalRef = this.modalService.open(EstablishmentTypeDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(EstablishmentTypeDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.establishmentType = establishmentType;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

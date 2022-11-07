@@ -137,6 +137,7 @@ export class AddAnyDonationsComponent implements OnInit {
   natureDescriptionDonation!: INature;
   DonationDetails: IDonationDetails[] = [];
   nTab: number[] = [];
+  result!: Observable<HttpResponse<IDonationsIssued>>;
 
   QuantityForm = this.formBuilder.group({
     quantity: [null, [Validators.required]],
@@ -803,7 +804,10 @@ export class AddAnyDonationsComponent implements OnInit {
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IDonationsIssued>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
+      next: () => {
+        this.onSaveSuccess();
+        console.log(result);
+      },
       error: () => this.onSaveError(),
     });
   }
@@ -817,7 +821,8 @@ export class AddAnyDonationsComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    this.isSaving = true;
+    // this.previousState();
     // this.router.navigate(['family',  , 'view']
   }
 

@@ -8,6 +8,7 @@ import { DonationsIssuedUpdateComponent } from '../update/donations-issued-updat
 import { DonationsIssuedRoutingResolveService } from './donations-issued-routing-resolve.service';
 import { AddDonationsIssuedComponent } from '../add-donations-issued/add-donations-issued.component';
 import { AddAnyDonationsComponent } from '../add-any-donations/add-any-donations.component';
+import { DonationIssuedDetailsComponent } from '../donation-issued-details/donation-issued-details.component';
 
 const donationsIssuedRoute: Routes = [
   {

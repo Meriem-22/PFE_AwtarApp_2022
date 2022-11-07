@@ -35,13 +35,19 @@ export class TutorDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ tutor }) => {
       this.tutor = tutor;
-      console.log(this.tutor!.id!);
     });
 
     this.profileService.findProfile(this.tutor!.id!).subscribe({
       next: (res: HttpResponse<IProfile>) => {
         this.profile = res.body!;
         console.log(this.profile);
+      },
+      error: e => console.error(e),
+    });
+
+    this.profileService.findOthersTutorsProfiles(this.tutor!.id!).subscribe({
+      next: (res: HttpResponse<any[]>) => {
+        this.profiles = res.body ?? [];
       },
       error: e => console.error(e),
     });
@@ -125,7 +131,8 @@ export class TutorDetailComponent implements OnInit {
   openFile(base64String: string, contentType: string | null | undefined): void {
     this.dataUtils.openFile(base64String, contentType);
   }
-  trackId(_index: number, item: ITutor): number {
-    return item.id!;
+
+  trackId(_index: number, tutor: ITutor): number {
+    return tutor.id!;
   }
 }

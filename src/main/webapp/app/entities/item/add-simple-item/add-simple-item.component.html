@@ -1,267 +1,669 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------  ---------->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Charles Anderson" />
 
-<div class="container emp-profile" *ngIf="item">
-  <jhi-alert></jhi-alert>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------  ---------->
 
-  <div class="row">
-    <div class="col-md-4">
-      <div class="profile-img">
-        <img
-          *ngIf="!item.urlPhoto"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-          alt=""
-        />
-        <img
-          *ngIf="item.urlPhoto"
-          [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto"
-          style="max-width: 100px; max-height: 130px"
-          alt="item image"
-        />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
+
+    <title>AdminLTE 3 | Dashboard</title>
+  </head>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../../content/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="profile-head">
-        <div style="display: flex">
-          <h5>Quantity To Add</h5>
-          <h6>
-            <input
-              type="number"
-              name="quantity"
-              id="field_quantity"
-              style="width: 5rem; text-align: center; border-radius: 30%; margin-left: 1rem"
-              [(ngModel)]="quantity"
-              data-cy="quantity"
-            />
-          </h6>
+
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black">
+        <a href="index3.html" class="brand-link" style="background-color: black">
+          <img
+            src="../../content/img/AdminLTELogo.png"
+            alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3"
+            style="opacity: 0.8"
+          />
+          <span class="brand-text font-weight-light">AWTAR</span>
+        </a>
+
+        <div class="sidebar">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">admin</a>
+            </div>
+          </div>
+
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item menu-open">
+                <a [routerLink]="['/dashboard']" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-header">BENEFICIARIES</li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
+                  <p>
+                    Families
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a [routerLink]="['/family']" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Families</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a [routerLink]="['/family/add']" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Family</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
+                  <p>
+                    Children
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a [routerLink]="['admin-dashboard/children']" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Chilfren</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Child</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
+                  <p>
+                    Establishments
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Establishments</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+
+                      <p>Add Establishment</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">DONATIONS</li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
+                  <p>
+                    Donations Issued
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Donations Issued</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Donations Issued</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
+                  <p>
+                    Donations Received
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Donations Received</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Donations Received</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Statistic</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">DONATIONS Items</li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    Items
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List of Items</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Item</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>Status Item</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header">REFERENCE TABLE</li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Establishments Types</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Citys</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Health Categories</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Nature</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>School Level</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Educational Institutions</p>
+                </a>
+              </li>
+
+              <li class="nav-header">CONTRIBUTORS</li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
+                  <p>
+                    Authorizing Officers
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Authorizing Officers</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Authorizing Officer</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    Tutors
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Tutors</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Tutor</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    Tutors
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav.html" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p>List Of Tutors</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p>Add Tutor</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
         </div>
-        <h5 jhiTranslate="awtarApp.item.name">Name</h5>
-        <h6>
-          {{ item.name }}
-        </h6>
+      </aside>
 
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"
-              >About</a
-            >
-          </li>
-          <li class="nav-item" *ngIf="schoolItem">
-            <a
-              class="nav-link"
-              id="schoolItem-tab"
-              data-toggle="tab"
-              href="#schoolItem"
-              role="tab"
-              aria-controls="schoolItem"
-              aria-selected="false"
-              >School Item Details</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"
-              >Update Price</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <button
-        pButton
-        pRipple
-        icon="pi pi-plus"
-        class="p-button-success mr-2"
-        label="{{ 'global.button.add.placeholder' | translate }}"
-        (click)="save()"
-      ></button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="profile-work text-center"></div>
-    </div>
-    <div class="col-md-8">
-      <div class="tab-content profile-tab" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <div class="row">
-            <div class="col-md-6">
-              <label jhiTranslate="awtarApp.item.name">Name</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{ item.name }}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label jhiTranslate="awtarApp.item.gender">Gender</label>
-            </div>
-            <div class="col-md-6">
-              <p jhiTranslate="{{ 'awtarApp.ItemGender.' + item.gender }}">{{ item.gender }}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label jhiTranslate="awtarApp.item.nature">Nature</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{ item.nature?.name }}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label><span>Price</span></label>
-            </div>
-            <div class="col-md-6">
-              <p>{{ priceItem.price }}</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <label>PriceDate</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{ priceItem.priceDate | formatMediumDate }}</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <label jhiTranslate="awtarApp.itemValue.availableStockQuantity">Available Stock Quantity</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{ priceItem.availableStockQuantity }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <form class="form-horizontal" name="editForm" role="form" novalidate [formGroup]="editForm">
-            <div class="card card-info">
-              <div class="card-body">
-                <div class="form-group row">
-                  <label class="col-sm-2 col-form-label" jhiTranslate="awtarApp.itemValue.price" for="field_price">Price</label>
-
-                  <div class="col-sm-10">
-                    <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
-                    <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
-                      <small
-                        class="form-text text-danger"
-                        *ngIf="editForm.get('price')?.errors?.required"
-                        jhiTranslate="entity.validation.required"
-                      >
-                        This field is required.
-                      </small>
-                      <small
-                        class="form-text text-danger"
-                        [hidden]="!editForm.get('price')?.errors?.number"
-                        jhiTranslate="entity.validation.number"
-                      >
-                        This field should be a number.
-                      </small>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-2 col-form-label" jhiTranslate="awtarApp.itemValue.priceDate" for="field_priceDate"
-                    >Price Date</label
-                  >
-                  <div class="col-sm-10">
-                    <div class="input-group">
-                      <input
-                        id="field_priceDate"
-                        data-cy="priceDate"
-                        type="text"
-                        class="form-control"
-                        name="priceDate"
-                        ngbDatepicker
-                        #priceDateDp="ngbDatepicker"
-                        formControlName="priceDate"
-                      />
-                      <button type="button" class="btn btn-secondary" (click)="priceDateDp.toggle()">
-                        <fa-icon icon="calendar-alt"></fa-icon>
-                      </button>
-                    </div>
-                    <div
-                      *ngIf="editForm.get('priceDate')!.invalid && (editForm.get('priceDate')!.dirty || editForm.get('priceDate')!.touched)"
-                    >
-                      <small
-                        class="form-text text-danger"
-                        *ngIf="editForm.get('priceDate')?.errors?.required"
-                        jhiTranslate="entity.validation.required"
-                      >
-                        This field is required.
-                      </small>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="offset-sm-2 col-sm-10"></div>
-                </div>
+      <div class="content-wrapper" style="margin-top: -3rem">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0">Add Item</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                  <li class="breadcrumb-item"><a href="#">Item</a></li>
+                  <li class="breadcrumb-item active">Add Item</li>
+                </ol>
               </div>
             </div>
-
-            <div class="footer text-right" style="margin-top: 2rem">
-              <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-              <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="editPrice()"></button>
-            </div>
-          </form>
+          </div>
         </div>
 
-        <div class="tab-pane fade" id="schoolItem" role="tabpanel" aria-labelledby="schoolItem-tab">
-          <div class="card">
-            <div *ngIf="childStatusItem" style="margin: 1rem">
-              <dt><span jhiTranslate="awtarApp.childStatus.staus">Staus</span></dt>
-              <div *ngFor="let status of childStatusItem">
-                <div style="display: flex">
-                  <span jhiTranslate="{{ 'awtarApp.Status.' + status.staus }}">{{ status.staus }}</span>
-                </div>
-              </div>
-            </div>
-            <p-table
-              #dt
-              [value]="SchoolLevelInfo!"
-              styleClass="p-datatable-sm"
-              [rows]="3"
-              [showCurrentPageReport]="true"
-              [rowsPerPageOptions]="[3, 5, 10]"
-              [paginator]="true"
-              [globalFilterFields]="['schoolLevelItem', 'quantityNeeded']"
-              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            >
-              <ng-template pTemplate="caption" style="background-color: rgb(241, 148, 235)">
-                <div class="flex align-items-center justify-content-between" style="display: flex">
-                  <h5 class="m-0" style="color: rgb(219, 28, 158)">School Level Item Details</h5>
-                  <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input
-                      pInputText
-                      type="text"
-                      (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
-                      placeholder="Search..."
+        <section class="content">
+          <div class="container-fluid">
+            <div class="container emp-profile" *ngIf="item">
+              <jhi-alert></jhi-alert>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="profile-img">
+                    <img
+                      *ngIf="!item.urlPhoto"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+                      alt=""
                     />
-                  </span>
+                    <img
+                      *ngIf="item.urlPhoto"
+                      [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto"
+                      style="max-width: 100px; max-height: 130px"
+                      alt="item image"
+                    />
+                  </div>
                 </div>
-              </ng-template>
+                <div class="col-md-6">
+                  <div class="profile-head">
+                    <div style="display: flex">
+                      <h5>Quantity To Add</h5>
+                      <h6>
+                        <input
+                          type="number"
+                          name="quantity"
+                          id="field_quantity"
+                          style="width: 5rem; text-align: center; border-radius: 30%; margin-left: 1rem"
+                          [(ngModel)]="quantity"
+                          data-cy="quantity"
+                        />
+                      </h6>
+                    </div>
+                    <h5 jhiTranslate="awtarApp.item.name">Name</h5>
+                    <h6>
+                      {{ item.name }}
+                    </h6>
 
-              <ng-template pTemplate="header">
-                <tr>
-                  <th pSortableColumn="schoolLevelItem">School Level<p-sortIcon field="schoolLevelItem"></p-sortIcon></th>
-                  <th pSortableColumn="quantityNeeded">Quantity Needed<p-sortIcon field="quantityNeeded"></p-sortIcon></th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-s>
-                <tr>
-                  <td>{{ s.schoolLevelItem }}</td>
-                  <td>{{ s.quantityNeeded }}</td>
-                </tr>
-              </ng-template>
-            </p-table>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                      <li class="nav-item">
+                        <a
+                          class="nav-link active"
+                          id="home-tab"
+                          data-toggle="tab"
+                          href="#home"
+                          role="tab"
+                          aria-controls="home"
+                          aria-selected="true"
+                          >About</a
+                        >
+                      </li>
+                      <li class="nav-item" *ngIf="schoolItem">
+                        <a
+                          class="nav-link"
+                          id="schoolItem-tab"
+                          data-toggle="tab"
+                          href="#schoolItem"
+                          role="tab"
+                          aria-controls="schoolItem"
+                          aria-selected="false"
+                          >School Item Details</a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link"
+                          id="profile-tab"
+                          data-toggle="tab"
+                          href="#profile"
+                          role="tab"
+                          aria-controls="profile"
+                          aria-selected="false"
+                          >Update Price</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-plus"
+                    class="p-button-success mr-2"
+                    label="{{ 'global.button.add.placeholder' | translate }}"
+                    (click)="save()"
+                  ></button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="profile-work text-center"></div>
+                </div>
+                <div class="col-md-8">
+                  <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label jhiTranslate="awtarApp.item.name">Name</label>
+                        </div>
+                        <div class="col-md-6">
+                          <p>{{ item.name }}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label jhiTranslate="awtarApp.item.gender">Gender</label>
+                        </div>
+                        <div class="col-md-6">
+                          <p jhiTranslate="{{ 'awtarApp.ItemGender.' + item.gender }}">{{ item.gender }}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label jhiTranslate="awtarApp.item.nature">Nature</label>
+                        </div>
+                        <div class="col-md-6">
+                          <p>{{ item.nature?.name }}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label><span>Price</span></label>
+                        </div>
+                        <div class="col-md-6">
+                          <p>{{ priceItem.price }}</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label>PriceDate</label>
+                        </div>
+                        <div class="col-md-6">
+                          <p>{{ priceItem.priceDate | formatMediumDate }}</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label jhiTranslate="awtarApp.itemValue.availableStockQuantity">Available Stock Quantity</label>
+                        </div>
+                        <div class="col-md-6">
+                          <p>{{ priceItem.availableStockQuantity }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                      <form class="form-horizontal" name="editForm" role="form" novalidate [formGroup]="editForm">
+                        <div class="card card-info">
+                          <div class="card-body">
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label" jhiTranslate="awtarApp.itemValue.price" for="field_price">Price</label>
+
+                              <div class="col-sm-10">
+                                <input
+                                  type="number"
+                                  class="form-control"
+                                  name="price"
+                                  id="field_price"
+                                  data-cy="price"
+                                  formControlName="price"
+                                />
+                                <div
+                                  *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)"
+                                >
+                                  <small
+                                    class="form-text text-danger"
+                                    *ngIf="editForm.get('price')?.errors?.required"
+                                    jhiTranslate="entity.validation.required"
+                                  >
+                                    This field is required.
+                                  </small>
+                                  <small
+                                    class="form-text text-danger"
+                                    [hidden]="!editForm.get('price')?.errors?.number"
+                                    jhiTranslate="entity.validation.number"
+                                  >
+                                    This field should be a number.
+                                  </small>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label" jhiTranslate="awtarApp.itemValue.priceDate" for="field_priceDate"
+                                >Price Date</label
+                              >
+                              <div class="col-sm-10">
+                                <div class="input-group">
+                                  <input
+                                    id="field_priceDate"
+                                    data-cy="priceDate"
+                                    type="text"
+                                    class="form-control"
+                                    name="priceDate"
+                                    ngbDatepicker
+                                    #priceDateDp="ngbDatepicker"
+                                    formControlName="priceDate"
+                                  />
+                                  <button type="button" class="btn btn-secondary" (click)="priceDateDp.toggle()">
+                                    <fa-icon icon="calendar-alt"></fa-icon>
+                                  </button>
+                                </div>
+                                <div
+                                  *ngIf="
+                                    editForm.get('priceDate')!.invalid &&
+                                    (editForm.get('priceDate')!.dirty || editForm.get('priceDate')!.touched)
+                                  "
+                                >
+                                  <small
+                                    class="form-text text-danger"
+                                    *ngIf="editForm.get('priceDate')?.errors?.required"
+                                    jhiTranslate="entity.validation.required"
+                                  >
+                                    This field is required.
+                                  </small>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="offset-sm-2 col-sm-10"></div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="footer text-right" style="margin-top: 2rem">
+                          <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                          <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="editPrice()"></button>
+                        </div>
+                      </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="schoolItem" role="tabpanel" aria-labelledby="schoolItem-tab">
+                      <div class="card">
+                        <div *ngIf="childStatusItem" style="margin: 1rem">
+                          <dt><span jhiTranslate="awtarApp.childStatus.staus">Staus</span></dt>
+                          <div *ngFor="let status of childStatusItem">
+                            <div style="display: flex">
+                              <span jhiTranslate="{{ 'awtarApp.Status.' + status.staus }}">{{ status.staus }}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <p-table
+                          #dt
+                          [value]="SchoolLevelInfo!"
+                          styleClass="p-datatable-sm"
+                          [rows]="3"
+                          [showCurrentPageReport]="true"
+                          [rowsPerPageOptions]="[3, 5, 10]"
+                          [paginator]="true"
+                          [globalFilterFields]="['schoolLevelItem', 'quantityNeeded']"
+                          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        >
+                          <ng-template pTemplate="caption" style="background-color: rgb(241, 148, 235)">
+                            <div class="flex align-items-center justify-content-between" style="display: flex">
+                              <h5 class="m-0" style="color: rgb(219, 28, 158)">School Level Item Details</h5>
+                              <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input
+                                  pInputText
+                                  type="text"
+                                  (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                  placeholder="Search..."
+                                />
+                              </span>
+                            </div>
+                          </ng-template>
+
+                          <ng-template pTemplate="header">
+                            <tr>
+                              <th pSortableColumn="schoolLevelItem">School Level<p-sortIcon field="schoolLevelItem"></p-sortIcon></th>
+                              <th pSortableColumn="quantityNeeded">Quantity Needed<p-sortIcon field="quantityNeeded"></p-sortIcon></th>
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-s>
+                            <tr>
+                              <td>{{ s.schoolLevelItem }}</td>
+                              <td>{{ s.quantityNeeded }}</td>
+                            </tr>
+                          </ng-template>
+                        </p-table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
+
+      <footer class="main-footer"></footer>
+
+      <aside class="control-sidebar control-sidebar-dark"></aside>
     </div>
-  </div>
-</div>
+
+    <script></script>
+  </body>
+</html>

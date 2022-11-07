@@ -30,7 +30,7 @@ public class Tutor implements Serializable {
     @Column(name = "manager_cin")
     private String managerCin;
 
-    @OneToMany(mappedBy = "tutor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tutor")
     @JsonIgnoreProperties(value = { "donationdetails", "visits", "authorizingOfficer", "tutor" }, allowSetters = true)
     private Set<Beneficiary> beneficiaries = new HashSet<>();
 
