@@ -51,21 +51,32 @@ export class EditTutorComponent implements OnInit {
       this.account = account;
     });
 
-    this.tutorService.find(this.beneficiary!.tutor!.id!).subscribe({
-      next: res => {
-        this.activity = res.body!.activity!;
-      },
-      error: e => console.error(e),
-    });
+    if (this.beneficiary!.tutor) {
+      this.tutorService.find(this.beneficiary!.tutor.id!).subscribe({
+        next: res => {
+          this.activity = res.body!.activity!;
+        },
+        error: e => console.error(e),
+      });
 
-    this.profileService.findProfile(this.beneficiary!.tutor!.id!).subscribe({
-      next: (res: HttpResponse<IProfile>) => {
-        this.Tutor = res.body!;
-      },
-      error: e => console.error(e),
-    });
+      this.profileService.findProfile(this.beneficiary!.tutor.id!).subscribe({
+        next: (res: HttpResponse<IProfile>) => {
+          this.Tutor = res.body!;
+        },
+        error: e => console.error(e),
+      });
 
-    this.TutorsList();
+      this.TutorsList();
+    }
+    if (!this.beneficiary!.tutor) {
+      this.tutorService.findTutorsDetails().subscribe({
+        next: (res: HttpResponse<any[]>) => {
+          this.profiles = res.body ?? [];
+          console.log(this.profiles);
+        },
+        error: e => console.error(e),
+      });
+    }
   }
 
   TutorsList(): void {
@@ -105,8 +116,8 @@ export class EditTutorComponent implements OnInit {
     this.dataUtils.openFile(base64String, contentType);
   }
 
-  edit(identity: number): void {
-    this.id = this.profiles![identity].id;
+  edit(identity: IProfile): void {
+    this.id = identity.id!;
     console.log(this.id);
     this.beneficiary!.idContributor = this.id;
     console.log(this.beneficiary!);

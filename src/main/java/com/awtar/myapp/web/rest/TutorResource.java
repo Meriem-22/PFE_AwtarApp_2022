@@ -207,4 +207,17 @@ public class TutorResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of tutors in body.
+     */
+    @GetMapping("/tutors/details")
+    public ResponseEntity<List<TutorDTO>> getTutorsDetails() {
+        log.debug("REST request to get  tutors details : {}");
+        List<TutorDTO> tutorDTOC = tutorService.findTutorsDetails();
+        return ResponseEntity.ok().body(tutorDTOC);
+    }
 }

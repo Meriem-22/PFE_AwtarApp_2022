@@ -126,4 +126,10 @@ public class AuthorizingOfficerServiceImpl implements AuthorizingOfficerService 
         profileRepository.save(profile);
         return authorizingOfficerMapper.toDto(authorizingOfficer);
     }
+
+    @Override
+    public List<AuthorizingOfficerDTO> findAuthorizingOfficersDetails() {
+        List<AuthorizingOfficerDTO> l = authorizingOfficerRepository.findAuthorizingOfficersDetails();
+        return l;
+    }
 }

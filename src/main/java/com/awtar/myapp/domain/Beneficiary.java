@@ -195,6 +195,14 @@ public class Beneficiary implements Serializable {
         return this;
     }
 
+    public void removeTutor() {
+        this.tutor = null;
+    }
+
+    public void removeAuthorizingOfficer() {
+        this.authorizingOfficer = null;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

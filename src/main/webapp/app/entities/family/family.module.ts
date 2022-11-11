@@ -8,9 +8,13 @@ import { FamilyRoutingModule } from './route/family-routing.module';
 import { AddComponent } from './add/add.component';
 import { BeneficiaryUpdateComponent } from './beneficiary-update/beneficiary-update.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TableModule } from 'primeng/table';
+import { ListboxModule } from 'primeng/listbox';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
-  imports: [SharedModule, FamilyRoutingModule, NgxPaginationModule],
+  imports: [SharedModule, FamilyRoutingModule, NgxPaginationModule, TableModule, ListboxModule, DialogModule, ButtonModule],
   declarations: [
     FamilyComponent,
     FamilyDetailComponent,

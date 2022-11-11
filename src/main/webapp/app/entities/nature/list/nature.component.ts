@@ -98,7 +98,7 @@ export class NatureComponent implements OnInit {
   }
 
   delete(nature: INature): void {
-    const modalRef = this.modalService.open(NatureDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(NatureDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.nature = nature;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

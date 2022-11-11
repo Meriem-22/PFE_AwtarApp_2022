@@ -87,7 +87,7 @@ export class AuthorizingOfficerComponent implements OnInit {
   }
 
   delete(authorizingOfficer: IAuthorizingOfficer): void {
-    const modalRef = this.modalService.open(AuthorizingOfficerDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(AuthorizingOfficerDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.authorizingOfficer = authorizingOfficer;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

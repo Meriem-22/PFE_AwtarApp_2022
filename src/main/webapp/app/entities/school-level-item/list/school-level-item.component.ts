@@ -62,7 +62,7 @@ export class SchoolLevelItemComponent implements OnInit {
   }
 
   delete(schoolLevelItem: ISchoolLevelItem): void {
-    const modalRef = this.modalService.open(SchoolLevelItemDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(SchoolLevelItemDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.schoolLevelItem = schoolLevelItem;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

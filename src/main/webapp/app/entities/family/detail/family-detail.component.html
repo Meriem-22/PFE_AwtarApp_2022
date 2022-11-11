@@ -1072,7 +1072,7 @@
                               <a class="dropdown-item" [routerLink]="['/beneficiary', family.id, 'contributor', 'authorizing-officer']">
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                               </a>
-                              <a class="dropdown-item" href="#">Delete</a>
+                              <a class="dropdown-item" (click)="removeAuthorizingOfficer(benef)">Delete</a>
                             </div>
                           </div>
                         </div>
@@ -1125,7 +1125,7 @@
                               <a class="dropdown-item" [routerLink]="['/beneficiary', family.id, 'contributor', 'tutor']">
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                               </a>
-                              <a class="dropdown-item" href="#">Delete</a>
+                              <a class="dropdown-item" (click)="removeTutor(benef)">Delete</a>
                             </div>
                           </div>
                         </div>
@@ -1276,6 +1276,17 @@
                                                 </button>
                                               </div>
                                               <img
+                                                *ngIf="!profil.urlPhoto"
+                                                class="bd-placeholder-img card-img-top"
+                                                src="../../../../content/images/no-profile.jpg"
+                                                alt="profile image"
+                                                role="img"
+                                                aria-label="Placeholder: Thumbnail"
+                                                preserveAspectRatio="xMidYMid slice"
+                                                focusable="false"
+                                                class="img-circle img-bordered-sm"
+                                              />
+                                              <img
                                                 class="img-circle img-bordered-sm"
                                                 *ngIf="profil.urlPhoto"
                                                 (click)="openFile(profil.urlPhoto, profil.urlPhotoContentType)"
@@ -1291,12 +1302,14 @@
                                                 <a href="#">{{ profil.lastName }} {{ profil.firstName }}</a>
                                               </span>
                                               <span class="description"
-                                                >{{ profil.occupation }} -
-                                                <span
-                                                  *ngIf="profil.familyHead"
-                                                  style="color: #fc00ff"
-                                                  jhiTranslate="awtarApp.parent.familyHead"
-                                                  >Family Head</span
+                                                >{{ profil.occupation }}
+                                                <b
+                                                  ><span
+                                                    *ngIf="profil.familyHead"
+                                                    style="color: #fc00ff"
+                                                    jhiTranslate="awtarApp.parent.familyHead"
+                                                    >Family Head</span
+                                                  ></b
                                                 ></span
                                               >
                                             </div>
@@ -1306,10 +1319,18 @@
                                             <div class="row">
                                               <div class="col-12">
                                                 <dl>
-                                                  <dt><span jhiTranslate="awtarApp.profile.dateOfBirth">Date Of Birth</span></dt>
-                                                  <dd>
-                                                    <span>{{ profil.dateOfBirth | formatMediumDate }}</span>
-                                                  </dd>
+                                                  <div *ngIf="!profil.dateOfDeath">
+                                                    <dt><span jhiTranslate="awtarApp.profile.dateOfBirth">Date Of Birth</span></dt>
+                                                    <dd>
+                                                      <span>{{ profil.dateOfBirth | formatMediumDate }}</span>
+                                                    </dd>
+                                                  </div>
+                                                  <div *ngIf="profil.dateOfDeath">
+                                                    <dt><span jhiTranslate="awtarApp.parent.dateOfDeath">Date Of Death</span></dt>
+                                                    <dd>
+                                                      <span>{{ profil.dateOfDeath }}</span>
+                                                    </dd>
+                                                  </div>
                                                   <dt><span jhiTranslate="awtarApp.parent.annualRevenue">Annual Revenue</span></dt>
                                                   <dd *ngIf="profil">
                                                     <span>{{ profil.annualRevenue }}</span>
@@ -1386,6 +1407,17 @@
                                                   </button>
                                                 </div>
                                                 <img
+                                                  *ngIf="!childx.urlPhoto"
+                                                  class="bd-placeholder-img card-img-top"
+                                                  src="../../../../content/images/no-profile.jpg"
+                                                  alt="profile image"
+                                                  role="img"
+                                                  aria-label="Placeholder: Thumbnail"
+                                                  preserveAspectRatio="xMidYMid slice"
+                                                  focusable="false"
+                                                  class="img-circle img-bordered-sm"
+                                                />
+                                                <img
                                                   class="img-circle img-bordered-sm"
                                                   *ngIf="childx.urlPhoto"
                                                   (click)="openFile(childx.urlPhoto, childx.urlPhotoContentType)"
@@ -1418,10 +1450,6 @@
                                                     <dt>
                                                       <span jhiTranslate="awtarApp.teachingCurriculum.annualResult">Annual Result</span>
                                                     </dt>
-                                                    <dd>
-                                                      <span>1558</span>
-                                                    </dd>
-                                                    <dt><span>Nombre Dons</span></dt>
                                                     <dd>
                                                       <span>1558</span>
                                                     </dd>
@@ -1503,7 +1531,13 @@
                                     <div class="col-md-12">
                                       <div class="card">
                                         <div class="card-header">
-                                          <h3 class="card-title">Donation Table</h3>
+                                          <h5 class="m-0" style="color: rgb(219, 28, 158)">
+                                            In total there are {{ donationList ? donationList.length : 0 }} Donations
+                                          </h5>
+                                        </div>
+
+                                        <div class="card-header">
+                                          <h3 class="card-title">Donation Settings</h3>
                                           <div class="text-right">
                                             <div class="dropdown">
                                               <button
@@ -1525,72 +1559,135 @@
                                             </div>
                                           </div>
                                         </div>
-
-                                        <div class="card-body" *ngIf="donationList">
-                                          <table class="table table-bordered">
-                                            <thead>
-                                              <tr>
-                                                <th></th>
-                                                <th><span jhiTranslate="awtarApp.donationsIssued.model">Model</span></th>
-                                                <th><span jhiTranslate="awtarApp.donationsIssued.isValidated">Validation Date</span></th>
-                                                <th style="width: 40px">
-                                                  <span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span>
-                                                </th>
-                                                <th style="width: 40px">items Number</th>
-                                                <th style="width: 40px">Total Price</th>
-                                                <th></th>
-                                              </tr>
-                                            </thead>
-
-                                            <tbody>
-                                              <tr
-                                                *ngFor="
-                                                  let don of donationList
-                                                    | paginate
-                                                      : {
-                                                          itemsPerPage: tableSize,
-                                                          currentPage: page,
-                                                          totalItems: count
-                                                        };
-                                                  let i = index;
-                                                  trackBy: trackId
-                                                "
-                                              >
-                                                <td>
-                                                  <div class="custom-control custom-checkbox">
+                                        <div *ngIf="donationList && donationList.length > 0" style="margin: 1rem">
+                                          <p-table
+                                            #dt
+                                            [value]="donationList!"
+                                            selectionMode="single"
+                                            [(selection)]="selectedDon"
+                                            dataKey="id"
+                                            [rowHover]="true"
+                                            [rows]="4"
+                                            [showCurrentPageReport]="true"
+                                            [rowsPerPageOptions]="[10, 25, 50]"
+                                            currentPageReportTemplate="{first} ---> {last} / {totalRecords}"
+                                            [paginator]="true"
+                                            styleClass="p-datatable-sm"
+                                            [tableStyle]="{ width: '30rem' }"
+                                            [filterDelay]="0"
+                                            [globalFilterFields]="['model', 'isValidated', 'donationsDate', 'itemQuantities']"
+                                          >
+                                            <ng-template pTemplate="caption">
+                                              <div class="table-header">
+                                                <div class="flex" style="text-align: right">
+                                                  <span class="p-input-icon-left ml-auto">
+                                                    <i class="pi pi-search" style="margin-left: 12rem"></i>
                                                     <input
-                                                      class="custom-control-input"
-                                                      type="checkbox"
-                                                      id="customCheckbox1"
-                                                      value="option1"
+                                                      pInputText
+                                                      type="text"
+                                                      (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                                      placeholder="Recherche Globale"
                                                     />
-                                                    <label for="customCheckbox1" class="custom-control-label"></label>
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </ng-template>
+                                            <ng-template pTemplate="header">
+                                              <tr>
+                                                <th pSortableColumn="model" style="min-width: 14rem">
+                                                  <div class="flex justify-content-between align-items-center">
+                                                    <span jhiTranslate="awtarApp.donationsIssued.model">Model</span>
+                                                    <p-sortIcon field="model"></p-sortIcon>
+                                                    <p-columnFilter
+                                                      type="text"
+                                                      field="model"
+                                                      display="menu"
+                                                      class="ml-auto"
+                                                    ></p-columnFilter>
                                                   </div>
-                                                </td>
-                                                <td>{{ don.model }}</td>
+                                                </th>
+                                                <th pSortableColumn="isValidated" style="min-width: 14rem">
+                                                  <div class="flex justify-content-between align-items-center">
+                                                    <span jhiTranslate="awtarApp.donationsIssued.isValidated">Validation Date</span>
+                                                    <p-sortIcon field="isValidated"></p-sortIcon>
+                                                    <p-columnFilter
+                                                      type="text"
+                                                      field="isValidated"
+                                                      display="menu"
+                                                      class="ml-auto"
+                                                    ></p-columnFilter>
+                                                  </div>
+                                                </th>
+
+                                                <th pSortableColumn="donationsDate" style="min-width: 14rem">
+                                                  <div class="flex justify-content-between align-items-center">
+                                                    <span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span>
+                                                    <p-sortIcon field="donationsDate"></p-sortIcon>
+                                                    <p-columnFilter
+                                                      type="text"
+                                                      field="donationsDate"
+                                                      display="menu"
+                                                      class="ml-auto"
+                                                    ></p-columnFilter>
+                                                  </div>
+                                                </th>
+
+                                                <th pSortableColumn="itemQuantities" style="min-width: 19rem">
+                                                  <div class="flex justify-content-between align-items-center">
+                                                    <span jhiTranslate="awtarApp.donationsIssued.itemQuantities">Item Quantities</span>
+                                                    <p-sortIcon field="itemQuantities"></p-sortIcon>
+                                                    <p-columnFilter
+                                                      type="text"
+                                                      field="itemQuantities"
+                                                      display="menu"
+                                                      class="ml-auto"
+                                                    ></p-columnFilter>
+                                                  </div>
+                                                </th>
+
+                                                <th style="width: 5rem"></th>
+                                              </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-don>
+                                              <tr [pSelectableRow]="don">
                                                 <td>
+                                                  <span class="p-column-title" jhiTranslate="awtarApp.donationsIssued.model">Model</span>
+                                                  {{ don.model }}
+                                                </td>
+
+                                                <td>
+                                                  <span class="p-column-title" jhiTranslate="awtarApp.donationsIssued.isValidated"
+                                                    >Validation Date</span
+                                                  >
+
                                                   <span class="badge" *ngIf="don.isValidated === true" style="background-color: #08cd67">
                                                     {{ don.isValidated }}</span
                                                   >
-                                                  <span
-                                                    class="badge"
-                                                    *ngIf="don.isValidated === false; or: don.isValidated === null"
-                                                    style="background-color: #cd1f08"
-                                                  >
+                                                  <span class="badge" *ngIf="don.isValidated === false" style="background-color: #cd1f08">
                                                     {{ don.isValidated }}</span
                                                   >
                                                 </td>
+
                                                 <td>
+                                                  <span class="p-column-title" jhiTranslate="awtarApp.donationsIssued.donationsDate"
+                                                    >Donations Date</span
+                                                  >
                                                   <span class="badge" style="background-color: #fc00ff">
                                                     {{ don.donationsDate | formatMediumDate }}</span
                                                   >
                                                 </td>
-                                                <td>{{ don.itemsNumber }}</td>
-                                                <td>{{ don.totalPrice }}</td>
+
                                                 <td>
+                                                  <span class="p-column-title" jhiTranslate="awtarApp.donationsIssued.itemQuantities"
+                                                    >Item Quantities</span
+                                                  >
+                                                  {{ don.itemQuantities }}
+                                                </td>
+
+                                                <td style="text-align: center">
                                                   <button
                                                     type="submit"
-                                                    [routerLink]="['/family', family!.id, 'view']"
+                                                    [routerLink]="['/donations-issued', don.id, 'view']"
                                                     class="btn btn-info btn-sm"
                                                     data-cy="entityDetailsButton"
                                                   >
@@ -1598,78 +1695,22 @@
                                                   </button>
                                                 </td>
                                               </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
-
-                                        <div class="card-footer clearfix" style="display: flex">
-                                          <div>
-                                            <select (change)="onTableSizeChange($event)">
-                                              <option *ngFor="let size of tableSizes">{{ size }}</option>
-                                            </select>
-                                          </div>
-                                          <div>
-                                            <pagination-controls
-                                              previousLabel="Prev"
-                                              nextLabel="Next"
-                                              (pageChange)="onTableDataChange($event)"
-                                            >
-                                            </pagination-controls>
-                                          </div>
+                                            </ng-template>
+                                            <ng-template pTemplate="emptymessage">
+                                              <tr>
+                                                <td colspan="8">No Donations found.</td>
+                                              </tr>
+                                            </ng-template>
+                                          </p-table>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
+
                                 <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
                                   <div class="row">
                                     <div class="col-md-12">
-                                      <div class="col-8">
-                                        <form name="editForm" role="form" novalidate [formGroup]="editForm">
-                                          <div>
-                                            <div>
-                                              <select name="child" formControlName="child" (change)="choix($event)">
-                                                <option
-                                                  *ngFor="let c of childrenCollection; trackBy: trackChildById"
-                                                  [ngValue]="c.id === editForm.get('child')!.value?.id ? editForm.get('child')!.value : c"
-                                                >
-                                                  {{ c.lastName }} {{ c.firstName }}
-                                                </option>
-                                              </select>
-                                            </div>
-
-                                            <div style="display: flex; margin: 1rem">
-                                              <label
-                                                class="form-label"
-                                                jhiTranslate="awtarApp.profile.child"
-                                                for="field_child"
-                                                style="margin-right: 1rem"
-                                                >Child</label
-                                              >
-                                              <select
-                                                class="form-control"
-                                                id="field_child"
-                                                data-cy="child"
-                                                name="child"
-                                                formControlName="child"
-                                                (change)="choix($event)"
-                                              >
-                                                <option [ngValue]="null"></option>
-                                                <option
-                                                  [ngValue]="
-                                                    childOption.id === editForm.get('child')!.value?.id
-                                                      ? editForm.get('child')!.value
-                                                      : childOption
-                                                  "
-                                                  *ngFor="let childOption of childrenCollection; trackBy: trackChildById"
-                                                >
-                                                  {{ childOption.lastName }} {{ childOption.firstName }}
-                                                </option>
-                                              </select>
-                                            </div>
-                                          </div>
-                                        </form>
-                                      </div>
                                       <div class="card">
                                         <div class="card-header">
                                           <h3 class="card-title">Donation Table</h3>
@@ -1695,101 +1736,192 @@
                                           </div>
                                         </div>
 
-                                        <div class="card-body" *ngIf="donationListChild && donationListChild.length > 0">
-                                          <table class="table table-bordered">
-                                            <thead>
-                                              <tr>
-                                                <th></th>
-                                                <th><span jhiTranslate="awtarApp.donationsIssued.model">Model</span></th>
-                                                <th><span jhiTranslate="awtarApp.donationsIssued.isValidated"> is Validated</span></th>
-                                                <th style="width: 40px">
-                                                  <span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span>
-                                                </th>
-                                                <th style="width: 40px">items Number</th>
-                                                <th style="width: 40px">Total Price</th>
-                                                <th></th>
-                                              </tr>
-                                            </thead>
+                                        <p-listbox
+                                          [options]="children!"
+                                          [(ngModel)]="selectedChild"
+                                          [metaKeySelection]="false"
+                                          [checkbox]="false"
+                                          [filter]="true"
+                                          [multiple]="false"
+                                          optionLabel="firstName"
+                                          [listStyle]="{ 'max-height': '250px' }"
+                                          [style]="{ 'max-width': '17.4rem', 'min-width': '17.4rem' }"
+                                        >
+                                          <ng-template let-c pTemplate="item">
+                                            <div class="country-item" style="display: flex">
+                                              <img
+                                                [src]="'data:' + c.urlPhotoContentType + ';base64,' + c.urlPhoto"
+                                                width="32px"
+                                                height="32px"
+                                                style="margin-right: 1rem"
+                                              />
+                                              <div>
+                                                {{ c.firstName }}
+                                                <img src="../../../../content/images/birthday.jpg " width="20px" height="20px" /><span
+                                                  style="font-size: 10px; color: gray"
+                                                  >{{ c.dateOfBirth | formatMediumDate }}</span
+                                                >
+                                              </div>
+                                            </div>
+                                          </ng-template>
+                                        </p-listbox>
 
-                                            <tbody>
-                                              <tr
-                                                *ngFor="
-                                                  let childDon of donationListChild
-                                                    | paginate
-                                                      : {
-                                                          itemsPerPage: tableSize,
-                                                          currentPage: page,
-                                                          totalItems: count
-                                                        };
-                                                  let i = index;
-                                                  trackBy: trackId
-                                                "
-                                              >
-                                                <td>
-                                                  <div class="custom-control custom-checkbox">
-                                                    <input
-                                                      class="custom-control-input"
-                                                      type="checkbox"
-                                                      id="customCheckbox1"
-                                                      value="option1"
-                                                    />
-                                                    <label for="customCheckbox1" class="custom-control-label"></label>
-                                                  </div>
-                                                </td>
-                                                <td>{{ childDon.model }}</td>
-                                                <td>
-                                                  <span
-                                                    class="badge"
-                                                    *ngIf="childDon.isValidated === true"
-                                                    style="background-color: #08cd67"
-                                                  >
-                                                    {{ childDon.isValidated }}</span
-                                                  >
-                                                  <span
-                                                    class="badge"
-                                                    *ngIf="childDon.isValidated != true"
-                                                    style="background-color: #cd1f08"
-                                                  >
-                                                    {{ childDon.isValidated }}</span
-                                                  >
-                                                </td>
-                                                <td>
-                                                  <span class="badge" style="background-color: #fc00ff">
-                                                    {{ childDon.donationsDate | formatMediumDate }}</span
-                                                  >
-                                                </td>
-                                                <td>{{ childDon.itemsNumber }}</td>
-                                                <td>{{ childDon.totalPrice }}</td>
-                                                <td>
-                                                  <button
-                                                    type="submit"
-                                                    [routerLink]="['/family', family!.id, 'view']"
-                                                    class="btn btn-info btn-sm"
-                                                    data-cy="entityDetailsButton"
-                                                  >
-                                                    <fa-icon icon="eye"></fa-icon>
-                                                  </button>
-                                                </td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
+                                        <p-dialog header="Détails" [(visible)]="selectedChild" [style]="{ width: '50vw' }">
+                                          <h1 *ngIf="selectedChild">{{ selectedChild!.child!.id! }}</h1>
 
-                                        <div class="card-footer clearfix" style="display: flex">
-                                          <div>
-                                            <select (change)="onTableSizeChange($event)">
-                                              <option *ngFor="let size of tableSizes">{{ size }}</option>
-                                            </select>
-                                          </div>
-                                          <div>
-                                            <pagination-controls
-                                              previousLabel="Prev"
-                                              nextLabel="Next"
-                                              (pageChange)="onTableDataChange($event)"
+                                          <div class="card-body" *ngIf="donationListChild && donationListChild.length > 0">
+                                            <p-table
+                                              #dt
+                                              [value]="donationListChild!"
+                                              selectionMode="single"
+                                              [(selection)]="selectedDon"
+                                              dataKey="id"
+                                              [rowHover]="true"
+                                              [rows]="4"
+                                              [showCurrentPageReport]="true"
+                                              [rowsPerPageOptions]="[10, 25, 50]"
+                                              currentPageReportTemplate="{first} ---> {last} / {totalRecords}"
+                                              [paginator]="true"
+                                              styleClass="p-datatable-sm"
+                                              [tableStyle]="{ width: '30rem' }"
+                                              [filterDelay]="0"
+                                              [globalFilterFields]="['model', 'isValidated', 'donationsDate', 'itemQuantities']"
                                             >
-                                            </pagination-controls>
+                                              <ng-template pTemplate="caption">
+                                                <div class="table-header">
+                                                  <div class="flex" style="text-align: right">
+                                                    <span class="p-input-icon-left ml-auto">
+                                                      <i class="pi pi-search" style="margin-left: 12rem"></i>
+                                                      <input
+                                                        pInputText
+                                                        type="text"
+                                                        (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                                        placeholder="Recherche Globale"
+                                                      />
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </ng-template>
+                                              <ng-template pTemplate="header">
+                                                <tr>
+                                                  <th pSortableColumn="model" style="min-width: 14rem">
+                                                    <div class="flex justify-content-between align-items-center">
+                                                      <span jhiTranslate="awtarApp.donationsIssued.model">Model</span>
+                                                      <p-sortIcon field="model"></p-sortIcon>
+                                                      <p-columnFilter
+                                                        type="text"
+                                                        field="model"
+                                                        display="menu"
+                                                        class="ml-auto"
+                                                      ></p-columnFilter>
+                                                    </div>
+                                                  </th>
+                                                  <th pSortableColumn="isValidated" style="min-width: 14rem">
+                                                    <div class="flex justify-content-between align-items-center">
+                                                      <span jhiTranslate="awtarApp.donationsIssued.isValidated">Validation Date</span>
+                                                      <p-sortIcon field="isValidated"></p-sortIcon>
+                                                      <p-columnFilter
+                                                        type="text"
+                                                        field="isValidated"
+                                                        display="menu"
+                                                        class="ml-auto"
+                                                      ></p-columnFilter>
+                                                    </div>
+                                                  </th>
+
+                                                  <th pSortableColumn="donationsDate" style="min-width: 14rem">
+                                                    <div class="flex justify-content-between align-items-center">
+                                                      <span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span>
+                                                      <p-sortIcon field="donationsDate"></p-sortIcon>
+                                                      <p-columnFilter
+                                                        type="text"
+                                                        field="donationsDate"
+                                                        display="menu"
+                                                        class="ml-auto"
+                                                      ></p-columnFilter>
+                                                    </div>
+                                                  </th>
+
+                                                  <th pSortableColumn="itemQuantities" style="min-width: 19rem">
+                                                    <div class="flex justify-content-between align-items-center">
+                                                      <span jhiTranslate="awtarApp.donationsIssued.itemQuantities">Item Quantities</span>
+                                                      <p-sortIcon field="itemQuantities"></p-sortIcon>
+                                                      <p-columnFilter
+                                                        type="text"
+                                                        field="itemQuantities"
+                                                        display="menu"
+                                                        class="ml-auto"
+                                                      ></p-columnFilter>
+                                                    </div>
+                                                  </th>
+
+                                                  <th style="width: 5rem"></th>
+                                                </tr>
+                                              </ng-template>
+                                              <ng-template pTemplate="body" let-don>
+                                                <tr [pSelectableRow]="don">
+                                                  <td>
+                                                    <span class="p-column-title" jhiTranslate="awtarApp.donationsIssued.model">Model</span>
+                                                    {{ don.model }}
+                                                  </td>
+
+                                                  <td>
+                                                    <span class="p-column-title" jhiTranslate="awtarApp.donationsIssued.isValidated"
+                                                      >Validation Date</span
+                                                    >
+
+                                                    <span class="badge" *ngIf="don.isValidated === true" style="background-color: #08cd67">
+                                                      {{ don.isValidated }}</span
+                                                    >
+                                                    <span class="badge" *ngIf="don.isValidated === false" style="background-color: #cd1f08">
+                                                      {{ don.isValidated }}</span
+                                                    >
+                                                  </td>
+
+                                                  <td>
+                                                    <span class="p-column-title" jhiTranslate="awtarApp.donationsIssued.donationsDate"
+                                                      >Donations Date</span
+                                                    >
+                                                    <span class="badge" style="background-color: #fc00ff">
+                                                      {{ don.donationsDate | formatMediumDate }}</span
+                                                    >
+                                                  </td>
+
+                                                  <td>
+                                                    <span class="p-column-title" jhiTranslate="awtarApp.donationsIssued.itemQuantities"
+                                                      >Item Quantities</span
+                                                    >
+                                                    {{ don.itemQuantities }}
+                                                  </td>
+
+                                                  <td style="text-align: center">
+                                                    <button
+                                                      type="submit"
+                                                      [routerLink]="['/donations-issued', don.id, 'view']"
+                                                      class="btn btn-info btn-sm"
+                                                      data-cy="entityDetailsButton"
+                                                    >
+                                                      <fa-icon icon="eye"></fa-icon>
+                                                    </button>
+                                                  </td>
+                                                </tr>
+                                              </ng-template>
+                                              <ng-template pTemplate="emptymessage">
+                                                <tr>
+                                                  <td colspan="8">No Donations found.</td>
+                                                </tr>
+                                              </ng-template>
+                                            </p-table>
                                           </div>
-                                        </div>
+                                          <ng-template pTemplate="footer">
+                                            <p-button
+                                              icon="pi pi-check"
+                                              (click)="selectedChild = null"
+                                              label="Ok"
+                                              styleClass="p-button-text"
+                                            ></p-button>
+                                          </ng-template>
+                                        </p-dialog>
                                       </div>
                                     </div>
                                   </div>

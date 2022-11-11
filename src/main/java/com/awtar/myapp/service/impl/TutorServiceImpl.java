@@ -126,4 +126,10 @@ public class TutorServiceImpl implements TutorService {
         profileRepository.save(profile);
         return tutorMapper.toDto(tutor);
     }
+
+    @Override
+    public List<TutorDTO> findTutorsDetails() {
+        List<TutorDTO> l = tutorRepository.findTutorsDetails();
+        return l;
+    }
 }

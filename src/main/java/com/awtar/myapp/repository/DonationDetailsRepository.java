@@ -45,16 +45,15 @@ public interface DonationDetailsRepository extends JpaRepository<DonationDetails
     )
     Optional<DonationDetails> findOneWithToOneRelationships(@Param("id") Long id);
 
-    @Query(
+    /*  @Query(
         "select new com.awtar.myapp.service.dto.DonationDetailsDTO (di.id, di.model, di.isValidated, di.donationsDate, COUNT(did.id) AS itemsNumber, (select SUM(iv.price * did.quantity) AS totalPrice from DonationsIssued di, DonationDetails dd, DonationItemDetails did, ItemValue iv where (di.id = dd.donationsIssued.id and did.donationDetails.id = dd.id  and did.item.id = iv.item.id)))" +
         "from DonationItemDetails did, DonationsIssued di, DonationDetails dd where (did.donationDetails.id = dd.id and dd.donationsIssued.id = di.id and dd.beneficiary = :beneficiary) GROUP  BY di.id "
     )
-    List<DonationDetailsDTO> findAllDonationsList(@Param("beneficiary") Beneficiary beneficiary);
+    List<DonationDetailsDTO> findAllDonationsList(@Param("beneficiary") Beneficiary beneficiary);*/
 
     @Query(
-        value = "select new com.awtar.myapp.service.dto.DonationDetailsDTO (di.id, di.model, di.isValidated, di.donationsDate, COUNT(did.id), (select SUM(iv.price * did.quantity) from DonationsIssued di, DonationDetails dd, DonationItemDetails did, ItemValue iv where (di.id = dd.donationsIssued.id and did.donationDetails.id = dd.id  and did.item.id = iv.item.id)))" +
-        "from DonationItemDetails did, DonationsIssued di, DonationDetails dd where (did.donationDetails.id = dd.id and dd.donationsIssued.id = di.id and dd.beneficiary = :beneficiary) GROUP  BY di.id",
-        countQuery = "select count(distinct di) from DonationsIssued di, DonationDetails dd where (dd.donationsIssued.id = di.id and dd.beneficiary = :beneficiary)"
+        "select new com.awtar.myapp.service.dto.DonationDetailsDTO (di.id, di.model, di.isValidated, di.donationsDate, SUM(did.quantity) AS itemQuantities)" +
+        "from DonationItemDetails did, DonationsIssued di, DonationDetails dd where (did.donationDetails.id = dd.id and dd.donationsIssued.id = di.id and dd.beneficiary = :beneficiary) GROUP  BY di.id "
     )
-    Page<DonationDetailsDTO> findAllDonations(@Param("beneficiary") Beneficiary beneficiary, Pageable pageable);
+    List<DonationDetailsDTO> findAllDonationsList(@Param("beneficiary") Beneficiary beneficiary);
 }

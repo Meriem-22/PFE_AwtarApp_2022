@@ -7,63 +7,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
 
     <title>AdminLTE 3 | Dashboard</title>
-
-    <script nonce="33a2bf22-55fb-4fb7-baea-4b8bb2a21cdd">
-      (function (w, d) {
-        !(function (a, e, t, r) {
-          (a.zarazData = a.zarazData || {}),
-            (a.zarazData.executed = []),
-            (a.zaraz = { deferred: [] }),
-            (a.zaraz.q = []),
-            (a.zaraz._f = function (e) {
-              return function () {
-                var t = Array.prototype.slice.call(arguments);
-                a.zaraz.q.push({ m: e, a: t });
-              };
-            });
-          for (const e of ['track', 'set', 'ecommerce', 'debug']) a.zaraz[e] = a.zaraz._f(e);
-          (a.zaraz.init = () => {
-            var t = e.getElementsByTagName(r)[0],
-              z = e.createElement(r),
-              n = e.getElementsByTagName('title')[0];
-            for (
-              n && (a.zarazData.t = e.getElementsByTagName('title')[0].text),
-                a.zarazData.x = Math.random(),
-                a.zarazData.w = a.screen.width,
-                a.zarazData.h = a.screen.height,
-                a.zarazData.j = a.innerHeight,
-                a.zarazData.e = a.innerWidth,
-                a.zarazData.l = a.location.href,
-                a.zarazData.r = e.referrer,
-                a.zarazData.k = a.screen.colorDepth,
-                a.zarazData.n = e.characterSet,
-                a.zarazData.o = new Date().getTimezoneOffset(),
-                a.zarazData.q = [];
-              a.zaraz.q.length;
-
-            ) {
-              const e = a.zaraz.q.shift();
-              a.zarazData.q.push(e);
-            }
-            z.defer = !0;
-            for (const e of [localStorage, sessionStorage])
-              Object.keys(e || {})
-                .filter(a => a.startsWith('_zaraz_'))
-                .forEach(t => {
-                  try {
-                    a.zarazData['z_' + t.slice(7)] = JSON.parse(e.getItem(t));
-                  } catch {
-                    a.zarazData['z_' + t.slice(7)] = e.getItem(t);
-                  }
-                });
-            (z.referrerPolicy = 'origin'),
-              (z.src = '/cdn-cgi/zaraz/s.js?z=' + btoa(encodeURIComponent(JSON.stringify(a.zarazData)))),
-              t.parentNode.insertBefore(z, t);
-          }),
-            ['complete', 'interactive'].includes(e.readyState) ? zaraz.init() : a.addEventListener('DOMContentLoaded', zaraz.init);
-        })(w, d, 0, 'script');
-      })(window, document);
-    </script>
   </head>
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -447,14 +390,18 @@
                                 <div class="candidate-list-info">
                                   <div class="candidate-list-title" style="display: flex">
                                     <h6 class="mb-0 mr-2">
-                                      <a href="#">{{ Ordonnateur.lastName }} {{ Ordonnateur.firstName }}</a>
+                                      <a [routerLink]="['/authorizing-officer', Ordonnateur.authorizingOfficer!.id!, 'view']"
+                                        >{{ Ordonnateur.lastName }} {{ Ordonnateur.firstName }}</a
+                                      >
                                     </h6>
                                     <span class="badge" style="background-color: #fc00ff">Current Authorizing Officer</span>
                                   </div>
                                   <div class="candidate-list-option">
                                     <ul class="list-unstyled">
-                                      <li><i class="fas fa-filter pr-1"></i>{{ activity! }}</li>
-                                      <li><i class="fas fa-map-marker-alt pr-1"></i>{{ Ordonnateur.address }}</li>
+                                      <li *ngIf="activity"><i class="fas fa-filter pr-1"></i>{{ activity! }}</li>
+                                      <li *ngIf="Ordonnateur.address">
+                                        <i class="fas fa-map-marker-alt pr-1"></i>{{ Ordonnateur.address }}
+                                      </li>
                                     </ul>
                                   </div>
                                 </div>
@@ -463,82 +410,121 @@
                           </tr>
                         </tbody>
                       </table>
-                      <table class="table manage-candidates-top mb-0">
-                        <thead>
-                          <tr>
-                            <th>Others Authorizing Officers</th>
-                            <th class="action text-right">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody *ngIf="profiles && profiles.length > 0">
-                          <tr
-                            class="candidates-list"
-                            *ngFor="
-                              let o of profiles
-                                | paginate
-                                  : {
-                                      itemsPerPage: tableSize,
-                                      currentPage: page,
-                                      totalItems: count
-                                    };
-                              let i = index;
-                              trackBy: trackId
-                            "
-                          >
-                            <td class="title">
-                              <div class="thumb">
-                                <img
-                                  *ngIf="!o.urlPhoto"
-                                  class="img-fluid"
-                                  src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                  alt=""
-                                />
-                                <a (click)="openFile(o.urlPhoto!, o.urlPhotoContentType!)">
-                                  <img
-                                    [src]="'data:' + o.urlPhotoContentType + ';base64,' + o.urlPhoto"
-                                    class="img-fluid"
-                                    style="max-width: 100%"
-                                    alt="o.body? image"
-                                  />
-                                </a>
-                              </div>
-                              <div class="candidate-list-details">
-                                <div class="candidate-list-info">
-                                  <div class="candidate-list-title">
-                                    <h6 class="mb-0">
-                                      <a href="#">{{ o.lastName }} {{ o.firstName }}</a>
-                                    </h6>
-                                  </div>
-                                  <div class="candidate-list-option">
-                                    <ul class="list-unstyled">
-                                      <li><i class="fas fa-filter pr-1"></i>{{ o.activity! }}</li>
-                                      <li><i class="fas fa-map-marker-alt pr-1"></i>{{ o.address }}</li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
 
-                            <td>
-                              <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                <button (click)="edit(i)" type="button" class="btn btn-warning">Affect</button>
-                              </ul>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <div class="text-center mt-3 mt-sm-3">
-                        <div class="card-footer clearfix" style="display: flex">
-                          <div>
-                            <select (change)="onTableSizeChange($event)">
-                              <option *ngFor="let size of tableSizes">{{ size }}</option>
-                            </select>
-                          </div>
-                          <div>
-                            <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
-                            </pagination-controls>
-                          </div>
-                        </div>
+                      <div class="card">
+                        <p-table
+                          #dt2
+                          [value]="profiles!"
+                          dataKey="id"
+                          [rows]="3"
+                          [rowHover]="true"
+                          [showCurrentPageReport]="true"
+                          [rowsPerPageOptions]="[3, 10, 20]"
+                          [paginator]="true"
+                          currentPageReportTemplate=" {first} ---> {last} / {totalRecords} "
+                          [globalFilterFields]="['lastName', 'firstName', 'activity', 'address']"
+                        >
+                          <ng-template pTemplate="caption">
+                            <div class="flex align-items-center justify-content-between" style="display: flex">
+                              <h5 class="m-0" style="color: rgb(219, 28, 158)">
+                                There are {{ profiles ? profiles.length : 0 }} Other Authorizing Officers
+                              </h5>
+                            </div>
+                          </ng-template>
+                          <ng-template pTemplate="header">
+                            <tr>
+                              <th><span jhiTranslate="awtarApp.profile.lastName">lastName</span></th>
+                              <th><span jhiTranslate="awtarApp.profile.firstName">firstName</span></th>
+                              <th><span jhiTranslate="awtarApp.authorizingOfficer.activity">activity</span></th>
+                              <th><span jhiTranslate="awtarApp.profile.address">address</span></th>
+
+                              <th><span>Action</span></th>
+                            </tr>
+                            <tr>
+                              <th>
+                                <p-columnFilter type="text" field="lastName"></p-columnFilter>
+                              </th>
+                              <th>
+                                <p-columnFilter type="text" field="firstName"></p-columnFilter>
+                              </th>
+                              <th>
+                                <p-columnFilter type="text" field="activity"></p-columnFilter>
+                              </th>
+                              <th>
+                                <p-columnFilter type="text" field="address"></p-columnFilter>
+                              </th>
+                              <th></th>
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-o>
+                            <tr style="text-align: center">
+                              <td style="display: flex">
+                                <div class="thumb">
+                                  <img
+                                    *ngIf="!o.urlPhoto"
+                                    class="img-fluid"
+                                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                    alt=""
+                                    width="60"
+                                    style="border-radius: 50%; margin-left: 1rem; margin-right: 1rem"
+                                  />
+                                  <a (click)="openFile(o.urlPhoto!, o.urlPhotoContentType!)">
+                                    <img
+                                      [src]="'data:' + o.urlPhotoContentType + ';base64,' + o.urlPhoto"
+                                      width="50"
+                                      height="40"
+                                      style="border-radius: 50%; margin-left: 1rem; margin-right: 1rem"
+                                      alt="o.body? image"
+                                    />
+                                  </a>
+                                </div>
+                                <div class="candidate-list-details">
+                                  <div class="candidate-list-info">
+                                    <div class="candidate-list-title">
+                                      <h6 class="title">
+                                        <a [routerLink]="['/authorizing-officer', o.id!, 'view']">{{ o.lastName }} {{ o.firstName }}</a>
+                                      </h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td></td>
+                              <td>
+                                <div class="candidate-list-details">
+                                  <div class="candidate-list-info">
+                                    <div class="candidate-list-option">
+                                      <ul class="list-unstyled" style="display: flex">
+                                        <li *ngIf="o.activity"><i class="fas fa-filter pr-1"></i>{{ o.activity! }}</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <div class="candidate-list-details">
+                                  <div class="candidate-list-info">
+                                    <div class="candidate-list-option">
+                                      <ul class="list-unstyled" style="display: flex">
+                                        <li *ngIf="o.address"><i class="fas fa-map-marker-alt pr-1"></i>{{ o.address }}</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+
+                              <td>
+                                <ul class="list-unstyled mb-0 d-flex justify-content-end">
+                                  <button (click)="edit(o)" type="button" class="btn btn-warning">Affect</button>
+                                </ul>
+                              </td>
+                            </tr>
+                          </ng-template>
+                          <ng-template pTemplate="emptymessage">
+                            <tr>
+                              <td colspan="5">No Authorizing Officer found.</td>
+                            </tr>
+                          </ng-template>
+                        </p-table>
                       </div>
                     </div>
                   </div>

@@ -289,4 +289,40 @@ public class BeneficiaryResource {
         List<BeneficiaryDTO> beneficiaryDTOC = beneficiaryService.findAllEstablishmentsContributor(id);
         return ResponseEntity.ok().body(beneficiaryDTOC);
     }
+
+    @PutMapping("/beneficiaries/remove-authorizing-officer/{id}")
+    public ResponseEntity<BeneficiaryDTO> removeAuthorizingOfficer(
+        @PathVariable(value = "id", required = false) final Long id,
+        @Valid @RequestBody BeneficiaryDTO beneficiaryDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to remove Contributor authorizing officer : : {}, {}", id, beneficiaryDTO);
+        if (beneficiaryDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+
+        BeneficiaryDTO result = beneficiaryService.removeAuthorizingOfficer(beneficiaryDTO);
+
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, beneficiaryDTO.getId().toString()))
+            .body(result);
+    }
+
+    @PutMapping("/beneficiaries/remove-tutor/{id}")
+    public ResponseEntity<BeneficiaryDTO> removeTutor(
+        @PathVariable(value = "id", required = false) final Long id,
+        @Valid @RequestBody BeneficiaryDTO beneficiaryDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to remove Contributor tutor : : {}, {}", id, beneficiaryDTO);
+        if (beneficiaryDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+
+        BeneficiaryDTO result = beneficiaryService.removeTutor(beneficiaryDTO);
+
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, beneficiaryDTO.getId().toString()))
+            .body(result);
+    }
 }

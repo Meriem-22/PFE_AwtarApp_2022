@@ -31,7 +31,8 @@
       "periodicity": "Périodicité",
       "recurrence": "Récurrence",
       "archivated": "Archivé",
-      "donationsDetails": "Détails des dons"
+      "donationsDetails": "Détails des dons",
+      "itemQuantities": "Quantités D'articles"
     }
   }
 }

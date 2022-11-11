@@ -23,10 +23,6 @@ export class EditAuthorizingOfficerComponent implements OnInit {
   Ordonnateur!: IProfile;
   beneficiary?: IBeneficiary;
   activity?: string;
-  page = 1;
-  count = 0;
-  tableSize = 4;
-  tableSizes: any = [3, 6, 12, 20];
   profiles?: any[] | null;
   id!: number;
   isSaving = false;
@@ -50,41 +46,42 @@ export class EditAuthorizingOfficerComponent implements OnInit {
       this.account = account;
     });
 
-    this.authorizingOfficerService.find(this.beneficiary!.authorizingOfficer!.id!).subscribe({
-      next: res => {
-        this.activity = res.body!.activity!;
-      },
-      error: e => console.error(e),
-    });
+    if (this.beneficiary!.authorizingOfficer) {
+      this.authorizingOfficerService.find(this.beneficiary!.authorizingOfficer.id!).subscribe({
+        next: res => {
+          this.activity = res.body!.activity!;
+        },
+        error: e => console.error(e),
+      });
 
-    this.profileService.findProfile(this.beneficiary!.authorizingOfficer!.id!).subscribe({
-      next: (res: HttpResponse<IProfile>) => {
-        this.Ordonnateur = res.body!;
-      },
-      error: e => console.error(e),
-    });
+      this.profileService.findProfile(this.beneficiary!.authorizingOfficer.id!).subscribe({
+        next: (res: HttpResponse<IProfile>) => {
+          this.Ordonnateur = res.body!;
+        },
+        error: e => console.error(e),
+      });
 
-    this.AuthaurizingOfficersList();
+      this.AuthaurizingOfficersList();
+    }
+    if (!this.beneficiary!.authorizingOfficer) {
+      this.authorizingOfficerService.findAuthorizingOfficerDetails().subscribe({
+        next: (res: HttpResponse<any[]>) => {
+          this.profiles = res.body ?? [];
+          console.log(this.profiles);
+        },
+        error: e => console.error(e),
+      });
+    }
   }
 
   AuthaurizingOfficersList(): void {
     this.profileService.findOthersAuthaurizingOfficersProfiles(this.beneficiary!.authorizingOfficer!.id!).subscribe({
       next: (res: HttpResponse<any[]>) => {
         this.profiles = res.body ?? [];
+        console.log(this.profiles);
       },
       error: e => console.error(e),
     });
-  }
-
-  onTableDataChange(event: any): void {
-    this.page = event;
-    this.AuthaurizingOfficersList();
-  }
-
-  onTableSizeChange(event: any): void {
-    this.tableSize = event.target.value;
-    this.page = 1;
-    this.AuthaurizingOfficersList();
   }
 
   previousState(): void {
@@ -103,8 +100,8 @@ export class EditAuthorizingOfficerComponent implements OnInit {
     this.dataUtils.openFile(base64String, contentType);
   }
 
-  edit(identity: number): void {
-    this.id = this.profiles![identity].id;
+  edit(identity: IProfile): void {
+    this.id = identity.id!;
     console.log(this.id);
     this.beneficiary!.idContributor = this.id;
     console.log(this.beneficiary!);

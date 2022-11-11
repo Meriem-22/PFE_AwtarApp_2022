@@ -72,7 +72,7 @@ export class ReportComponent implements OnInit {
   }
 
   delete(report: IReport): void {
-    const modalRef = this.modalService.open(ReportDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(ReportDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.report = report;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

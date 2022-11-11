@@ -70,4 +70,12 @@ public interface TutorService {
      * @return the persisted entity.
      */
     TutorDTO add(TutorDTO tutorDTO);
+
+    /**
+     * Get  all the authorizing Officers details.
+     *
+     *
+     * @return the entity.
+     */
+    List<TutorDTO> findTutorsDetails();
 }

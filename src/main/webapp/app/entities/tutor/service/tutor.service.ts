@@ -9,6 +9,7 @@ import { ITutor, getTutorIdentifier } from '../tutor.model';
 
 export type EntityResponseType = HttpResponse<ITutor>;
 export type EntityArrayResponseType = HttpResponse<ITutor[]>;
+export type EntityArrayResponseAnyType = HttpResponse<any[]>;
 
 @Injectable({ providedIn: 'root' })
 export class TutorService {
@@ -43,6 +44,10 @@ export class TutorService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findTutorsDetails(): Observable<EntityArrayResponseAnyType> {
+    return this.http.get<any[]>(this.resourceUrl + '/details', { observe: 'response' });
   }
 
   addTutorToCollectionIfMissing(tutorCollection: ITutor[], ...tutorsToCheck: (ITutor | null | undefined)[]): ITutor[] {

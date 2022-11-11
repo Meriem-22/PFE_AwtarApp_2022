@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditContributorsComponent } from './edit-contributors.component';
+import { RemoveTutorComponent } from './remove-tutor.component';
 
-describe('EditContributorsComponent', () => {
-  let component: EditContributorsComponent;
-  let fixture: ComponentFixture<EditContributorsComponent>;
+describe('RemoveTutorComponent', () => {
+  let component: RemoveTutorComponent;
+  let fixture: ComponentFixture<RemoveTutorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditContributorsComponent],
+      declarations: [RemoveTutorComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditContributorsComponent);
+    fixture = TestBed.createComponent(RemoveTutorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

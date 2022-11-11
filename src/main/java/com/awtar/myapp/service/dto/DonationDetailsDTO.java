@@ -31,7 +31,7 @@ public class DonationDetailsDTO implements Serializable {
 
     private LocalDate donationsDate;
 
-    private Long itemsNumber;
+    private Long itemQuantities;
 
     private Double totalPrice;
 
@@ -41,13 +41,12 @@ public class DonationDetailsDTO implements Serializable {
 
     public DonationDetailsDTO() {}
 
-    public DonationDetailsDTO(Long id, String model, Boolean isValidated, LocalDate donationsDate, Long itemsNumber, Double totalPrice) {
+    public DonationDetailsDTO(Long id, String model, Boolean isValidated, LocalDate donationsDate, Long itemsNumber) {
         this.id = id;
         this.model = model;
         this.isValidated = isValidated;
         this.donationsDate = donationsDate;
-        this.itemsNumber = itemsNumber;
-        this.totalPrice = totalPrice;
+        this.itemQuantities = itemsNumber;
     }
 
     public DonationDetailsDTO(Long id, String model, Boolean isValidated, LocalDate donationsDate) {
@@ -59,11 +58,11 @@ public class DonationDetailsDTO implements Serializable {
 
     public DonationDetailsDTO(String model, Long itemsNumber) {
         this.model = model;
-        this.itemsNumber = itemsNumber;
+        this.itemQuantities = itemsNumber;
     }
 
     public DonationDetailsDTO(Long itemsNumber) {
-        this.itemsNumber = itemsNumber;
+        this.itemQuantities = itemsNumber;
     }
 
     public DonationDetailsDTO(Double totalPrice) {
@@ -150,12 +149,12 @@ public class DonationDetailsDTO implements Serializable {
         this.donationsDate = donationsDate;
     }
 
-    public Long getItemsNumber() {
-        return itemsNumber;
+    public Long getItemQuantities() {
+        return itemQuantities;
     }
 
-    public void setItemsNumber(Long itemsNumber) {
-        this.itemsNumber = itemsNumber;
+    public void setItemQuantities(Long itemsNumber) {
+        this.itemQuantities = itemsNumber;
     }
 
     public Double getTotalPrice() {

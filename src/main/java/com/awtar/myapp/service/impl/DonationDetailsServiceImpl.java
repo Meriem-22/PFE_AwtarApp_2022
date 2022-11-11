@@ -97,8 +97,7 @@ public class DonationDetailsServiceImpl implements DonationDetailsService {
 
     @Override
     public Page<DonationDetailsDTO> findAllBeneficiaryDonation(Long id, Pageable pageable) {
-        Page<DonationDetailsDTO> donation = donationDetailsRepository.findAllDonations(beneficiaryRepository.getById(id), pageable);
-        return donation;
+        return null;
     }
 
     @Override

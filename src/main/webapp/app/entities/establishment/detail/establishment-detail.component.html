@@ -640,6 +640,9 @@
 
         <section class="content">
           <div class="container-fluid">
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
             <div class="row">
               <div class="col-md-3">
                 <div class="card card-primary card-outline">
@@ -730,7 +733,7 @@
                               >
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                               </a>
-                              <a class="dropdown-item" href="#">Delete</a>
+                              <a class="dropdown-item" (click)="removeAuthorizingOfficer(benef)">Delete</a>
                             </div>
                           </div>
                         </div>
@@ -787,7 +790,7 @@
                               <a class="dropdown-item" [routerLink]="['/beneficiary', establishment.id, 'contributor', 'tutor']">
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                               </a>
-                              <a class="dropdown-item" href="#">Delete</a>
+                              <a class="dropdown-item" (click)="removeAuthorizingOfficer(benef)">Delete</a>
                             </div>
                           </div>
                         </div>
@@ -888,14 +891,14 @@
                                           style="height: 194px"
                                           class="img-fluid"
                                         />
-                                        <div>
+                                        <div style="text-align: center">
                                           <h6 style="margin-top: 0.5rem">
                                             <b><span jhiTranslate="awtarApp.establishment.manager">Manager</span></b>
-                                            <a class="float-right">{{ establishment.manager }}</a>
+                                            <h6>{{ establishment.manager }}</h6>
                                           </h6>
                                           <h6>
                                             <b><span jhiTranslate="awtarApp.establishment.managerCin">Manager Cin</span></b>
-                                            <a class="float-right">{{ establishment.managerCin }}</a>
+                                            <h6>{{ establishment.managerCin }}</h6>
                                           </h6>
                                         </div>
                                       </div>
@@ -904,7 +907,9 @@
                                       <div class="position-relative">
                                         <img src="../../../../content/images/Donations-family.jpg" alt="Photo 2" class="img-fluid" />
                                         <h6 style="margin-top: 0.5rem">Donations Issued</h6>
-                                        <h6>{{ df }}</h6>
+                                        <h6>{{ df }} Programed donations</h6>
+
+                                        <h6>{{ df }} validated / {{ donationList!.length }} not validated</h6>
                                       </div>
                                     </div>
                                     <div class="col-sm-4 text-center">
@@ -928,130 +933,180 @@
                       </div>
 
                       <div class="tab-pane" id="dons">
-                        <div class="col-lg-13 gedf-main" style="margin-left: -1rem; margin-right: -1rem">
-                          <!--- \\\\\\\Post-->
-                          <div class="card social-timeline-card">
-                            <div class="card-body" style="margin-left: -0.8rem; margin-right: -1rem">
-                              <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade active show" id="posts" role="tabpanel" aria-labelledby="posts-tab">
-                                  <div class="row">
-                                    <div class="col-md-12">
-                                      <div class="card">
-                                        <div class="card-header">
-                                          <h3 class="card-title">Donation Table</h3>
-                                          <div class="text-right">
-                                            <div class="dropdown">
-                                              <button
-                                                class="btn btn-link dropdown-toggle"
-                                                type="button"
-                                                id="gedf-drop11"
-                                                data-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
-                                              >
-                                                <i class="fa fa-ellipsis-h"></i>
-                                              </button>
-                                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop11">
-                                                <div class="h6 dropdown-header">Settings</div>
-                                                <a class="dropdown-item" href="#">Add Donation</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
-                                                <a class="dropdown-item" href="#">Report</a>
-                                              </div>
+                        <div class="card social-timeline-card">
+                          <div class="card-body" style="margin-left: -0.8rem; margin-right: -1rem">
+                            <div class="tab-content" id="myTabContent">
+                              <div class="tab-pane fade active show" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="card">
+                                      <div style="height: 3rem; margin-top: 1rem; margin-left: 1rem">
+                                        <h5 class="m-0" style="color: rgb(219, 28, 158)">
+                                          In total there are {{ donationList ? donationList.length : 0 }} Donations
+                                        </h5>
+                                      </div>
+
+                                      <div class="card-header">
+                                        <h3 class="card-title">Donation Settings</h3>
+                                        <div class="text-right">
+                                          <div class="dropdown">
+                                            <button
+                                              class="btn btn-link dropdown-toggle"
+                                              type="button"
+                                              id="gedf-drop11"
+                                              data-toggle="dropdown"
+                                              aria-haspopup="true"
+                                              aria-expanded="false"
+                                            >
+                                              <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop11">
+                                              <div class="h6 dropdown-header">Settings</div>
+                                              <a class="dropdown-item" href="#">Add Donation</a>
+                                              <a class="dropdown-item" href="#">Delete</a>
+                                              <a class="dropdown-item" href="#">Report</a>
                                             </div>
                                           </div>
                                         </div>
+                                      </div>
+                                      <div *ngIf="donationList && donationList.length > 0" style="margin: 1rem">
+                                        <p-table
+                                          #dt
+                                          [value]="donationList!"
+                                          selectionMode="single"
+                                          [(selection)]="selectedDon"
+                                          dataKey="id"
+                                          [rowHover]="true"
+                                          [rows]="5"
+                                          [showCurrentPageReport]="true"
+                                          [rowsPerPageOptions]="[10, 25, 50]"
+                                          currentPageReportTemplate="{first} ---> {last} / {totalRecords}"
+                                          [paginator]="true"
+                                          styleClass="p-datatable-sm"
+                                          [tableStyle]="{ width: '30rem' }"
+                                          [filterDelay]="0"
+                                          [globalFilterFields]="['model', 'isValidated', 'donationsDate', 'itemQuantities']"
+                                        >
+                                          <ng-template pTemplate="caption">
+                                            <div class="table-header">
+                                              <div class="flex" style="text-align: right">
+                                                <span class="p-input-icon-left ml-auto">
+                                                  <i class="pi pi-search" style="margin-left: 12rem"></i>
+                                                  <input
+                                                    pInputText
+                                                    type="text"
+                                                    (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                                    placeholder="Recherche Globale"
+                                                  />
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </ng-template>
+                                          <ng-template pTemplate="header">
+                                            <tr>
+                                              <th pSortableColumn="model" style="min-width: 14rem">
+                                                <div class="flex justify-content-between align-items-center">
+                                                  <span jhiTranslate="awtarApp.donationsIssued.model">Model</span>
+                                                  <p-sortIcon field="model"></p-sortIcon>
+                                                  <p-columnFilter type="text" field="model" display="menu" class="ml-auto"></p-columnFilter>
+                                                </div>
+                                              </th>
+                                              <th pSortableColumn="isValidated" style="min-width: 14rem">
+                                                <div class="flex justify-content-between align-items-center">
+                                                  <span jhiTranslate="awtarApp.donationsIssued.isValidated">Validation Date</span>
+                                                  <p-sortIcon field="isValidated"></p-sortIcon>
+                                                  <p-columnFilter
+                                                    type="text"
+                                                    field="isValidated"
+                                                    display="menu"
+                                                    class="ml-auto"
+                                                  ></p-columnFilter>
+                                                </div>
+                                              </th>
 
-                                        <div class="card-body" *ngIf="donationList">
-                                          <table class="table table-bordered">
-                                            <thead>
-                                              <tr>
-                                                <th></th>
-                                                <th><span jhiTranslate="awtarApp.donationsIssued.model">Model</span></th>
-                                                <th><span jhiTranslate="awtarApp.donationsIssued.isValidated">Validation Date</span></th>
-                                                <th style="width: 40px">
+                                              <th pSortableColumn="donationsDate" style="min-width: 14rem">
+                                                <div class="flex justify-content-between align-items-center">
                                                   <span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span>
-                                                </th>
-                                                <th style="width: 40px">items Number</th>
-                                                <th style="width: 40px">Total Price</th>
-                                                <th></th>
-                                              </tr>
-                                            </thead>
+                                                  <p-sortIcon field="donationsDate"></p-sortIcon>
+                                                  <p-columnFilter
+                                                    type="text"
+                                                    field="donationsDate"
+                                                    display="menu"
+                                                    class="ml-auto"
+                                                  ></p-columnFilter>
+                                                </div>
+                                              </th>
 
-                                            <tbody>
-                                              <tr
-                                                *ngFor="
-                                                  let don of donationList
-                                                    | paginate
-                                                      : {
-                                                          itemsPerPage: tableSize,
-                                                          currentPage: page,
-                                                          totalItems: count
-                                                        };
-                                                  let i = index;
-                                                  trackBy: trackId
-                                                "
-                                              >
-                                                <td>
-                                                  <div class="custom-control custom-checkbox">
-                                                    <input
-                                                      class="custom-control-input"
-                                                      type="checkbox"
-                                                      id="customCheckbox1"
-                                                      value="option1"
-                                                    />
-                                                    <label for="customCheckbox1" class="custom-control-label"></label>
-                                                  </div>
-                                                </td>
-                                                <td>{{ don.model }}</td>
-                                                <td>
-                                                  <span class="badge" *ngIf="don.isValidated === true" style="background-color: #08cd67">
-                                                    {{ don.isValidated }}</span
-                                                  >
-                                                  <span
-                                                    class="badge"
-                                                    *ngIf="don.isValidated === false; or: don.isValidated === null"
-                                                    style="background-color: #cd1f08"
-                                                  >
-                                                    {{ don.isValidated }}</span
-                                                  >
-                                                </td>
-                                                <td>
-                                                  <span class="badge" style="background-color: #fc00ff">
-                                                    {{ don.donationsDate | formatMediumDate }}</span
-                                                  >
-                                                </td>
-                                                <td>{{ don.itemsNumber }}</td>
-                                                <td>{{ don.totalPrice }}</td>
-                                                <td>
-                                                  <button
-                                                    type="submit"
-                                                    [routerLink]="['/establishment', establishment!.id, 'view']"
-                                                    class="btn btn-info btn-sm"
-                                                    data-cy="entityDetailsButton"
-                                                  >
-                                                    <fa-icon icon="eye"></fa-icon>
-                                                  </button>
-                                                </td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
+                                              <th pSortableColumn="itemQuantities" style="min-width: 14rem">
+                                                <div class="flex justify-content-between align-items-center">
+                                                  <span jhiTranslate="awtarApp.donationsIssued.itemQuantities">Item Quantities</span>
+                                                  <p-sortIcon field="itemQuantities"></p-sortIcon>
+                                                  <p-columnFilter
+                                                    type="text"
+                                                    field="itemQuantities"
+                                                    display="menu"
+                                                    class="ml-auto"
+                                                  ></p-columnFilter>
+                                                </div>
+                                              </th>
 
-                                        <div class="card-footer clearfix" style="display: flex">
-                                          <div>
-                                            <select (change)="onTableSizeChange($event)">
-                                              <option *ngFor="let size of tableSizes">{{ size }}</option>
-                                            </select>
-                                          </div>
-                                          <div>
-                                            <pagination-controls
-                                              previousLabel="Prev"
-                                              nextLabel="Next"
-                                              (pageChange)="onTableDataChange($event)"
-                                            >
-                                            </pagination-controls>
-                                          </div>
-                                        </div>
+                                              <th style="width: 5rem"></th>
+                                            </tr>
+                                          </ng-template>
+                                          <ng-template pTemplate="body" let-don>
+                                            <tr [pSelectableRow]="don">
+                                              <td>
+                                                <span class="p-column-title" jhiTranslate="awtarApp.donationsIssued.model">Model</span>
+                                                {{ don.model }}
+                                              </td>
+
+                                              <td>
+                                                <span class="p-column-title" jhiTranslate="awtarApp.donationsIssued.isValidated"
+                                                  >Validation Date</span
+                                                >
+
+                                                <span class="badge" *ngIf="don.isValidated === true" style="background-color: #08cd67">
+                                                  {{ don.isValidated }}</span
+                                                >
+                                                <span class="badge" *ngIf="don.isValidated === false" style="background-color: #cd1f08">
+                                                  {{ don.isValidated }}</span
+                                                >
+                                              </td>
+
+                                              <td>
+                                                <span class="p-column-title" jhiTranslate="awtarApp.donationsIssued.donationsDate"
+                                                  >Donations Date</span
+                                                >
+                                                <span class="badge" style="background-color: #fc00ff">
+                                                  {{ don.donationsDate | formatMediumDate }}</span
+                                                >
+                                              </td>
+
+                                              <td>
+                                                <span class="p-column-title" jhiTranslate="awtarApp.donationsIssued.itemQuantities"
+                                                  >Item Quantities</span
+                                                >
+                                                {{ don.itemQuantities }}
+                                              </td>
+
+                                              <td style="text-align: center">
+                                                <button
+                                                  type="submit"
+                                                  [routerLink]="['/donations-issued', don.id, 'view']"
+                                                  class="btn btn-info btn-sm"
+                                                  data-cy="entityDetailsButton"
+                                                >
+                                                  <fa-icon icon="eye"></fa-icon>
+                                                </button>
+                                              </td>
+                                            </tr>
+                                          </ng-template>
+                                          <ng-template pTemplate="emptymessage">
+                                            <tr>
+                                              <td colspan="8">No Donations found.</td>
+                                            </tr>
+                                          </ng-template>
+                                        </p-table>
                                       </div>
                                     </div>
                                   </div>
@@ -1059,11 +1114,6 @@
                               </div>
                             </div>
                           </div>
-
-                          <!--- \\\\\\\Post-->
-
-                          <!-- Post /////-->
-                          <!--- \\\\\\\Post-->
                         </div>
                       </div>
 

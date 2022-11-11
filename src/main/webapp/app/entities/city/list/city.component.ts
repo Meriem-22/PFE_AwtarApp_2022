@@ -62,7 +62,7 @@ export class CityComponent implements OnInit {
   }
 
   delete(city: ICity): void {
-    const modalRef = this.modalService.open(CityDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(CityDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.city = city;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

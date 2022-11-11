@@ -214,4 +214,17 @@ public class AuthorizingOfficerResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of authorizingOfficers in body.
+     */
+    @GetMapping("/authorizing-officers/details")
+    public ResponseEntity<List<AuthorizingOfficerDTO>> getAuthorizingOfficersDetails() {
+        log.debug("REST request to get authorizing Officers details  : {}");
+        List<AuthorizingOfficerDTO> authorizingOfficerDTOC = authorizingOfficerService.findAuthorizingOfficersDetails();
+        return ResponseEntity.ok().body(authorizingOfficerDTOC);
+    }
 }

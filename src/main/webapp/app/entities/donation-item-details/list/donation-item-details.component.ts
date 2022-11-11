@@ -62,7 +62,7 @@ export class DonationItemDetailsComponent implements OnInit {
   }
 
   delete(donationItemDetails: IDonationItemDetails): void {
-    const modalRef = this.modalService.open(DonationItemDetailsDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(DonationItemDetailsDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.donationItemDetails = donationItemDetails;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

@@ -9,6 +9,7 @@ import { IAuthorizingOfficer, getAuthorizingOfficerIdentifier } from '../authori
 
 export type EntityResponseType = HttpResponse<IAuthorizingOfficer>;
 export type EntityArrayResponseType = HttpResponse<IAuthorizingOfficer[]>;
+export type EntityArrayResponseAnyType = HttpResponse<any[]>;
 
 @Injectable({ providedIn: 'root' })
 export class AuthorizingOfficerService {
@@ -51,6 +52,10 @@ export class AuthorizingOfficerService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findAuthorizingOfficerDetails(): Observable<EntityArrayResponseAnyType> {
+    return this.http.get<any[]>(this.resourceUrl + '/details', { observe: 'response' });
   }
 
   addAuthorizingOfficerToCollectionIfMissing(

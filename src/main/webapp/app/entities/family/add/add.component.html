@@ -7,63 +7,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
 
     <title>AdminLTE 3 | Dashboard</title>
-
-    <script nonce="33a2bf22-55fb-4fb7-baea-4b8bb2a21cdd">
-      (function (w, d) {
-        !(function (a, e, t, r) {
-          (a.zarazData = a.zarazData || {}),
-            (a.zarazData.executed = []),
-            (a.zaraz = { deferred: [] }),
-            (a.zaraz.q = []),
-            (a.zaraz._f = function (e) {
-              return function () {
-                var t = Array.prototype.slice.call(arguments);
-                a.zaraz.q.push({ m: e, a: t });
-              };
-            });
-          for (const e of ['track', 'set', 'ecommerce', 'debug']) a.zaraz[e] = a.zaraz._f(e);
-          (a.zaraz.init = () => {
-            var t = e.getElementsByTagName(r)[0],
-              z = e.createElement(r),
-              n = e.getElementsByTagName('title')[0];
-            for (
-              n && (a.zarazData.t = e.getElementsByTagName('title')[0].text),
-                a.zarazData.x = Math.random(),
-                a.zarazData.w = a.screen.width,
-                a.zarazData.h = a.screen.height,
-                a.zarazData.j = a.innerHeight,
-                a.zarazData.e = a.innerWidth,
-                a.zarazData.l = a.location.href,
-                a.zarazData.r = e.referrer,
-                a.zarazData.k = a.screen.colorDepth,
-                a.zarazData.n = e.characterSet,
-                a.zarazData.o = new Date().getTimezoneOffset(),
-                a.zarazData.q = [];
-              a.zaraz.q.length;
-
-            ) {
-              const e = a.zaraz.q.shift();
-              a.zarazData.q.push(e);
-            }
-            z.defer = !0;
-            for (const e of [localStorage, sessionStorage])
-              Object.keys(e || {})
-                .filter(a => a.startsWith('_zaraz_'))
-                .forEach(t => {
-                  try {
-                    a.zarazData['z_' + t.slice(7)] = JSON.parse(e.getItem(t));
-                  } catch {
-                    a.zarazData['z_' + t.slice(7)] = e.getItem(t);
-                  }
-                });
-            (z.referrerPolicy = 'origin'),
-              (z.src = '/cdn-cgi/zaraz/s.js?z=' + btoa(encodeURIComponent(JSON.stringify(a.zarazData)))),
-              t.parentNode.insertBefore(z, t);
-          }),
-            ['complete', 'interactive'].includes(e.readyState) ? zaraz.init() : a.addEventListener('DOMContentLoaded', zaraz.init);
-        })(w, d, 0, 'script');
-      })(window, document);
-    </script>
   </head>
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -671,10 +614,10 @@
                   <div class="col-md-">
                     <div class="card">
                       <div class="text-center" style="margin-top: 0.5rem; margin-bottom: -0.7rem">
-                        <h4 *ngIf="step == 1"><span class="badge" style="background-color: #fc00ff">1</span> Family Details</h4>
+                        <h4 *ngIf="step == 1"><span class="badge" style="background-color: #fc00ff">1</span> FAMILY DETAILS</h4>
 
-                        <h4 *ngIf="step == 2"><span class="badge" style="background-color: #fc00ff">2</span> Parents Details</h4>
-                        <h4 *ngIf="step == 3"><span class="badge" style="background-color: #fc00ff">3</span> Enfants Details</h4>
+                        <h4 *ngIf="step == 2"><span class="badge" style="background-color: #fc00ff">2</span> ADD PARENTS</h4>
+                        <h4 *ngIf="step == 3"><span class="badge" style="background-color: #fc00ff">3</span> ADD CHILDREN</h4>
                       </div>
 
                       <div class="card-header p-2">
@@ -903,27 +846,24 @@
                                                 <div class="card1" style="width: 20rem; margin-top: -0.5rem">
                                                   <img
                                                     *ngIf="!ParentDetails.get('urlPhoto')!.value"
-                                                    src="https://bootdey.com/img/Content/avatar/avatar6.png"
+                                                    src="../../../../content/images/no-profile.jpg"
                                                     alt="Admin"
                                                     class="rounded-circle p-1 bg-primary"
-                                                    width="120"
+                                                    width="150"
                                                     style="margin-top: 1rem"
                                                   />
                                                   <img
+                                                    *ngIf="ParentDetails.get('urlPhoto')!.value"
                                                     [src]="
                                                       'data:' +
                                                       ParentDetails.get('urlPhotoContentType')!.value +
                                                       ';base64,' +
                                                       ParentDetails.get('urlPhoto')!.value
                                                     "
-                                                    style="max-height: 100px"
-                                                    *ngIf="ParentDetails.get('urlPhoto')!.value"
+                                                    style="max-height: 100px; margin-top: 1rem"
                                                     alt="profile image"
-                                                    src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                                                    alt="Admin"
                                                     class="rounded-circle p-1 bg-primary"
-                                                    width="120"
-                                                    style="margin-top: 1rem"
+                                                    width="150"
                                                   />
                                                   <div *ngIf="ParentDetails.get('urlPhoto')!.value" class="form-text text-danger clearfix">
                                                     <span class="pull-start"
@@ -1478,73 +1418,74 @@
                                                     />
                                                   </div>
 
-                                                  <div class="chek">
-                                                    <div style="display: flex">
-                                                      <label
-                                                        style="margin-right: 1rem; margin-top: 1rem"
-                                                        class="form-label"
-                                                        jhiTranslate="awtarApp.parent.familyHead"
-                                                        for="field_familyHead"
-                                                        >Family Head</label
-                                                      >
-
-                                                      <input
-                                                        type="checkbox"
-                                                        class="form-check"
-                                                        name="familyHead"
-                                                        id="field_familyHead"
-                                                        data-cy="archivated"
-                                                        formControlName="familyHead"
-                                                        style="margin-top: 1rem; width: 1rem; height: 1rem"
-                                                      />
-                                                    </div>
-                                                  </div>
-                                                  <h4 class="d-flex align-items-center mb-3" style="margin-top: 1.5rem">Parent Décédé</h4>
-
-                                                  <div class="chek">
-                                                    <div style="display: flex">
-                                                      <label
-                                                        style="margin-right: 1rem; margin-top: 1rem"
-                                                        class="form-label"
-                                                        jhiTranslate="awtarApp.parent.deceased"
-                                                        for="field_deceased"
-                                                        >Deceased</label
-                                                      >
-                                                      <input
-                                                        type="checkbox"
-                                                        class="form-check"
-                                                        name="deceased"
-                                                        id="field_deceased"
-                                                        data-cy="deceased"
-                                                        formControlName="deceased"
-                                                        style="margin-top: 1rem; height: 1rem; width: 1rem"
-                                                      />
-                                                    </div>
-                                                  </div>
-
-                                                  <label
-                                                    class="form-label"
-                                                    jhiTranslate="awtarApp.parent.dateOfDeath"
-                                                    for="field_dateOfDeath"
-                                                    >Date Of Death</label
-                                                  >
-                                                  <div class="input-group">
+                                                  <div class="form-check" style="margin-top: 1rem">
                                                     <input
-                                                      id="field_dateOfDeath"
-                                                      data-cy="dateOfDeath"
-                                                      type="text"
-                                                      class="form-control"
-                                                      name="dateOfDeath"
-                                                      ngbDatepicker
-                                                      #dateOfDeathDp="ngbDatepicker"
-                                                      formControlName="dateOfDeath"
+                                                      type="checkbox"
+                                                      class="form-check-input"
+                                                      name="familyHead"
+                                                      id="field_familyHead"
+                                                      data-cy="archivated"
+                                                      style="height: 1rem; width: 1rem"
+                                                      formControlName="familyHead"
                                                     />
-                                                    <button type="button" class="btn btn-secondary" (click)="dateOfDeathDp.toggle()">
-                                                      <fa-icon icon="calendar-alt"></fa-icon>
-                                                    </button>
+
+                                                    <label
+                                                      class="form-label"
+                                                      jhiTranslate="awtarApp.parent.familyHead"
+                                                      for="field_familyHead"
+                                                      >Family Head</label
+                                                    >
                                                   </div>
 
-                                                  <div class="chek">
+                                                  <div class="card card-danger" style="margin-top: 1rem">
+                                                    <div class="card-header text-white" style="background-color: black">
+                                                      <h3 class="card-title">Dead Parent</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                      <div class="form-check">
+                                                        <input
+                                                          type="checkbox"
+                                                          style="height: 1rem; width: 1rem"
+                                                          class="form-check-input"
+                                                          name="deceased"
+                                                          id="field_deceased"
+                                                          data-cy="deceased"
+                                                          formControlName="deceased"
+                                                        />
+
+                                                        <label
+                                                          class="form-check-label"
+                                                          jhiTranslate="awtarApp.parent.deceased"
+                                                          for="field_deceased"
+                                                          >Deceased</label
+                                                        >
+                                                      </div>
+
+                                                      <label
+                                                        class="form-label"
+                                                        jhiTranslate="awtarApp.parent.dateOfDeath"
+                                                        for="field_dateOfDeath"
+                                                        >Date Of Death</label
+                                                      >
+                                                      <div class="input-group">
+                                                        <input
+                                                          id="field_dateOfDeath"
+                                                          data-cy="dateOfDeath"
+                                                          type="text"
+                                                          class="form-control"
+                                                          name="dateOfDeath"
+                                                          ngbDatepicker
+                                                          #dateOfDeathDp="ngbDatepicker"
+                                                          formControlName="dateOfDeath"
+                                                        />
+                                                        <button type="button" class="btn btn-secondary" (click)="dateOfDeathDp.toggle()">
+                                                          <fa-icon icon="calendar-alt"></fa-icon>
+                                                        </button>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="chek" style="display: none">
                                                     <div style="display: flex">
                                                       <label
                                                         style="margin-right: 1rem; margin-top: 1rem"
@@ -1575,7 +1516,9 @@
 
                                   <div style="margin-left: 45rem">
                                     <button (click)="previous()" type="button" class="btn btn-secondary">précédent</button>
-                                    <button (click)="add()" type="button" class="btn btn-success">Ajouter</button>
+                                    <button (click)="add()" type="button" class="btn" style="background-color: #fc00ff; color: white">
+                                      Ajouter
+                                    </button>
                                     <button (click)="next()" type="button" class="btn btn-primary">Suivant</button>
                                   </div>
                                 </fieldset>
@@ -1593,27 +1536,25 @@
                                                 <div class="card1" style="width: 20rem; margin-top: -0.5rem">
                                                   <img
                                                     *ngIf="!ChildDetails.get('urlPhoto')!.value"
-                                                    src="https://bootdey.com/img/Content/avatar/avatar6.png"
+                                                    src="../../../../content/images/no-profile.jpg"
                                                     alt="child"
                                                     class="rounded-circle p-1 bg-primary"
-                                                    width="120"
+                                                    width="150"
                                                     style="margin-top: 1rem"
                                                   />
                                                   <img
+                                                    *ngIf="ChildDetails.get('urlPhoto')!.value"
                                                     [src]="
                                                       'data:' +
                                                       ChildDetails.get('urlPhotoContentType')!.value +
                                                       ';base64,' +
                                                       ChildDetails.get('urlPhoto')!.value
                                                     "
-                                                    style="max-height: 100px"
-                                                    *ngIf="ChildDetails.get('urlPhoto')!.value"
+                                                    style="max-height: 100px; margin-top: 1rem"
                                                     alt="profile image"
-                                                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
                                                     alt="child"
                                                     class="rounded-circle p-1 bg-primary"
-                                                    width="120"
-                                                    style="margin-top: 1rem"
+                                                    width="150"
                                                   />
                                                   <div *ngIf="ChildDetails.get('urlPhoto')!.value" class="form-text text-danger clearfix">
                                                     <span class="pull-start"
@@ -2038,7 +1979,7 @@
                                                   </small>
                                                 </div>
                                               </div>
-                                              <div class="chek">
+                                              <div class="chek" style="display: none">
                                                 <div style="display: flex">
                                                   <label
                                                     class="form-label"
@@ -2066,129 +2007,14 @@
 
                                   <div style="margin-left: 45rem">
                                     <button (click)="previous()" type="button" class="btn btn-secondary">précédent</button>
-                                    <button (click)="add()" type="button" class="btn btn-success">Ajouter</button>
+                                    <button (click)="add()" type="button" class="btn" style="background-color: #fc00ff; color: white">
+                                      Ajouter
+                                    </button>
                                     <button (click)="submit()" type="button" class="btn btn-primary">Enregistrer</button>
                                   </div>
                                 </fieldset>
                               </form>
                             </div>
-                          </div>
-
-                          <div class="tab-pane" id="timeline">
-                            <div class="timeline timeline-inverse">
-                              <div class="time-label">
-                                <span class="bg-danger"> 10 Feb. 2014 </span>
-                              </div>
-
-                              <div>
-                                <i class="fas fa-envelope bg-primary"></i>
-                                <div class="timeline-item">
-                                  <span class="time"><i class="far fa-clock"></i> 12:05</span>
-                                  <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-                                  <div class="timeline-body">
-                                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
-                                    dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle quora plaxo
-                                    ideeli hulu weebly balihoo...
-                                  </div>
-                                  <div class="timeline-footer">
-                                    <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div>
-                                <i class="fas fa-user bg-info"></i>
-                                <div class="timeline-item">
-                                  <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-                                  <h3 class="timeline-header border-0"><a href="#">Sarah Young</a> accepted your friend request</h3>
-                                </div>
-                              </div>
-
-                              <div>
-                                <i class="fas fa-comments bg-warning"></i>
-                                <div class="timeline-item">
-                                  <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-                                  <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-                                  <div class="timeline-body">
-                                    Take me to your leader! Switzerland is small and neutral! We are more like Germany, ambitious and
-                                    misunderstood!
-                                  </div>
-                                  <div class="timeline-footer">
-                                    <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="time-label">
-                                <span class="bg-success"> 3 Jan. 2014 </span>
-                              </div>
-
-                              <div>
-                                <i class="fas fa-camera bg-purple"></i>
-                                <div class="timeline-item">
-                                  <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-                                  <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-                                  <div class="timeline-body">
-                                    <img src="https://placehold.it/150x100" alt="..." />
-                                    <img src="https://placehold.it/150x100" alt="..." />
-                                    <img src="https://placehold.it/150x100" alt="..." />
-                                    <img src="https://placehold.it/150x100" alt="..." />
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div>
-                                <i class="far fa-clock bg-gray"></i>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="tab-pane" id="settings">
-                            <form class="form-horizontal">
-                              <div class="form-group row">
-                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-                                  <input type="email" class="form-control" id="inputName" placeholder="Name" />
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-10">
-                                  <input type="email" class="form-control" id="inputEmail" placeholder="Email" />
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="inputName2" placeholder="Name" />
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-                                <div class="col-sm-10">
-                                  <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="inputSkills" placeholder="Skills" />
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-10">
-                                  <div class="checkbox">
-                                    <label> <input type="checkbox" /> I agree to the <a href="#">terms and conditions</a> </label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-10">
-                                  <button type="submit" class="btn btn-danger">Submit</button>
-                                </div>
-                              </div>
-                            </form>
                           </div>
                         </div>
                       </div>

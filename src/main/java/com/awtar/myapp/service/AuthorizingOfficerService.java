@@ -70,4 +70,12 @@ public interface AuthorizingOfficerService {
      * @return the persisted entity.
      */
     AuthorizingOfficerDTO add(AuthorizingOfficerDTO authorizingOfficerDTO);
+
+    /**
+     * Get  all the authorizing Officers details.
+     *
+     *
+     * @return the entity.
+     */
+    List<AuthorizingOfficerDTO> findAuthorizingOfficersDetails();
 }

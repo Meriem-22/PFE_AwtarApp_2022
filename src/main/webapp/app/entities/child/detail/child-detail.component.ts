@@ -18,6 +18,10 @@ import { ProfileService } from 'app/entities/profile/service/profile.service';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { DonationDetailsService } from 'app/entities/donation-details/service/donation-details.service';
 import { BeneficiaryService } from 'app/entities/beneficiary/service/beneficiary.service';
+import { IBeneficiary } from 'app/entities/beneficiary/beneficiary.model';
+import { RemoveAuthorizingOfficerComponent } from 'app/entities/beneficiary/remove-authorizing-officer/remove-authorizing-officer.component';
+import { RemoveTutorComponent } from 'app/entities/beneficiary/remove-tutor/remove-tutor.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-child-detail',
@@ -36,18 +40,17 @@ export class ChildDetailComponent implements OnInit {
   parents?: any[] = [];
   Otherchild?: IProfile[] = [];
   children?: IProfile[] = [];
+  restOfChildren?: IProfile[] = [];
+  selectedDon!: any;
+
   t = 0;
+  r = 0;
   donationListChild?: any[];
   df = 0;
   Ordonnateur!: HttpResponse<IProfile>;
   Tuteur!: HttpResponse<IProfile>;
-  Beneficiary!: HttpResponse<IProfile>;
+  Beneficiary!: IBeneficiary;
   x!: number;
-
-  page = 1;
-  count = 0;
-  tableSize = 4;
-  tableSizes: any = [4, 8, 16, 20];
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -59,7 +62,8 @@ export class ChildDetailComponent implements OnInit {
     private router: Router,
     protected dataUtils: DataUtils,
     private donationDetailsService: DonationDetailsService,
-    private beneficiaryService: BeneficiaryService
+    private beneficiaryService: BeneficiaryService,
+    protected modalService: NgbModal
   ) {
     if (VERSION) {
       this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
@@ -91,43 +95,51 @@ export class ChildDetailComponent implements OnInit {
       error: e => console.error(e),
     });
 
-    this.profileService.getAllParentsProfile(this.child!.family!.id!).subscribe({
-      next: (res: HttpResponse<any[]>) => {
-        this.parents = res.body ?? [];
+    if (this.child!.family) {
+      this.profileService.getAllParentsProfile(this.child!.family.id!).subscribe({
+        next: (res: HttpResponse<any[]>) => {
+          this.parents = res.body ?? [];
+        },
+        error: e => console.error(e),
+      });
+
+      this.profileService.getAllChildrenProfile(this.child!.family.id!).subscribe({
+        next: (res: HttpResponse<IProfile[]>) => {
+          this.children = res.body ?? [];
+          for (this.t = 0; this.t < this.children.length; this.t++) {
+            if (this.children[this.t].child!.id! !== this.child!.id!) {
+              this.restOfChildren![this.r] = this.children[this.t];
+              this.r++;
+            }
+          }
+          console.log(this.restOfChildren);
+        },
+        error: e => console.error(e),
+      });
+    }
+
+    this.beneficiaryService.find(this.child!.id!).subscribe({
+      next: (res: HttpResponse<IBeneficiary>) => {
+        this.Beneficiary = res.body!;
+        console.log(this.Beneficiary);
+        this.profileService.findProfile(this.Beneficiary.authorizingOfficer!.id!).subscribe({
+          next: res2 => {
+            this.Ordonnateur = res2;
+            console.log(this.Ordonnateur);
+          },
+          error: e => console.error(e),
+        });
+        this.profileService.findProfile(this.Beneficiary.tutor!.id!).subscribe({
+          next: res3 => {
+            this.Tuteur = res3;
+            console.log(this.Tuteur);
+          },
+          error: e => console.error(e),
+        });
       },
       error: e => console.error(e),
     });
 
-    this.profileService.getAllChildrenProfile(this.child!.family!.id!).subscribe({
-      next: (res: HttpResponse<IProfile[]>) => {
-        this.children = res.body ?? [];
-        /* for ( this.t=0; this.t<this.children.length; this.t++){
-          
-       }*/
-      },
-      error: e => console.error(e),
-    });
-
-    this.beneficiaryService.find(this.child!.family!.id!).subscribe({
-      next: res => {
-        this.Beneficiary = res;
-      },
-      error: e => console.error(e),
-    });
-
-    this.profileService.findProfile(this.Beneficiary.body!.authorizingOfficer!.id!).subscribe({
-      next: res => {
-        this.Ordonnateur = res;
-      },
-      error: e => console.error(e),
-    });
-
-    this.profileService.findProfile(this.Beneficiary.body!.tutor!.id!).subscribe({
-      next: res => {
-        this.Tuteur = res;
-      },
-      error: e => console.error(e),
-    });
     this.DonationList();
   }
 
@@ -139,17 +151,6 @@ export class ChildDetailComponent implements OnInit {
       },
       error: e => console.error(e),
     });
-  }
-
-  onTableDataChange(event: any): void {
-    this.page = event;
-    this.DonationList();
-  }
-
-  onTableSizeChange(event: any): void {
-    this.tableSize = event.target.value;
-    this.page = 1;
-    this.DonationList();
   }
 
   previousState(): void {
@@ -189,5 +190,27 @@ export class ChildDetailComponent implements OnInit {
 
   openFile(base64String: string, contentType: string | null | undefined): void {
     this.dataUtils.openFile(base64String, contentType);
+  }
+
+  removeAuthorizingOfficer(beneficiary: IBeneficiary): void {
+    const modalRef = this.modalService.open(RemoveAuthorizingOfficerComponent, { size: 'lg', backdrop: false, keyboard: false });
+    modalRef.componentInstance.beneficiary = beneficiary;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'deleted') {
+        //this.loadPage();
+      }
+    });
+  }
+
+  removeTutor(beneficiary: IBeneficiary): void {
+    const modalRef = this.modalService.open(RemoveTutorComponent, { size: 'lg', backdrop: false, keyboard: false });
+    modalRef.componentInstance.beneficiary = beneficiary;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'removed') {
+        //this.loadPage();
+      }
+    });
   }
 }

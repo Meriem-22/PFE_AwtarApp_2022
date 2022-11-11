@@ -112,4 +112,20 @@ public interface BeneficiaryService {
      * @return the persisted entity.
      */
     List<BeneficiaryDTO> findAllEstablishmentsContributor(Long id);
+
+    /**
+     * Updates a beneficiary.
+     *
+     * @param beneficiaryDTO the entity to update.
+     * @return the persisted entity.
+     */
+    BeneficiaryDTO removeAuthorizingOfficer(BeneficiaryDTO beneficiaryDTO);
+
+    /**
+     * Updates a beneficiary.
+     *
+     * @param beneficiaryDTO the entity to update.
+     * @return the persisted entity.
+     */
+    BeneficiaryDTO removeTutor(BeneficiaryDTO beneficiaryDTO);
 }

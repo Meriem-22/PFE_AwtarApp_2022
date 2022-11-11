@@ -7,9 +7,10 @@ import { EstablishmentDeleteDialogComponent } from './delete/establishment-delet
 import { EstablishmentRoutingModule } from './route/establishment-routing.module';
 import { AddComponent } from './add/add.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
-  imports: [SharedModule, EstablishmentRoutingModule, NgxPaginationModule],
+  imports: [SharedModule, EstablishmentRoutingModule, NgxPaginationModule, TableModule],
   declarations: [
     EstablishmentComponent,
     EstablishmentDetailComponent,

@@ -62,7 +62,7 @@ export class ChildStatusComponent implements OnInit {
   }
 
   delete(childStatus: IChildStatus): void {
-    const modalRef = this.modalService.open(ChildStatusDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(ChildStatusDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.childStatus = childStatus;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

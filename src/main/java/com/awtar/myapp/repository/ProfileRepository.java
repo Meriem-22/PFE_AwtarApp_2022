@@ -46,7 +46,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
     Optional<Profile> findOneWithToOneRelationships(@Param("id") Long id);
 
     @Query(
-        "select new com.awtar.myapp.service.dto.ProfileDTO (p.id, f.firstName,  f.lastName,  f.dateOfBirth, f.urlPhoto, p.annualRevenue, p.occupation, p.familyHead.id, f.urlPhotoContentType, f.phone, f.address) from Profile f join f.parent p where f.parent.family = :family"
+        "select new com.awtar.myapp.service.dto.ProfileDTO (p.id, f.firstName,  f.lastName,  f.dateOfBirth, f.urlPhoto, p.annualRevenue, p.occupation, p.familyHead.id, f.urlPhotoContentType, f.phone, f.address, p.deceased, p.dateOfDeath) from Profile f join f.parent p where f.parent.family = :family"
     )
     List<ProfileDTO> findParentsOfOneFamily(@Param("family") Family family);
 

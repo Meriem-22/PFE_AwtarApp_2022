@@ -6,7 +6,6 @@ import { BeneficiaryComponent } from '../list/beneficiary.component';
 import { BeneficiaryDetailComponent } from '../detail/beneficiary-detail.component';
 import { BeneficiaryUpdateComponent } from '../update/beneficiary-update.component';
 import { BeneficiaryRoutingResolveService } from './beneficiary-routing-resolve.service';
-import { EditContributorsComponent } from '../edit-contributors/edit-contributors.component';
 import { EditAuthorizingOfficerComponent } from '../edit-authorizing-officer/edit-authorizing-officer.component';
 import { EditTutorComponent } from '../edit-tutor/edit-tutor.component';
 

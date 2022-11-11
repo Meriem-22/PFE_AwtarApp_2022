@@ -82,4 +82,12 @@ public interface BeneficiaryRepository extends JpaRepository<Beneficiary, Long> 
         @Param("authorizingOfficer") AuthorizingOfficer authorizingOfficer,
         @Param("tutor") Tutor tutor
     );
+
+    @Modifying
+    @Query("update Beneficiary set authorizingOfficer = NULL  where id= :id")
+    Beneficiary removeAuthorizingOfficer(@Param("id") Long id);
+
+    @Modifying
+    @Query("update Beneficiary set tutor = NULL  where id= :id")
+    Beneficiary removeTutor(@Param("id") Long id);
 }

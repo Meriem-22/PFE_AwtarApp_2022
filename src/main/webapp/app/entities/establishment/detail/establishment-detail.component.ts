@@ -18,6 +18,9 @@ import { IBeneficiary } from 'app/entities/beneficiary/beneficiary.model';
 import { DonationDetailsService } from 'app/entities/donation-details/service/donation-details.service';
 import { BeneficiaryService } from 'app/entities/beneficiary/service/beneficiary.service';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { RemoveAuthorizingOfficerComponent } from 'app/entities/beneficiary/remove-authorizing-officer/remove-authorizing-officer.component';
+import { RemoveTutorComponent } from 'app/entities/beneficiary/remove-tutor/remove-tutor.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-establishment-detail',
@@ -35,14 +38,11 @@ export class EstablishmentDetailComponent implements OnInit {
   Ordonnateur!: HttpResponse<IProfile>;
   Tuteur!: HttpResponse<IProfile>;
 
-  page = 1;
-  count = 0;
-  tableSize = 4;
-  tableSizes: any = [4, 8, 16, 20];
   donationList?: any[];
   benef!: IBeneficiary;
   df = 0;
   t = 0;
+  selectedDon: any;
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -54,7 +54,8 @@ export class EstablishmentDetailComponent implements OnInit {
     private router: Router,
     protected donationDetailsService: DonationDetailsService,
     protected beneficiaryService: BeneficiaryService,
-    protected dataUtils: DataUtils
+    protected dataUtils: DataUtils,
+    protected modalService: NgbModal
   ) {
     if (VERSION) {
       this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
@@ -63,6 +64,12 @@ export class EstablishmentDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ establishment }) => {
       this.establishment = establishment;
+      this.beneficiaryService.find(establishment.id!).subscribe({
+        next: (res: HttpResponse<IBeneficiary>) => {
+          this.benef = res.body!;
+        },
+        error: e => console.error(e),
+      });
     });
     this.profileService.findProfile(this.establishment!.authorizingOfficer!.id!).subscribe({
       next: res => {
@@ -110,17 +117,6 @@ export class EstablishmentDetailComponent implements OnInit {
     });
   }
 
-  onTableDataChange(event: any): void {
-    this.page = event;
-    this.DonationList();
-  }
-
-  onTableSizeChange(event: any): void {
-    this.tableSize = event.target.value;
-    this.page = 1;
-    this.DonationList();
-  }
-
   previousState(): void {
     window.history.back();
   }
@@ -158,5 +154,27 @@ export class EstablishmentDetailComponent implements OnInit {
 
   openFile(base64String: string, contentType: string | null | undefined): void {
     return this.dataUtils.openFile(base64String, contentType);
+  }
+
+  removeAuthorizingOfficer(beneficiary: IBeneficiary): void {
+    const modalRef = this.modalService.open(RemoveAuthorizingOfficerComponent, { size: 'lg', backdrop: false, keyboard: false });
+    modalRef.componentInstance.beneficiary = beneficiary;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'deleted') {
+        //this.loadPage();
+      }
+    });
+  }
+
+  removeTutor(beneficiary: IBeneficiary): void {
+    const modalRef = this.modalService.open(RemoveTutorComponent, { size: 'lg', backdrop: false, keyboard: false });
+    modalRef.componentInstance.beneficiary = beneficiary;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'removed') {
+        //this.loadPage();
+      }
+    });
   }
 }

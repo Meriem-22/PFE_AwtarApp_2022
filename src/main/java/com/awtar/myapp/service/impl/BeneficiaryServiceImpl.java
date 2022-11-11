@@ -205,4 +205,25 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
         Beneficiary beneficiary = beneficiaryRepository.getById(id);
         return beneficiaryMapper.toDto(beneficiary);
     }
+
+    @Override
+    public BeneficiaryDTO removeAuthorizingOfficer(BeneficiaryDTO beneficiaryDTO) {
+        Beneficiary beneficiary = beneficiaryMapper.toEntity(beneficiaryDTO);
+        Beneficiary benef = new Beneficiary();
+        benef.setId(beneficiary.getId());
+        benef.setBeneficiaryReference(beneficiary.getBeneficiaryReference());
+        benef.setBeneficiaryType(beneficiary.getBeneficiaryType());
+        benef.setArchivated(false);
+        benef.setTutor(beneficiary.getTutor());
+        benef = beneficiaryRepository.save(benef);
+        return beneficiaryMapper.toDto(benef);
+    }
+
+    @Override
+    public BeneficiaryDTO removeTutor(BeneficiaryDTO beneficiaryDTO) {
+        Beneficiary beneficiary = beneficiaryMapper.toEntity(beneficiaryDTO);
+        beneficiary.removeTutor();
+        beneficiary = beneficiaryRepository.save(beneficiary);
+        return beneficiaryMapper.toDto(beneficiary);
+    }
 }

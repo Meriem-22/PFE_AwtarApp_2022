@@ -1,87 +1,10 @@
-#progressbar {
-  text-align: center;
-  margin-bottom: 30px;
-  overflow: hidden;
-  /*CSS counters to number the steps*/
-  counter-reset: step;
-}
-#progressbar li {
-  list-style-type: none;
-  color: white;
-  text-transform: uppercase;
-  font-size: 9px;
-  width: 33.33%;
-  float: left;
-  position: relative;
-  letter-spacing: 1px;
-}
-#progressbar li:before {
-  content: counter(step);
-  counter-increment: step;
-  width: 50px;
-  height: 50px;
-  line-height: 51px;
-  display: block;
-  font-size: 20px;
-  color: #333;
-  background: white;
-  border-radius: 25px;
-  margin: 0 auto 10px auto;
-}
-/*progressbar connectors*/
-#progressbar li:after {
-  content: '';
-  width: 100%;
-  height: 2px;
-  background: white;
-  position: absolute;
-  left: -50%;
-  top: 9px;
-  z-index: -1; /*put it behind the numbers*/
-}
-#progressbar li:first-child:after {
-  /*connector not needed before the first step*/
-  content: none;
-}
-/*marking active/completed steps green*/
-/*The number of the step and the connector before it = green*/
-#progressbar li.active:before,
-#progressbar li.active:after {
-  background: -webkit-linear-gradient(left, #7579ff, #b224ef);
-  color: white;
-}
-#progressbar li.inactive:before {
-  background: rgb(222, 232, 38);
-  color: #000;
-}
-
-.fs-title {
-  font-size: 18px;
-  text-transform: uppercase;
-  color: #2c3e50;
-  margin-bottom: 10px;
-  letter-spacing: 2px;
-  font-weight: bold;
-}
-.fs-subtitle {
-  font-weight: normal;
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-input {
-  border-width: 0.2rem;
-  border-color: rgb(226, 223, 223);
-  height: 2.5rem;
-}
+input,
 select {
-  border-width: 0.2rem;
-  border-color: rgb(226, 223, 223);
-  height: 2.5rem;
+  border-left-width: 0.08rem;
+  border-left-color: #d4d1d1;
 }
 
 .card1 {
-  background-image: linear-gradient(40deg, #fffc00 0%, #fc00ff 45%, #00fffc 100%);
+  background-color: white;
   border-radius: 15px;
 }

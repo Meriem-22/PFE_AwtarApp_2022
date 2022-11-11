@@ -62,7 +62,7 @@ export class HealthStatusCategoryComponent implements OnInit {
   }
 
   delete(healthStatusCategory: IHealthStatusCategory): void {
-    const modalRef = this.modalService.open(HealthStatusCategoryDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(HealthStatusCategoryDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.healthStatusCategory = healthStatusCategory;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

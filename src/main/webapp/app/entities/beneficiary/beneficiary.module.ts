@@ -5,21 +5,25 @@ import { BeneficiaryDetailComponent } from './detail/beneficiary-detail.componen
 import { BeneficiaryUpdateComponent } from './update/beneficiary-update.component';
 import { BeneficiaryDeleteDialogComponent } from './delete/beneficiary-delete-dialog.component';
 import { BeneficiaryRoutingModule } from './route/beneficiary-routing.module';
-import { EditContributorsComponent } from './edit-contributors/edit-contributors.component';
 import { EditAuthorizingOfficerComponent } from './edit-authorizing-officer/edit-authorizing-officer.component';
 import { EditTutorComponent } from './edit-tutor/edit-tutor.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TableModule } from 'primeng/table';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { RemoveAuthorizingOfficerComponent } from './remove-authorizing-officer/remove-authorizing-officer.component';
+import { RemoveTutorComponent } from './remove-tutor/remove-tutor.component';
 
 @NgModule({
-  imports: [SharedModule, BeneficiaryRoutingModule, NgxPaginationModule],
+  imports: [SharedModule, BeneficiaryRoutingModule, NgxPaginationModule, TableModule, MultiSelectModule],
   declarations: [
     BeneficiaryComponent,
     BeneficiaryDetailComponent,
     BeneficiaryUpdateComponent,
     BeneficiaryDeleteDialogComponent,
-    EditContributorsComponent,
     EditAuthorizingOfficerComponent,
     EditTutorComponent,
+    RemoveAuthorizingOfficerComponent,
+    RemoveTutorComponent,
   ],
   entryComponents: [BeneficiaryDeleteDialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

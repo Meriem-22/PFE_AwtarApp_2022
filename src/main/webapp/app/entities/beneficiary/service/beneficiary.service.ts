@@ -20,6 +20,8 @@ export class BeneficiaryService {
   protected UrlF = this.applicationConfigService.getEndpointFor('api/beneficiaries/families');
   protected UrlE = this.applicationConfigService.getEndpointFor('api/beneficiaries/establishments');
   protected UrlC = this.applicationConfigService.getEndpointFor('api/beneficiaries/children');
+  protected UrlRA = this.applicationConfigService.getEndpointFor('api/beneficiaries/remove-authorizing-officer');
+  protected UrlRT = this.applicationConfigService.getEndpointFor('api/beneficiaries/tutor');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -78,6 +80,18 @@ export class BeneficiaryService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  removeBeneficiaryAuthorizingOfficer(beneficiary: IBeneficiary): Observable<EntityResponseType> {
+    return this.http.put<IBeneficiary>(`${this.UrlRA}/${getBeneficiaryIdentifier(beneficiary) as number}`, beneficiary, {
+      observe: 'response',
+    });
+  }
+
+  removeBeneficiaryTutor(beneficiary: IBeneficiary): Observable<EntityResponseType> {
+    return this.http.put<IBeneficiary>(`${this.UrlRT}/${getBeneficiaryIdentifier(beneficiary) as number}`, beneficiary, {
+      observe: 'response',
+    });
   }
 
   addBeneficiaryToCollectionIfMissing(

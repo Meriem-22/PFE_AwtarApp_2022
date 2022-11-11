@@ -86,7 +86,7 @@ export class FamilyComponent implements OnInit {
   }
 
   delete(family: IFamily): void {
-    const modalRef = this.modalService.open(FamilyDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(FamilyDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.family = family;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

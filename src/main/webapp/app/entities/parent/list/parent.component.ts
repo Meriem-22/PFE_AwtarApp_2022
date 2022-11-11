@@ -62,7 +62,7 @@ export class ParentComponent implements OnInit {
   }
 
   delete(parent: IParent): void {
-    const modalRef = this.modalService.open(ParentDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(ParentDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.parent = parent;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

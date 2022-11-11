@@ -8,78 +8,17 @@
 
     <title>AdminLTE 3 | Dashboard</title>
     <style>
-      input {
-        border-width: 0.2rem;
-        border-color: rgb(226, 223, 223);
-        height: 2.5rem;
-      }
+      input,
       select {
-        border-width: 0.2rem;
-        border-color: rgb(226, 223, 223);
-        height: 2.5rem;
+        border-left-width: 0.08rem;
+        border-left-color: #d4d1d1;
       }
 
       .card1 {
-        background-image: linear-gradient(40deg, #fffc00 0%, #fc00ff 45%, #00fffc 100%);
+        background-color: white;
         border-radius: 15px;
       }
     </style>
-    <script nonce="33a2bf22-55fb-4fb7-baea-4b8bb2a21cdd">
-      (function (w, d) {
-        !(function (a, e, t, r) {
-          (a.zarazData = a.zarazData || {}),
-            (a.zarazData.executed = []),
-            (a.zaraz = { deferred: [] }),
-            (a.zaraz.q = []),
-            (a.zaraz._f = function (e) {
-              return function () {
-                var t = Array.prototype.slice.call(arguments);
-                a.zaraz.q.push({ m: e, a: t });
-              };
-            });
-          for (const e of ['track', 'set', 'ecommerce', 'debug']) a.zaraz[e] = a.zaraz._f(e);
-          (a.zaraz.init = () => {
-            var t = e.getElementsByTagName(r)[0],
-              z = e.createElement(r),
-              n = e.getElementsByTagName('title')[0];
-            for (
-              n && (a.zarazData.t = e.getElementsByTagName('title')[0].text),
-                a.zarazData.x = Math.random(),
-                a.zarazData.w = a.screen.width,
-                a.zarazData.h = a.screen.height,
-                a.zarazData.j = a.innerHeight,
-                a.zarazData.e = a.innerWidth,
-                a.zarazData.l = a.location.href,
-                a.zarazData.r = e.referrer,
-                a.zarazData.k = a.screen.colorDepth,
-                a.zarazData.n = e.characterSet,
-                a.zarazData.o = new Date().getTimezoneOffset(),
-                a.zarazData.q = [];
-              a.zaraz.q.length;
-
-            ) {
-              const e = a.zaraz.q.shift();
-              a.zarazData.q.push(e);
-            }
-            z.defer = !0;
-            for (const e of [localStorage, sessionStorage])
-              Object.keys(e || {})
-                .filter(a => a.startsWith('_zaraz_'))
-                .forEach(t => {
-                  try {
-                    a.zarazData['z_' + t.slice(7)] = JSON.parse(e.getItem(t));
-                  } catch {
-                    a.zarazData['z_' + t.slice(7)] = e.getItem(t);
-                  }
-                });
-            (z.referrerPolicy = 'origin'),
-              (z.src = '/cdn-cgi/zaraz/s.js?z=' + btoa(encodeURIComponent(JSON.stringify(a.zarazData)))),
-              t.parentNode.insertBefore(z, t);
-          }),
-            ['complete', 'interactive'].includes(e.readyState) ? zaraz.init() : a.addEventListener('DOMContentLoaded', zaraz.init);
-        })(w, d, 0, 'script');
-      })(window, document);
-    </script>
   </head>
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -445,8 +384,8 @@
                           <div class="d-flex flex-column align-items-center text-center">
                             <img
                               *ngIf="!editForm.get('urlPhoto')!.value"
-                              src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                              alt="Admin"
+                              src="../../../../content/images/no-profile.jpg"
+                              alt="profile image"
                               class="rounded-circle"
                               width="150"
                             />
@@ -454,13 +393,9 @@
                               [src]="'data:' + editForm.get('urlPhotoContentType')!.value + ';base64,' + editForm.get('urlPhoto')!.value"
                               style="max-height: 100px"
                               *ngIf="editForm.get('urlPhoto')!.value"
-                              src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                              alt="Admin"
                               class="rounded-circle"
                               width="150"
                               alt="profile image"
-                              class="rounded-circle"
-                              width="150"
                             />
                             <div class="mt-3">
                               <div class="row mb-3">
@@ -486,6 +421,7 @@
                                     (change)="setFileData($event, 'urlPhoto', true)"
                                     accept="image/*"
                                     jhiTranslate="entity.action.addimage"
+                                    style="color: #fc00ff"
                                   />
                                 </div>
                                 <input
@@ -871,6 +807,7 @@
                                   (change)="setFileData($event, 'urlCinAttached', true)"
                                   accept="image/*"
                                   jhiTranslate="entity.action.addimage"
+                                  style="color: #fc00ff"
                                 />
                               </div>
                               <input

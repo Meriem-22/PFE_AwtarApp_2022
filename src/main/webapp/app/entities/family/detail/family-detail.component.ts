@@ -24,6 +24,8 @@ import { combineLatest, map } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { IChild } from 'app/entities/child/child.model';
 import { BeneficiaryService } from 'app/entities/beneficiary/service/beneficiary.service';
+import { RemoveAuthorizingOfficerComponent } from 'app/entities/beneficiary/remove-authorizing-officer/remove-authorizing-officer.component';
+import { RemoveTutorComponent } from 'app/entities/beneficiary/remove-tutor/remove-tutor.component';
 
 @Component({
   selector: 'jhi-family-detail',
@@ -34,10 +36,6 @@ export class FamilyDetailComponent implements OnInit {
     child: [],
   });
   Posts: any;
-  page = 1;
-  count = 0;
-  tableSize = 4;
-  tableSizes: any = [4, 8, 16, 20];
 
   isLoading = false;
   totalItems = 0;
@@ -53,10 +51,12 @@ export class FamilyDetailComponent implements OnInit {
   donation?: any[];
 
   benef!: IBeneficiary;
+  selectedDon!: any;
 
   childrenCollection?: IProfile[] = [];
   childProfile?: HttpResponse<IProfile>;
   childSelected?: number;
+  selectedChild?: IProfile | null;
 
   text?: any;
 
@@ -76,9 +76,7 @@ export class FamilyDetailComponent implements OnInit {
   beneficiary!: HttpResponse<IBeneficiary>;
   familyId?: number;
   o = 0;
-
   dc = 0;
-
   i = 0;
 
   constructor(
@@ -127,14 +125,12 @@ export class FamilyDetailComponent implements OnInit {
       this.profileService.getAllChildrenProfile(family.id).subscribe({
         next: (res: HttpResponse<IProfile[]>) => {
           this.children = res.body ?? [];
-          console.log(this.children[0].child!.id!);
+          console.log(this.children);
 
           for (this.t = 0; this.t < this.children.length; this.t++) {
             this.donationDetailsService.getAllDonationsIssuedOfFamily(this.children[this.t].child!.id!).subscribe({
               next: (resc: HttpResponse<any[]>) => {
                 this.donationChild = this.donationChild + resc.body!.length;
-                console.log(this.children![this.t].child!.id!);
-                console.log(this.donationChild);
               },
               error: e => console.error(e),
             });
@@ -188,46 +184,17 @@ export class FamilyDetailComponent implements OnInit {
     });
   }
 
-  onTableDataChange(event: any): void {
-    this.page = event;
-    this.DonationList();
+  callFunction(): void {
+    if (this.selectedChild != null) {
+      this.donationDetailsService.getAllDonationsIssuedOfFamily(this.selectedChild.child!.id!).subscribe({
+        next: (res: HttpResponse<any[]>) => {
+          this.donationListChild = res.body ?? [];
+          console.log(this.donationListChild);
+        },
+        error: e => console.error(e),
+      });
+    }
   }
-
-  onTableSizeChange(event: any): void {
-    this.tableSize = event.target.value;
-    this.page = 1;
-    this.DonationList();
-  }
-
-  choix(val: any): void {
-    this.callFunction(val);
-  }
-
-  callFunction(val: any): void {
-    this.text = val;
-    console.log(this.text);
-
-    const profilex = this.createFromForm();
-    console.log(profilex);
-
-    this.profileService.find(profilex.child!.id!).subscribe({
-      next: res => {
-        this.childProfile = res;
-        console.log(this.childProfile.body!.child!.id!);
-      },
-      error: e => console.error(e),
-    });
-
-    this.donationDetailsService.getAllDonationsIssuedOfFamily(this.childProfile!.body!.child!.id!).subscribe({
-      next: (res: HttpResponse<any[]>) => {
-        this.donationListChild = res.body ?? [];
-        console.log(this.donationListChild);
-      },
-      error: e => console.error(e),
-    });
-  }
-
-  /*querygetAllDonationsIssuedOfFamily*/
 
   previousState(): void {
     window.history.back();
@@ -276,8 +243,30 @@ export class FamilyDetailComponent implements OnInit {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
 
-  trackChildById(_index: number, item: IProfile): number {
-    return item.id!;
+  trackChildById(_index: number, profile: IProfile): number {
+    return profile.id!;
+  }
+
+  removeAuthorizingOfficer(beneficiary: IBeneficiary): void {
+    const modalRef = this.modalService.open(RemoveAuthorizingOfficerComponent, { size: 'lg', backdrop: false, keyboard: false });
+    modalRef.componentInstance.beneficiary = beneficiary;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'deleted') {
+        //this.loadPage();
+      }
+    });
+  }
+
+  removeTutor(beneficiary: IBeneficiary): void {
+    const modalRef = this.modalService.open(RemoveTutorComponent, { size: 'lg', backdrop: false, keyboard: false });
+    modalRef.componentInstance.beneficiary = beneficiary;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'removed') {
+        //this.loadPage();
+      }
+    });
   }
 
   protected loadRelationshipsOptions(): void {

@@ -62,7 +62,7 @@ export class EducationalInstitutionComponent implements OnInit {
   }
 
   delete(educationalInstitution: IEducationalInstitution): void {
-    const modalRef = this.modalService.open(EducationalInstitutionDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(EducationalInstitutionDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.educationalInstitution = educationalInstitution;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
