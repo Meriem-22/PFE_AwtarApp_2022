@@ -59,6 +59,7 @@ export class FamilyDetailComponent implements OnInit {
   selectedChild?: IProfile | null;
 
   text?: any;
+  display = false;
 
   inProduction?: boolean;
   isNavbarCollapsed = true;
@@ -185,6 +186,7 @@ export class FamilyDetailComponent implements OnInit {
   }
 
   callFunction(): void {
+    this.display = true;
     if (this.selectedChild != null) {
       this.donationDetailsService.getAllDonationsIssuedOfFamily(this.selectedChild.child!.id!).subscribe({
         next: (res: HttpResponse<any[]>) => {

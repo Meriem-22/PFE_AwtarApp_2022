@@ -4,9 +4,10 @@ import { EntityRoutingModule } from 'app/entities/entity-routing.module';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { DASHBOARD_Template_ROUTE } from './dashboard.route';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
-  imports: [SharedModule, EntityRoutingModule, RouterModule.forChild([DASHBOARD_Template_ROUTE])],
+  imports: [SharedModule, EntityRoutingModule, RouterModule.forChild([DASHBOARD_Template_ROUTE]), CalendarModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DashboardTemplateModule {}

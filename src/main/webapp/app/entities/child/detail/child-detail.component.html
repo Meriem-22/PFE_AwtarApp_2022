@@ -1337,7 +1337,7 @@
                                 />
                               </div>
                               <div class="right" [routerLink]="['/parent', parent.id, 'view']">
-                                <h3>{{ parent.firstName }} {{ parent.lastName }}</h3>
+                                <h3 [routerLink]="['/parent', parent.id, 'view']">{{ parent.firstName }} {{ parent.lastName }}</h3>
                                 <p>Parent</p>
                               </div>
                             </li>
@@ -1360,7 +1360,7 @@
                                 />
                               </div>
                               <div class="right" [routerLink]="['/child', child.child?.id, 'view']">
-                                <h3 [routerLink]="['./', child.child!.id, 'view']">{{ child.lastName }} {{ child.firstName }}</h3>
+                                <h3 [routerLink]="['/child', child.child?.id, 'view']">{{ child.lastName }} {{ child.firstName }}</h3>
                                 <p>Enfant</p>
                               </div>
                             </li>
@@ -1409,7 +1409,7 @@
                                   <p>
                                     <fa-icon
                                       icon="plus"
-                                      style="margin-left: 1rem; color: #447de8"
+                                      style="margin-left: 1rem"
                                       [routerLink]="['/beneficiary', child.id, 'contributor', 'authorizing-officer']"
                                     ></fa-icon>
                                     <span jhiTranslate="awtarApp.authorizingOfficer.home.addLabel"> Add an Authorizing Officer </span>
@@ -1469,7 +1469,7 @@
                                   <p>
                                     <fa-icon
                                       icon="plus"
-                                      style="margin-left: 1rem; color: #447de8"
+                                      style="margin-left: 1rem"
                                       [routerLink]="['/beneficiary', child.id, 'contributor', 'tutor']"
                                     ></fa-icon>
                                     <span jhiTranslate="awtarApp.tutor.home.addLabel"> Add a tutor </span>

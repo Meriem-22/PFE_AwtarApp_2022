@@ -8,65 +8,193 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
 
     <title>AdminLTE 3 | Dashboard</title>
-
-    <script nonce="33a2bf22-55fb-4fb7-baea-4b8bb2a21cdd">
-      (function (w, d) {
-        !(function (a, e, t, r) {
-          (a.zarazData = a.zarazData || {}),
-            (a.zarazData.executed = []),
-            (a.zaraz = { deferred: [] }),
-            (a.zaraz.q = []),
-            (a.zaraz._f = function (e) {
-              return function () {
-                var t = Array.prototype.slice.call(arguments);
-                a.zaraz.q.push({ m: e, a: t });
-              };
-            });
-          for (const e of ['track', 'set', 'ecommerce', 'debug']) a.zaraz[e] = a.zaraz._f(e);
-          (a.zaraz.init = () => {
-            var t = e.getElementsByTagName(r)[0],
-              z = e.createElement(r),
-              n = e.getElementsByTagName('title')[0];
-            for (
-              n && (a.zarazData.t = e.getElementsByTagName('title')[0].text),
-                a.zarazData.x = Math.random(),
-                a.zarazData.w = a.screen.width,
-                a.zarazData.h = a.screen.height,
-                a.zarazData.j = a.innerHeight,
-                a.zarazData.e = a.innerWidth,
-                a.zarazData.l = a.location.href,
-                a.zarazData.r = e.referrer,
-                a.zarazData.k = a.screen.colorDepth,
-                a.zarazData.n = e.characterSet,
-                a.zarazData.o = new Date().getTimezoneOffset(),
-                a.zarazData.q = [];
-              a.zaraz.q.length;
-
-            ) {
-              const e = a.zaraz.q.shift();
-              a.zarazData.q.push(e);
-            }
-            z.defer = !0;
-            for (const e of [localStorage, sessionStorage])
-              Object.keys(e || {})
-                .filter(a => a.startsWith('_zaraz_'))
-                .forEach(t => {
-                  try {
-                    a.zarazData['z_' + t.slice(7)] = JSON.parse(e.getItem(t));
-                  } catch {
-                    a.zarazData['z_' + t.slice(7)] = e.getItem(t);
-                  }
-                });
-            (z.referrerPolicy = 'origin'),
-              (z.src = '/cdn-cgi/zaraz/s.js?z=' + btoa(encodeURIComponent(JSON.stringify(a.zarazData)))),
-              t.parentNode.insertBefore(z, t);
-          }),
-            ['complete', 'interactive'].includes(e.readyState) ? zaraz.init() : a.addEventListener('DOMContentLoaded', zaraz.init);
-        })(w, d, 0, 'script');
-      })(window, document);
-    </script>
   </head>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    .container {
+      position: relative;
+    }
+
+    .container .card {
+      position: relative;
+      width: 390px;
+      height: 180px;
+      background: #232323;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-right: 1rem;
+    }
+
+    .container .card:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fc00ff;
+      clip-path: circle(150px at 80% 20%);
+      transition: 0.5s ease-in-out;
+    }
+
+    .container .card:hover:before {
+      clip-path: circle(300px at 80% -20%);
+    }
+
+    .container .card:after {
+      content: 'Nike';
+      position: absolute;
+      top: 30%;
+      left: -20%;
+      font-size: 12em;
+      font-weight: 800;
+      font-style: italic;
+      color: rgba(255, 255, 25, 0.05);
+    }
+
+    .container .card .imgBx {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-20%);
+      z-index: 10000;
+      width: 100%;
+      height: 220px;
+      transition: 0.5s;
+    }
+
+    .container .card:hover .imgBx {
+      top: 0%;
+      transform: translateY(0%);
+    }
+
+    .container .card .imgBx img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-20%, -20%) rotate(-25deg);
+      width: 270px;
+    }
+
+    .container .card .contentBx {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100px;
+      text-align: center;
+      transition: 1s;
+      z-index: 10;
+    }
+
+    .container .card:hover .contentBx {
+      height: 210px;
+    }
+
+    .container .card .contentBx h2 {
+      position: relative;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #fff;
+      margin: 0;
+    }
+
+    .container .card .contentBx .size,
+    .container .card .contentBx .color {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 20px;
+      transition: 0.5s;
+      opacity: 0;
+      visibility: hidden;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .container .card:hover .contentBx .size {
+      opacity: 1;
+      visibility: visible;
+      transition-delay: 0.5s;
+    }
+
+    .container .card:hover .contentBx .color {
+      opacity: 1;
+      visibility: visible;
+      transition-delay: 0.6s;
+    }
+
+    .container .card .contentBx .size h3,
+    .container .card .contentBx .color h3 {
+      color: #fff;
+      font-weight: 300;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-right: 10px;
+    }
+
+    .container .card .contentBx .size span {
+      width: 26px;
+      height: 26px;
+      text-align: center;
+      line-height: 26px;
+      font-size: 14px;
+      display: inline-block;
+      color: #111;
+      background: #fff;
+      margin: 0 5px;
+      transition: 0.5s;
+      color: #111;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .container .card .contentBx .size span:hover {
+      background: #9bdc28;
+    }
+
+    .container .card .contentBx .color span {
+      width: 20px;
+      height: 20px;
+      background: #ff0;
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .container .card .contentBx .color span:nth-child(2) {
+      background: #9bdc28;
+    }
+
+    .container .card .contentBx .color span:nth-child(3) {
+      background: #03a9f4;
+    }
+
+    .container .card .contentBx .color span:nth-child(4) {
+      background: #e91e63;
+    }
+
+    .container .card .contentBx a {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #fff;
+      border-radius: 4px;
+      margin-top: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      color: #111;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: 0.5s;
+      margin-top: 0;
+    }
+
+    .container .card:hover .contentBx a {
+      opacity: 1;
+      transform: translateY(0px);
+      transition-delay: 0.75s;
+    }
+
     .map {
       overflow: hidden;
     }
@@ -132,7 +260,7 @@
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <li class="nav-item menu-open">
-                <a href="dashboard" class="nav-link active">
+                <a href="dashboard" class="nav-link active" style="background-color: #fc00ff">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                 </a>
@@ -433,205 +561,102 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-lg-3 col-6">
-                <div class="small-box bg-gradient-primary">
+                <div class="small-box" style="background-color: white">
                   <div class="inner">
-                    <h3>50</h3>
-                    <p>Scheduled donations</p>
+                    <h3 style="color: #fc00ff">50</h3>
+                    <h6>Scheduled donations</h6>
                   </div>
                   <div class="icon">
                     <i class="ion ion-bag"></i>
                   </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="#" class="small-box-footer" style="background-color: black"
+                    >More info <i class="fas fa-arrow-circle-right"></i
+                  ></a>
                 </div>
               </div>
 
               <div class="col-lg-3 col-6">
-                <div class="small-box" style="background-color: #fffc00">
+                <div class="small-box" style="background-color: white">
                   <div class="inner">
-                    <h3>33<sup style="font-size: 20px">%</sup></h3>
-                    <p>Programmed donation validated</p>
+                    <h3 style="color: #fc00ff">33<sup style="font-size: 20px">%</sup></h3>
+                    <h6>Programmed donation validated</h6>
                   </div>
                   <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                   </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="#" class="small-box-footer" style="background-color: black"
+                    >More info <i class="fas fa-arrow-circle-right"></i
+                  ></a>
                 </div>
               </div>
 
               <div class="col-lg-3 col-6">
-                <div class="small-box" style="background-color: #fc00ff">
+                <div class="small-box" style="background-color: white">
                   <div class="inner">
-                    <h3>24</h3>
-                    <p>total beneficiaries</p>
+                    <h3 style="color: #fc00ff">24</h3>
+                    <h6>total beneficiaries</h6>
                   </div>
                   <div class="icon">
                     <i class="ion ion-person-add"></i>
                   </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="#" class="small-box-footer" style="background-color: black"
+                    >More info <i class="fas fa-arrow-circle-right"></i
+                  ></a>
                 </div>
               </div>
 
               <div class="col-lg-3 col-6">
-                <div class="small-box" style="background-color: #00fffc">
+                <div class="small-box" style="background-color: white">
                   <div class="inner">
-                    <h3>65</h3>
-                    <p>donations received this month</p>
+                    <h3 style="color: #fc00ff">65</h3>
+                    <h6>donations received this month</h6>
                   </div>
                   <div class="icon">
                     <i class="ion ion-pie-graph"></i>
                   </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="#" class="small-box-footer" style="background-color: black"
+                    >More info <i class="fas fa-arrow-circle-right"></i
+                  ></a>
                 </div>
               </div>
             </div>
 
             <div class="row">
-              <section class="col-lg-7 connectedSortable">
-                <div class="card">
-                  <div class="card-header">
+              <section class="col-lg-6 connectedSortable">
+                <div class="card" style="background-color: white">
+                  <div class="card-header border-0">
                     <h3 class="card-title">
-                      <i class="fas fa-chart-pie mr-1"></i>
-                      Donation
+                      <i class="far fa-calendar-alt"></i>
+                      Calendar
                     </h3>
-                  </div>
-                  <div class="card-body" style="background-color: black">
-                    <div class="tab-content p-0">
-                      <div class="chart tab-pane active text-center" id="revenue-chart" style="position: relative; height: 300px">
-                        <img id="revenue-chart-canvas" src="../../../content/images/image-circle.jpg" height="300" style="height: 300px" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">
-                      <i class="ion ion-clipboard mr-1"></i>
-                      To Do List
-                    </h3>
                     <div class="card-tools">
-                      <ul class="pagination pagination-sm">
-                        <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
-                      </ul>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
+                          <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a href="#" class="dropdown-item">Add new event</a>
+                          <a href="#" class="dropdown-item">Clear events</a>
+                          <div class="dropdown-divider"></div>
+                          <a href="#" class="dropdown-item">View calendar</a>
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-secondary btn-sm" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-secondary btn-sm" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                      </button>
                     </div>
                   </div>
-
-                  <div class="card-body">
-                    <ul class="todo-list" data-widget="todo-list">
-                      <li>
-                        <span class="handle">
-                          <i class="fas fa-ellipsis-v"></i>
-                          <i class="fas fa-ellipsis-v"></i>
-                        </span>
-
-                        <div class="icheck-primary d-inline ml-2">
-                          <input type="checkbox" value="" name="todo1" id="todoCheck1" />
-                          <label for="todoCheck1"></label>
-                        </div>
-
-                        <span class="text">Design a nice theme</span>
-
-                        <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
-
-                        <div class="tools">
-                          <i class="fas fa-edit"></i>
-                          <i class="fas fa-trash-o"></i>
-                        </div>
-                      </li>
-                      <li>
-                        <span class="handle">
-                          <i class="fas fa-ellipsis-v"></i>
-                          <i class="fas fa-ellipsis-v"></i>
-                        </span>
-                        <div class="icheck-primary d-inline ml-2">
-                          <input type="checkbox" value="" name="todo2" id="todoCheck2" checked />
-                          <label for="todoCheck2"></label>
-                        </div>
-                        <span class="text">Make the theme responsive</span>
-                        <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
-                        <div class="tools">
-                          <i class="fas fa-edit"></i>
-                          <i class="fas fa-trash-o"></i>
-                        </div>
-                      </li>
-                      <li>
-                        <span class="handle">
-                          <i class="fas fa-ellipsis-v"></i>
-                          <i class="fas fa-ellipsis-v"></i>
-                        </span>
-                        <div class="icheck-primary d-inline ml-2">
-                          <input type="checkbox" value="" name="todo3" id="todoCheck3" />
-                          <label for="todoCheck3"></label>
-                        </div>
-                        <span class="text">Let theme shine like a star</span>
-                        <small class="badge badge-warning"><i class="far fa-clock"></i> 1 day</small>
-                        <div class="tools">
-                          <i class="fas fa-edit"></i>
-                          <i class="fas fa-trash-o"></i>
-                        </div>
-                      </li>
-                      <li>
-                        <span class="handle">
-                          <i class="fas fa-ellipsis-v"></i>
-                          <i class="fas fa-ellipsis-v"></i>
-                        </span>
-                        <div class="icheck-primary d-inline ml-2">
-                          <input type="checkbox" value="" name="todo4" id="todoCheck4" />
-                          <label for="todoCheck4"></label>
-                        </div>
-                        <span class="text">Let theme shine like a star</span>
-                        <small class="badge badge-success"><i class="far fa-clock"></i> 3 days</small>
-                        <div class="tools">
-                          <i class="fas fa-edit"></i>
-                          <i class="fas fa-trash-o"></i>
-                        </div>
-                      </li>
-                      <li>
-                        <span class="handle">
-                          <i class="fas fa-ellipsis-v"></i>
-                          <i class="fas fa-ellipsis-v"></i>
-                        </span>
-                        <div class="icheck-primary d-inline ml-2">
-                          <input type="checkbox" value="" name="todo5" id="todoCheck5" />
-                          <label for="todoCheck5"></label>
-                        </div>
-                        <span class="text">Check your messages and notifications</span>
-                        <small class="badge badge-primary"><i class="far fa-clock"></i> 1 week</small>
-                        <div class="tools">
-                          <i class="fas fa-edit"></i>
-                          <i class="fas fa-trash-o"></i>
-                        </div>
-                      </li>
-                      <li>
-                        <span class="handle">
-                          <i class="fas fa-ellipsis-v"></i>
-                          <i class="fas fa-ellipsis-v"></i>
-                        </span>
-                        <div class="icheck-primary d-inline ml-2">
-                          <input type="checkbox" value="" name="todo6" id="todoCheck6" />
-                          <label for="todoCheck6"></label>
-                        </div>
-                        <span class="text">Let theme shine like a star</span>
-                        <small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>
-                        <div class="tools">
-                          <i class="fas fa-edit"></i>
-                          <i class="fas fa-trash-o"></i>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div class="card-footer clearfix">
-                    <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
+                  <div class="card-body pt-10" style="align-items: center">
+                    <p-calendar [(ngModel)]="date" [inline]="true" [showWeek]="true"></p-calendar>
                   </div>
                 </div>
               </section>
 
-              <section class="col-lg-5 connectedSortable">
+              <section class="col-lg-6 connectedSortable">
                 <div
                   class="card text-center text-white"
                   style="background-image: linear-gradient(40deg, #fffc00 0%, #fc00ff 45%, #00fffc 100%)"
@@ -860,8 +885,8 @@
                         <div class="text-white">Establishments</div>
                       </div>
 
-                      <div class="col-4 text-center">
-                        <div id="sparkline-2"></div>
+                      <div class="col-2 text-center">
+                        <div id="sparkline-4"></div>
                         <div class="text-white">Families</div>
                       </div>
 
@@ -872,37 +897,21 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="card bg-gradient-secondary">
-                  <div class="card-header border-0">
+              </section>
+              <section class="col-lg-13 connectedSortable">
+                <div class="card">
+                  <div class="card-header">
                     <h3 class="card-title">
-                      <i class="far fa-calendar-alt"></i>
-                      Calendar
+                      <i class="fas fa-chart-pie mr-1"></i>
+                      Donation
                     </h3>
-
-                    <div class="card-tools">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                          <i class="fas fa-bars"></i>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a href="#" class="dropdown-item">Add new event</a>
-                          <a href="#" class="dropdown-item">Clear events</a>
-                          <div class="dropdown-divider"></div>
-                          <a href="#" class="dropdown-item">View calendar</a>
-                        </div>
-                      </div>
-                      <button type="button" class="btn btn-secondary btn-sm" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                      </button>
-                      <button type="button" class="btn btn-secondary btn-sm" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                      </button>
-                    </div>
                   </div>
-
-                  <div class="card-body pt-10">
-                    <div id="calendar" style="width: 100%"></div>
+                  <div class="card-body">
+                    <div class="tab-content p-0">
+                      <div class="chart tab-pane active text-center" id="revenue-chart" style="width: 75rem">
+                        <p-chart type="bar" [data]="data" [options]="chartOptions"></p-chart>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>

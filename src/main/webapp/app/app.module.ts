@@ -33,6 +33,8 @@ import { MbscModule } from '@mobiscroll/angular-lite';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TableModule } from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule } from 'primeng/calendar';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   imports: [
@@ -54,6 +56,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TableModule,
     MultiSelectModule,
     BrowserAnimationsModule,
+    CalendarModule,
+    ChartModule,
   ],
   providers: [
     Title,
