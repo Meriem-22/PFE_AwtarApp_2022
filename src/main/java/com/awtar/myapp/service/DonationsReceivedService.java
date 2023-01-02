@@ -1,6 +1,7 @@
 package com.awtar.myapp.service;
 
 import com.awtar.myapp.service.dto.DonationsReceivedDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -63,4 +64,28 @@ public interface DonationsReceivedService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get the "id" donationsReceived.
+     *
+     *
+     * @return the entity.
+     */
+    List<DonationsReceivedDTO> findRecentDonationsReceived();
+
+    /**
+     *
+     *
+     *
+     * @return the persisted entity.
+     */
+    List<DonationsReceivedDTO> CurrentYearDonationsReceived();
+
+    /**
+     *
+     *
+     *
+     * @return the persisted entity.
+     */
+    List<DonationsReceivedDTO> ReceivedDonationsOfCurrentYearByMonth();
 }

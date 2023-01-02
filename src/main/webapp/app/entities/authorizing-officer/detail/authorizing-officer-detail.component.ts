@@ -1,6 +1,8 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { BeneficiaryService } from 'app/entities/beneficiary/service/beneficiary.service';
 import { IProfile } from 'app/entities/profile/profile.model';
@@ -19,6 +21,7 @@ export class AuthorizingOfficerDetailComponent implements OnInit {
   establishments?: any[] | null;
   children?: any[] | null;
   profiles?: any[] | null;
+  account: Account | null = null;
 
   page = 1;
   count = 0;
@@ -29,10 +32,14 @@ export class AuthorizingOfficerDetailComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected profileService: ProfileService,
     protected dataUtils: DataUtils,
+    private accountService: AccountService,
     protected beneficiaryService: BeneficiaryService
   ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
     this.activatedRoute.data.subscribe(({ authorizingOfficer }) => {
       this.authorizingOfficer = authorizingOfficer;
     });

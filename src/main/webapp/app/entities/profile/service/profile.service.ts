@@ -58,6 +58,17 @@ export class ProfileService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  findAllAuthorizingOfficers(): Observable<EntityArrayResponse> {
+    return this.http.get<any[]>(this.resourceUrl + '/all-authorizing-officers', { observe: 'response' });
+  }
+
+  findAllTutors(): Observable<EntityArrayResponse> {
+    return this.http.get<any[]>(this.resourceUrl + '/all-tutors', { observe: 'response' });
+  }
+  findAllChildren(): Observable<EntityArrayResponse> {
+    return this.http.get<any[]>(this.resourceUrl + '/all-children', { observe: 'response' });
+  }
+
   findOthersTutorsProfiles(id: number): Observable<EntityArrayResponseType> {
     return this.http.get<IProfile[]>(`${this.resourceT}/${id}`, { observe: 'response' });
   }

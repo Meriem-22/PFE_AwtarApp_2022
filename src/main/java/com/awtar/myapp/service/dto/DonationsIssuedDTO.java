@@ -42,6 +42,17 @@ public class DonationsIssuedDTO implements Serializable {
 
     private DonationDetailsDTO donationsDetailsN[];
 
+    private String month;
+
+    private Long number;
+
+    public DonationsIssuedDTO() {}
+
+    public DonationsIssuedDTO(String month, Long number) {
+        this.month = month;
+        this.number = number;
+    }
+
     public Long getId() {
         return id;
     }
@@ -160,6 +171,22 @@ public class DonationsIssuedDTO implements Serializable {
 
     public void setDonationsDetailsN(DonationDetailsDTO[] donationsDetailsN) {
         this.donationsDetailsN = donationsDetailsN;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
     }
 
     @Override

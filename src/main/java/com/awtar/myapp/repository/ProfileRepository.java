@@ -84,4 +84,19 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
         "select new com.awtar.myapp.service.dto.ProfileDTO(t.id, p.firstName, p.lastName, p.address, p.urlPhoto, p.urlPhotoContentType, t.activity) from Profile p join p.tutor t where p.tutor.id !=:id and p.tutor IS NOT NULL"
     )
     List<ProfileDTO> findOthersTutorsProfiles(@Param("id") Long id);
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.ProfileDTO(c.id, p.firstName, p.lastName, p.dateOfBirth, p.urlPhoto, p.urlPhotoContentType, c.family.familyName, p.gender) from Profile p, Child c where p.child.id = c.id"
+    )
+    List<ProfileDTO> findallchildren();
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.ProfileDTO(a.id, p.firstName, p.lastName, p.address, p.urlPhoto, p.urlPhotoContentType, a.activity) from Profile p join p.authorizingOfficer a where (p.archivated= false or p.archivated= null) and p.authorizingOfficer IS NOT NULL"
+    )
+    List<ProfileDTO> findAllAuthorizingOfficers();
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.ProfileDTO(t.id, p.firstName, p.lastName, p.address, p.urlPhoto, p.urlPhotoContentType, t.activity) from Profile p join p.tutor t where (p.archivated= false or p.archivated= null) and p.tutor IS NOT NULL"
+    )
+    List<ProfileDTO> findAllTutors();
 }

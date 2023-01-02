@@ -12,6 +12,7 @@ import { IDonationsIssued, getDonationsIssuedIdentifier } from '../donations-iss
 
 export type EntityResponseType = HttpResponse<IDonationsIssued>;
 export type EntityArrayResponseType = HttpResponse<IDonationsIssued[]>;
+export type EntityArrayResponseTypeAny = HttpResponse<any[]>;
 
 @Injectable({ providedIn: 'root' })
 export class DonationsIssuedService {
@@ -36,12 +37,36 @@ export class DonationsIssuedService {
   }
 
   createDons(donationsIssued: IDonationsIssued): Observable<EntityResponseType> {
-    return this.http.post<IDonationsIssued>(this.resourceUrl + '/add', donationsIssued, { observe: 'response' });
+    const copy = this.convertDateFromClient(donationsIssued);
+    return this.http
+      .post<IDonationsIssued>(this.resourceUrl + '/add', copy, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   getAllValidatedDonationsIssued(): Observable<EntityArrayResponseType> {
     return this.http.get<IDonationsIssued[]>(this.resourceUrl + '/validated', { observe: 'response' });
   }
+
+  Upcomingscheduleddonations(): Observable<EntityArrayResponseType> {
+    return this.http.get<IDonationsIssued[]>(this.resourceUrl + '/upcoming-scheduled-donations', { observe: 'response' });
+  }
+
+  UpcomingDonationsValidated(): Observable<EntityArrayResponseType> {
+    return this.http.get<IDonationsIssued[]>(this.resourceUrl + '/upcoming-validated-donations', { observe: 'response' });
+  }
+
+  DonationsIssuedOfCurrentYearByMonth(): Observable<EntityArrayResponseTypeAny> {
+    return this.http.get<any[]>(this.resourceUrl + '/by-month', { observe: 'response' });
+  }
+
+  CanceledDonationsOfCurrentYearByMonth(): Observable<EntityArrayResponseTypeAny> {
+    return this.http.get<any[]>(this.resourceUrl + '/canceled-by-month', { observe: 'response' });
+  }
+
+  getAll(): Observable<EntityArrayResponseTypeAny> {
+    return this.http.get<any[]>(this.resourceUrl + '/get-all', { observe: 'response' });
+  }
+
   partialUpdate(donationsIssued: IDonationsIssued): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(donationsIssued);
     return this.http

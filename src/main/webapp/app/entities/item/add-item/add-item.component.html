@@ -43,44 +43,44 @@
               <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
             </div>
             <div class="info">
-              <a href="#" class="d-block">admin</a>
+              <a href="#" class="d-block">{{ account?.login }}</a>
             </div>
           </div>
 
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <li class="nav-item menu-open">
-                <a [routerLink]="['admin-dashboard/dashboard']" class="nav-link active">
+                <a href="dashboard" class="nav-link active">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Dashboard</p>
+                  <p><span jhiTranslate="dashboard.dashboard">Dashboard</span></p>
                 </a>
               </li>
-              <li class="nav-header">BENEFICIARIES</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.beneficiaries">BENEFICIARIES</span></li>
               <li class="nav-item">
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
                   <p>
-                    Families
+                    <span jhiTranslate="dashboard.families">Families</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a [routerLink]="['/family']" class="nav-link">
+                    <a href="/family" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Families</p>
+                      <p><span jhiTranslate="dashboard.listOfFamilies">List of Families</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a [routerLink]="['/family/add']" class="nav-link">
+                    <a href="/family/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Family</p>
+                      <p><span jhiTranslate="dashboard.addFamily">Add Family</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -89,27 +89,27 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
                   <p>
-                    Children
+                    <span jhiTranslate="dashboard.children">Children</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a [routerLink]="['admin-dashboard/children']" class="nav-link">
+                    <a href="/child" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Chilfren</p>
+                      <p><span jhiTranslate="dashboard.listOfChildren">List Of Chilfren</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="child/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Child</p>
+                      <p><span jhiTranslate="dashboard.addChild">Add Child</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -118,59 +118,59 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
                   <p>
-                    Establishments
+                    <span jhiTranslate="dashboard.establishments">Establishments</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/establishment" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Establishments</p>
+                      <p><span jhiTranslate="dashboard.listOfEstablishments">List Of Establishments</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/establishment/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
 
-                      <p>Add Establishment</p>
+                      <p><span jhiTranslate="dashboard.addEstablishment">Add Establishment</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">DONATIONS</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.donations">DONATIONS</span></li>
               <li class="nav-item">
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
                   <p>
-                    Donations Issued
+                    <span jhiTranslate="dashboard.donationsIssued">Donations Issued</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-issued" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Donations Issued</p>
+                      <p><span jhiTranslate="dashboard.listOfDonationsIssued">List of Donations Issued</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-issued/add-any-donations" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Donations Issued</p>
+                      <p><span jhiTranslate="dashboard.addDonationsIssued">Add Donations Issued</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -179,123 +179,123 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
                   <p>
-                    Donations Received
+                    <span jhiTranslate="dashboard.donationsReceived">Donations Received</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-received" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Donations Received</p>
+                      <p><span jhiTranslate="dashboard.listOfDonationsReceived">List Of Donations Received</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-received/new" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Donations Received</p>
+                      <p><span jhiTranslate="dashboard.addDonationsReceived">Add Donations Received</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">DONATIONS Items</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.donationsItems">DONATIONS Items</span></li>
               <li class="nav-item">
                 <a class="nav-link">
                   <i class="nav-icon fas fa-circle"></i>
                   <p>
-                    Items
+                    <span jhiTranslate="dashboard.items">Items</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/item" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Items</p>
+                      <p><span jhiTranslate="dashboard.listOfItems">List of Items</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/item/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Item</p>
+                      <p><span jhiTranslate="dashboard.addItem">Add Item</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Status Item</p>
+                      <p><span jhiTranslate="dashboard.statusOfItem">Status Item</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">REFERENCE TABLE</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.referenceTable">REFERENCE TABLE</span></li>
+
+              <li class="nav-item">
+                <a href="establishment-type" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.establishmentsTypes">Establishments Types</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/city" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.Citys">Citys</span></p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="pages/widgets.html" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                  <p>Establishments Types</p>
+                  <p><span jhiTranslate="dashboard.healthCategories">Health Categories</span></p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
+                <a href="/nature" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                  <p>Citys</p>
+                  <p><span jhiTranslate="dashboard.natureOfDonOrItem">Nature</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/school-level" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.schoolLevels">School Level</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/educational-institution" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.educationInstitutions">Educational Institutions</span></p>
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Health Categories</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Nature</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>School Level</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Educational Institutions</p>
-                </a>
-              </li>
-
-              <li class="nav-header">CONTRIBUTORS</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.contributors">CONTRIBUTORS</span></li>
               <li class="nav-item">
                 <a href="#" class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
                   <p>
-                    Authorizing Officers
+                    <span jhiTranslate="dashboard.authorizingOfficers">Authorizing Officers</span>
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
+                    <a routerLink="/authorizing-officer" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Authorizing Officers</p>
+                      <p><span jhiTranslate="dashboard.listOfAuthorizingOfficers">List Of Authorizing Officers</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                    <a href="/authorizing-officer/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Authorizing Officer</p>
+                      <p><span jhiTranslate="dashboard.addAuthorizingOfficer">Add Authorizing Officer</span></p>
                     </a>
                   </li>
                 </ul>
@@ -304,49 +304,27 @@
                 <a href="#" class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
                   <p>
-                    Tutors
+                    <span jhiTranslate="dashboard.tutors">Tutors</span>
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
+                    <a href="/tutor" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Tutors</p>
+                      <p><span jhiTranslate="dashboard.listOfTutors">List Of Tutors</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                    <a href="/tutor/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Tutor</p>
+                      <p><span jhiTranslate="dashboard.addTutor">Add Tutor</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link" style="display: flex">
-                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
-                  <p>
-                    Tutors
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
-                      <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Tutors</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                      <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Tutor</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              <li class="nav-item"></li>
             </ul>
           </nav>
         </div>
@@ -357,14 +335,14 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Add Item</h1>
+                <h1 class="m-0">Ajouter Article</h1>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                  <li class="breadcrumb-item"><a href="#">Item</a></li>
-                  <li class="breadcrumb-item active">Add Item</li>
+                  <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                  <li class="breadcrumb-item"><a href="#">Tablrau De Bord</a></li>
+                  <li class="breadcrumb-item"><a href="#">Article</a></li>
+                  <li class="breadcrumb-item active">Ajouter Article</li>
                 </ol>
               </div>
             </div>
@@ -384,7 +362,7 @@
                   <fieldset *ngIf="step == 1">
                     <div class="card card-primary" style="background-color: rgb(255, 202, 249)">
                       <div class="card-header">
-                        <h3 class="card-title">Item Parametre</h3>
+                        <h3 class="card-title">Paramètre Article</h3>
                       </div>
 
                       <div style="display: flex">
@@ -412,7 +390,7 @@
                           <br />
                           <br />
                           <p-radioButton name="groupname" value="2" [(ngModel)]="itemNature"></p-radioButton>
-                          <label class="form-check-label"> any article </label>
+                          <label class="form-check-label"> N'importe Quel Type </label>
                           <br />
                           <br />
                           <p-radioButton name="groupname2" value="1" [(ngModel)]="itemType"></p-radioButton>
@@ -420,7 +398,7 @@
                           <br />
                           <br />
                           <p-radioButton name="groupname2" value="2" [(ngModel)]="itemType"></p-radioButton>
-                          <label class="form-check-label" for="flexRadioItemType2"> Simple Item </label>
+                          <label class="form-check-label" for="flexRadioItemType2"> Simple </label>
                           <br />
                         </div>
 
@@ -431,7 +409,7 @@
                       <div class="card-footer text-right">
                         <div class="button">
                           <button (click)="previousState()" type="button" name="reset" class="btn btn-secondary">Annuler</button>
-                          <button (click)="next()" type="button" name="next" class="btn btn-primary">Next</button>
+                          <button (click)="next()" type="button" name="next" class="btn btn-primary">Suivant</button>
                         </div>
                       </div>
                     </div>
@@ -440,7 +418,7 @@
                   <fieldset *ngIf="step == 2">
                     <div class="card card-primary">
                       <div class="card-header">
-                        <h3 class="card-title">Simple Item Details</h3>
+                        <h3 class="card-title">Détails Article Simple</h3>
                       </div>
                       <div *ngIf="SI == 0">
                         <div style="display: flex">
@@ -474,14 +452,13 @@
                           </div>
                         </div>
                         <div class="card-footer text-right" style="margin-top: 1rem">
-                          <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                          <button (click)="nextStep()" type="button" name="reset" class="btn btn-primary">Reset</button>
+                          <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Précédent</button>
                         </div>
                       </div>
 
                       <div *ngIf="SI == 2">
                         <div class="field align-items-center" style="display: flex; margin: 1rem">
-                          <label for="quantity" style="margin-right: 1rem; margin-left: 50rem">Quantity To Add</label>
+                          <label for="quantity" style="margin-right: 1rem; margin-left: 50rem">Quantité à ajouter</label>
                           <input
                             type="number"
                             name="quantity"
@@ -734,8 +711,7 @@
                             </div>
 
                             <div class="card-footer text-right" style="margin-top: 1rem">
-                              <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                              <button (click)="nextStep()" type="button" name="next" class="btn btn-primary">Next</button>
+                              <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Précédent</button>
                             </div>
                           </div>
                         </form>
@@ -987,12 +963,12 @@
                               </div>
                               <div>
                                 <div class="flex align-items-center justify-content-between" style="margin: 1rem">
-                                  <dt><span>Price</span></dt>
+                                  <dt><span jhiTranslate="awtarApp.itemValue.price">Price</span></dt>
                                   <dd>
                                     <span>{{ itemValue.price }}</span>
                                   </dd>
 
-                                  <dt><span>PriceDate</span></dt>
+                                  <dt><span jhiTranslate="awtarApp.itemValue.priceDate">Price Date</span></dt>
                                   <dd>
                                     <span>{{ itemValue.priceDate | formatMediumDate }}</span>
                                   </dd>
@@ -1020,7 +996,7 @@
                             </div>
                           </dl>
                           <div class="flex align-items-right justify-content-between">
-                            <label for="quantityToAdd" style="margin-right: 1rem">Quantity To Add</label>
+                            <label for="quantityToAdd" style="margin-right: 1rem">Quantité à ajouter</label>
                             <input
                               type="number"
                               name="quantityToAdd"
@@ -1039,7 +1015,7 @@
                   <fieldset *ngIf="step == 3">
                     <div class="card card-primary" style="background-color: rgb(255, 202, 249)">
                       <div class="card-header">
-                        <h3 class="card-title">Composite Item</h3>
+                        <h3 class="card-title">Article Composé</h3>
                       </div>
 
                       <div *ngIf="SI == 0">
@@ -1073,8 +1049,7 @@
                           </div>
                         </div>
                         <div class="card-footer text-right" style="margin-top: 1rem">
-                          <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                          <button (click)="next()" type="button" name="next" class="btn btn-primary">Next</button>
+                          <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Précedent</button>
                         </div>
                       </div>
 
@@ -1187,17 +1162,17 @@
                         <div class="card-body" style="margin-top: -2rem">
                           <div *ngIf="SIC == 1" class="card">
                             <div class="card-header">
-                              <h3 class="card-title">Compositeur Items</h3>
+                              <h3 class="card-title">Articles Compositeurs</h3>
                             </div>
                             <form name="compositeurItemForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="compositeurItemForm">
                               <div class="card-body">
                                 <div class="item text-right">
                                   <button style="margin-bottom: 1rem" (click)="next()" type="button" name="next" class="btn btn-primary">
-                                    Add Item
+                                    Ajouter Article
                                   </button>
                                 </div>
                                 <div class="item text-right" style="display: flex; margin-top: -1rem">
-                                  <label for="horizontal">Quantity</label>
+                                  <label for="horizontal">Quantité</label>
                                   <input
                                     type="number"
                                     style="width: 5rem; margin-left: 1rem; margin-bottom: 3rem"
@@ -1358,24 +1333,23 @@
                               </div>
                             </form>
                             <div class="card-footer text-right" style="margin-top: 1rem">
-                              <button (click)="previous2()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                              <button (click)="nextStep()" type="button" name="reset" class="btn btn-primary">Reset</button>
+                              <button (click)="previous2()" type="button" name="previous" class="btn btn-secondary">Précedent</button>
                             </div>
                           </div>
 
                           <div *ngIf="SIC == 2" class="card">
                             <div class="card-header">
-                              <h3 class="card-title">Compositeur Items</h3>
+                              <h3 class="card-title">Articles Compositeurs</h3>
                             </div>
                             <form name="compositeurItemForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="compositeurItemForm">
                               <div class="card-body">
                                 <div class="item text-right">
                                   <button style="margin-bottom: 1rem" (click)="next()" type="button" name="next" class="btn btn-primary">
-                                    Add Item
+                                    Ajouter Article
                                   </button>
                                 </div>
                                 <div class="item text-right" style="display: flex; margin-top: -1rem">
-                                  <label for="horizontal">Quantity</label>
+                                  <label for="horizontal">Quantité</label>
                                   <input
                                     type="number"
                                     style="width: 5rem; margin-left: 1rem; margin-bottom: 3rem"
@@ -1556,13 +1530,12 @@
                               </div>
                             </form>
                             <div class="card-footer text-right" style="margin-top: 1rem">
-                              <button (click)="previous2()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                              <button (click)="nextStep()" type="button" name="reset" class="btn btn-primary">Reset</button>
+                              <button (click)="previous2()" type="button" name="previous" class="btn btn-secondary">Précedent</button>
                             </div>
                           </div>
                           <div *ngIf="SIC == 0" class="card">
                             <div class="card-header">
-                              <h3 class="card-title">Compositeur Items</h3>
+                              <h3 class="card-title">Articles Compositeurs</h3>
                             </div>
                             <div style="display: flex">
                               <img src="../../../../content/images/SearchBox.PNG" style="height: 380px; width: 410px" />
@@ -1602,9 +1575,8 @@
                       </div>
 
                       <div *ngIf="SI == 1 || SI == 2" class="card-footer text-right">
-                        <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                        <button (click)="previousState()" type="button" name="next" class="btn btn-success">Save</button>
-                        <button (click)="nextStep()" type="button" name="next" class="btn btn-primary">Next</button>
+                        <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Précedent</button>
+                        <button (click)="previousState()" type="button" name="next" class="btn btn-success">Sauvegarder</button>
                       </div>
                     </div>
                   </fieldset>
@@ -1612,7 +1584,7 @@
                   <fieldset *ngIf="step == 4">
                     <div class="card card-primary">
                       <div class="card-header">
-                        <h3 class="card-title">Simple School Item Details</h3>
+                        <h3 class="card-title">Détails Article Scolaire Simple</h3>
                       </div>
 
                       <div *ngIf="SI == 0">
@@ -1646,8 +1618,7 @@
                           </div>
                         </div>
                         <div class="card-footer text-right" style="margin-top: 1rem">
-                          <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                          <button (click)="next()" type="button" name="next" class="btn btn-primary">Next</button>
+                          <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Précedent</button>
                         </div>
                       </div>
 
@@ -1664,11 +1635,11 @@
                               >
                                 <div class="item text-right">
                                   <button style="margin-bottom: 1rem" (click)="next()" type="button" name="next" class="btn btn-primary">
-                                    Add Item
+                                    Ajouter Article
                                   </button>
                                 </div>
                                 <div class="item text-right" style="display: flex; margin-top: -1rem">
-                                  <label for="horizontal">Quantity</label>
+                                  <label for="horizontal">Quantité</label>
                                   <input
                                     type="number"
                                     style="width: 5rem; margin-left: 1rem; margin-bottom: 3rem"
@@ -1896,10 +1867,10 @@
                                 </div>
                                 <div class="card-body">
                                   <p-table [value]="SelectedLevel" styleClass="p-datatable-sm" responsiveLayout="scroll">
-                                    <ng-template pTemplate="caption"> Selected School Level </ng-template>
+                                    <ng-template pTemplate="caption"> Niveau scolaire sélectionné </ng-template>
                                     <ng-template pTemplate="header">
                                       <tr>
-                                        <th>sckool Level</th>
+                                        <th>Niveau scolaire</th>
                                         <th><span jhiTranslate="awtarApp.schoolLevelItem.quantityNeeded">Quantity Needed</span></th>
                                       </tr>
                                     </ng-template>
@@ -1941,11 +1912,11 @@
                                   name="next"
                                   class="btn btn-primary"
                                 >
-                                  Add Item
+                                  Ajouter article
                                 </button>
                               </div>
                               <div class="item text-right" style="display: flex; margin-top: -1rem">
-                                <label for="horizontal">Quantity</label>
+                                <label for="horizontal">Quantité</label>
                                 <input
                                   type="number"
                                   style="width: 5rem; margin-left: 1rem; margin-bottom: 3rem"
@@ -2194,10 +2165,10 @@
                                 </div>
                                 <div class="card-body">
                                   <p-table [value]="SelectedLevel" styleClass="p-datatable-sm" responsiveLayout="scroll">
-                                    <ng-template pTemplate="caption"> Selected School Level </ng-template>
+                                    <ng-template pTemplate="caption"> Niveau scolaire sélectionné </ng-template>
                                     <ng-template pTemplate="header">
                                       <tr>
-                                        <th>sckool Level</th>
+                                        <th>Niveau scolaire</th>
                                         <th><span jhiTranslate="awtarApp.schoolLevelItem.quantityNeeded">Quantity Needed</span></th>
                                       </tr>
                                     </ng-template>
@@ -2227,9 +2198,8 @@
                       </div>
 
                       <div *ngIf="SI == 1 || SI == 2" class="card-footer text-right">
-                        <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                        <button (click)="previousState()" type="button" name="next" class="btn btn-success">Save</button>
-                        <button (click)="nextStep()" type="button" name="next" class="btn btn-primary">Next</button>
+                        <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Précedent</button>
+                        <button (click)="previousState()" type="button" name="next" class="btn btn-success">Sauvegarder</button>
                       </div>
                     </div>
                   </fieldset>
@@ -2237,7 +2207,7 @@
                   <fieldset *ngIf="step == 5">
                     <div class="card card-primary">
                       <div class="card-header">
-                        <h3 class="card-title">Composite School Item</h3>
+                        <h3 class="card-title">Article Scolaire Composite</h3>
                       </div>
 
                       <div *ngIf="SI == 0">
@@ -2271,8 +2241,7 @@
                           </div>
                         </div>
                         <div class="card-footer text-right" style="margin-top: 1rem">
-                          <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                          <button (click)="next()" type="button" name="next" class="btn btn-primary">Next</button>
+                          <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Précedent</button>
                         </div>
                       </div>
 
@@ -2392,7 +2361,7 @@
                         <div class="card-body" style="margin-top: -2rem">
                           <div *ngIf="SIC == 2" class="card">
                             <div class="card-header">
-                              <h3 class="card-title">Compositeur Items</h3>
+                              <h3 class="card-title">Compositeurs Articles</h3>
                             </div>
 
                             <div class="card-body">
@@ -2405,11 +2374,11 @@
                               >
                                 <div class="item text-right">
                                   <button style="margin-bottom: 1rem" (click)="next()" type="button" name="next" class="btn btn-primary">
-                                    Add Item
+                                    Ajouter Article
                                   </button>
                                 </div>
                                 <div class="item text-right" style="margin-bottom: 2rem">
-                                  <label for="horizontal">Quantity</label>
+                                  <label for="horizontal">Quantité</label>
                                   <input type="number" formControlName="quantity" id="field_quantity" name="quantity" />
                                 </div>
 
@@ -2632,10 +2601,10 @@
                                 </div>
                                 <div class="card-body">
                                   <p-table [value]="SelectedLevel" styleClass="p-datatable-sm" responsiveLayout="scroll">
-                                    <ng-template pTemplate="caption"> Selected School Level </ng-template>
+                                    <ng-template pTemplate="caption"> Niveau scolaire sélectionné </ng-template>
                                     <ng-template pTemplate="header">
                                       <tr>
-                                        <th>sckool Level</th>
+                                        <th>Niveau scolaire</th>
                                         <th><span jhiTranslate="awtarApp.schoolLevelItem.quantityNeeded">Quantity Needed</span></th>
                                       </tr>
                                     </ng-template>
@@ -2662,14 +2631,13 @@
                               </div>
                             </div>
                             <div class="card-footer text-right" style="margin-top: 1rem">
-                              <button (click)="previous2()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                              <button (click)="nextStep()" type="button" name="reset" class="btn btn-primary">Reset</button>
+                              <button (click)="previous2()" type="button" name="previous" class="btn btn-secondary">Précedent</button>
                             </div>
                           </div>
 
                           <div *ngIf="SIC == 1" class="card">
                             <div class="card-header">
-                              <h3 class="card-title">Compositeur Items</h3>
+                              <h3 class="card-title">Compositeurs Articles</h3>
                             </div>
 
                             <div class="card-body">
@@ -2682,11 +2650,11 @@
                               >
                                 <div class="item text-right">
                                   <button style="margin-bottom: 1rem" (click)="next()" type="button" name="next" class="btn btn-primary">
-                                    Add Item
+                                    Ajouter Article
                                   </button>
                                 </div>
                                 <div class="item text-right" style="margin-bottom: 2rem">
-                                  <label for="horizontal">Quantity</label>
+                                  <label for="horizontal">Quantité</label>
                                   <input type="number" formControlName="quantity" id="field_quantity" name="quantity" />
                                 </div>
 
@@ -2909,10 +2877,10 @@
                                 </div>
                                 <div class="card-body">
                                   <p-table [value]="SelectedLevel" styleClass="p-datatable-sm" responsiveLayout="scroll">
-                                    <ng-template pTemplate="caption"> Selected School Level </ng-template>
+                                    <ng-template pTemplate="caption"> Niveau scolaire sélectionné </ng-template>
                                     <ng-template pTemplate="header">
                                       <tr>
-                                        <th>sckool Level</th>
+                                        <th>Niveau scolaire</th>
                                         <th><span jhiTranslate="awtarApp.schoolLevelItem.quantityNeeded">Quantity Needed</span></th>
                                       </tr>
                                     </ng-template>
@@ -2939,14 +2907,13 @@
                               </div>
                             </div>
                             <div class="card-footer text-right" style="margin-top: 1rem">
-                              <button (click)="previous2()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                              <button (click)="nextStep()" type="button" name="reset" class="btn btn-primary">Reset</button>
+                              <button (click)="previous2()" type="button" name="previous" class="btn btn-secondary">Précedent</button>
                             </div>
                           </div>
 
                           <div *ngIf="SIC == 0" class="card">
                             <div class="card-header">
-                              <h3 class="card-title">Compositeur Items</h3>
+                              <h3 class="card-title">Articles Compositeurs</h3>
                             </div>
                             <div style="display: flex">
                               <img src="../../../../content/images/SearchBox.PNG" style="height: 380px; width: 410px" />
@@ -3097,7 +3064,7 @@
                         <div class="card-body" style="margin-top: -2rem">
                           <div *ngIf="SIC == 2" class="card">
                             <div class="card-header">
-                              <h3 class="card-title">Compositeur Items</h3>
+                              <h3 class="card-title">Articles Compositeurs</h3>
                             </div>
 
                             <div class="card-body">
@@ -3116,11 +3083,11 @@
                                     name="next"
                                     class="btn btn-primary"
                                   >
-                                    Add Item
+                                    Ajouter Article
                                   </button>
                                 </div>
                                 <div class="item text-right" style="margin-bottom: 2rem">
-                                  <label for="horizontal">Quantity</label>
+                                  <label for="horizontal">Quantité</label>
                                   <input type="number" formControlName="quantity" id="field_quantity" name="quantity" />
                                 </div>
 
@@ -3373,14 +3340,13 @@
                               </div>
                             </div>
                             <div class="card-footer text-right" style="margin-top: 1rem">
-                              <button (click)="previous2()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                              <button (click)="nextStep()" type="button" name="reset" class="btn btn-primary">Reset</button>
+                              <button (click)="previous2()" type="button" name="previous" class="btn btn-secondary">Précedent</button>
                             </div>
                           </div>
 
                           <div *ngIf="SIC == 1" class="card">
                             <div class="card-header">
-                              <h3 class="card-title">Compositeur Items</h3>
+                              <h3 class="card-title">Articles Compositeurs</h3>
                             </div>
 
                             <div class="card-body">
@@ -3393,11 +3359,11 @@
                               >
                                 <div class="item text-right">
                                   <button style="margin-bottom: 1rem" (click)="next()" type="button" name="next" class="btn btn-primary">
-                                    Add Item
+                                    Ajouter Articles
                                   </button>
                                 </div>
                                 <div class="item text-right" style="margin-bottom: 2rem">
-                                  <label for="horizontal">Quantity</label>
+                                  <label for="horizontal">Quantité</label>
                                   <input type="number" formControlName="quantity" id="field_quantity" name="quantity" />
                                 </div>
 
@@ -3620,10 +3586,10 @@
                                 </div>
                                 <div class="card-body">
                                   <p-table [value]="SelectedLevel" styleClass="p-datatable-sm" responsiveLayout="scroll">
-                                    <ng-template pTemplate="caption"> Selected School Level </ng-template>
+                                    <ng-template pTemplate="caption"> Niveau scolaire sélectionné </ng-template>
                                     <ng-template pTemplate="header">
                                       <tr>
-                                        <th>sckool Level</th>
+                                        <th>Niveau scolaire</th>
                                         <th><span jhiTranslate="awtarApp.schoolLevelItem.quantityNeeded">Quantity Needed</span></th>
                                       </tr>
                                     </ng-template>
@@ -3650,14 +3616,13 @@
                               </div>
                             </div>
                             <div class="card-footer text-right" style="margin-top: 1rem">
-                              <button (click)="previous2()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                              <button (click)="nextStep()" type="button" name="reset" class="btn btn-primary">Reset</button>
+                              <button (click)="previous2()" type="button" name="previous" class="btn btn-secondary">Précedent</button>
                             </div>
                           </div>
 
                           <div *ngIf="SIC == 0" class="card">
                             <div class="card-header">
-                              <h3 class="card-title">Compositeur Items</h3>
+                              <h3 class="card-title">Articles Compositeurs</h3>
                             </div>
                             <div style="display: flex">
                               <img src="../../../../content/images/SearchBox.PNG" style="height: 380px; width: 410px" />
@@ -3693,9 +3658,8 @@
                       </div>
 
                       <div *ngIf="SI == 1 || SI == 2" class="card-footer text-right">
-                        <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Previous</button>
-                        <button (click)="previousState()" type="button" name="next" class="btn btn-success">Save</button>
-                        <button (click)="nextStep()" type="button" name="next" class="btn btn-primary">Next</button>
+                        <button (click)="previous()" type="button" name="previous" class="btn btn-secondary">Précedent</button>
+                        <button (click)="previousState()" type="button" name="next" class="btn btn-success">Sauvegerder</button>
                       </div>
                     </div>
                   </fieldset>

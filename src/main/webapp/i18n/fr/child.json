@@ -19,8 +19,14 @@
       },
       "id": "ID",
       "teachingCurriculum": "Cursus d'enseignement",
-      "childProfile": "Profil de l'enfant",
-      "family": "Famille"
+      "childProfile": "Enfant Profil",
+      "family": "Famille",
+      "childEducation": "Réglages Éducation D'enfant",
+      "childDonations": "Dons",
+      "childProfileInfo": "INFORMATIONS SUR L'ENFANT",
+      "childDonationsInfo": "DONS D'ENFANT",
+      "inTotalThereAre": "Au total il y a",
+      "childInfoReport": "RAPPORT SUR L'ENFANT"
     }
   }
 }

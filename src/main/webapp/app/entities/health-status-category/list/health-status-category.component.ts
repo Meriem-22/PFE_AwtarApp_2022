@@ -9,6 +9,8 @@ import { IHealthStatusCategory } from '../health-status-category.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { HealthStatusCategoryService } from '../service/health-status-category.service';
 import { HealthStatusCategoryDeleteDialogComponent } from '../delete/health-status-category-delete-dialog.component';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-health-status-category',
@@ -23,11 +25,13 @@ export class HealthStatusCategoryComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  account: Account | null = null;
 
   constructor(
     protected healthStatusCategoryService: HealthStatusCategoryService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
+    private accountService: AccountService,
     protected modalService: NgbModal
   ) {}
 
@@ -54,6 +58,10 @@ export class HealthStatusCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.handleNavigation();
   }
 

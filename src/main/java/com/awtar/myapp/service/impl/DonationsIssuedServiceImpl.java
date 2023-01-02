@@ -154,9 +154,9 @@ public class DonationsIssuedServiceImpl implements DonationsIssuedService {
             Integer[] quantitys = donationItemDetails.getQuantityOfItems();
             Long[] itemsWithoutQuantitys = donationItemDetails.getItemsWithoutQuantitys();
 
-            DonationDetails donationDetail = donationDetailsMapper.toEntity(donationDetails[i]);
-
             for (int b = 0; b < beneficiarys.length; b++) {
+                DonationDetails donationDetail = new DonationDetails();
+                donationDetail = donationDetailsMapper.toEntity(donationDetails[i]);
                 donationDetail.setDonationsIssued(donationsIssued);
                 donationDetail.setBeneficiary(beneficiaryRepository.getById(beneficiarys[b]));
                 donationDetail = donationDetailsRepository.save(donationDetail);
@@ -189,6 +189,39 @@ public class DonationsIssuedServiceImpl implements DonationsIssuedService {
     @Override
     public List<DonationsIssuedDTO> getLastValidatedDonations() {
         List<DonationsIssued> donations = donationsIssuedRepository.findAllDetailsItemDonations();
+        return donationsIssuedMapper.toDto(donations);
+    }
+
+    @Override
+    public List<DonationsIssuedDTO> Upcomingscheduleddonations() {
+        LocalDate date = LocalDate.now();
+        List<DonationsIssued> donations = donationsIssuedRepository.Upcomingscheduleddonations(date);
+        return donationsIssuedMapper.toDto(donations);
+    }
+
+    @Override
+    public List<DonationsIssuedDTO> UpcomingDonationsValidated() {
+        LocalDate date = LocalDate.now();
+        List<DonationsIssued> donations = donationsIssuedRepository.UpcomingDonationsValidated(date);
+        return donationsIssuedMapper.toDto(donations);
+    }
+
+    @Override
+    public List<DonationsIssuedDTO> IssuedDonationsOfCurrentYearByMonth() {
+        List<DonationsIssuedDTO> donations = donationsIssuedRepository.findIssuedDonationsByMonth();
+        return donations;
+    }
+
+    @Override
+    public List<DonationsIssuedDTO> CanceledDonationsOfCurrentYearByMonth() {
+        List<DonationsIssuedDTO> donations = donationsIssuedRepository.findCanceledDonationsByMonth();
+        return donations;
+    }
+
+    @Override
+    public List<DonationsIssuedDTO> GetAll() {
+        List<DonationsIssued> donations = donationsIssuedRepository.findAllNotArchivated();
+
         return donationsIssuedMapper.toDto(donations);
     }
 }

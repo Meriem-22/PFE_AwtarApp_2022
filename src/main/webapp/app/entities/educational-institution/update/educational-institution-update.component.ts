@@ -9,6 +9,8 @@ import { IEducationalInstitution, EducationalInstitution } from '../educational-
 import { EducationalInstitutionService } from '../service/educational-institution.service';
 import { ICity } from 'app/entities/city/city.model';
 import { CityService } from 'app/entities/city/service/city.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-educational-institution-update',
@@ -18,6 +20,7 @@ export class EducationalInstitutionUpdateComponent implements OnInit {
   isSaving = false;
 
   citiesSharedCollection: ICity[] = [];
+  account: Account | null = null;
 
   editForm = this.fb.group({
     id: [],
@@ -30,11 +33,15 @@ export class EducationalInstitutionUpdateComponent implements OnInit {
   constructor(
     protected educationalInstitutionService: EducationalInstitutionService,
     protected cityService: CityService,
+    private accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
     this.activatedRoute.data.subscribe(({ educationalInstitution }) => {
       this.updateForm(educationalInstitution);
 

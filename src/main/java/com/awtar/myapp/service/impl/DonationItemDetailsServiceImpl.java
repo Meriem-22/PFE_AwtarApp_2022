@@ -103,4 +103,28 @@ public class DonationItemDetailsServiceImpl implements DonationItemDetailsServic
 
         return donationsItem;
     }
+
+    @Override
+    public List<DonationItemDetailsDTO> getAllDonationItemDetailsOfFamilies(Long id) {
+        DonationsIssued donation = donationsIssuedRepository.getById(id);
+        List<DonationItemDetailsDTO> donationsItem = donationItemDetailsRepository.findAllFamiliesDonationItemsDetails(donation);
+
+        return donationsItem;
+    }
+
+    @Override
+    public List<DonationItemDetailsDTO> getAllDonationItemDetailsOfChildren(Long id) {
+        DonationsIssued donation = donationsIssuedRepository.getById(id);
+        List<DonationItemDetailsDTO> donationsItem = donationItemDetailsRepository.findAllChildrenDonationItemsDetails(donation);
+
+        return donationsItem;
+    }
+
+    @Override
+    public List<DonationItemDetailsDTO> getAllDonationItemDetailsOfEstablishments(Long id) {
+        DonationsIssued donation = donationsIssuedRepository.getById(id);
+        List<DonationItemDetailsDTO> donationsItem = donationItemDetailsRepository.findAllEstablishmentsDonationItemsDetails(donation);
+
+        return donationsItem;
+    }
 }

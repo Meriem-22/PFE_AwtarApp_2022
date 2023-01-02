@@ -7,9 +7,10 @@ import { AuthorizingOfficerDeleteDialogComponent } from './delete/authorizing-of
 import { AuthorizingOfficerRoutingModule } from './route/authorizing-officer-routing.module';
 import { AddComponent } from './add/add.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
-  imports: [SharedModule, AuthorizingOfficerRoutingModule, NgxPaginationModule],
+  imports: [SharedModule, AuthorizingOfficerRoutingModule, NgxPaginationModule, TableModule],
   declarations: [
     AuthorizingOfficerComponent,
     AuthorizingOfficerDetailComponent,

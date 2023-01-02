@@ -9,6 +9,8 @@ import { IEstablishmentType } from '../establishment-type.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { EstablishmentTypeService } from '../service/establishment-type.service';
 import { EstablishmentTypeDeleteDialogComponent } from '../delete/establishment-type-delete-dialog.component';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-establishment-type',
@@ -23,12 +25,14 @@ export class EstablishmentTypeComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  account: Account | null = null;
 
   constructor(
     protected establishmentTypeService: EstablishmentTypeService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private accountService: AccountService
   ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
@@ -55,6 +59,10 @@ export class EstablishmentTypeComponent implements OnInit {
 
   ngOnInit(): void {
     this.handleNavigation();
+
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
   }
 
   trackId(_index: number, item: IEstablishmentType): number {

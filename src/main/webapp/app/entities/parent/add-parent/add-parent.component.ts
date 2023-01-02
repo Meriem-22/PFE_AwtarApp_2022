@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventManager } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { ICity } from 'app/entities/city/city.model';
 import { CityService } from 'app/entities/city/service/city.service';
@@ -27,6 +29,7 @@ export class AddParentComponent implements OnInit {
   genderValues = Object.keys(Gender);
 
   citiesSharedCollection: ICity[] = [];
+  account: Account | null = null;
 
   maritalStatusValues = Object.keys(MaritalStatus);
 
@@ -70,12 +73,16 @@ export class AddParentComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected formBuilder: FormBuilder,
     protected router: Router,
+    private accountService: AccountService,
     protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ family }) => {
       this.parentFamily = family;
+    });
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
     });
 
     this.loadRelationshipsOptionsParent();

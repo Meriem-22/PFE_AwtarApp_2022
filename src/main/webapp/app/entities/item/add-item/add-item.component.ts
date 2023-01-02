@@ -25,6 +25,8 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { ISchoolLevelItem } from 'app/entities/school-level-item/school-level-item.model';
 import { ChildStatusService } from 'app/entities/child-status/service/child-status.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-add-item',
@@ -71,6 +73,7 @@ export class AddItemComponent implements OnInit {
   b!: string;
   n!: string;
   itemValue!: IItemValue;
+  account: Account | null = null;
   SimpleItemSearch?: string;
   CompositeurItemSearch?: string;
   schoolLevelDetails: ISchoolLevelItem[] = [];
@@ -184,11 +187,16 @@ export class AddItemComponent implements OnInit {
     protected itemValueService: ItemValueService,
     protected router: Router,
     protected messageService: MessageService,
+    private accountService: AccountService,
     protected confirmationService: ConfirmationService,
     protected childStatusService: ChildStatusService
   ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.loadRelationshipsOptions();
     this.schoolLevelService.findAllSchoolLevel().subscribe({
       next: (res: HttpResponse<ISchoolLevel[]>) => {

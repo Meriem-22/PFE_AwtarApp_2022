@@ -77,6 +77,8 @@ public class ProfileDTO implements Serializable {
 
     private LocalDate dateOfDeath;
 
+    private String family;
+
     public ProfileDTO() {}
 
     public ProfileDTO(
@@ -116,6 +118,26 @@ public class ProfileDTO implements Serializable {
         this.dateOfBirth = dateOfBirth;
         this.urlPhoto = urlPhoto;
         this.urlPhotoContentType = urlPhotoContentType;
+    }
+
+    public ProfileDTO(
+        Long id,
+        String firstName,
+        String lastName,
+        LocalDate dateOfBirth,
+        byte[] urlPhoto,
+        String urlPhotoContentType,
+        String family,
+        Gender gender
+    ) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.urlPhoto = urlPhoto;
+        this.urlPhotoContentType = urlPhotoContentType;
+        this.family = family;
+        this.gender = gender;
     }
 
     public ProfileDTO(
@@ -358,6 +380,14 @@ public class ProfileDTO implements Serializable {
 
     public void setDateOfDeath(LocalDate dateOfDeath) {
         this.dateOfDeath = dateOfDeath;
+    }
+
+    public String getFamily() {
+        return family;
+    }
+
+    public void setFamily(String family) {
+        this.family = family;
     }
 
     @Override

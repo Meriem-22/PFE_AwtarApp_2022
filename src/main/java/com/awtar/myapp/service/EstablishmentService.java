@@ -80,4 +80,12 @@ public interface EstablishmentService {
      * @return the persisted entity.
      */
     EstablishmentDTO add(EstablishmentDTO establishmentDTO);
+
+    /**
+     * Get the "id" city.
+     *
+     *@param id the id of the entity.
+     * @return the result.
+     */
+    EstablishmentDTO getEstablishmentsNumberByCity(Long id);
 }

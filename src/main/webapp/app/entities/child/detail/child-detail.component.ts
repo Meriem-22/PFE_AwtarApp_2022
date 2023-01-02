@@ -70,6 +70,10 @@ export class ChildDetailComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.activatedRoute.data.subscribe(({ child }) => {
       this.child = child;
       this.x = child.id;
@@ -122,17 +126,18 @@ export class ChildDetailComponent implements OnInit {
       next: (res: HttpResponse<IBeneficiary>) => {
         this.Beneficiary = res.body!;
         console.log(this.Beneficiary);
-        this.profileService.findProfile(this.Beneficiary.authorizingOfficer!.id!).subscribe({
-          next: res2 => {
-            this.Ordonnateur = res2;
-            console.log(this.Ordonnateur);
-          },
-          error: e => console.error(e),
-        });
+
         this.profileService.findProfile(this.Beneficiary.tutor!.id!).subscribe({
           next: res3 => {
             this.Tuteur = res3;
             console.log(this.Tuteur);
+          },
+          error: e => console.error(e),
+        });
+        this.profileService.findProfile(this.Beneficiary.authorizingOfficer!.id!).subscribe({
+          next: res2 => {
+            this.Ordonnateur = res2;
+            console.log(this.Ordonnateur);
           },
           error: e => console.error(e),
         });

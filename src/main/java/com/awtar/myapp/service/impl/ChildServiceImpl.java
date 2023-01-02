@@ -238,4 +238,10 @@ public class ChildServiceImpl implements ChildService {
     public List<ChildDTO> getChildrenWithoutFamilyDetails() {
         return childRepository.findChildrenWithoutFamilyDetails();
     }
+
+    @Override
+    public ChildDTO getChildrenNumberByCity(Long id) {
+        ChildDTO n = childRepository.findChildrenInCity(id);
+        return n;
+    }
 }

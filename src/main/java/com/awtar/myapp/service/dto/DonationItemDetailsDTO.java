@@ -30,6 +30,42 @@ public class DonationItemDetailsDTO implements Serializable {
 
     private Long itemsWithoutQuantitys[];
 
+    private String name;
+
+    private byte[] urlPhoto;
+
+    private String urlPhotoContentType;
+
+    private Double price;
+
+    private Long availableStockQuantity;
+
+    private Long bId;
+
+    private String description;
+
+    public DonationItemDetailsDTO() {}
+
+    public DonationItemDetailsDTO(
+        Integer quantity,
+        String name,
+        byte[] urlPhoto,
+        String urlPhotoContentType,
+        Double price,
+        Long availableStockQuantity,
+        Long bId,
+        String description
+    ) {
+        this.quantity = quantity;
+        this.name = name;
+        this.urlPhoto = urlPhoto;
+        this.urlPhotoContentType = urlPhotoContentType;
+        this.price = price;
+        this.availableStockQuantity = availableStockQuantity;
+        this.bId = bId;
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }
@@ -100,6 +136,62 @@ public class DonationItemDetailsDTO implements Serializable {
 
     public void setItemsWithoutQuantitys(Long[] itemsWithoutQuantitys) {
         this.itemsWithoutQuantitys = itemsWithoutQuantitys;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public byte[] getUrlPhoto() {
+        return urlPhoto;
+    }
+
+    public void setUrlPhoto(byte[] urlPhoto) {
+        this.urlPhoto = urlPhoto;
+    }
+
+    public String getUrlPhotoContentType() {
+        return urlPhotoContentType;
+    }
+
+    public void setUrlPhotoContentType(String urlPhotoContentType) {
+        this.urlPhotoContentType = urlPhotoContentType;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Long getAvailableStockQuantity() {
+        return availableStockQuantity;
+    }
+
+    public void setAvailableStockQuantity(Long availableStockQuantity) {
+        this.availableStockQuantity = availableStockQuantity;
+    }
+
+    public Long getbId() {
+        return bId;
+    }
+
+    public void setbId(Long bId) {
+        this.bId = bId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

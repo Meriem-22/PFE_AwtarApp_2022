@@ -31,4 +31,9 @@ public interface ChildRepository extends JpaRepository<Child, Long> {
         "select new com.awtar.myapp.service.dto.ChildDTO (c.id, e.beginningYear,  e.endYear, e.annualResult, e.result, l.schoolLevel) from Child c, TeachingCurriculum e, SchoolLevel l where c.id = e.child.id and e.schoolLevel.id = l.id and e.beginningYear = :beginningYear"
     )
     List<ChildDTO> findChildEducationDetails(@Param("beginningYear") String beginningYear);
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.ChildDTO ( COUNT(c.id) As NbInCity) from Child c, Profile p where c.id = p.child.id and p.placeOfResidence.id = :id and (p.archivated = null or p.archivated = false)"
+    )
+    ChildDTO findChildrenInCity(@Param("id") Long city);
 }

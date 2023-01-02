@@ -21,6 +21,8 @@ import { TutorService } from 'app/entities/tutor/service/tutor.service';
 import { ICity } from 'app/entities/city/city.model';
 import { CityService } from 'app/entities/city/service/city.service';
 import { Gender } from 'app/entities/enumerations/gender.model';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-profile-update',
@@ -29,11 +31,13 @@ import { Gender } from 'app/entities/enumerations/gender.model';
 export class ProfileUpdateComponent implements OnInit {
   isSaving = false;
   genderValues = Object.keys(Gender);
+  account: Account | null = null;
 
   parentsCollection: IParent[] = [];
   childrenCollection: IChild[] = [];
   authorizingOfficersCollection: IAuthorizingOfficer[] = [];
   tutorsCollection: ITutor[] = [];
+
   citiesSharedCollection: ICity[] = [];
 
   editForm = this.fb.group({
@@ -71,6 +75,7 @@ export class ProfileUpdateComponent implements OnInit {
     protected tutorService: TutorService,
     protected cityService: CityService,
     protected elementRef: ElementRef,
+    private accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -80,6 +85,10 @@ export class ProfileUpdateComponent implements OnInit {
       this.updateForm(profile);
 
       this.loadRelationshipsOptions();
+    });
+
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
     });
   }
 

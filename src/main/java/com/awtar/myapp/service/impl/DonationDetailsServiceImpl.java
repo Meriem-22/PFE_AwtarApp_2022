@@ -105,4 +105,22 @@ public class DonationDetailsServiceImpl implements DonationDetailsService {
         List<DonationDetailsDTO> donation = donationDetailsRepository.findAllDonationsList(beneficiaryRepository.getById(id));
         return donation;
     }
+
+    @Override
+    public List<DonationDetailsDTO> findAllDonationDetailsFamilies(Long id) {
+        List<DonationDetailsDTO> donation = donationDetailsRepository.findAllDonationDetailsFamilies(id);
+        return donation;
+    }
+
+    @Override
+    public List<DonationDetailsDTO> findAllDonationDetailsEstablishments(Long id) {
+        List<DonationDetailsDTO> donation = donationDetailsRepository.findAllDonationDetailsEstablishments(id);
+        return donation;
+    }
+
+    @Override
+    public List<DonationDetailsDTO> findAllDonationDetailsChildren(Long id) {
+        List<DonationDetailsDTO> donation = donationDetailsRepository.findAllDonationDetailsChildren(id);
+        return donation;
+    }
 }

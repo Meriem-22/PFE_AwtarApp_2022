@@ -217,4 +217,69 @@ public class DonationsIssuedResource {
         List<DonationsIssuedDTO> donationsIssuedDTO = donationsIssuedService.getLastValidatedDonations();
         return ResponseEntity.ok().body(donationsIssuedDTO);
     }
+
+    /**
+     * {@code GET  /donations-issueds/validated} : get the  donationsIssued.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationsIssuedDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donations-issueds/upcoming-scheduled-donations")
+    public ResponseEntity<List<DonationsIssuedDTO>> UpcomingScheduledDonationsIssued() {
+        log.debug("REST request to get DonationsIssued : {}");
+        List<DonationsIssuedDTO> donationsIssuedDTO = donationsIssuedService.Upcomingscheduleddonations();
+        return ResponseEntity.ok().body(donationsIssuedDTO);
+    }
+
+    /**
+     * {@code GET  /donations-issueds/upcoming-validated-donations} : get the  donationsIssued.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationsIssuedDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donations-issueds/upcoming-validated-donations")
+    public ResponseEntity<List<DonationsIssuedDTO>> UpcomingValidatedDonationsIssued() {
+        log.debug("REST request to get DonationsIssued : {}");
+        List<DonationsIssuedDTO> donationsIssuedDTO = donationsIssuedService.UpcomingDonationsValidated();
+        return ResponseEntity.ok().body(donationsIssuedDTO);
+    }
+
+    /**
+     * {@code GET  /donations-issueds/validated} : get the  donationsIssued.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationsIssuedDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donations-issueds/by-month")
+    public ResponseEntity<List<DonationsIssuedDTO>> DonationsIssuedOfCurrentYearByMoth() {
+        log.debug("REST request to get DonationsIssued by month : {}");
+        List<DonationsIssuedDTO> donationsIssuedDTO = donationsIssuedService.IssuedDonationsOfCurrentYearByMonth();
+        return ResponseEntity.ok().body(donationsIssuedDTO);
+    }
+
+    /**
+     * {@code GET  /donations-issueds/validated} : get the  donationsIssued.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationsIssuedDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donations-issueds/canceled-by-month")
+    public ResponseEntity<List<DonationsIssuedDTO>> CanceledDonationsOfCurrentYearByMoth() {
+        log.debug("REST request to get DonationsIssued by month : {}");
+        List<DonationsIssuedDTO> donationsIssuedDTO = donationsIssuedService.CanceledDonationsOfCurrentYearByMonth();
+        return ResponseEntity.ok().body(donationsIssuedDTO);
+    }
+
+    /**
+     * {@code GET  /donations-issueds/validated} : get the  donationsIssued.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationsIssuedDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donations-issueds/get-all")
+    public ResponseEntity<List<DonationsIssuedDTO>> GetAll() {
+        log.debug("REST request to get DonationsIssued  : {}");
+        List<DonationsIssuedDTO> donationsIssuedDTO = donationsIssuedService.GetAll();
+        return ResponseEntity.ok().body(donationsIssuedDTO);
+    }
 }

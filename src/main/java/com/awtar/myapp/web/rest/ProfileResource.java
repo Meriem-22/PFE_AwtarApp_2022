@@ -294,4 +294,43 @@ public class ProfileResource {
         List<ProfileDTO> profileDTOC = profileService.findOthersTutors(id);
         return ResponseEntity.ok().body(profileDTOC);
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profileDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/profiles/all-children")
+    public ResponseEntity<List<ProfileDTO>> getAllChildren() {
+        log.debug("REST request to get  all Profile : {}");
+        List<ProfileDTO> profileDTOC = profileService.findallchildren();
+        return ResponseEntity.ok().body(profileDTOC);
+    }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profileDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/profiles/all-authorizing-officers")
+    public ResponseEntity<List<ProfileDTO>> getAllAuthorizingOfficers() {
+        log.debug("REST request to get  all Profile : {}");
+        List<ProfileDTO> profileDTOC = profileService.findAllAuthorizingOfficers();
+        return ResponseEntity.ok().body(profileDTOC);
+    }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the profileDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/profiles/all-tutors")
+    public ResponseEntity<List<ProfileDTO>> getAllTutors() {
+        log.debug("REST request to get  all Profile : {}");
+        List<ProfileDTO> profileDTOC = profileService.findAllTutors();
+        return ResponseEntity.ok().body(profileDTOC);
+    }
 }

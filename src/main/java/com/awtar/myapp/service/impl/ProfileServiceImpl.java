@@ -161,4 +161,25 @@ public class ProfileServiceImpl implements ProfileService {
 
         return l;
     }
+
+    @Override
+    public List<ProfileDTO> findallchildren() {
+        List<ProfileDTO> l = profileRepository.findallchildren();
+
+        return l;
+    }
+
+    @Override
+    public List<ProfileDTO> findAllAuthorizingOfficers() {
+        List<ProfileDTO> l = profileRepository.findAllAuthorizingOfficers();
+
+        return l;
+    }
+
+    @Override
+    public List<ProfileDTO> findAllTutors() {
+        List<ProfileDTO> l = profileRepository.findAllTutors();
+
+        return l;
+    }
 }

@@ -7,6 +7,8 @@ import { finalize } from 'rxjs/operators';
 
 import { ISchoolLevel, SchoolLevel } from '../school-level.model';
 import { SchoolLevelService } from '../service/school-level.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-school-level-update',
@@ -14,6 +16,7 @@ import { SchoolLevelService } from '../service/school-level.service';
 })
 export class SchoolLevelUpdateComponent implements OnInit {
   isSaving = false;
+  account: Account | null = null;
 
   editForm = this.fb.group({
     id: [],
@@ -21,9 +24,17 @@ export class SchoolLevelUpdateComponent implements OnInit {
     archivated: [],
   });
 
-  constructor(protected schoolLevelService: SchoolLevelService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected schoolLevelService: SchoolLevelService,
+    private accountService: AccountService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
     this.activatedRoute.data.subscribe(({ schoolLevel }) => {
       this.updateForm(schoolLevel);
     });

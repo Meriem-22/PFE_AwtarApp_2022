@@ -9,6 +9,7 @@ export interface IChild {
   teachingCurricula?: ITeachingCurriculum[] | null;
   childProfile?: IProfile | null;
   family?: IFamily | null;
+  NbInCity?: number;
 }
 
 export class Child implements IChild {
@@ -16,7 +17,8 @@ export class Child implements IChild {
     public id?: number,
     public teachingCurricula?: ITeachingCurriculum[] | null,
     public childProfile?: IProfile | null,
-    public family?: IFamily | null
+    public family?: IFamily | null,
+    public NbInCity?: number
   ) {}
 }
 

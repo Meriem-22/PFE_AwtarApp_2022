@@ -35,6 +35,8 @@ import { TableModule } from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'primeng/calendar';
 import { ChartModule } from 'primeng/chart';
+import { GalleriaModule } from 'primeng/galleria';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   imports: [
@@ -58,6 +60,8 @@ import { ChartModule } from 'primeng/chart';
     BrowserAnimationsModule,
     CalendarModule,
     ChartModule,
+    GalleriaModule,
+    DialogModule,
   ],
   providers: [
     Title,

@@ -32,7 +32,9 @@
       "recurrence": "Récurrence",
       "archivated": "Archivé",
       "donationsDetails": "Détails des dons",
-      "itemQuantities": "Quantités D'articles"
+      "itemQuantities": "Quantités D'articles",
+      "donationsIssued": "Dons Émis",
+      "addDonationIssued": "Ajouter Don Émis"
     }
   }
 }

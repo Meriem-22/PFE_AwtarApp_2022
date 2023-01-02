@@ -2,7 +2,7 @@
   "awtarApp": {
     "donationsIssued": {
       "home": {
-        "title": "Donations Issueds",
+        "title": "Donations Issued",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Donations Issued",
         "createOrEditLabel": "Create or edit a Donations Issued",
@@ -32,7 +32,9 @@
       "recurrence": "Recurrence",
       "archivated": "Archivated",
       "donationsDetails": "Donations Details",
-      "itemQuantities": "Item Quantities"
+      "itemQuantities": "Item Quantities",
+      "donationsIssued": "Donations Issued",
+      "addDonationIssued": "Add Donations Issued"
     }
   }
 }

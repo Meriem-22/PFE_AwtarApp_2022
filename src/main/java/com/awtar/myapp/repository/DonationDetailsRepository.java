@@ -56,4 +56,27 @@ public interface DonationDetailsRepository extends JpaRepository<DonationDetails
         "from DonationItemDetails did, DonationsIssued di, DonationDetails dd where (did.donationDetails.id = dd.id and dd.donationsIssued.id = di.id and dd.beneficiary = :beneficiary) GROUP  BY di.id "
     )
     List<DonationDetailsDTO> findAllDonationsList(@Param("beneficiary") Beneficiary beneficiary);
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.DonationDetailsDTO (d.id, d.description, d.nature.name, f.familyName, f.id) from DonationDetails d, Family f where d.donationsIssued.id = :id and (d.archivated =false or d.archivated =null) and f.id = d.beneficiary.id and (f.archivated =false or f.archivated =null)"
+    )
+    List<DonationDetailsDTO> findAllDonationDetailsFamilies(@Param("id") Long id);
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.DonationDetailsDTO (d.id AS detailsId, d.description, d.nature.name, e.name, e.id) from DonationDetails d, Establishment e where d.donationsIssued.id = :id and (d.archivated =false or d.archivated =null) and e.id = d.beneficiary.id and (e.archivated =false or e.archivated =null)"
+    )
+    List<DonationDetailsDTO> findAllDonationDetailsEstablishments(@Param("id") Long id);
+
+    /* 
+    @Query(
+        "select new com.awtar.myapp.service.dto.DonationDetailsDTO (d.id AS detailsId, d.description, d.nature.name, p.firstName, p.lastName, p.urlPhoto, p.urlPhotoContentType, c.id As childId) from DonationDetails d, Profile p, Child c where d.donationsIssued.id = :id and (d.archivated =false or d.archivated =null) and c.id = d.beneficiary.id and p.child.id = c.id and  (p.archivated =false or p.archivated =null)"
+    )
+    List<DonationDetailsDTO> findAllDonationDetailsChildren(@Param("id") Long id);
+
+}*/
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.DonationDetailsDTO (d.id AS detailsId, d.description, d.nature.name, p.firstName, p.lastName, p.urlPhoto, p.urlPhotoContentType, c.id) from DonationDetails d, Profile p, Child c where d.donationsIssued.id = :id and (d.archivated =false or d.archivated =null) and c.id = d.beneficiary.id and p.child.id = c.id and  (p.archivated =false or p.archivated =null)"
+    )
+    List<DonationDetailsDTO> findAllDonationDetailsChildren(@Param("id") Long id);
 }

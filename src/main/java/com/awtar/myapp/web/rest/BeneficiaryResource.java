@@ -325,4 +325,17 @@ public class BeneficiaryResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, beneficiaryDTO.getId().toString()))
             .body(result);
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the beneficiaryDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/beneficiaries/all")
+    public ResponseEntity<List<BeneficiaryDTO>> getAllBeneficiaires() {
+        log.debug("REST request to get  all Beneficiaires : {}");
+        List<BeneficiaryDTO> beneficiaryDTOC = beneficiaryService.TotalBeneficiaries();
+        return ResponseEntity.ok().body(beneficiaryDTOC);
+    }
 }

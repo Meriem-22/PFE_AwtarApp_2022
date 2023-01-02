@@ -1,6 +1,7 @@
 package com.awtar.myapp.repository;
 
 import com.awtar.myapp.domain.Establishment;
+import com.awtar.myapp.service.dto.EstablishmentDTO;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -41,4 +42,9 @@ public interface EstablishmentRepository extends JpaRepository<Establishment, Lo
         "select establishment from Establishment establishment left join fetch establishment.establishmentType left join fetch establishment.city where establishment.id =:id"
     )
     Optional<Establishment> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.EstablishmentDTO ( COUNT(e.id) As NbInCity) from Establishment e where e.city.id = :id and (e.archivated = null or e.archivated = false)"
+    )
+    EstablishmentDTO findEstablishmentsInCity(@Param("id") Long city);
 }

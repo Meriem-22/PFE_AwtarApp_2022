@@ -3,260 +3,1264 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
-    <meta name="generator" content="Hugo 0.98.0" />
-    <title>Album example · Bootstrap v5.2</title>
+    <meta name="author" content="Charles Anderson" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/" />
-
-    <link
-      href="/docs/5.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous"
-    />
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180" />
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
-    <link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json" />
-    <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9" />
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico" />
-    <meta name="theme-color" content="#712cf9" />
+    <title>AdminLTE 3 | Dashboard</title>
 
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
+      input,
+      select {
+        border-left-width: 0.08rem;
+        border-left-color: #d4d1d1;
+      }
+      p-autoComplete,
+      p-inputNumber {
+        border-left-width: 0.001;
+        border-left-color: white;
       }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-      .b-example-divider {
-        height: 3rem;
-        background-color: rgba(0, 0, 0, 0.1);
-        border: solid rgba(0, 0, 0, 0.15);
-        border-width: 1px 0;
-        box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1), inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -0.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
+      .product-item {
         display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
+        align-items: center;
+        padding: 0.5rem;
+        width: 100%;
       }
-      .album .container {
-        width: 80rem;
+
+      .product-item img {
+        width: 65px;
+        height: 65px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        margin-right: 1rem;
+      }
+
+      .product-item .product-list-detail {
+        flex: 1 1 0;
+      }
+
+      .product-item .product-list-action {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      .product-item .product-category-icon {
+        vertical-align: middle;
+        margin-right: 0.5rem;
+      }
+
+      .product-item.product-category {
+        vertical-align: middle;
+        line-height: 1;
+      }
+
+      @media screen and (max-width: 576px) {
+        .product-item {
+          flex-wrap: wrap;
+        }
+
+        .product-item .image-container {
+          width: 100%;
+          text-align: center;
+        }
+
+        .product-item img {
+          margin: 0 0 1rem 0;
+          width: 100px;
+        }
       }
     </style>
   </head>
-  <body>
-    <main>
-      <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
-            <div class="d-flex justify-content-center">
-              <div class="col-8">
-                <div *ngIf="donationsIssued">
-                  <h2 data-cy="donationsIssuedDetailsHeading">
-                    <span jhiTranslate="awtarApp.donationsIssued.detail.title">Donations Issued</span>
-                  </h2>
-
-                  <hr />
-
-                  <jhi-alert-error></jhi-alert-error>
-
-                  <jhi-alert></jhi-alert>
-
-                  <dl class="row-md jh-entity-details">
-                    <dt><span jhiTranslate="global.field.id">ID</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.id }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.model">Model</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.model }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.isValidated">Is Validated</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.isValidated }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.validationDate">Validation Date</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.validationDate | formatMediumDate }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.validationUser">Validation User</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.validationUser }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.donationsDate | formatMediumDate }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.canceledDonations">Canceled Donations</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.canceledDonations }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.canceledOn">Canceled On</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.canceledOn | formatMediumDate }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.canceledBy">Canceled By</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.canceledBy }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.cancellationReason">Cancellation Reason</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.cancellationReason }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.recurringDonations">Recurring Donations</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.recurringDonations }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.periodicity">Periodicity</span></dt>
-                    <dd>
-                      <span jhiTranslate="{{ 'awtarApp.Period.' + donationsIssued.periodicity }}">{{ donationsIssued.periodicity }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.recurrence">Recurrence</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.recurrence }}</span>
-                    </dd>
-                    <dt><span jhiTranslate="awtarApp.donationsIssued.archivated">Archivated</span></dt>
-                    <dd>
-                      <span>{{ donationsIssued.archivated }}</span>
-                    </dd>
-                  </dl>
-
-                  <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-                    <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-                  </button>
-
-                  <button type="button" [routerLink]="['/donations-issued', donationsIssued.id, 'edit']" class="btn btn-primary">
-                    <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="album py-5 bg-light">
-        <div class="container">
-          <h2><span>Tous les détails des Dons</span></h2>
-
-          <hr />
-
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-              <div class="card shadow-sm" style="width: 1200px">
-                <div class="card-body">
-                  <table class="table table-striped" aria-describedby="page-heading">
-                    <thead>
-                      <tr>
-                        <th><span jhiTranslate="global.field.id">ID</span></th>
-                        <th>
-                          <span jhiTranslate="awtarApp.donationItemDetails.quantity">Quantity</span>
-                        </th>
-                        <th>
-                          <span jhiTranslate="awtarApp.donationItemDetails.date">Date</span>
-                        </th>
-                        <th>
-                          <span jhiTranslate="awtarApp.donationItemDetails.archivated">Archivated</span>
-                        </th>
-                        <th>
-                          <span jhiTranslate="awtarApp.donationItemDetails.donationDetails">Donation Details</span>
-                        </th>
-                        <th>
-                          <span jhiTranslate="awtarApp.donationItemDetails.item">Item</span>
-                        </th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let donationItemDetails of donations" data-cy="entityTable">
-                        <td>
-                          <a [routerLink]="['/donation-item-details', donationItemDetails.id, 'view']">{{ donationItemDetails.id }}</a>
-                        </td>
-                        <td>{{ donationItemDetails.quantity }}</td>
-                        <td>{{ donationItemDetails.date | formatMediumDate }}</td>
-                        <td>{{ donationItemDetails.archivated }}</td>
-                        <td>
-                          <div *ngIf="donationItemDetails.donationDetails">
-                            <a [routerLink]="['/donation-details', donationItemDetails.donationDetails?.id, 'view']">{{
-                              donationItemDetails.donationDetails?.id
-                            }}</a>
-                          </div>
-                        </td>
-                        <td>
-                          <div *ngIf="donationItemDetails.item">
-                            <a [routerLink]="['/item', donationItemDetails.item?.id, 'view']">{{ donationItemDetails.item?.name }}</a>
-                          </div>
-                        </td>
-                        <td class="text-end">
-                          <div class="btn-group">
-                            <button
-                              type="submit"
-                              [routerLink]="['/donation-item-details', donationItemDetails.id, 'view']"
-                              class="btn btn-info btn-sm"
-                              data-cy="entityDetailsButton"
-                            >
-                              <fa-icon icon="eye"></fa-icon>
-                              <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
-
-                            <button
-                              type="submit"
-                              [routerLink]="['/donation-item-details', donationItemDetails.id, 'edit']"
-                              class="btn btn-primary btn-sm"
-                              data-cy="entityEditButton"
-                            >
-                              <fa-icon icon="pencil-alt"></fa-icon>
-                              <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../../content/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
       </div>
-    </main>
+
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black">
+        <a href="index3.html" class="brand-link" style="background-color: black">
+          <img
+            src="../../content/img/AdminLTELogo.png"
+            alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3"
+            style="opacity: 0.8"
+          />
+          <span class="brand-text font-weight-light">AWTAR</span>
+        </a>
+
+        <div class="sidebar">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">{{ account?.login }}</a>
+            </div>
+          </div>
+
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item menu-open">
+                <a href="dashboard" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p><span jhiTranslate="dashboard.dashboard">Dashboard</span></p>
+                </a>
+              </li>
+              <li class="nav-header"><span jhiTranslate="dashboard.beneficiaries">BENEFICIARIES</span></li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
+                  <p>
+                    <span jhiTranslate="dashboard.families">Families</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/family" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfFamilies">List of Families</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/family/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addFamily">Add Family</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
+                  <p>
+                    <span jhiTranslate="dashboard.children">Children</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/child" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfChildren">List Of Chilfren</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="child/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addChild">Add Child</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
+                  <p>
+                    <span jhiTranslate="dashboard.establishments">Establishments</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/establishment" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfEstablishments">List Of Establishments</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/establishment/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+
+                      <p><span jhiTranslate="dashboard.addEstablishment">Add Establishment</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.donations">DONATIONS</span></li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
+                  <p>
+                    <span jhiTranslate="dashboard.donationsIssued">Donations Issued</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/donations-issued" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfDonationsIssued">List of Donations Issued</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/donations-issued/add-any-donations" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addDonationsIssued">Add Donations Issued</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
+                  <p>
+                    <span jhiTranslate="dashboard.donationsReceived">Donations Received</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/donations-received" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfDonationsReceived">List Of Donations Received</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/donations-received/new" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addDonationsReceived">Add Donations Received</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.donationsItems">DONATIONS Items</span></li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    <span jhiTranslate="dashboard.items">Items</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/item" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfItems">List of Items</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/item/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addItem">Add Item</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statusOfItem">Status Item</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.referenceTable">REFERENCE TABLE</span></li>
+
+              <li class="nav-item">
+                <a href="establishment-type" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.establishmentsTypes">Establishments Types</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/city" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.Citys">Citys</span></p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.healthCategories">Health Categories</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/nature" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.natureOfDonOrItem">Nature</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/school-level" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.schoolLevels">School Level</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/educational-institution" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.educationInstitutions">Educational Institutions</span></p>
+                </a>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.contributors">CONTRIBUTORS</span></li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
+                  <p>
+                    <span jhiTranslate="dashboard.authorizingOfficers">Authorizing Officers</span>
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a routerLink="/authorizing-officer" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfAuthorizingOfficers">List Of Authorizing Officers</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/authorizing-officer/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addAuthorizingOfficer">Add Authorizing Officer</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    <span jhiTranslate="dashboard.tutors">Tutors</span>
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/tutor" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfTutors">List Of Tutors</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/tutor/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addTutor">Add Tutor</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item"></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="content-wrapper" style="margin-top: -3rem">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0"><span jhiTranslate="awtarApp.donationsIssued.donationsIssued">Donations Issued</span></h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.home">Home</span></a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.dashboard">Dashboard</span></a>
+                  </li>
+                  <li class="breadcrumb-item active">
+                    <span jhiTranslate="awtarApp.donationsIssued.donationsIssued">Donations Issued</span>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="content">
+          <div class="container-fluid">
+            <!--      
+<button class="btn" (click)="finalTableDetails()"> get Item</button>
+
+<p-table [value]="finalDonationItemsByDetailsFamilies!" dataKey="details.description" [tableStyle]="{'min-width': '60rem'}">
+  <ng-template pTemplate="header">
+      <tr>
+          <th style="width: 5rem"></th>
+          <th pSortableColumn="description"><span jhiTranslate="awtarApp.donationDetails.description">Description</span><p-sortIcon field="description"></p-sortIcon></th>
+          <th pSortableColumn="description"><span jhiTranslate="awtarApp.donationDetails.nature">Nature</span><p-sortIcon field="nature"></p-sortIcon></th>
+          <th pSortableColumn="familyName"><span jhiTranslate="awtarApp.donationDetails.beneficiary">Beneficiary</span><p-sortIcon field="familyName"></p-sortIcon></th>
+          
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-donation let-expanded="expanded">
+      <tr>
+          <td>
+              <button type="button" pButton pRipple [pRowToggler]="donation" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+          </td>
+          <td>{{donation.details.description}}</td>
+          <td>{{donation.details.nature}}</td>
+          <td><button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-info" (click)="finalTableDetails()"></button>
+          </td>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-donation>
+      <tr>
+          <td colspan="7">
+              <div class="p-3">
+                  <p-table [value]="donation.items" dataKey="description">
+                      <ng-template pTemplate="header">
+                          <tr>
+                              <th pSortableColumn="customer"><span jhiTranslate="awtarApp.item.urlPhoto">Url Photo</span> <p-sortIcon field="customer"></p-sortIcon></th>
+                              <th pSortableColumn="id"><span jhiTranslate="awtarApp.item.name">Name</span><p-sortIcon field="price"></p-sortIcon></th>
+                              <th pSortableColumn="date"><span jhiTranslate="awtarApp.itemValue.price">Price</span><p-sortIcon field="date"></p-sortIcon></th>
+                              <th pSortableColumn="amount"><span jhiTranslate="awtarApp.donationItemDetails.quantity">Quantity</span><p-sortIcon field="amount"></p-sortIcon></th>
+                              <th style="width: 4rem"></th>
+                          </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-item>
+                          <tr>
+                              <td><img [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto" style="height: 3rem; width: 3rem;" alt="item image" /></td>
+                              <td>{{item.name}}</td>
+                              <td>{{item.price}}</td>
+                              <td>{{item.quantity}}</td>
+                              <td><p-button type="button" icon="pi pi-search"></p-button></td>
+                          </tr>
+                      </ng-template>
+                      <ng-template pTemplate="emptymessage">
+                          <tr>
+                              <td colspan="6">There are no order for this product yet.</td>
+                          </tr>
+                      </ng-template>
+                  </p-table>
+              </div>
+          </td>
+      </tr>
+  </ng-template>
+</p-table>
+
+
+
+
+    
+    -->
+            <div *ngIf="step == 1">
+              <main style="background-color: white">
+                <div class="card" style="background-color: rgb(17, 135, 255)">
+                  <div class="card" style="margin-top: 3rem; margin-bottom: 3rem">
+                    <section class="py-5 text-center">
+                      <div class="row py-lg-5">
+                        <div class="col-lg-6 col-md-8 mx-auto">
+                          <div class="d-flex justify-content-center">
+                            <div class="col-8">
+                              <div *ngIf="donationsIssued">
+                                <h2 style="margin-top: -3rem" data-cy="donationsIssuedDetailsHeading">
+                                  {{ donationsIssued.model }}
+                                </h2>
+
+                                <hr />
+
+                                <jhi-alert></jhi-alert>
+
+                                <dl class="row-md jh-entity-details">
+                                  <dt><span jhiTranslate="awtarApp.donationsIssued.isValidated">Is Validated</span></dt>
+                                  <dd>
+                                    <button
+                                      *ngIf="donationsIssued.isValidated === true"
+                                      pButton
+                                      pRipple
+                                      type="button"
+                                      icon="pi pi-check"
+                                      class="p-button-rounded p-button-success"
+                                    ></button>
+                                    <button
+                                      *ngIf="donationsIssued.isValidated === false"
+                                      pButton
+                                      pRipple
+                                      type="button"
+                                      icon="pi pi-times"
+                                      class="p-button-rounded p-button-danger"
+                                    ></button>
+                                  </dd>
+
+                                  <dt><span jhiTranslate="awtarApp.donationsIssued.canceledDonations">Canceled Donations</span></dt>
+                                  <dd>
+                                    <button
+                                      *ngIf="donationsIssued.canceledDonations === true"
+                                      pButton
+                                      pRipple
+                                      type="button"
+                                      icon="pi pi-check"
+                                      class="p-button-rounded p-button-success"
+                                    ></button>
+                                    <button
+                                      *ngIf="donationsIssued.canceledDonations === false"
+                                      pButton
+                                      pRipple
+                                      type="button"
+                                      icon="pi pi-times"
+                                      class="p-button-rounded p-button-danger"
+                                    ></button>
+                                  </dd>
+
+                                  <dt><span jhiTranslate="awtarApp.donationsIssued.recurringDonations">Recurring Donations</span></dt>
+                                  <dd>
+                                    <button
+                                      *ngIf="donationsIssued.recurringDonations === true"
+                                      pButton
+                                      pRipple
+                                      type="button"
+                                      icon="pi pi-check"
+                                      class="p-button-rounded p-button-success"
+                                    ></button>
+                                    <button
+                                      *ngIf="donationsIssued.recurringDonations === false"
+                                      pButton
+                                      pRipple
+                                      type="button"
+                                      icon="pi pi-times"
+                                      class="p-button-rounded p-button-danger"
+                                    ></button>
+                                  </dd>
+
+                                  <dt><span jhiTranslate="awtarApp.donationsIssued.donationsDate">Donations Date</span></dt>
+                                  <dd>
+                                    <span>{{ donationsIssued.donationsDate | formatMediumDate }}</span>
+                                  </dd>
+                                  <dt><span jhiTranslate="awtarApp.donationsIssued.periodicity">Periodicity</span></dt>
+                                  <dd>
+                                    <span jhiTranslate="{{ 'awtarApp.Period.' + donationsIssued.periodicity }}">{{
+                                      donationsIssued.periodicity
+                                    }}</span>
+                                  </dd>
+                                  <dt><span jhiTranslate="awtarApp.donationsIssued.recurrence">Recurrence</span></dt>
+                                  <dd>
+                                    <span>{{ donationsIssued.recurrence }}</span>
+                                  </dd>
+                                </dl>
+
+                                <button type="submit" (click)="previousState()" class="btn btn-secondary" data-cy="entityDetailsBackButton">
+                                  <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                                </button>
+
+                                <button type="button" (click)="next()" class="btn btn-primary">
+                                  <fa-icon icon="eye"></fa-icon>&nbsp;<span>Details</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </main>
+            </div>
+            <div *ngIf="step == 2">
+              <div class="container">
+                <p-toolbar styleClass="mb-4">
+                  <ng-template pTemplate="left">
+                    <div>
+                      <div class="card">
+                        <div class="card-body">
+                          <nav class="nav grid-column nav-pills nav-gap-y-1">
+                            <a href="#children" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded active"> Children </a>
+                            <a href="#families" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded"> Families </a>
+                            <a href="#establishments" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                              Establishments
+                            </a>
+                          </nav>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+
+                  <ng-template pTemplate="right">
+                    <button pButton pRipple icon="pi pi-plus" class="p-button-success mr-2"></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-warning mr-2"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-danger"></button>
+                  </ng-template>
+                </p-toolbar>
+
+                <div>
+                  <div>
+                    <div class="card">
+                      <div class="card-body tab-content">
+                        <div class="tab-pane active" id="children">
+                          <p-table
+                            #dt
+                            [value]="finalDonationItemsByDetailsChildren!"
+                            dataKey="details.description"
+                            [tableStyle]="{ 'min-width': '67.8rem' }"
+                            [(selection)]="selectedDetails"
+                            [rowHover]="true"
+                            [rows]="3"
+                            [showCurrentPageReport]="true"
+                            [rowsPerPageOptions]="[3, 5, 10]"
+                            [paginator]="true"
+                            currentPageReportTemplate=" {first} ---> {last} / {totalRecords} "
+                            [filterDelay]="0"
+                            [globalFilterFields]="['description', 'details.natureDetailDon']"
+                          >
+                            <ng-template pTemplate="caption">
+                              <div class="table-header" style="display: flex">
+                                <h6 style="margin-right: 30rem; margin-top: 1rem">Liste De Détails Don Pour Enfants</h6>
+
+                                <span class="p-input-icon-left ml-auto">
+                                  <i class="pi pi-search"></i>
+                                  <input
+                                    pInputText
+                                    type="text"
+                                    (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                    placeholder="Recherche Globale"
+                                  />
+                                </span>
+                              </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                              <tr>
+                                <th style="width: 4rem">
+                                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                </th>
+
+                                <th style="width: 5rem"></th>
+                                <th pSortableColumn="description">
+                                  <span jhiTranslate="awtarApp.donationDetails.description">Description</span
+                                  ><p-sortIcon field="description"></p-sortIcon
+                                  ><p-columnFilter type="text" field="description" class="ml-auto" display="menu"></p-columnFilter>
+                                </th>
+                                <th pSortableColumn="natureDetailDon">
+                                  <span jhiTranslate="awtarApp.donationDetails.nature">Nature</span
+                                  ><p-sortIcon field="natureDetailDon"></p-sortIcon
+                                  ><p-columnFilter type="text" field="natureDetailDon" class="ml-auto" display="menu"></p-columnFilter>
+                                </th>
+                                <th><span jhiTranslate="awtarApp.donationDetails.beneficiary">Beneficiary</span></th>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-donation let-expanded="expanded">
+                              <tr>
+                                <td>
+                                  <p-tableCheckbox [value]="donation"></p-tableCheckbox>
+                                </td>
+
+                                <td>
+                                  <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="donation"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+                                  ></button>
+                                </td>
+                                <td>{{ donation.details.description }}</td>
+                                <td>{{ donation.details.natureDetailDon }}</td>
+
+                                <td>
+                                  <p-dialog header="" [(visible)]="display">
+                                    <p-table
+                                      [value]="beneficiariesToShow!"
+                                      dataKey="description"
+                                      [tableStyle]="{ 'min-width': '30rem' }"
+                                      [(selection)]="selectedItems"
+                                      dataKey="id"
+                                      [rowHover]="true"
+                                      [rows]="5"
+                                      [showCurrentPageReport]="true"
+                                      [rowsPerPageOptions]="[5, 10, 15]"
+                                      [paginator]="true"
+                                      currentPageReportTemplate=" {first} ---> {last} / {totalRecords} "
+                                      [filterDelay]="0"
+                                      [globalFilterFields]="['name']"
+                                    >
+                                      <ng-template pTemplate="header">
+                                        <tr>
+                                          <th></th>
+                                          <th pSortableColumn="firstName">
+                                            <div class="flex justify-content-between align-items-center">
+                                              <span jhiTranslate="awtarApp.profile.firstName">First Name</span>
+                                              <p-sortIcon field="firstName"></p-sortIcon>
+                                              <p-columnFilter type="text" field="firstName" display="menu" class="ml-auto"></p-columnFilter>
+                                            </div>
+                                          </th>
+                                          <th pSortableColumn="lastName">
+                                            <div class="flex justify-content-between align-items-center">
+                                              <span jhiTranslate="awtarApp.profile.lastName">Last Name</span>
+                                              <p-sortIcon field="lastName"></p-sortIcon>
+                                              <p-columnFilter type="text" field="lastName" display="menu" class="ml-auto"></p-columnFilter>
+                                            </div>
+                                          </th>
+
+                                          <th style="width: 4rem"></th>
+                                        </tr>
+                                      </ng-template>
+                                      <ng-template pTemplate="body" let-beneficiary>
+                                        <tr>
+                                          <td>
+                                            <div class="img text-center">
+                                              <a (click)="openFile(beneficiary.urlPhoto!, beneficiary.urlPhotoContentType!)">
+                                                <img
+                                                  *ngIf="beneficiary.urlPhoto"
+                                                  [src]="'data:' + beneficiary.urlPhotoContentType + ';base64,' + beneficiary.urlPhoto"
+                                                  width="34px"
+                                                  height="34px"
+                                                  class="shadow-4"
+                                                  alt="item image"
+                                                  style="border-radius: 50%"
+                                                />
+                                              </a>
+                                              <img
+                                                *ngIf="!beneficiary.urlPhoto"
+                                                [src]="'https://oasys.ch/wp-content/uploads/2019/03/photo-avatar-profil.png'"
+                                                width="34px"
+                                                height="34px"
+                                                class="shadow-4"
+                                                alt="item image"
+                                                style="border-radius: 50%"
+                                              />
+                                            </div>
+                                          </td>
+                                          <td>{{ beneficiary.firstName }}</td>
+                                          <td>{{ beneficiary.lastName }}</td>
+
+                                          <td>
+                                            <p-button
+                                              type="button"
+                                              icon="pi pi-eye"
+                                              [routerLink]="['/child', beneficiary.id, 'view']"
+                                            ></p-button>
+                                          </td>
+                                        </tr>
+                                      </ng-template>
+                                      <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                          <td colspan="6">There are no order for this beneficiary yet.</td>
+                                        </tr>
+                                      </ng-template>
+                                    </p-table>
+                                  </p-dialog>
+
+                                  <button
+                                    pButton
+                                    pRipple
+                                    type="button"
+                                    icon="pi pi-user"
+                                    class="p-button-rounded p-button-info"
+                                    (click)="showDialog(donation.beneficiary)"
+                                  ></button>
+                                </td>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="rowexpansion" let-donation>
+                              <tr>
+                                <td colspan="7">
+                                  <div class="p-3">
+                                    <p-table
+                                      [value]="donation.items"
+                                      dataKey="name"
+                                      [tableStyle]="{ 'min-width': '58rem' }"
+                                      [(selection)]="selectedItems"
+                                      [rowHover]="true"
+                                      [rows]="3"
+                                      [showCurrentPageReport]="true"
+                                      [rowsPerPageOptions]="[3, 7, 15]"
+                                      [paginator]="true"
+                                      currentPageReportTemplate=" {first} ---> {last} / {totalRecords} "
+                                      [filterDelay]="0"
+                                      [globalFilterFields]="['name', 'price', 'quantity']"
+                                    >
+                                      <ng-template pTemplate="header">
+                                        <tr>
+                                          <th><span jhiTranslate="awtarApp.item.urlPhoto">Url Photo</span></th>
+                                          <th>
+                                            <span jhiTranslate="awtarApp.item.name">Name</span><p-sortIcon field="name"></p-sortIcon
+                                            ><p-columnFilter type="text" field="name" class="ml-auto" display="menu"></p-columnFilter>
+                                          </th>
+                                          <th>
+                                            <span jhiTranslate="awtarApp.itemValue.price">Price</span><p-sortIcon field="price"></p-sortIcon
+                                            ><p-columnFilter type="text" field="price" class="ml-auto" display="menu"></p-columnFilter>
+                                          </th>
+                                          <th>
+                                            <span jhiTranslate="awtarApp.donationItemDetails.quantity">Quantity</span
+                                            ><p-sortIcon field="quantity"></p-sortIcon
+                                            ><p-columnFilter type="text" field="Quantity" class="ml-auto" display="menu"></p-columnFilter>
+                                          </th>
+                                          <th style="width: 4rem"></th>
+                                        </tr>
+                                      </ng-template>
+                                      <ng-template pTemplate="body" let-item>
+                                        <tr>
+                                          <td>
+                                            <img
+                                              [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto"
+                                              style="height: 3rem; width: 3rem"
+                                              alt="item image"
+                                            />
+                                          </td>
+                                          <td>{{ item.name }}</td>
+                                          <td>{{ item.price }}</td>
+                                          <td>{{ item.quantity }}</td>
+                                          <td><p-button type="button" icon="pi pi-eye"></p-button></td>
+                                        </tr>
+                                      </ng-template>
+                                      <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                          <td colspan="6">There are no order for this item yet.</td>
+                                        </tr>
+                                      </ng-template>
+                                    </p-table>
+                                  </div>
+                                </td>
+                              </tr>
+                            </ng-template>
+                          </p-table>
+                        </div>
+
+                        <div class="tab-pane" id="families">
+                          <p-table
+                            #dt
+                            [value]="finalDonationItemsByDetailsFamilies!"
+                            dataKey="details.description"
+                            [tableStyle]="{ 'min-width': '67.8rem' }"
+                            [(selection)]="selectedDetails"
+                            [rowHover]="true"
+                            [rows]="5"
+                            [showCurrentPageReport]="true"
+                            [rowsPerPageOptions]="[5, 10, 15]"
+                            [paginator]="true"
+                            currentPageReportTemplate=" {first} ---> {last} / {totalRecords} "
+                            [filterDelay]="0"
+                            [globalFilterFields]="['description', 'details.natureDetailDon']"
+                          >
+                            <ng-template pTemplate="caption">
+                              <div class="table-header" style="display: flex">
+                                <h6 style="margin-right: 30rem; margin-top: 1rem">Liste De Détails Don Pour Familles</h6>
+
+                                <span class="p-input-icon-left ml-auto">
+                                  <i class="pi pi-search"></i>
+                                  <input
+                                    pInputText
+                                    type="text"
+                                    (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                    placeholder="Recherche Globale"
+                                  />
+                                </span>
+                              </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                              <tr>
+                                <th style="width: 4rem">
+                                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                </th>
+                                <th style="width: 5rem"></th>
+                                <th pSortableColumn="description">
+                                  <span jhiTranslate="awtarApp.donationDetails.description">Description</span
+                                  ><p-sortIcon field="description"></p-sortIcon
+                                  ><p-columnFilter type="text" field="description" class="ml-auto" display="menu"></p-columnFilter>
+                                </th>
+                                <th pSortableColumn="natureDetailDon">
+                                  <span jhiTranslate="awtarApp.donationDetails.nature">Nature</span
+                                  ><p-sortIcon field="natureDetailDon"></p-sortIcon
+                                  ><p-columnFilter type="text" field="natureDetailDon" class="ml-auto" display="menu"></p-columnFilter>
+                                </th>
+                                <th><span jhiTranslate="awtarApp.donationDetails.beneficiary">Beneficiary</span></th>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-donation let-expanded="expanded">
+                              <tr>
+                                <td>
+                                  <p-tableCheckbox [value]="donation"></p-tableCheckbox>
+                                </td>
+                                <td>
+                                  <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="donation"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+                                  ></button>
+                                </td>
+                                <td>{{ donation.details.description }}</td>
+                                <td>{{ donation.details.natureDetailDon }}</td>
+
+                                <td>
+                                  <p-dialog header="" [(visible)]="display">
+                                    <p-table
+                                      [value]="beneficiariesToShow!"
+                                      dataKey="description"
+                                      [tableStyle]="{ 'min-width': '30rem' }"
+                                      [(selection)]="selectedItems"
+                                      dataKey="id"
+                                      [rowHover]="true"
+                                      [rows]="5"
+                                      [showCurrentPageReport]="true"
+                                      [rowsPerPageOptions]="[5, 10, 15]"
+                                      [paginator]="true"
+                                      currentPageReportTemplate=" {first} ---> {last} / {totalRecords} "
+                                      [filterDelay]="0"
+                                      [globalFilterFields]="['name']"
+                                    >
+                                      <ng-template pTemplate="header">
+                                        <tr>
+                                          <th style="display: flex">
+                                            <span style="margin-right: 0.8rem; margin-top: 1rem" jhiTranslate="awtarApp.family.familyName"
+                                              >Family Name</span
+                                            >
+                                            <p-columnFilter type="text" field="name" class="ml-auto"></p-columnFilter>
+                                          </th>
+
+                                          <th style="width: 4rem"></th>
+                                        </tr>
+                                      </ng-template>
+                                      <ng-template pTemplate="body" let-beneficiary>
+                                        <tr>
+                                          <td>
+                                            <img
+                                              src="../../../../content/images/famille-membres.jpg"
+                                              style="height: 3rem; width: 3rem"
+                                              alt="item image"
+                                            />
+                                            {{ beneficiary.name }}
+                                          </td>
+
+                                          <td>
+                                            <p-button
+                                              type="button"
+                                              icon="pi pi-eye"
+                                              [routerLink]="['/family', beneficiary.id, 'view']"
+                                            ></p-button>
+                                          </td>
+                                        </tr>
+                                      </ng-template>
+                                      <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                          <td colspan="6">There are no order for this beneficiary yet.</td>
+                                        </tr>
+                                      </ng-template>
+                                    </p-table>
+                                  </p-dialog>
+                                  <button
+                                    pButton
+                                    pRipple
+                                    type="button"
+                                    icon="pi pi-user"
+                                    class="p-button-rounded p-button-info"
+                                    (click)="showDialog(donation.beneficiary)"
+                                  ></button>
+                                </td>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="rowexpansion" let-donation>
+                              <tr>
+                                <td colspan="7">
+                                  <div class="p-3">
+                                    <p-table
+                                      [value]="donation.items"
+                                      dataKey="name"
+                                      [tableStyle]="{ 'min-width': '58rem' }"
+                                      [(selection)]="selectedItems"
+                                      [rowHover]="true"
+                                      [rows]="5"
+                                      [showCurrentPageReport]="true"
+                                      [rowsPerPageOptions]="[5, 10, 15]"
+                                      [paginator]="true"
+                                      currentPageReportTemplate=" {first} ---> {last} / {totalRecords} "
+                                      [filterDelay]="0"
+                                      [globalFilterFields]="['name', 'price', 'quantity']"
+                                    >
+                                      <ng-template pTemplate="header">
+                                        <tr>
+                                          <th><span jhiTranslate="awtarApp.item.urlPhoto">Url Photo</span></th>
+                                          <th>
+                                            <span jhiTranslate="awtarApp.item.name">Name</span><p-sortIcon field="name"></p-sortIcon
+                                            ><p-columnFilter type="text" field="name" class="ml-auto" display="menu"></p-columnFilter>
+                                          </th>
+                                          <th>
+                                            <span jhiTranslate="awtarApp.itemValue.price">Price</span><p-sortIcon field="price"></p-sortIcon
+                                            ><p-columnFilter type="text" field="price" class="ml-auto" display="menu"></p-columnFilter>
+                                          </th>
+                                          <th>
+                                            <span jhiTranslate="awtarApp.donationItemDetails.quantity">Quantity</span
+                                            ><p-sortIcon field="quantity"></p-sortIcon
+                                            ><p-columnFilter type="text" field="Quantity" class="ml-auto" display="menu"></p-columnFilter>
+                                          </th>
+                                          <th style="width: 4rem"></th>
+                                        </tr>
+                                      </ng-template>
+                                      <ng-template pTemplate="body" let-item>
+                                        <tr>
+                                          <td>
+                                            <img
+                                              [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto"
+                                              style="height: 3rem; width: 3rem"
+                                              alt="item image"
+                                            />
+                                          </td>
+                                          <td>{{ item.name }}</td>
+                                          <td>{{ item.price }}</td>
+                                          <td>{{ item.quantity }}</td>
+                                          <td><p-button type="button" icon="pi pi-eye"></p-button></td>
+                                        </tr>
+                                      </ng-template>
+                                      <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                          <td colspan="6">There are no order for this item yet.</td>
+                                        </tr>
+                                      </ng-template>
+                                    </p-table>
+                                  </div>
+                                </td>
+                              </tr>
+                            </ng-template>
+                          </p-table>
+                        </div>
+
+                        <div class="tab-pane" id="establishments">
+                          <p-table
+                            #dt
+                            [value]="finalDonationItemsByDetailsEstablishments!"
+                            dataKey="details.description"
+                            [tableStyle]="{ 'min-width': '67.8rem' }"
+                            [(selection)]="selectedDetails"
+                            [rowHover]="true"
+                            [rows]="5"
+                            [showCurrentPageReport]="true"
+                            [rowsPerPageOptions]="[5, 10, 15]"
+                            [paginator]="true"
+                            currentPageReportTemplate=" {first} ---> {last} / {totalRecords} "
+                            [filterDelay]="0"
+                            [globalFilterFields]="['description', 'details.natureDetailDon']"
+                          >
+                            <ng-template pTemplate="caption">
+                              <div class="table-header" style="display: flex">
+                                <h6 style="margin-right: 20rem; margin-top: 1rem">Liste De Détails Don Pour Établissements</h6>
+
+                                <span class="p-input-icon-left ml-auto">
+                                  <i class="pi pi-search"></i>
+                                  <input
+                                    pInputText
+                                    type="text"
+                                    (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                    placeholder="Recherche Globale"
+                                  />
+                                </span>
+                              </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                              <tr>
+                                <th style="width: 4rem">
+                                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                </th>
+                                <th style="width: 5rem"></th>
+                                <th pSortableColumn="description">
+                                  <span jhiTranslate="awtarApp.donationDetails.description">Description</span
+                                  ><p-sortIcon field="description"></p-sortIcon
+                                  ><p-columnFilter type="text" field="description" class="ml-auto" display="menu"></p-columnFilter>
+                                </th>
+                                <th pSortableColumn="natureDetailDon">
+                                  <span jhiTranslate="awtarApp.donationDetails.nature">Nature</span
+                                  ><p-sortIcon field="natureDetailDon"></p-sortIcon
+                                  ><p-columnFilter type="text" field="natureDetailDon" class="ml-auto" display="menu"></p-columnFilter>
+                                </th>
+                                <th><span jhiTranslate="awtarApp.donationDetails.beneficiary">Beneficiary</span></th>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-donation let-expanded="expanded">
+                              <tr>
+                                <td>
+                                  <p-tableCheckbox [value]="donation"></p-tableCheckbox>
+                                </td>
+                                <td>
+                                  <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="donation"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+                                  ></button>
+                                </td>
+                                <td>{{ donation.details.description }}</td>
+                                <td>{{ donation.details.natureDetailDon }}</td>
+
+                                <td>
+                                  <p-dialog header="" [(visible)]="display">
+                                    <p-table
+                                      [value]="beneficiariesToShow!"
+                                      dataKey="description"
+                                      [tableStyle]="{ 'min-width': '30rem' }"
+                                      [(selection)]="selectedItems"
+                                      dataKey="id"
+                                      [rowHover]="true"
+                                      [rows]="5"
+                                      [showCurrentPageReport]="true"
+                                      [rowsPerPageOptions]="[5, 10, 15]"
+                                      [paginator]="true"
+                                      currentPageReportTemplate=" {first} ---> {last} / {totalRecords} "
+                                      [filterDelay]="0"
+                                      [globalFilterFields]="['name']"
+                                    >
+                                      <ng-template pTemplate="header">
+                                        <tr>
+                                          <th style="display: flex">
+                                            <span style="margin-right: 0.8rem; margin-top: 1rem" jhiTranslate="awtarApp.establishment.name"
+                                              >Name</span
+                                            >
+                                            <p-columnFilter type="text" field="name" class="ml-auto"></p-columnFilter>
+                                          </th>
+
+                                          <th style="width: 4rem"></th>
+                                        </tr>
+                                      </ng-template>
+                                      <ng-template pTemplate="body" let-beneficiary>
+                                        <tr>
+                                          <td>
+                                            <img
+                                              src="../../../../content/images/famille-membres.jpg"
+                                              style="height: 3rem; width: 3rem"
+                                              alt="item image"
+                                            />
+                                            {{ beneficiary.name }}
+                                          </td>
+
+                                          <td>
+                                            <p-button
+                                              type="button"
+                                              icon="pi pi-eye"
+                                              [routerLink]="['/establishment', beneficiary.id, 'view']"
+                                            ></p-button>
+                                          </td>
+                                        </tr>
+                                      </ng-template>
+                                      <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                          <td colspan="6">There are no order for this beneficiary yet.</td>
+                                        </tr>
+                                      </ng-template>
+                                    </p-table>
+                                  </p-dialog>
+                                  <button
+                                    pButton
+                                    pRipple
+                                    type="button"
+                                    icon="pi pi-user"
+                                    class="p-button-rounded p-button-info"
+                                    (click)="showDialog(donation.beneficiary)"
+                                  ></button>
+                                </td>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="rowexpansion" let-donation>
+                              <tr>
+                                <td colspan="7">
+                                  <div class="p-3">
+                                    <p-table
+                                      [value]="donation.items"
+                                      dataKey="name"
+                                      [tableStyle]="{ 'min-width': '58rem' }"
+                                      [(selection)]="selectedItems"
+                                      [rowHover]="true"
+                                      [rows]="5"
+                                      [showCurrentPageReport]="true"
+                                      [rowsPerPageOptions]="[5, 10, 15]"
+                                      [paginator]="true"
+                                      currentPageReportTemplate=" {first} ---> {last} / {totalRecords} "
+                                      [filterDelay]="0"
+                                      [globalFilterFields]="['name', 'price', 'quantity']"
+                                    >
+                                      <ng-template pTemplate="header">
+                                        <tr>
+                                          <th><span jhiTranslate="awtarApp.item.urlPhoto">Url Photo</span></th>
+                                          <th>
+                                            <span jhiTranslate="awtarApp.item.name">Name</span><p-sortIcon field="name"></p-sortIcon
+                                            ><p-columnFilter type="text" field="name" class="ml-auto" display="menu"></p-columnFilter>
+                                          </th>
+                                          <th>
+                                            <span jhiTranslate="awtarApp.itemValue.price">Price</span><p-sortIcon field="price"></p-sortIcon
+                                            ><p-columnFilter type="text" field="price" class="ml-auto" display="menu"></p-columnFilter>
+                                          </th>
+                                          <th>
+                                            <span jhiTranslate="awtarApp.donationItemDetails.quantity">Quantity</span
+                                            ><p-sortIcon field="quantity"></p-sortIcon
+                                            ><p-columnFilter type="text" field="Quantity" class="ml-auto" display="menu"></p-columnFilter>
+                                          </th>
+                                          <th style="width: 4rem"></th>
+                                        </tr>
+                                      </ng-template>
+                                      <ng-template pTemplate="body" let-item>
+                                        <tr>
+                                          <td>
+                                            <img
+                                              [src]="'data:' + item.urlPhotoContentType + ';base64,' + item.urlPhoto"
+                                              style="height: 3rem; width: 3rem"
+                                              alt="item image"
+                                            />
+                                          </td>
+                                          <td>{{ item.name }}</td>
+                                          <td>{{ item.price }}</td>
+                                          <td>{{ item.quantity }}</td>
+                                          <td><p-button type="button" icon="pi pi-eye"></p-button></td>
+                                        </tr>
+                                      </ng-template>
+                                      <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                          <td colspan="6">There are no order for this item yet.</td>
+                                        </tr>
+                                      </ng-template>
+                                    </p-table>
+                                  </div>
+                                </td>
+                              </tr>
+                            </ng-template>
+                          </p-table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                style="margin-top: 3rem"
+                type="submit"
+                (click)="previousStep()"
+                class="btn btn-secondary"
+                data-cy="entityDetailsBackButton"
+              >
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
   </body>
 </html>

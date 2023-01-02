@@ -207,4 +207,43 @@ public class DonationItemDetailsResource {
         List<DonationItemDetailsDTO> donationItemDetailsDTO = donationItemDetailsService.findAllOfOneDonation(id);
         return ResponseEntity.ok().body(donationItemDetailsDTO);
     }
+
+    /**
+     * {@code GET  /donation-item-details/:id} : get the "id" donationItemDetails.
+     *
+     * @param id the id of the donationItemDetailsDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationItemDetailsDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donation-item-details/donation-issued/families/{id}")
+    public ResponseEntity<List<DonationItemDetailsDTO>> getAllFamiliesDonationItemDetails(@PathVariable Long id) {
+        log.debug("REST request to get DonationItemDetails : {}", id);
+        List<DonationItemDetailsDTO> donationItemDetailsDTO = donationItemDetailsService.getAllDonationItemDetailsOfFamilies(id);
+        return ResponseEntity.ok().body(donationItemDetailsDTO);
+    }
+
+    /**
+     * {@code GET  /donation-item-details/:id} : get the "id" donationItemDetails.
+     *
+     * @param id the id of the donationItemDetailsDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationItemDetailsDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donation-item-details/donation-issued/children/{id}")
+    public ResponseEntity<List<DonationItemDetailsDTO>> getAllChildrenDonationItemDetails(@PathVariable Long id) {
+        log.debug("REST request to get DonationItemDetails : {}", id);
+        List<DonationItemDetailsDTO> donationItemDetailsDTO = donationItemDetailsService.getAllDonationItemDetailsOfChildren(id);
+        return ResponseEntity.ok().body(donationItemDetailsDTO);
+    }
+
+    /**
+     * {@code GET  /donation-item-details/:id} : get the "id" donationItemDetails.
+     *
+     * @param id the id of the donationItemDetailsDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationItemDetailsDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donation-item-details/donation-issued/establishments/{id}")
+    public ResponseEntity<List<DonationItemDetailsDTO>> getAllEstablishmentsDonationItemDetails(@PathVariable Long id) {
+        log.debug("REST request to get DonationItemDetails : {}", id);
+        List<DonationItemDetailsDTO> donationItemDetailsDTO = donationItemDetailsService.getAllDonationItemDetailsOfEstablishments(id);
+        return ResponseEntity.ok().body(donationItemDetailsDTO);
+    }
 }

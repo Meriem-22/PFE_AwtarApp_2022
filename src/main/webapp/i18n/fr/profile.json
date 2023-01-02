@@ -37,7 +37,11 @@
       "tutor": "Tuteur",
       "statusOfHealth": "État de santé",
       "birthPlace": "Lieu de naissance",
-      "placeOfResidence": "Lieu de résidence"
+      "placeOfResidence": "Lieu de résidence",
+      "editProfile": "Editer Profil",
+      "iDCardNumber": "Numéro Carte D'identité",
+      "photoCardID": "Photo Carte D'identité",
+      "profile": "Profil"
     }
   }
 }

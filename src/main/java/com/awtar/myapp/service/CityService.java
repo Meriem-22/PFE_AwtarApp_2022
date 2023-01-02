@@ -1,6 +1,7 @@
 package com.awtar.myapp.service;
 
 import com.awtar.myapp.service.dto.CityDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,4 +56,12 @@ public interface CityService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Partially updates a city.
+     *
+     *
+     * @return the persisted entity.
+     */
+    List<CityDTO> getAll();
 }

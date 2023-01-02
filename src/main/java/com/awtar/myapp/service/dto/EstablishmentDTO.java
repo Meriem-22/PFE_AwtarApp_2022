@@ -46,6 +46,14 @@ public class EstablishmentDTO implements Serializable {
 
     private ProfileDTO tutor;
 
+    private Long NbInCity;
+
+    public EstablishmentDTO() {}
+
+    public EstablishmentDTO(Long NbInCity) {
+        this.NbInCity = NbInCity;
+    }
+
     public Long getId() {
         return id;
     }
@@ -188,6 +196,14 @@ public class EstablishmentDTO implements Serializable {
 
     public void setTutor(ProfileDTO tutor) {
         this.tutor = tutor;
+    }
+
+    public Long getNbInCity() {
+        return NbInCity;
+    }
+
+    public void setNbInCity(Long nbInCity) {
+        NbInCity = nbInCity;
     }
 
     @Override

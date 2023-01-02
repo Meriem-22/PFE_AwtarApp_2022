@@ -41,6 +41,10 @@ export class CityService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findall(): Observable<EntityArrayResponseType> {
+    return this.http.get<ICity[]>(this.resourceUrl + '/all', { observe: 'response' });
+  }
+
   addCityToCollectionIfMissing(cityCollection: ICity[], ...citiesToCheck: (ICity | null | undefined)[]): ICity[] {
     const cities: ICity[] = citiesToCheck.filter(isPresent);
     if (cities.length > 0) {

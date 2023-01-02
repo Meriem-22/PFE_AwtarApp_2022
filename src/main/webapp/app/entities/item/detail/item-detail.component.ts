@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IItem } from '../item.model';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-item-detail',
@@ -10,10 +12,15 @@ import { DataUtils } from 'app/core/util/data-util.service';
 })
 export class ItemDetailComponent implements OnInit {
   item: IItem | null = null;
+  account: Account | null = null;
 
-  constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute) {}
+  constructor(protected dataUtils: DataUtils, private accountService: AccountService, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.activatedRoute.data.subscribe(({ item }) => {
       this.item = item;
     });

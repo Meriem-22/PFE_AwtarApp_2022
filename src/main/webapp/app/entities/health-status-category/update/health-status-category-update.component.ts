@@ -7,6 +7,8 @@ import { finalize } from 'rxjs/operators';
 
 import { IHealthStatusCategory, HealthStatusCategory } from '../health-status-category.model';
 import { HealthStatusCategoryService } from '../service/health-status-category.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-health-status-category-update',
@@ -14,6 +16,7 @@ import { HealthStatusCategoryService } from '../service/health-status-category.s
 })
 export class HealthStatusCategoryUpdateComponent implements OnInit {
   isSaving = false;
+  account: Account | null = null;
 
   editForm = this.fb.group({
     id: [],
@@ -24,10 +27,15 @@ export class HealthStatusCategoryUpdateComponent implements OnInit {
   constructor(
     protected healthStatusCategoryService: HealthStatusCategoryService,
     protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService,
     protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.activatedRoute.data.subscribe(({ healthStatusCategory }) => {
       this.updateForm(healthStatusCategory);
     });

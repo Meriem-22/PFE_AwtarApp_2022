@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { EventManager } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { EventWithContent } from 'app/core/util/event-manager.service';
 import { ICity } from 'app/entities/city/city.model';
@@ -23,6 +25,7 @@ export class AddComponent implements OnInit {
   isSaving = false;
   genderValues = Object.keys(Gender);
   citiesSharedCollection: ICity[] = [];
+  account: Account | null = null;
 
   editForm = this.fb.group({
     id: [],
@@ -58,11 +61,15 @@ export class AddComponent implements OnInit {
     protected tutorService: TutorService,
     protected cityService: CityService,
     protected elementRef: ElementRef,
+    private accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
     this.activatedRoute.data.subscribe(({ profile }) => {
       this.updateForm(profile);
 

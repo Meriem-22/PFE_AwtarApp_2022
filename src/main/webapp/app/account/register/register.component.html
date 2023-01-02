@@ -1,234 +1,627 @@
-<div>
-  <div class="d-flex justify-content-center">
-    <div class="col-md-8">
-      <h1 jhiTranslate="register.title" data-cy="registerTitle">Registration</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Charles Anderson" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
 
-      <div class="alert alert-success" *ngIf="success" jhiTranslate="register.messages.success">
-        <strong>Registration saved!</strong> Please check your email for confirmation.
+    <title>AdminLTE 3 | Dashboard</title>
+  </head>
+
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../../content/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
       </div>
 
-      <div class="alert alert-danger" *ngIf="error" jhiTranslate="register.messages.error.fail">
-        <strong>Registration failed!</strong> Please try again later.
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black">
+        <a href="index3.html" class="brand-link" style="background-color: black">
+          <img
+            src="../../content/img/AdminLTELogo.png"
+            alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3"
+            style="opacity: 0.8"
+          />
+          <span class="brand-text font-weight-light">AWTAR</span>
+        </a>
+
+        <div class="sidebar">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">{{ account?.login }}</a>
+            </div>
+          </div>
+
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item menu-open">
+                <a href="dashboard" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p><span jhiTranslate="dashboard.dashboard">Dashboard</span></p>
+                </a>
+              </li>
+              <li class="nav-header"><span jhiTranslate="dashboard.beneficiaries">BENEFICIARIES</span></li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
+                  <p>
+                    <span jhiTranslate="dashboard.families">Families</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/family" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfFamilies">List of Families</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/family/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addFamily">Add Family</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
+                  <p>
+                    <span jhiTranslate="dashboard.children">Children</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/child" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfChildren">List Of Chilfren</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="child/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addChild">Add Child</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
+                  <p>
+                    <span jhiTranslate="dashboard.establishments">Establishments</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/establishment" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfEstablishments">List Of Establishments</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/establishment/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+
+                      <p><span jhiTranslate="dashboard.addEstablishment">Add Establishment</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.donations">DONATIONS</span></li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
+                  <p>
+                    <span jhiTranslate="dashboard.donationsIssued">Donations Issued</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/donations-issued" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfDonationsIssued">List of Donations Issued</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/donations-issued/add-any-donations" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addDonationsIssued">Add Donations Issued</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
+                  <p>
+                    <span jhiTranslate="dashboard.donationsReceived">Donations Received</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/donations-received" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfDonationsReceived">List Of Donations Received</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/donations-received/new" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addDonationsReceived">Add Donations Received</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.donationsItems">DONATIONS Items</span></li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    <span jhiTranslate="dashboard.items">Items</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/item" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfItems">List of Items</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/item/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addItem">Add Item</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statusOfItem">Status Item</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.referenceTable">REFERENCE TABLE</span></li>
+
+              <li class="nav-item">
+                <a href="establishment-type" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.establishmentsTypes">Establishments Types</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/city" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.Citys">Citys</span></p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.healthCategories">Health Categories</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/nature" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.natureOfDonOrItem">Nature</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/school-level" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.schoolLevels">School Level</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/educational-institution" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.educationInstitutions">Educational Institutions</span></p>
+                </a>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.contributors">CONTRIBUTORS</span></li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
+                  <p>
+                    <span jhiTranslate="dashboard.authorizingOfficers">Authorizing Officers</span>
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a routerLink="/authorizing-officer" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfAuthorizingOfficers">List Of Authorizing Officers</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/authorizing-officer/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addAuthorizingOfficer">Add Authorizing Officer</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    <span jhiTranslate="dashboard.tutors">Tutors</span>
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/tutor" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfTutors">List Of Tutors</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/tutor/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addTutor">Add Tutor</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item"></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="content-wrapper" style="margin-top: -3rem">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0"><span jhiTranslate="register.title" data-cy="registerTitle">Registration</span></h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.home">Home</span></a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.dashboard">Dashboard</span></a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.account">Compte</span></a>
+                  </li>
+                  <li class="breadcrumb-item"><span jhiTranslate="register.title" data-cy="registerTitle">Registration</span></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="content">
+          <div class="container-fluid">
+            <div>
+              <div class="d-flex justify-content-center">
+                <div class="col-md-8">
+                  <div class="alert alert-success" *ngIf="success" jhiTranslate="register.messages.success">
+                    <strong>Registration saved!</strong> Please check your email for confirmation.
+                    <button
+                      style="margin-top: 3rem"
+                      type="submit"
+                      (click)="previousState()"
+                      class="btn btn-secondary"
+                      data-cy="entityDetailsBackButton"
+                    >
+                      <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                    </button>
+                  </div>
+
+                  <div class="alert alert-danger" *ngIf="error" jhiTranslate="register.messages.error.fail">
+                    <strong>Registration failed!</strong> Please try again later.
+                  </div>
+
+                  <div class="alert alert-danger" *ngIf="errorUserExists" jhiTranslate="register.messages.error.userexists">
+                    <strong>Login name already registered!</strong> Please choose another one.
+                  </div>
+
+                  <div class="alert alert-danger" *ngIf="errorEmailExists" jhiTranslate="register.messages.error.emailexists">
+                    <strong>Email is already in use!</strong> Please choose another one.
+                  </div>
+
+                  <div class="alert alert-danger" *ngIf="doNotMatch" jhiTranslate="global.messages.error.dontmatch">
+                    The password and its confirmation do not match!
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-center">
+                <div class="card col-8">
+                  <div style="display: flex">
+                    <div class="col-5">
+                      <form name="form" role="form" (ngSubmit)="register()" [formGroup]="registerForm" *ngIf="!success">
+                        <div class="mb-3">
+                          <label class="form-label" style="margin-top: 1rem" for="login" jhiTranslate="global.form.username.label"
+                            >Username</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="login"
+                            name="login"
+                            placeholder="{{ 'global.form.username.placeholder' | translate }}"
+                            formControlName="login"
+                            data-cy="username"
+                            #login
+                          />
+
+                          <div
+                            *ngIf="
+                              registerForm.get('login')!.invalid && (registerForm.get('login')!.dirty || registerForm.get('login')!.touched)
+                            "
+                          >
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('login')?.errors?.required"
+                              jhiTranslate="register.messages.validate.login.required"
+                            >
+                              Your username is required.
+                            </small>
+
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('login')?.errors?.minlength"
+                              jhiTranslate="register.messages.validate.login.minlength"
+                            >
+                              Your username is required to be at least 1 character.
+                            </small>
+
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('login')?.errors?.maxlength"
+                              jhiTranslate="register.messages.validate.login.maxlength"
+                            >
+                              Your username cannot be longer than 50 characters.
+                            </small>
+
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('login')?.errors?.pattern"
+                              jhiTranslate="register.messages.validate.login.pattern"
+                            >
+                              Your username can only contain letters and digits.
+                            </small>
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label" for="email" jhiTranslate="global.form.email.label">Email</label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            placeholder="{{ 'global.form.email.placeholder' | translate }}"
+                            formControlName="email"
+                            data-cy="email"
+                          />
+
+                          <div
+                            *ngIf="
+                              registerForm.get('email')!.invalid && (registerForm.get('email')!.dirty || registerForm.get('email')!.touched)
+                            "
+                          >
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('email')?.errors?.required"
+                              jhiTranslate="global.messages.validate.email.required"
+                            >
+                              Your email is required.
+                            </small>
+
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('email')?.errors?.invalid"
+                              jhiTranslate="global.messages.validate.email.invalid"
+                            >
+                              Your email is invalid.
+                            </small>
+
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('email')?.errors?.minlength"
+                              jhiTranslate="global.messages.validate.email.minlength"
+                            >
+                              Your email is required to be at least 5 characters.
+                            </small>
+
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('email')?.errors?.maxlength"
+                              jhiTranslate="global.messages.validate.email.maxlength"
+                            >
+                              Your email cannot be longer than 100 characters.
+                            </small>
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label" for="password" jhiTranslate="global.form.newpassword.label">New password</label>
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="password"
+                            name="password"
+                            placeholder="{{ 'global.form.newpassword.placeholder' | translate }}"
+                            formControlName="password"
+                            data-cy="firstPassword"
+                          />
+
+                          <div
+                            *ngIf="
+                              registerForm.get('password')!.invalid &&
+                              (registerForm.get('password')!.dirty || registerForm.get('password')!.touched)
+                            "
+                          >
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('password')?.errors?.required"
+                              jhiTranslate="global.messages.validate.newpassword.required"
+                            >
+                              Your password is required.
+                            </small>
+
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('password')?.errors?.minlength"
+                              jhiTranslate="global.messages.validate.newpassword.minlength"
+                            >
+                              Your password is required to be at least 4 characters.
+                            </small>
+
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('password')?.errors?.maxlength"
+                              jhiTranslate="global.messages.validate.newpassword.maxlength"
+                            >
+                              Your password cannot be longer than 50 characters.
+                            </small>
+                          </div>
+
+                          <jhi-password-strength-bar [passwordToCheck]="registerForm.get('password')!.value"></jhi-password-strength-bar>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label" for="confirmPassword" jhiTranslate="global.form.confirmpassword.label"
+                            >New password confirmation</label
+                          >
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="{{ 'global.form.confirmpassword.placeholder' | translate }}"
+                            formControlName="confirmPassword"
+                            data-cy="secondPassword"
+                          />
+
+                          <div
+                            *ngIf="
+                              registerForm.get('confirmPassword')!.invalid &&
+                              (registerForm.get('confirmPassword')!.dirty || registerForm.get('confirmPassword')!.touched)
+                            "
+                          >
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('confirmPassword')?.errors?.required"
+                              jhiTranslate="global.messages.validate.confirmpassword.required"
+                            >
+                              Your confirmation password is required.
+                            </small>
+
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('confirmPassword')?.errors?.minlength"
+                              jhiTranslate="global.messages.validate.confirmpassword.minlength"
+                            >
+                              Your confirmation password is required to be at least 4 characters.
+                            </small>
+
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="registerForm.get('confirmPassword')?.errors?.maxlength"
+                              jhiTranslate="global.messages.validate.confirmpassword.maxlength"
+                            >
+                              Your confirmation password cannot be longer than 50 characters.
+                            </small>
+                          </div>
+                        </div>
+
+                        <button
+                          type="submit"
+                          [disabled]="registerForm.invalid"
+                          class="btn btn-primary"
+                          jhiTranslate="register.form.button"
+                          data-cy="submit"
+                        >
+                          Register
+                        </button>
+                      </form>
+
+                      <div *ngIf="success">
+                        <button
+                          style="margin-top: 3rem"
+                          type="submit"
+                          (click)="previousState()"
+                          class="btn btn-secondary"
+                          data-cy="entityDetailsBackButton"
+                        >
+                          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="col-3">
+                      <img src="../../../../content/images/no-profile.jpg" style="width: 29rem; height: 32.9rem" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
 
-      <div class="alert alert-danger" *ngIf="errorUserExists" jhiTranslate="register.messages.error.userexists">
-        <strong>Login name already registered!</strong> Please choose another one.
-      </div>
+      <footer class="main-footer"></footer>
 
-      <div class="alert alert-danger" *ngIf="errorEmailExists" jhiTranslate="register.messages.error.emailexists">
-        <strong>Email is already in use!</strong> Please choose another one.
-      </div>
-
-      <div class="alert alert-danger" *ngIf="doNotMatch" jhiTranslate="global.messages.error.dontmatch">
-        The password and its confirmation do not match!
-      </div>
+      <aside class="control-sidebar control-sidebar-dark"></aside>
     </div>
-  </div>
 
-  <div class="d-flex justify-content-center">
-    <div class="col-md-8">
-      <form name="form" role="form" (ngSubmit)="register()" [formGroup]="registerForm" *ngIf="!success">
-        <div class="mb-3">
-          <label class="form-label" for="login" jhiTranslate="global.form.username.label">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            id="login"
-            name="login"
-            placeholder="{{ 'global.form.username.placeholder' | translate }}"
-            formControlName="login"
-            data-cy="username"
-            #login
-          />
-
-          <div *ngIf="registerForm.get('login')!.invalid && (registerForm.get('login')!.dirty || registerForm.get('login')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('login')?.errors?.required"
-              jhiTranslate="register.messages.validate.login.required"
-            >
-              Your username is required.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('login')?.errors?.minlength"
-              jhiTranslate="register.messages.validate.login.minlength"
-            >
-              Your username is required to be at least 1 character.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('login')?.errors?.maxlength"
-              jhiTranslate="register.messages.validate.login.maxlength"
-            >
-              Your username cannot be longer than 50 characters.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('login')?.errors?.pattern"
-              jhiTranslate="register.messages.validate.login.pattern"
-            >
-              Your username can only contain letters and digits.
-            </small>
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="email" jhiTranslate="global.form.email.label">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="{{ 'global.form.email.placeholder' | translate }}"
-            formControlName="email"
-            data-cy="email"
-          />
-
-          <div *ngIf="registerForm.get('email')!.invalid && (registerForm.get('email')!.dirty || registerForm.get('email')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('email')?.errors?.required"
-              jhiTranslate="global.messages.validate.email.required"
-            >
-              Your email is required.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('email')?.errors?.invalid"
-              jhiTranslate="global.messages.validate.email.invalid"
-            >
-              Your email is invalid.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('email')?.errors?.minlength"
-              jhiTranslate="global.messages.validate.email.minlength"
-            >
-              Your email is required to be at least 5 characters.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('email')?.errors?.maxlength"
-              jhiTranslate="global.messages.validate.email.maxlength"
-            >
-              Your email cannot be longer than 100 characters.
-            </small>
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="password" jhiTranslate="global.form.newpassword.label">New password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            name="password"
-            placeholder="{{ 'global.form.newpassword.placeholder' | translate }}"
-            formControlName="password"
-            data-cy="firstPassword"
-          />
-
-          <div
-            *ngIf="registerForm.get('password')!.invalid && (registerForm.get('password')!.dirty || registerForm.get('password')!.touched)"
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('password')?.errors?.required"
-              jhiTranslate="global.messages.validate.newpassword.required"
-            >
-              Your password is required.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('password')?.errors?.minlength"
-              jhiTranslate="global.messages.validate.newpassword.minlength"
-            >
-              Your password is required to be at least 4 characters.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('password')?.errors?.maxlength"
-              jhiTranslate="global.messages.validate.newpassword.maxlength"
-            >
-              Your password cannot be longer than 50 characters.
-            </small>
-          </div>
-
-          <jhi-password-strength-bar [passwordToCheck]="registerForm.get('password')!.value"></jhi-password-strength-bar>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="confirmPassword" jhiTranslate="global.form.confirmpassword.label">New password confirmation</label>
-          <input
-            type="password"
-            class="form-control"
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="{{ 'global.form.confirmpassword.placeholder' | translate }}"
-            formControlName="confirmPassword"
-            data-cy="secondPassword"
-          />
-
-          <div
-            *ngIf="
-              registerForm.get('confirmPassword')!.invalid &&
-              (registerForm.get('confirmPassword')!.dirty || registerForm.get('confirmPassword')!.touched)
-            "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('confirmPassword')?.errors?.required"
-              jhiTranslate="global.messages.validate.confirmpassword.required"
-            >
-              Your confirmation password is required.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('confirmPassword')?.errors?.minlength"
-              jhiTranslate="global.messages.validate.confirmpassword.minlength"
-            >
-              Your confirmation password is required to be at least 4 characters.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('confirmPassword')?.errors?.maxlength"
-              jhiTranslate="global.messages.validate.confirmpassword.maxlength"
-            >
-              Your confirmation password cannot be longer than 50 characters.
-            </small>
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          [disabled]="registerForm.invalid"
-          class="btn btn-primary"
-          jhiTranslate="register.form.button"
-          data-cy="submit"
-        >
-          Register
-        </button>
-      </form>
-
-      <div class="mt-3 alert alert-warning">
-        <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
-        <a class="alert-link" routerLink="/login" jhiTranslate="global.messages.info.authenticated.link">sign in</a
-        ><span jhiTranslate="global.messages.info.authenticated.suffix"
-          >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
-          password="user").</span
-        >
-      </div>
-    </div>
-  </div>
-</div>
+    <script></script>
+  </body>
+</html>

@@ -24,7 +24,24 @@
       "manager": "Gérant",
       "managerCin": "CIN Gérant",
       "beneficiary": "Beneficiary",
-      "tutorProfile": "Profil du tuteur"
+      "tutorProfile": "Profil du tuteur",
+      "currentTutor": "Tuteur actuel",
+      "thereAre": "Il y a",
+      "otherTutors": "Autres Tuteurs",
+      "contributor": "Contributeur",
+      "editTutor": "Éditer Tuteur",
+      "profileSettings": "Réglages Profil",
+      "listOfFamilies": "Liste Des Familles",
+      "listOfChildren": "Liste Des Enfants",
+      "listOfEstablishments": "Liste Des Etablissement",
+      "profileInformation": "Profil Informations",
+      "settings1": "Réglages",
+      "info": "INFORMATION SUR LE TUTEUR",
+      "settings2": "REGLAGES TUTEUR",
+      "report": "Rapport",
+      "report2": "RAPPORT TUTEUR",
+      "generateReport": "Générer rapport",
+      "othersMembers": "Autres tuteurs"
     }
   }
 }

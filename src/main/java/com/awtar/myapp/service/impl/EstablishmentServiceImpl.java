@@ -176,4 +176,10 @@ public class EstablishmentServiceImpl implements EstablishmentService {
         establishmentRepository.save(establishment);
         return establishmentMapper.toDto(establishment);
     }
+
+    @Override
+    public EstablishmentDTO getEstablishmentsNumberByCity(Long id) {
+        EstablishmentDTO n = establishmentRepository.findEstablishmentsInCity(id);
+        return n;
+    }
 }

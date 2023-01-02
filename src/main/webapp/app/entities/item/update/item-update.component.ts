@@ -13,6 +13,8 @@ import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { INature } from 'app/entities/nature/nature.model';
 import { NatureService } from 'app/entities/nature/service/nature.service';
 import { ItemGender } from 'app/entities/enumerations/item-gender.model';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-item-update',
@@ -23,6 +25,7 @@ export class ItemUpdateComponent implements OnInit {
   itemGenderValues = Object.keys(ItemGender);
 
   naturesSharedCollection: INature[] = [];
+  account: Account | null = null;
 
   editForm = this.fb.group({
     id: [],
@@ -42,10 +45,15 @@ export class ItemUpdateComponent implements OnInit {
     protected natureService: NatureService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService,
     protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.activatedRoute.data.subscribe(({ item }) => {
       this.updateForm(item);
 

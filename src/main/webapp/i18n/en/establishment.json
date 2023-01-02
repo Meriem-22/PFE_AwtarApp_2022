@@ -33,7 +33,10 @@
       "remark": "Remark",
       "report": "Report",
       "establishmentType": "Establishment Type",
-      "city": "City"
+      "city": "City",
+      "establishment": "Establishment",
+      "AddEstablishment": "Add Establishment",
+      "establishmentInterface": "Establishment Interface"
     }
   }
 }

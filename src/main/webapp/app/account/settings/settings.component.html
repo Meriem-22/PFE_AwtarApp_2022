@@ -1,166 +1,531 @@
-<div>
-  <div class="d-flex justify-content-center">
-    <div class="col-md-8">
-      <h2 jhiTranslate="settings.title" [translateValues]="{ username: account.login }" *ngIf="account">
-        User settings for [<strong>{{ account.login }}</strong
-        >]
-      </h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Charles Anderson" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
 
-      <div class="alert alert-success" *ngIf="success" jhiTranslate="settings.messages.success">
-        <strong>Settings saved!</strong>
+    <title>AdminLTE 3 | Dashboard</title>
+  </head>
+
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../../content/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
       </div>
 
-      <jhi-alert-error></jhi-alert-error>
-
-      <form name="form" role="form" (ngSubmit)="save()" [formGroup]="settingsForm" *ngIf="account" novalidate>
-        <div class="mb-3">
-          <label class="form-label" for="firstName" jhiTranslate="settings.form.firstname">First Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="firstName"
-            name="firstName"
-            placeholder="{{ 'settings.form.firstname.placeholder' | translate }}"
-            formControlName="firstName"
-            data-cy="firstname"
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black">
+        <a href="index3.html" class="brand-link" style="background-color: black">
+          <img
+            src="../../content/img/AdminLTELogo.png"
+            alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3"
+            style="opacity: 0.8"
           />
+          <span class="brand-text font-weight-light">AWTAR</span>
+        </a>
 
-          <div
-            *ngIf="
-              settingsForm.get('firstName')!.invalid && (settingsForm.get('firstName')!.dirty || settingsForm.get('firstName')!.touched)
-            "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="settingsForm.get('firstName')?.errors?.required"
-              jhiTranslate="settings.messages.validate.firstname.required"
-            >
-              Your first name is required.
-            </small>
+        <div class="sidebar">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">{{ account?.login }}</a>
+            </div>
+          </div>
 
-            <small
-              class="form-text text-danger"
-              *ngIf="settingsForm.get('firstName')?.errors?.minlength"
-              jhiTranslate="settings.messages.validate.firstname.minlength"
-            >
-              Your first name is required to be at least 1 character.
-            </small>
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item menu-open">
+                <a href="dashboard" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p><span jhiTranslate="dashboard.dashboard">Dashboard</span></p>
+                </a>
+              </li>
+              <li class="nav-header"><span jhiTranslate="dashboard.beneficiaries">BENEFICIARIES</span></li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
+                  <p>
+                    <span jhiTranslate="dashboard.families">Families</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/family" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfFamilies">List of Families</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/family/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addFamily">Add Family</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
+                  <p>
+                    <span jhiTranslate="dashboard.children">Children</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/child" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfChildren">List Of Chilfren</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="child/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addChild">Add Child</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
+                  <p>
+                    <span jhiTranslate="dashboard.establishments">Establishments</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/establishment" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfEstablishments">List Of Establishments</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/establishment/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
 
-            <small
-              class="form-text text-danger"
-              *ngIf="settingsForm.get('firstName')?.errors?.maxlength"
-              jhiTranslate="settings.messages.validate.firstname.maxlength"
-            >
-              Your first name cannot be longer than 50 characters.
-            </small>
+                      <p><span jhiTranslate="dashboard.addEstablishment">Add Establishment</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.donations">DONATIONS</span></li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
+                  <p>
+                    <span jhiTranslate="dashboard.donationsIssued">Donations Issued</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/donations-issued" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfDonationsIssued">List of Donations Issued</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/donations-issued/add-any-donations" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addDonationsIssued">Add Donations Issued</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
+                  <p>
+                    <span jhiTranslate="dashboard.donationsReceived">Donations Received</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/donations-received" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfDonationsReceived">List Of Donations Received</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/donations-received/new" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addDonationsReceived">Add Donations Received</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.donationsItems">DONATIONS Items</span></li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    <span jhiTranslate="dashboard.items">Items</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/item" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfItems">List of Items</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/item/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addItem">Add Item</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statusOfItem">Status Item</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.referenceTable">REFERENCE TABLE</span></li>
+
+              <li class="nav-item">
+                <a href="establishment-type" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.establishmentsTypes">Establishments Types</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/city" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.Citys">Citys</span></p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.healthCategories">Health Categories</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/nature" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.natureOfDonOrItem">Nature</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/school-level" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.schoolLevels">School Level</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/educational-institution" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.educationInstitutions">Educational Institutions</span></p>
+                </a>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.contributors">CONTRIBUTORS</span></li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
+                  <p>
+                    <span jhiTranslate="dashboard.authorizingOfficers">Authorizing Officers</span>
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a routerLink="/authorizing-officer" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfAuthorizingOfficers">List Of Authorizing Officers</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/authorizing-officer/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addAuthorizingOfficer">Add Authorizing Officer</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    <span jhiTranslate="dashboard.tutors">Tutors</span>
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/tutor" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfTutors">List Of Tutors</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/tutor/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addTutor">Add Tutor</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item"></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="content-wrapper" style="margin-top: -3rem">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0"><span jhiTranslate="dashboard.account">Compte</span></h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.home">Home</span></a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.dashboard">Dashboard</span></a>
+                  </li>
+                  <li class="breadcrumb-item"><span jhiTranslate="dashboard.account">Compte</span></li>
+                </ol>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="mb-3">
-          <label class="form-label" for="lastName" jhiTranslate="settings.form.lastname">Last Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="lastName"
-            name="lastName"
-            placeholder="{{ 'settings.form.lastname.placeholder' | translate }}"
-            formControlName="lastName"
-            data-cy="lastname"
-          />
+        <section class="content">
+          <div class="container-fluid">
+            <div>
+              <div class="d-flex justify-content-center">
+                <div class="col-md-8">
+                  <h2 jhiTranslate="settings.title" [translateValues]="{ username: account.login }" *ngIf="account">
+                    User settings for [<strong>{{ account.login }}</strong
+                    >]
+                  </h2>
 
-          <div
-            *ngIf="settingsForm.get('lastName')!.invalid && (settingsForm.get('lastName')!.dirty || settingsForm.get('lastName')!.touched)"
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="settingsForm.get('lastName')?.errors?.required"
-              jhiTranslate="settings.messages.validate.lastname.required"
-            >
-              Your last name is required.
-            </small>
+                  <div class="alert alert-success" *ngIf="success" jhiTranslate="settings.messages.success">
+                    <strong>Settings saved!</strong>
+                  </div>
 
-            <small
-              class="form-text text-danger"
-              *ngIf="settingsForm.get('lastName')?.errors?.minlength"
-              jhiTranslate="settings.messages.validate.lastname.minlength"
-            >
-              Your last name is required to be at least 1 character.
-            </small>
+                  <jhi-alert-error></jhi-alert-error>
 
-            <small
-              class="form-text text-danger"
-              *ngIf="settingsForm.get('lastName')?.errors?.maxlength"
-              jhiTranslate="settings.messages.validate.lastname.maxlength"
-            >
-              Your last name cannot be longer than 50 characters.
-            </small>
+                  <form name="form" role="form" (ngSubmit)="save()" [formGroup]="settingsForm" *ngIf="account" novalidate>
+                    <div class="mb-3">
+                      <label class="form-label" for="firstName" jhiTranslate="settings.form.firstname">First Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="firstName"
+                        name="firstName"
+                        placeholder="{{ 'settings.form.firstname.placeholder' | translate }}"
+                        formControlName="firstName"
+                        data-cy="firstname"
+                      />
+
+                      <div
+                        *ngIf="
+                          settingsForm.get('firstName')!.invalid &&
+                          (settingsForm.get('firstName')!.dirty || settingsForm.get('firstName')!.touched)
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="settingsForm.get('firstName')?.errors?.required"
+                          jhiTranslate="settings.messages.validate.firstname.required"
+                        >
+                          Your first name is required.
+                        </small>
+
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="settingsForm.get('firstName')?.errors?.minlength"
+                          jhiTranslate="settings.messages.validate.firstname.minlength"
+                        >
+                          Your first name is required to be at least 1 character.
+                        </small>
+
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="settingsForm.get('firstName')?.errors?.maxlength"
+                          jhiTranslate="settings.messages.validate.firstname.maxlength"
+                        >
+                          Your first name cannot be longer than 50 characters.
+                        </small>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label" for="lastName" jhiTranslate="settings.form.lastname">Last Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="lastName"
+                        name="lastName"
+                        placeholder="{{ 'settings.form.lastname.placeholder' | translate }}"
+                        formControlName="lastName"
+                        data-cy="lastname"
+                      />
+
+                      <div
+                        *ngIf="
+                          settingsForm.get('lastName')!.invalid &&
+                          (settingsForm.get('lastName')!.dirty || settingsForm.get('lastName')!.touched)
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="settingsForm.get('lastName')?.errors?.required"
+                          jhiTranslate="settings.messages.validate.lastname.required"
+                        >
+                          Your last name is required.
+                        </small>
+
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="settingsForm.get('lastName')?.errors?.minlength"
+                          jhiTranslate="settings.messages.validate.lastname.minlength"
+                        >
+                          Your last name is required to be at least 1 character.
+                        </small>
+
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="settingsForm.get('lastName')?.errors?.maxlength"
+                          jhiTranslate="settings.messages.validate.lastname.maxlength"
+                        >
+                          Your last name cannot be longer than 50 characters.
+                        </small>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label" for="email" jhiTranslate="global.form.email.label">Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        placeholder="{{ 'global.form.email.placeholder' | translate }}"
+                        formControlName="email"
+                        data-cy="email"
+                      />
+
+                      <div
+                        *ngIf="
+                          settingsForm.get('email')!.invalid && (settingsForm.get('email')!.dirty || settingsForm.get('email')!.touched)
+                        "
+                      >
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="settingsForm.get('email')?.errors?.required"
+                          jhiTranslate="global.messages.validate.email.required"
+                        >
+                          Your email is required.
+                        </small>
+
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="settingsForm.get('email')?.errors?.email"
+                          jhiTranslate="global.messages.validate.email.invalid"
+                        >
+                          Your email is invalid.
+                        </small>
+
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="settingsForm.get('email')?.errors?.minlength"
+                          jhiTranslate="global.messages.validate.email.minlength"
+                        >
+                          Your email is required to be at least 5 characters.
+                        </small>
+
+                        <small
+                          class="form-text text-danger"
+                          *ngIf="settingsForm.get('email')?.errors?.maxlength"
+                          jhiTranslate="global.messages.validate.email.maxlength"
+                        >
+                          Your email cannot be longer than 100 characters.
+                        </small>
+                      </div>
+                    </div>
+
+                    <div class="mb-3" *ngIf="languages && languages.length > 0">
+                      <label for="langKey" jhiTranslate="settings.form.language">Language</label>
+                      <select class="form-control" id="langKey" name="langKey" formControlName="langKey" data-cy="langKey">
+                        <option *ngFor="let language of languages" [value]="language">{{ language | findLanguageFromKey }}</option>
+                      </select>
+                    </div>
+
+                    <button
+                      type="submit"
+                      [disabled]="settingsForm.invalid"
+                      class="btn btn-primary"
+                      jhiTranslate="settings.form.button"
+                      data-cy="submit"
+                    >
+                      Save
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+      </div>
 
-        <div class="mb-3">
-          <label class="form-label" for="email" jhiTranslate="global.form.email.label">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="{{ 'global.form.email.placeholder' | translate }}"
-            formControlName="email"
-            data-cy="email"
-          />
+      <footer class="main-footer"></footer>
 
-          <div *ngIf="settingsForm.get('email')!.invalid && (settingsForm.get('email')!.dirty || settingsForm.get('email')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="settingsForm.get('email')?.errors?.required"
-              jhiTranslate="global.messages.validate.email.required"
-            >
-              Your email is required.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="settingsForm.get('email')?.errors?.email"
-              jhiTranslate="global.messages.validate.email.invalid"
-            >
-              Your email is invalid.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="settingsForm.get('email')?.errors?.minlength"
-              jhiTranslate="global.messages.validate.email.minlength"
-            >
-              Your email is required to be at least 5 characters.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="settingsForm.get('email')?.errors?.maxlength"
-              jhiTranslate="global.messages.validate.email.maxlength"
-            >
-              Your email cannot be longer than 100 characters.
-            </small>
-          </div>
-        </div>
-
-        <div class="mb-3" *ngIf="languages && languages.length > 0">
-          <label for="langKey" jhiTranslate="settings.form.language">Language</label>
-          <select class="form-control" id="langKey" name="langKey" formControlName="langKey" data-cy="langKey">
-            <option *ngFor="let language of languages" [value]="language">{{ language | findLanguageFromKey }}</option>
-          </select>
-        </div>
-
-        <button
-          type="submit"
-          [disabled]="settingsForm.invalid"
-          class="btn btn-primary"
-          jhiTranslate="settings.form.button"
-          data-cy="submit"
-        >
-          Save
-        </button>
-      </form>
+      <aside class="control-sidebar control-sidebar-dark"></aside>
     </div>
-  </div>
-</div>
+
+    <script></script>
+  </body>
+</html>

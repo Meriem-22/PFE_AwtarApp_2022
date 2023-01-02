@@ -20,7 +20,13 @@
       "id": "ID",
       "teachingCurriculum": "Teaching Curriculum",
       "childProfile": "Child Profile",
-      "family": "Family"
+      "family": "Family",
+      "childEducation": "Child Education Settings",
+      "childDonations": "Donations",
+      "childProfileInfo": "CHILD PROFILE INFORMATIONS",
+      "childDonationsInfo": "CHILD DONATIONS",
+      "inTotalThereAre": "In total there are",
+      "childInfoReport": "CHILD INFORMATION REPORT"
     }
   }
 }

@@ -193,4 +193,43 @@ public class DonationsReceivedResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationsReceivedDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donations-receiveds/recent")
+    public ResponseEntity<List<DonationsReceivedDTO>> getRecentDonationsReceived() {
+        log.debug("REST request to get  recent donations Received  : {}");
+        List<DonationsReceivedDTO> donationsReceivedDTOC = donationsReceivedService.findRecentDonationsReceived();
+        return ResponseEntity.ok().body(donationsReceivedDTOC);
+    }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationsReceivedDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donations-receiveds/current-year")
+    public ResponseEntity<List<DonationsReceivedDTO>> getCurrentYearDonationsReceived() {
+        log.debug("REST request to get  recent donations Received  : {}");
+        List<DonationsReceivedDTO> donationsReceivedDTOC = donationsReceivedService.CurrentYearDonationsReceived();
+        return ResponseEntity.ok().body(donationsReceivedDTOC);
+    }
+
+    /**
+     * {@code GET  /donations-issueds/validated} : get the  donationsIssued.
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donationsReceivedDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/donations-receiveds/by-month")
+    public ResponseEntity<List<DonationsReceivedDTO>> ReceivedDonationsOfCurrentYearByMoth() {
+        log.debug("REST request to get DonationsIssued by month : {}");
+        List<DonationsReceivedDTO> donationsReceivedDTOC = donationsReceivedService.ReceivedDonationsOfCurrentYearByMonth();
+        return ResponseEntity.ok().body(donationsReceivedDTOC);
+    }
 }

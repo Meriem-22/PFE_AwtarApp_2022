@@ -18,6 +18,8 @@ import { IItemValue, ItemValue } from 'app/entities/item-value/item-value.model'
 import dayjs from 'dayjs/esm';
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { DatePipe } from '@angular/common';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-add-composite-item',
@@ -31,6 +33,7 @@ export class AddCompositeItemComponent implements OnInit {
   products!: IItem[];
   product!: IItem;
   item!: IItem;
+  account: Account | null = null;
   selectedProducts?: IItem[] | null;
   statuses?: any[];
   isSaving = false;
@@ -68,10 +71,15 @@ export class AddCompositeItemComponent implements OnInit {
     protected schoolLevelService: SchoolLevelService,
     protected itemValueService: ItemValueService,
     protected messageService: MessageService,
+    private accountService: AccountService,
     protected confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.item = history.state.item;
     this.price = history.state.price;
     console.log(this.item);

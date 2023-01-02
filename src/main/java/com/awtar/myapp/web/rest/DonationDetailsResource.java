@@ -199,33 +199,51 @@ public class DonationDetailsResource {
      */
 
     @GetMapping("/donation-details/beneficiary/donation-list/{id}")
-    public ResponseEntity<List<DonationDetailsDTO>> getParentsProfile(@PathVariable Long id) {
-        log.debug("REST request to get Beneficiary : {}", id);
+    public ResponseEntity<List<DonationDetailsDTO>> getBeneficiaryDonation(@PathVariable Long id) {
+        log.debug("REST request to get Beneficiary donation ddetails list : {}", id);
         List<DonationDetailsDTO> donationDetailsDTO = donationDetailsService.findAllBeneficiaryDonationList(id);
         return ResponseEntity.ok().body(donationDetailsDTO);
     }
 
     /**
-     * {@code GET  /donation-details} : get all the donationDetails.
+     * {@code GET  /donation-details/:id} : get the "id" donation-details.
      *
-     * @param pageable the pagination information.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of donationDetails in body.
+     * @param id the id of the donation-detailsDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donation-detailsDTO, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/donation-details/beneficiary/{id}")
-    public ResponseEntity<List<DonationDetailsDTO>> getParentsProfile(
-        @PathVariable Long id,
-        @org.springdoc.api.annotations.ParameterObject Pageable pageable,
-        @RequestParam(required = false, defaultValue = "true") boolean eagerload
-    ) {
-        log.debug("REST request to get a page of DonationDetails");
-        Page<DonationDetailsDTO> page;
-        if (eagerload) {
-            page = donationDetailsService.findAllBeneficiaryDonation(id, pageable);
-        } else {
-            page = donationDetailsService.findAllBeneficiaryDonation(id, pageable);
-        }
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+
+    @GetMapping("/donation-details/families-beneficiaries/{id}")
+    public ResponseEntity<List<DonationDetailsDTO>> getFamiliesDonationDetails(@PathVariable Long id) {
+        log.debug("REST request to get families donation details : {}", id);
+        List<DonationDetailsDTO> donationDetailsDTO = donationDetailsService.findAllDonationDetailsFamilies(id);
+        return ResponseEntity.ok().body(donationDetailsDTO);
+    }
+
+    /**
+     * {@code GET  /donation-details/:id} : get the "id" donation-details.
+     *
+     * @param id the id of the donation-detailsDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donation-detailsDTO, or with status {@code 404 (Not Found)}.
+     */
+
+    @GetMapping("/donation-details/establishments-beneficiaries/{id}")
+    public ResponseEntity<List<DonationDetailsDTO>> getEstablishmentsDonationDetails(@PathVariable Long id) {
+        log.debug("REST request to get establishments donation details : {}", id);
+        List<DonationDetailsDTO> donationDetailsDTO = donationDetailsService.findAllDonationDetailsEstablishments(id);
+        return ResponseEntity.ok().body(donationDetailsDTO);
+    }
+
+    /**
+     * {@code GET  /donation-details/:id} : get the "id" donation-details.
+     *
+     * @param id the id of the donation-detailsDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the donation-detailsDTO, or with status {@code 404 (Not Found)}.
+     */
+
+    @GetMapping("/donation-details/children-beneficiaries/{id}")
+    public ResponseEntity<List<DonationDetailsDTO>> getChildrenDonationDetails(@PathVariable Long id) {
+        log.debug("REST request to get children donation details : {}", id);
+        List<DonationDetailsDTO> donationDetailsDTO = donationDetailsService.findAllDonationDetailsChildren(id);
+        return ResponseEntity.ok().body(donationDetailsDTO);
     }
 }

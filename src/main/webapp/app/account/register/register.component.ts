@@ -1,16 +1,18 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/config/error.constants';
 import { RegisterService } from './register.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-register',
   templateUrl: './register.component.html',
 })
-export class RegisterComponent implements AfterViewInit {
+export class RegisterComponent implements OnInit {
   @ViewChild('login', { static: false })
   login?: ElementRef;
 
@@ -19,6 +21,7 @@ export class RegisterComponent implements AfterViewInit {
   errorEmailExists = false;
   errorUserExists = false;
   success = false;
+  account: Account | null = null;
 
   registerForm = this.fb.group({
     login: [
@@ -35,12 +38,21 @@ export class RegisterComponent implements AfterViewInit {
     confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
   });
 
-  constructor(private translateService: TranslateService, private registerService: RegisterService, private fb: FormBuilder) {}
+  constructor(
+    private translateService: TranslateService,
+    private accountService: AccountService,
+    private registerService: RegisterService,
+    private fb: FormBuilder
+  ) {}
 
-  ngAfterViewInit(): void {
-    if (this.login) {
-      this.login.nativeElement.focus();
-    }
+  ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+  }
+
+  previousState(): void {
+    window.history.back();
   }
 
   register(): void {

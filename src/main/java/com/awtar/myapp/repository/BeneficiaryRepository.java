@@ -90,4 +90,9 @@ public interface BeneficiaryRepository extends JpaRepository<Beneficiary, Long> 
     @Modifying
     @Query("update Beneficiary set tutor = NULL  where id= :id")
     Beneficiary removeTutor(@Param("id") Long id);
+
+    @Query(
+        "select distinct beneficiary from Beneficiary beneficiary left join fetch beneficiary.authorizingOfficer where (beneficiary.archivated = null or beneficiary.archivated = false) "
+    )
+    List<Beneficiary> TotalBeneficiaries();
 }

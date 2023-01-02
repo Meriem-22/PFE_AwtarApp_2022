@@ -1,6 +1,8 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { IProfile } from 'app/entities/profile/profile.model';
 import { ProfileService } from 'app/entities/profile/service/profile.service';
@@ -17,13 +19,22 @@ export class ParentDetailComponent implements OnInit {
   parents?: any[] = [];
   Otherparent?: any;
   children?: IProfile[] = [];
+  account: Account | null = null;
   t = 0;
 
-  constructor(protected activatedRoute: ActivatedRoute, protected profileService: ProfileService, protected dataUtils: DataUtils) {}
+  constructor(
+    protected activatedRoute: ActivatedRoute,
+    protected profileService: ProfileService,
+    private accountService: AccountService,
+    protected dataUtils: DataUtils
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ parent }) => {
       this.parent = parent;
+    });
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
     });
 
     this.profileService.findProfile(this.parent!.id!).subscribe({

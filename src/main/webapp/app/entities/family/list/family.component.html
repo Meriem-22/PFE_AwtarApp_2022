@@ -14,253 +14,6 @@
         <img class="animation__shake" src="../../content/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
       </div>
 
-      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-          </li>
-          <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
-          </li>
-        </ul>
-
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-              <i class="fas fa-search"></i>
-            </a>
-            <div class="navbar-search-block">
-              <form class="form-inline"></form>
-            </div>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-              <i class="far fa-comments"></i>
-              <span class="badge badge-danger navbar-badge">3</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-              <a href="#" class="dropdown-item">
-                <div class="media">
-                  <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle" />
-                  <div class="media-body">
-                    <h3 class="dropdown-item-title">
-                      Brad Diesel
-                      <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                    </h3>
-                    <p class="text-sm">Call me whenever you can...</p>
-                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                  </div>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <div class="media">
-                  <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3" />
-                  <div class="media-body">
-                    <h3 class="dropdown-item-title">
-                      John Pierce
-                      <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                    </h3>
-                    <p class="text-sm">I got your message bro</p>
-                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                  </div>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <div class="media">
-                  <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3" />
-                  <div class="media-body">
-                    <h3 class="dropdown-item-title">
-                      Nora Silvester
-                      <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                    </h3>
-                    <p class="text-sm">The subject goes here</p>
-                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                  </div>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-            </div>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-              <i class="far fa-bell"></i>
-              <span class="badge badge-warning navbar-badge">15</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-              <span class="dropdown-item dropdown-header">15 Notifications</span>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-envelope mr-2"></i> 4 new messages
-                <span class="float-right text-muted text-sm">3 mins</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-users mr-2"></i> 8 friend requests
-                <span class="float-right text-muted text-sm">12 hours</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-file mr-2"></i> 3 new reports
-                <span class="float-right text-muted text-sm">2 days</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-            </div>
-          </li>
-
-          <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"></li>
-              <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-              <li
-                *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                ngbDropdown
-                class="nav-item dropdown pointer"
-                display="dynamic"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-              >
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu" data-cy="adminMenu">
-                  <span>
-                    <fa-icon icon="users-cog"></fa-icon>
-                    <span jhiTranslate="global.menu.admin.main">Administration</span>
-                  </span>
-                </a>
-                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
-                  <li>
-                    <a class="dropdown-item" routerLink="/admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
-                      <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
-                      <span jhiTranslate="global.menu.admin.userManagement">User management</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" routerLink="/admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
-                      <fa-icon icon="tachometer-alt" [fixedWidth]="true"></fa-icon>
-                      <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" routerLink="/admin/health" routerLinkActive="active" (click)="collapseNavbar()">
-                      <fa-icon icon="heart" [fixedWidth]="true"></fa-icon>
-                      <span jhiTranslate="global.menu.admin.health">Health</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" routerLink="/admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
-                      <fa-icon icon="cogs" [fixedWidth]="true"></fa-icon>
-                      <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" routerLink="/admin/logs" routerLinkActive="active" (click)="collapseNavbar()">
-                      <fa-icon icon="tasks" [fixedWidth]="true"></fa-icon>
-                      <span jhiTranslate="global.menu.admin.logs">Logs</span>
-                    </a>
-                  </li>
-                  <li *ngIf="openAPIEnabled">
-                    <a class="dropdown-item" routerLink="/admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
-                      <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
-                      <span jhiTranslate="global.menu.admin.apidocs">API</span>
-                    </a>
-                  </li>
-                  <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
-                </ul>
-              </li>
-              <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *ngIf="languages && languages.length > 1">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
-                  <span>
-                    <fa-icon icon="flag"></fa-icon>
-                    <span jhiTranslate="global.menu.language">Language</span>
-                  </span>
-                </a>
-                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="languagesnavBarDropdown">
-                  <li *ngFor="let language of languages">
-                    <a class="dropdown-item" href="javascript:void(0);" (click)="changeLanguage(language); collapseNavbar()">{{
-                      language | findLanguageFromKey
-                    }}</a>
-                  </li>
-                </ul>
-              </li>
-              <li
-                ngbDropdown
-                class="nav-item dropdown pointer"
-                display="dynamic"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-              >
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu" data-cy="accountMenu">
-                  <span *ngIf="!account?.imageUrl">
-                    <fa-icon icon="user"></fa-icon>
-                    <span jhiTranslate="global.menu.account.main">Account</span>
-                  </span>
-                  <span *ngIf="account?.imageUrl">
-                    <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />
-                  </span>
-                </a>
-                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
-                  <li *ngSwitchCase="true">
-                    <a
-                      class="dropdown-item"
-                      routerLink="/account/settings"
-                      routerLinkActive="active"
-                      (click)="collapseNavbar()"
-                      data-cy="settings"
-                    >
-                      <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
-                      <span jhiTranslate="global.menu.account.settings">Settings</span>
-                    </a>
-                  </li>
-                  <li *ngSwitchCase="true">
-                    <a
-                      class="dropdown-item"
-                      routerLink="/account/password"
-                      routerLinkActive="active"
-                      (click)="collapseNavbar()"
-                      data-cy="passwordItem"
-                    >
-                      <fa-icon icon="lock" [fixedWidth]="true"></fa-icon>
-                      <span jhiTranslate="global.menu.account.password">Password</span>
-                    </a>
-                  </li>
-                  <li *ngSwitchCase="true">
-                    <a class="dropdown-item" (click)="logout()" id="logout" data-cy="logout">
-                      <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
-                      <span jhiTranslate="global.menu.account.logout">Sign out</span>
-                    </a>
-                  </li>
-                  <li *ngSwitchCase="false">
-                    <a class="dropdown-item" (click)="login()" id="login" data-cy="login">
-                      <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
-                      <span jhiTranslate="global.menu.account.login">Sign in</span>
-                    </a>
-                  </li>
-                  <li *ngSwitchCase="false">
-                    <a
-                      class="dropdown-item"
-                      routerLink="account/register"
-                      routerLinkActive="active"
-                      (click)="collapseNavbar()"
-                      data-cy="register"
-                    >
-                      <fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon>
-                      <span jhiTranslate="global.menu.account.register">Register</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </ul>
-      </nav>
-
       <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black">
         <a href="index3.html" class="brand-link" style="background-color: black">
           <img
@@ -278,18 +31,7 @@
               <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
             </div>
             <div class="info">
-              <a href="#" class="d-block">Souissi Meriem</a>
-            </div>
-          </div>
-
-          <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-              <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" />
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
-              </div>
+              <a href="#" class="d-block">{{ account?.login }}</a>
             </div>
           </div>
 
@@ -298,15 +40,15 @@
               <li class="nav-item menu-open">
                 <a href="dashboard" class="nav-link active">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Dashboard</p>
+                  <p><span jhiTranslate="dashboard.dashboard">Dashboard</span></p>
                 </a>
               </li>
-              <li class="nav-header">BENEFICIARIES</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.beneficiaries">BENEFICIARIES</span></li>
               <li class="nav-item">
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
                   <p>
-                    Families
+                    <span jhiTranslate="dashboard.families">Families</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -314,19 +56,19 @@
                   <li class="nav-item">
                     <a href="/family" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Families</p>
+                      <p><span jhiTranslate="dashboard.listOfFamilies">List of Families</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="/family/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Family</p>
+                      <p><span jhiTranslate="dashboard.addFamily">Add Family</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -335,7 +77,7 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
                   <p>
-                    Children
+                    <span jhiTranslate="dashboard.children">Children</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -343,19 +85,19 @@
                   <li class="nav-item">
                     <a href="/child" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Chilfren</p>
+                      <p><span jhiTranslate="dashboard.listOfChildren">List Of Chilfren</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="child/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Child</p>
+                      <p><span jhiTranslate="dashboard.addChild">Add Child</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -364,7 +106,7 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
                   <p>
-                    Establishments
+                    <span jhiTranslate="dashboard.establishments">Establishments</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -372,51 +114,51 @@
                   <li class="nav-item">
                     <a href="/establishment" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Establishments</p>
+                      <p><span jhiTranslate="dashboard.listOfEstablishments">List Of Establishments</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/establishment/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+
+                      <p><span jhiTranslate="dashboard.addEstablishment">Add Establishment</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
-                      <i class="nav-icon far fa-plus-square"></i>
-
-                      <p>Add Establishment</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/establishment/new" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">DONATIONS</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.donations">DONATIONS</span></li>
               <li class="nav-item">
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
                   <p>
-                    Donations Issued
+                    <span jhiTranslate="dashboard.donationsIssued">Donations Issued</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-issued" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Donations Issued</p>
+                      <p><span jhiTranslate="dashboard.listOfDonationsIssued">List of Donations Issued</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-issued/add-any-donations" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Donations Issued</p>
+                      <p><span jhiTranslate="dashboard.addDonationsIssued">Add Donations Issued</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -425,123 +167,123 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
                   <p>
-                    Donations Received
+                    <span jhiTranslate="dashboard.donationsReceived">Donations Received</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-received" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Donations Received</p>
+                      <p><span jhiTranslate="dashboard.listOfDonationsReceived">List Of Donations Received</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-received/new" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Donations Received</p>
+                      <p><span jhiTranslate="dashboard.addDonationsReceived">Add Donations Received</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">DONATIONS Items</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.donationsItems">DONATIONS Items</span></li>
               <li class="nav-item">
                 <a class="nav-link">
                   <i class="nav-icon fas fa-circle"></i>
                   <p>
-                    Items
+                    <span jhiTranslate="dashboard.items">Items</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/item" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Items</p>
+                      <p><span jhiTranslate="dashboard.listOfItems">List of Items</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/item/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Item</p>
+                      <p><span jhiTranslate="dashboard.addItem">Add Item</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Status Item</p>
+                      <p><span jhiTranslate="dashboard.statusOfItem">Status Item</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">REFERENCE TABLE</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.referenceTable">REFERENCE TABLE</span></li>
+
+              <li class="nav-item">
+                <a href="establishment-type" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.establishmentsTypes">Establishments Types</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/city" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.Citys">Citys</span></p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="pages/widgets.html" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                  <p>Establishments Types</p>
+                  <p><span jhiTranslate="dashboard.healthCategories">Health Categories</span></p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
+                <a href="/nature" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                  <p>Citys</p>
+                  <p><span jhiTranslate="dashboard.natureOfDonOrItem">Nature</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/school-level" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.schoolLevels">School Level</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/educational-institution" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.educationInstitutions">Educational Institutions</span></p>
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Health Categories</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Nature</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>School Level</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Educational Institutions</p>
-                </a>
-              </li>
-
-              <li class="nav-header">CONTRIBUTORS</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.contributors">CONTRIBUTORS</span></li>
               <li class="nav-item">
                 <a href="#" class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
                   <p>
-                    Authorizing Officers
+                    <span jhiTranslate="dashboard.authorizingOfficers">Authorizing Officers</span>
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
+                    <a routerLink="/authorizing-officer" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Authorizing Officers</p>
+                      <p><span jhiTranslate="dashboard.listOfAuthorizingOfficers">List Of Authorizing Officers</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                    <a href="/authorizing-officer/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Authorizing Officer</p>
+                      <p><span jhiTranslate="dashboard.addAuthorizingOfficer">Add Authorizing Officer</span></p>
                     </a>
                   </li>
                 </ul>
@@ -550,49 +292,27 @@
                 <a href="#" class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
                   <p>
-                    Tutors
+                    <span jhiTranslate="dashboard.tutors">Tutors</span>
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
+                    <a href="/tutor" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Tutors</p>
+                      <p><span jhiTranslate="dashboard.listOfTutors">List Of Tutors</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                    <a href="/tutor/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Tutor</p>
+                      <p><span jhiTranslate="dashboard.addTutor">Add Tutor</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link" style="display: flex">
-                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
-                  <p>
-                    Tutors
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
-                      <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Tutors</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                      <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Tutor</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              <li class="nav-item"></li>
             </ul>
           </nav>
         </div>
@@ -640,104 +360,138 @@
 
               <jhi-alert></jhi-alert>
 
-              <div class="alert alert-warning" id="no-result" *ngIf="families?.length === 0">
-                <span jhiTranslate="awtarApp.family.home.notFound">No families found</span>
-              </div>
-              <div class="table-responsive" id="entities" *ngIf="families && families.length > 0">
-                <table class="table table-striped" aria-describedby="page-heading">
-                  <thead>
-                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-                      <th scope="col" jhiSortBy="familyName">
-                        <span jhiTranslate="awtarApp.family.familyName">Family Name</span> <fa-icon icon="sort"></fa-icon>
-                      </th>
-                      <th scope="col" jhiSortBy="dwelling">
-                        <span jhiTranslate="awtarApp.family.dwelling">Dwelling</span> <fa-icon icon="sort"></fa-icon>
-                      </th>
-                      <th scope="col" jhiSortBy="area">
-                        <span jhiTranslate="awtarApp.family.area">Area</span> <fa-icon icon="sort"></fa-icon>
-                      </th>
-                      <th scope="col" jhiSortBy="notebookOfPoverty">
-                        <span jhiTranslate="awtarApp.family.notebookOfPoverty">Notebook Of Poverty</span> <fa-icon icon="sort"></fa-icon>
-                      </th>
-                      <th scope="col" jhiSortBy="notebookOfHandicap">
-                        <span jhiTranslate="awtarApp.family.notebookOfHandicap">Notebook Of Handicap</span> <fa-icon icon="sort"></fa-icon>
-                      </th>
+              <p-table
+                #dt5
+                [value]="families!"
+                [(selection)]="selectedFamilys"
+                dataKey="id"
+                styleClass="p-datatable-sm"
+                [rowHover]="true"
+                [rows]="6"
+                [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[6, 10, 16]"
+                responsiveLayout="scroll"
+                [paginator]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [filterDelay]="0"
+                [globalFilterFields]="['familyName', 'dwelling', 'area', 'notebookOfPoverty', 'notebookOfHandicap']"
+              >
+                <ng-template pTemplate="caption">
+                  <div class="table-header">
+                    <div class="flex" style="text-align: right">
+                      <span class="p-input-icon-left ml-auto">
+                        <i class="pi pi-search" style="margin-left: 12rem"></i>
+                        <input
+                          pInputText
+                          type="text"
+                          (input)="dt5.filterGlobal($any($event.target).value!, 'contains')"
+                          placeholder="Recherche Globale"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th style="width: 3rem">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th pSortableColumn="name">
+                      <div class="flex justify-content-between align-items-center">
+                        <span jhiTranslate="awtarApp.family.familyName">Family Name</span>
+                        <p-sortIcon field="name"></p-sortIcon>
+                        <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
+                      </div>
+                    </th>
+                    <th pSortableColumn="dwelling">
+                      <div class="flex justify-content-between align-items-center">
+                        <span jhiTranslate="awtarApp.family.dwelling">Dwelling</span>
+                        <p-sortIcon field="dwelling"></p-sortIcon>
+                        <p-columnFilter type="text" field="dwelling" display="menu" class="ml-auto"></p-columnFilter>
+                      </div>
+                    </th>
+                    <th pSortableColumn="area">
+                      <div class="flex justify-content-between align-items-center">
+                        <span jhiTranslate="awtarApp.family.area">Area</span>
+                        <p-sortIcon field="area"></p-sortIcon>
+                        <p-columnFilter type="text" field="area" display="menu" class="ml-auto"></p-columnFilter>
+                      </div>
+                    </th>
+                    <th pSortableColumn="notebookOfPoverty">
+                      <div class="flex justify-content-between align-items-center">
+                        <span jhiTranslate="awtarApp.family.notebookOfPoverty">Notebook Of Poverty</span>
+                        <p-sortIcon field="notebookOfPoverty"></p-sortIcon>
+                        <p-columnFilter type="text" field="notebookOfPoverty" display="menu" class="ml-auto"></p-columnFilter>
+                      </div>
+                    </th>
+                    <th pSortableColumn="notebookOfHandicap">
+                      <div class="flex justify-content-between align-items-center">
+                        <span jhiTranslate="awtarApp.family.notebookOfHandicap">Notebook Of Handicap</span>
+                        <p-sortIcon field="notebookOfHandicap"></p-sortIcon>
+                        <p-columnFilter type="text" field="notebookOfHandicap" display="menu" class="ml-auto"></p-columnFilter>
+                      </div>
+                    </th>
+                  </tr>
+                </ng-template>
 
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let family of families; trackBy: trackId" data-cy="entityTable">
-                      <td>{{ family.familyName }}</td>
-                      <td>{{ family.dwelling }}</td>
-                      <td>{{ family.area }}</td>
-                      <td>{{ family.notebookOfPoverty }}</td>
-                      <td>{{ family.notebookOfHandicap }}</td>
-                      <td class="text-end">
-                        <div class="btn-group">
-                          <button
-                            style="margin-right: 0.5rem; height: 2rem; width: 3rem"
-                            type="submit"
-                            [routerLink]="['/family', family.id, 'view']"
-                            class="btn btn-info btn-sm"
-                            data-cy="entityDetailsButton"
-                          >
-                            <fa-icon icon="eye"></fa-icon>
-                          </button>
+                <ng-template pTemplate="body" let-family>
+                  <tr class="p-selectable-row">
+                    <td>
+                      <p-tableCheckbox [value]="family"></p-tableCheckbox>
+                    </td>
+                    <td>
+                      <span class="p-column-title"></span>
+                      {{ family.familyName }}
+                    </td>
+                    <td>
+                      <span class="p-column-title"></span>
+                      {{ family.dwelling }}
+                    </td>
+                    <td>
+                      <span class="p-column-title"></span>
+                      {{ family.area }}
+                    </td>
+                    <td>
+                      <span class="p-column-title"></span>
+                      {{ family.notebookOfPoverty }}
+                    </td>
+                    <td>
+                      <span class="p-column-title"></span>
+                      {{ family.notebookOfHandicap }}
+                    </td>
 
-                          <button
-                            style="margin-right: 0.5rem; height: 2rem; width: 3rem"
-                            type="submit"
-                            [routerLink]="['/family', family.id, 'edit']"
-                            class="btn btn-warning"
-                            data-cy="entityEditButton"
-                          >
-                            <fa-icon icon="pencil-alt"></fa-icon>
-                          </button>
+                    <td class="text-end">
+                      <div class="btn-group">
+                        <button
+                          style="margin-right: 0.5rem; height: 2rem; width: 3rem"
+                          type="submit"
+                          [routerLink]="['/family', family.id, 'view']"
+                          class="btn btn-info btn-sm"
+                          data-cy="entityDetailsButton"
+                        >
+                          <fa-icon icon="eye"></fa-icon>
+                        </button>
 
-                          <button
-                            style="margin-right: 0.5rem; height: 2rem; width: 3rem"
-                            type="submit"
-                            [routerLink]="['/family', family.id, 'view']"
-                            class="btn btn-secondary"
-                            data-cy="entityDetailsButton"
-                          >
-                            <span class="material-icons-sharp">volunteer_activism</span>
-                          </button>
+                        <button
+                          style="margin-right: 0.5rem; height: 2rem; width: 3rem"
+                          type="submit"
+                          (click)="delete(family)"
+                          class="btn btn-danger btn-sm"
+                          data-cy="entityDeleteButton"
+                        >
+                          <fa-icon icon="times"></fa-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
 
-                          <button
-                            style="margin-right: 0.5rem; height: 2rem; width: 3rem"
-                            type="submit"
-                            (click)="delete(family)"
-                            class="btn btn-danger btn-sm"
-                            data-cy="entityDeleteButton"
-                          >
-                            <fa-icon icon="times"></fa-icon>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div *ngIf="families && families.length > 0">
-                <div class="d-flex justify-content-center">
-                  <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                  <ngb-pagination
-                    [collectionSize]="totalItems"
-                    [(page)]="ngbPaginationPage"
-                    [pageSize]="itemsPerPage"
-                    [maxSize]="5"
-                    [rotate]="true"
-                    [boundaryLinks]="true"
-                    (pageChange)="loadPage($event)"
-                  ></ngb-pagination>
-                </div>
-              </div>
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="8">No families found.</td>
+                  </tr>
+                </ng-template>
+              </p-table>
             </div>
           </div>
         </section>

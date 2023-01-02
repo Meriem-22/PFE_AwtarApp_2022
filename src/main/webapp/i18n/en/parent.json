@@ -26,7 +26,22 @@
       "dateOfDeath": "Date Of Death",
       "familyHead": "Family Head",
       "parentProfile": "Parent Profile",
-      "family": "Family"
+      "family": "Family",
+      "profileSettings": "Profile Settings",
+      "healthSettings": "Health Settings",
+      "profileInformation": "Profile Informations",
+      "settings": "Settings",
+      "parentInfo": "PARENT PROFILE INFORMATION",
+      "parentSettings": "PARENT  SETTINGS",
+      "report": "Report",
+      "parentReport": "PARENT REPORT",
+      "generateReport": "Generate Report",
+      "familyMembers": "Family Members",
+      "parent": "Parent",
+      "child": "Child",
+      "profilParent": "Profile Parent",
+      "deadParent": "Dead Parent",
+      "dead": "Dead"
     }
   }
 }

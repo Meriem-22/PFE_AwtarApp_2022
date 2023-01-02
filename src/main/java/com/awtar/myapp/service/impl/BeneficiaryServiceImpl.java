@@ -226,4 +226,10 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
         beneficiary = beneficiaryRepository.save(beneficiary);
         return beneficiaryMapper.toDto(beneficiary);
     }
+
+    @Override
+    public List<BeneficiaryDTO> TotalBeneficiaries() {
+        List<Beneficiary> beneficiaires = beneficiaryRepository.TotalBeneficiaries();
+        return beneficiaryMapper.toDto(beneficiaires);
+    }
 }

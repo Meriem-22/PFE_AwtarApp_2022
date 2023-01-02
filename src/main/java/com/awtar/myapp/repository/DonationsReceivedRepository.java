@@ -1,6 +1,8 @@
 package com.awtar.myapp.repository;
 
 import com.awtar.myapp.domain.DonationsReceived;
+import com.awtar.myapp.service.dto.DonationsReceivedDTO;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -41,4 +43,22 @@ public interface DonationsReceivedRepository extends JpaRepository<DonationsRece
         "select donationsReceived from DonationsReceived donationsReceived left join fetch donationsReceived.authorizingOfficer where donationsReceived.id =:id"
     )
     Optional<DonationsReceived> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query(
+        "select distinct new com.awtar.myapp.service.dto.DonationsReceivedDTO(d.id, d.urlPhoto, d.urlPhotoContentType, p.firstName, p.lastName, di.date) from DonationsReceived d, DonationsReceivedItem di , Profile p where d.authorizingOfficer.id = p.authorizingOfficer.id and d.id = di.donationsReceived.id and d.archivated = false order by d.id desc"
+    )
+    List<DonationsReceivedDTO> findRecentDonationsReceived();
+
+    @Query(
+        "select distinct new com.awtar.myapp.service.dto.DonationsReceivedDTO(d.id) from DonationsReceived d , DonationsReceivedItem di where d.id = di.donationsReceived.id and d.archivated != true and (di.date > :beginingDate or di.date = :beginingDate) and (di.date < :EndDate or di.date = :EndDate)"
+    )
+    List<DonationsReceivedDTO> findCurrentYearDonationsReceived(
+        @Param("beginingDate") LocalDate beginingDate,
+        @Param("EndDate") LocalDate EndDate
+    );
+
+    @Query(
+        "select new com.awtar.myapp.service.dto.DonationsReceivedDTO (to_char(di.date, 'Month YYYY') AS month , count(DISTINCT d.id) AS number) FROM DonationsReceived d, DonationsReceivedItem di  WHERE (date_part('year',di.date) = 2022 and (d.archivated = null or d.archivated = false) and (di.archivated = null or di.archivated = false) and d.id = di.donationsReceived.id)  GROUP BY date_part('month', date), to_char(di.date, 'Month YYYY') ORDER BY date_part('month', di.date)"
+    )
+    List<DonationsReceivedDTO> findCurrentYearDonationsReceivedByMonth();
 }

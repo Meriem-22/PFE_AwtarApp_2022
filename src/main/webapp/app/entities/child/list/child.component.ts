@@ -17,8 +17,10 @@ import { LANGUAGES } from 'app/config/language.constants';
 import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
+
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
+import { ProfileService } from 'app/entities/profile/service/profile.service';
+import { DataUtils } from 'app/core/util/data-util.service';
 
 @Component({
   selector: 'jhi-child',
@@ -33,6 +35,7 @@ export class ChildComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  allChild?: any[];
 
   inProduction?: boolean;
   isNavbarCollapsed = true;
@@ -41,6 +44,8 @@ export class ChildComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
+  selectedChildren?: any[];
+  childrenWithoutFamilyDetails: any[] = [];
 
   constructor(
     protected childService: ChildService,
@@ -51,7 +56,8 @@ export class ChildComponent implements OnInit {
     private translateService: TranslateService,
     private sessionStorageService: SessionStorageService,
     private accountService: AccountService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    protected dataUtils: DataUtils
   ) {
     if (VERSION) {
       this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
@@ -80,7 +86,30 @@ export class ChildComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.profileService.findAllChildren().subscribe({
+      next: (res: HttpResponse<any[]>) => {
+        this.allChild = res.body ?? [];
+        console.log(this.allChild);
+      },
+      error: e => console.error(e),
+    });
+
+    this.childService.getChildrenWithoutFamilyDetails2().subscribe({
+      next: (res: HttpResponse<any[]>) => {
+        this.isLoading = true;
+        this.childrenWithoutFamilyDetails = res.body ?? [];
+
+        console.log(this.childrenWithoutFamilyDetails);
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
+
     this.handleNavigation();
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
   }
 
   trackId(_index: number, item: IChild): number {
@@ -115,6 +144,10 @@ export class ChildComponent implements OnInit {
     this.collapseNavbar();
     this.loginService.logout();
     this.router.navigate(['']);
+  }
+
+  openFile(base64String: string, contentType: string | null | undefined): void {
+    return this.dataUtils.openFile(base64String, contentType);
   }
 
   toggleNavbar(): void {

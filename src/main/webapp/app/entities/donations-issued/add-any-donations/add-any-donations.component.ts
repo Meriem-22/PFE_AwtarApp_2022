@@ -2,6 +2,8 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { IBeneficiary } from 'app/entities/beneficiary/beneficiary.model';
 import { BeneficiaryService } from 'app/entities/beneficiary/service/beneficiary.service';
@@ -138,6 +140,7 @@ export class AddAnyDonationsComponent implements OnInit {
   DonationDetails: IDonationDetails[] = [];
   nTab: number[] = [];
   result!: Observable<HttpResponse<IDonationsIssued>>;
+  account: Account | null = null;
 
   QuantityForm = this.formBuilder.group({
     quantity: [null, [Validators.required]],
@@ -159,10 +162,15 @@ export class AddAnyDonationsComponent implements OnInit {
     protected familyService: FamilyService,
     protected establishmentService: EstablishmentService,
     protected dataUtils: DataUtils,
+    private accountService: AccountService,
     protected childService: ChildService
   ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.DonationsIssued = this.formBuilder.group({
       model: [null, [Validators.required]],
       isValidated: [],
@@ -635,6 +643,7 @@ export class AddAnyDonationsComponent implements OnInit {
     this.isSaving = true;
     const dons = this.createFromFormDonationsIssued();
     this.subscribeToSaveResponse(this.donationsIssuedService.createDons(dons));
+    this.previousState();
     console.log(dons);
   }
 
@@ -855,9 +864,9 @@ export class AddAnyDonationsComponent implements OnInit {
     return {
       ...new DonationsIssued(),
       model: this.DonationsIssued.get(['model'])!.value,
-      isValidated: this.DonationsIssued.get(['isValidated'])!.value === true,
+      isValidated: this.DonationsIssued.get(['isValidated'])!.value,
       donationsDate: this.DonationsIssued.get(['donationsDate'])!.value,
-      recurringDonations: this.DonationsIssued.get(['recurringDonations'])!.value === true,
+      recurringDonations: this.DonationsIssued.get(['recurringDonations'])!.value,
       periodicity: this.DonationsIssued.get(['periodicity'])!.value,
       recurrence: this.DonationsIssued.get(['recurrence'])!.value,
       donationsDetailsN: this.DonationDetails,

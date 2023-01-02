@@ -81,4 +81,28 @@ public interface DonationDetailsService {
      * @return  the list of entities.
      */
     Page<DonationDetailsDTO> findAllBeneficiaryDonation(Long id, Pageable pageable);
+
+    /**
+     * Get the "id" donationIssued.
+     *
+     * @param id the id of the entity.
+     * @return  the list of entities.
+     */
+    List<DonationDetailsDTO> findAllDonationDetailsFamilies(Long id);
+
+    /**
+     * Get the "id" donationIssued.
+     *
+     * @param id the id of the entity.
+     * @return  the list of entities.
+     */
+    List<DonationDetailsDTO> findAllDonationDetailsEstablishments(Long id);
+
+    /**
+     * Get the "id" donationIssued.
+     *
+     * @param id the id of the entity.
+     * @return  the list of entities.
+     */
+    List<DonationDetailsDTO> findAllDonationDetailsChildren(Long id);
 }

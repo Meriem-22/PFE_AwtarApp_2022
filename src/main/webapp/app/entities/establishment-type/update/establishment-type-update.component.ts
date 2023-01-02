@@ -7,6 +7,8 @@ import { finalize } from 'rxjs/operators';
 
 import { IEstablishmentType, EstablishmentType } from '../establishment-type.model';
 import { EstablishmentTypeService } from '../service/establishment-type.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-establishment-type-update',
@@ -14,6 +16,7 @@ import { EstablishmentTypeService } from '../service/establishment-type.service'
 })
 export class EstablishmentTypeUpdateComponent implements OnInit {
   isSaving = false;
+  account: Account | null = null;
 
   editForm = this.fb.group({
     id: [],
@@ -24,10 +27,15 @@ export class EstablishmentTypeUpdateComponent implements OnInit {
   constructor(
     protected establishmentTypeService: EstablishmentTypeService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.activatedRoute.data.subscribe(({ establishmentType }) => {
       this.updateForm(establishmentType);
     });

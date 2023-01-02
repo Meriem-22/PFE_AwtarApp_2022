@@ -105,6 +105,9 @@ export class FamilyDetailComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ family }) => {
       this.family = family;
       this.familyId = family.id;
+      this.accountService.getAuthenticationState().subscribe(account => {
+        this.account = account;
+      });
 
       this.beneficiaryService.find(family.id).subscribe({
         next: (res: HttpResponse<IBeneficiary>) => {

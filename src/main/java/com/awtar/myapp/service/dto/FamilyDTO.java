@@ -35,6 +35,14 @@ public class FamilyDTO implements Serializable {
 
     private ChildDTO childrenDetails[];
 
+    private Long NbInCity;
+
+    public FamilyDTO() {}
+
+    public FamilyDTO(Long NbInCity) {
+        this.NbInCity = NbInCity;
+    }
+
     public Long getId() {
         return id;
     }
@@ -129,6 +137,14 @@ public class FamilyDTO implements Serializable {
 
     public void setChildrenDetails(ChildDTO[] childrenDetails) {
         this.childrenDetails = childrenDetails;
+    }
+
+    public Long getNbInCity() {
+        return NbInCity;
+    }
+
+    public void setNbInCity(Long nbInCity) {
+        NbInCity = nbInCity;
     }
 
     @Override

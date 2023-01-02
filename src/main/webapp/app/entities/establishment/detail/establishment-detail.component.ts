@@ -62,6 +62,9 @@ export class EstablishmentDetailComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
     this.activatedRoute.data.subscribe(({ establishment }) => {
       this.establishment = establishment;
       this.beneficiaryService.find(establishment.id!).subscribe({

@@ -10,10 +10,12 @@ import { IFamily, getFamilyIdentifier, IFamilyAllDetails, getFamilyAllDetailsIde
 export type EntityResponseType = HttpResponse<IFamily>;
 export type EntityArrayResponseType = HttpResponse<IFamily[]>;
 export type EntityResponse = HttpResponse<IFamilyAllDetails>;
+export type EntityResponseTypeAny = HttpResponse<any>;
 
 @Injectable({ providedIn: 'root' })
 export class FamilyService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/families');
+  protected resourceUrl2 = this.applicationConfigService.getEndpointFor('api/families/place-of-residence');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -46,6 +48,10 @@ export class FamilyService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findNumberOfFamiliesByCity(id: number): Observable<EntityResponseTypeAny> {
+    return this.http.get<any>(`${this.resourceUrl2}/${id}`, { observe: 'response' });
   }
 
   addFamilyToCollectionIfMissing(

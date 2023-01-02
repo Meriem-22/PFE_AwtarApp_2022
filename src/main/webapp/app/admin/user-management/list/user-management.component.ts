@@ -18,8 +18,10 @@ import { UserManagementDeleteDialogComponent } from '../delete/user-management-d
 export class UserManagementComponent implements OnInit {
   currentAccount: Account | null = null;
   users: User[] | null = null;
+  account: Account | null = null;
   isLoading = false;
   totalItems = 0;
+
   itemsPerPage = ITEMS_PER_PAGE;
   page!: number;
   predicate!: string;
@@ -36,6 +38,9 @@ export class UserManagementComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.handleNavigation();
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
   }
 
   setActive(user: User, isActivated: boolean): void {
@@ -47,7 +52,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   deleteUser(user: User): void {
-    const modalRef = this.modalService.open(UserManagementDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(UserManagementDeleteDialogComponent, { size: 'lg', backdrop: false, keyboard: false });
     modalRef.componentInstance.user = user;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {

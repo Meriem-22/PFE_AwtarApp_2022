@@ -12,11 +12,14 @@ import { IDonationItemDetails, getDonationItemDetailsIdentifier } from '../donat
 
 export type EntityResponseType = HttpResponse<IDonationItemDetails>;
 export type EntityArrayResponseType = HttpResponse<IDonationItemDetails[]>;
+export type EntityArrayResponseTypeAny = HttpResponse<any[]>;
 
 @Injectable({ providedIn: 'root' })
 export class DonationItemDetailsService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/donation-item-details');
-  protected Url = this.applicationConfigService.getEndpointFor('api/donation-item-details/donation-issued');
+  protected UrlF = this.applicationConfigService.getEndpointFor('api/donation-item-details/donation-issued/families');
+  protected UrlC = this.applicationConfigService.getEndpointFor('api/donation-item-details/donation-issued/children');
+  protected UrlE = this.applicationConfigService.getEndpointFor('api/donation-item-details/donation-issued/establishments');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -45,10 +48,21 @@ export class DonationItemDetailsService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  getAllDonationItemDetails(id: number): Observable<EntityArrayResponseType> {
+  getAllDonationItemDetails(id: number): Observable<EntityArrayResponseTypeAny> {
     return this.http
-      .get<IDonationItemDetails[]>(`${this.Url}/${id}`, { observe: 'response' })
+      .get<any[]>(`${this.UrlF}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  getAllDonationItemDetailsOfFamilies(id: number): Observable<EntityArrayResponseTypeAny> {
+    return this.http.get<any[]>(`${this.UrlF}/${id}`, { observe: 'response' });
+  }
+
+  getAllDonationItemDetailsOfChildren(id: number): Observable<EntityArrayResponseTypeAny> {
+    return this.http.get<any[]>(`${this.UrlC}/${id}`, { observe: 'response' });
+  }
+  getAllDonationItemDetailsOfEstablishments(id: number): Observable<EntityArrayResponseTypeAny> {
+    return this.http.get<any[]>(`${this.UrlE}/${id}`, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {

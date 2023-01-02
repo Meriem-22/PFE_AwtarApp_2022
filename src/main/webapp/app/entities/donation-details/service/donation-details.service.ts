@@ -17,6 +17,9 @@ export class DonationDetailsService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/donation-details');
   protected Url = this.applicationConfigService.getEndpointFor('api/donation-details/beneficiary');
   protected Url2 = this.applicationConfigService.getEndpointFor('api/donation-details/beneficiary/donation-list');
+  protected Url3 = this.applicationConfigService.getEndpointFor('api/donation-details/families-beneficiaries');
+  protected Url4 = this.applicationConfigService.getEndpointFor('api/donation-details/establishments-beneficiaries');
+  protected Url5 = this.applicationConfigService.getEndpointFor('api/donation-details/children-beneficiaries');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -51,6 +54,18 @@ export class DonationDetailsService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  getFamiliesDonationDetails(id: number): Observable<EntityArrayResponse> {
+    return this.http.get<any[]>(`${this.Url3}/${id}`, { observe: 'response' });
+  }
+
+  getEstablishmentsDonationDetails(id: number): Observable<EntityArrayResponse> {
+    return this.http.get<any[]>(`${this.Url4}/${id}`, { observe: 'response' });
+  }
+
+  getChildrenDonationDetails(id: number): Observable<EntityArrayResponse> {
+    return this.http.get<any[]>(`${this.Url5}/${id}`, { observe: 'response' });
   }
 
   addDonationDetailsToCollectionIfMissing(

@@ -9,10 +9,12 @@ import { IEstablishment, getEstablishmentIdentifier } from '../establishment.mod
 
 export type EntityResponseType = HttpResponse<IEstablishment>;
 export type EntityArrayResponseType = HttpResponse<IEstablishment[]>;
+export type EntityResponseTypeAny = HttpResponse<any>;
 
 @Injectable({ providedIn: 'root' })
 export class EstablishmentService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/establishments');
+  protected resourceUrl2 = this.applicationConfigService.getEndpointFor('api/establishments/place-of-establishment');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -51,6 +53,10 @@ export class EstablishmentService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findNumberOfEstablishmentsByCity(id: number): Observable<EntityResponseTypeAny> {
+    return this.http.get<any>(`${this.resourceUrl2}/${id}`, { observe: 'response' });
   }
 
   addEstablishmentToCollectionIfMissing(

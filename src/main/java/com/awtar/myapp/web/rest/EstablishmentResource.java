@@ -225,4 +225,17 @@ public class EstablishmentResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of establishments in body.
+     */
+    @GetMapping("/establishments/place-of-establishment/{id}")
+    public ResponseEntity<EstablishmentDTO> getEstablishmentsNumberByCity(@PathVariable Long id) {
+        log.debug("REST request to get  number of establishments in a city : {}");
+        EstablishmentDTO establishmentDTOC = establishmentService.getEstablishmentsNumberByCity(id);
+        return ResponseEntity.ok().body(establishmentDTOC);
+    }
 }

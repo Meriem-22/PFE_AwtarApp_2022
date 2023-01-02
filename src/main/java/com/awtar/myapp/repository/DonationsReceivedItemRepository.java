@@ -1,6 +1,7 @@
 package com.awtar.myapp.repository;
 
 import com.awtar.myapp.domain.DonationsReceivedItem;
+import com.awtar.myapp.service.dto.DonationsReceivedDTO;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;

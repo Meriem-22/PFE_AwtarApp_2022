@@ -6,9 +6,11 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDonationsReceived, getDonationsReceivedIdentifier } from '../donations-received.model';
+import { Beneficiaries } from 'app/entities/enumerations/beneficiaries.model';
 
 export type EntityResponseType = HttpResponse<IDonationsReceived>;
 export type EntityArrayResponseType = HttpResponse<IDonationsReceived[]>;
+export type EntityArrayResponseAnyType = HttpResponse<any[]>;
 
 @Injectable({ providedIn: 'root' })
 export class DonationsReceivedService {
@@ -47,6 +49,18 @@ export class DonationsReceivedService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findRecentDonationsReceived(): Observable<EntityArrayResponseAnyType> {
+    return this.http.get<any[]>(this.resourceUrl + '/recent', { observe: 'response' });
+  }
+
+  getCurrentyeardonations(): Observable<EntityArrayResponseAnyType> {
+    return this.http.get<any[]>(this.resourceUrl + '/current-year', { observe: 'response' });
+  }
+
+  ReceivedDonationsOfCurrentYearByMonth(): Observable<EntityArrayResponseAnyType> {
+    return this.http.get<any[]>(this.resourceUrl + '/by-month', { observe: 'response' });
   }
 
   addDonationsReceivedToCollectionIfMissing(

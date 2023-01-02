@@ -12,6 +12,7 @@ import { LANGUAGES } from 'app/config/language.constants';
 })
 export class SettingsComponent implements OnInit {
   account!: Account;
+
   success = false;
   languages = LANGUAGES;
   settingsForm = this.fb.group({

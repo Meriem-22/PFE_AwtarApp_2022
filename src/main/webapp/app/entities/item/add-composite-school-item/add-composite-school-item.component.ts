@@ -4,6 +4,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { EventManager } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { DATE_FORMAT } from 'app/config/input.constants';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { IChildStatusItem } from 'app/entities/child-status-item/child-status-item.model';
 import { ChildStatusItemService } from 'app/entities/child-status-item/service/child-status-item.service';
@@ -43,6 +45,7 @@ export class AddCompositeSchoolItemComponent implements OnInit {
   price!: IItemValue;
   SchoolLevelInfo?: any[];
   childStatusItem!: any[];
+  account: Account | null = null;
 
   itemGenderValues = Object.keys(ItemGender);
 
@@ -75,10 +78,15 @@ export class AddCompositeSchoolItemComponent implements OnInit {
     protected messageService: MessageService,
     protected confirmationService: ConfirmationService,
     protected schoolLevelItemService: SchoolLevelItemService,
+    private accountService: AccountService,
     protected childStatusItemService: ChildStatusItemService
   ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.item = history.state.item;
     this.price = history.state.price;
     console.log(this.item);
@@ -189,7 +197,7 @@ export class AddCompositeSchoolItemComponent implements OnInit {
       error: e => console.error(e),
     });
 
-    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
+    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Price Updated', life: 3000 });
   }
 
   trackNatureById(_index: number, item: INature): number {

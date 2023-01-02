@@ -47,7 +47,13 @@ public class ChildDTO implements Serializable {
 
     private String urlPhotoContentType;
 
+    private Long NbInCity;
+
     public ChildDTO() {}
+
+    public ChildDTO(Long NbInCity) {
+        this.NbInCity = NbInCity;
+    }
 
     public ChildDTO(
         Long id,
@@ -274,6 +280,14 @@ public class ChildDTO implements Serializable {
 
     public void setUrlPhotoContentType(String urlPhotoContentType) {
         this.urlPhotoContentType = urlPhotoContentType;
+    }
+
+    public Long getNbInCity() {
+        return NbInCity;
+    }
+
+    public void setNbInCity(Long nbInCity) {
+        NbInCity = nbInCity;
     }
 
     @Override

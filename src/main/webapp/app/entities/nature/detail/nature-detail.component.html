@@ -1,46 +1,398 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <div *ngIf="nature">
-      <h2 style="margin-top: 4rem; margin-bottom: 2rem" data-cy="natureDetailsHeading">
-        <span jhiTranslate="awtarApp.nature.detail.title">Nature</span>
-      </h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Charles Anderson" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
 
-      <hr />
+    <title>AdminLTE 3 | Dashboard</title>
+  </head>
 
-      <jhi-alert-error></jhi-alert-error>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../../content/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
+      </div>
 
-      <jhi-alert></jhi-alert>
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black">
+        <a href="index3.html" class="brand-link" style="background-color: black">
+          <img
+            src="../../content/img/AdminLTELogo.png"
+            alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3"
+            style="opacity: 0.8"
+          />
+          <span class="brand-text font-weight-light">AWTAR</span>
+        </a>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ nature.id }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.nature.name">Name</span></dt>
-        <dd>
-          <span>{{ nature.name }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.nature.destinedTo">Destined To</span></dt>
-        <dd>
-          <span jhiTranslate="{{ 'awtarApp.Beneficiaries.' + nature.destinedTo }}">{{ nature.destinedTo }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.nature.necessityValue">Necessity Value</span></dt>
-        <dd>
-          <span>{{ nature.necessityValue }}</span>
-        </dd>
-        <dt><span jhiTranslate="awtarApp.nature.archivated">Archivated</span></dt>
-        <dd>
-          <span>{{ nature.archivated }}</span>
-        </dd>
-      </dl>
+        <div class="sidebar">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+            </div>
+            <div class="info">
+              <a href="#" class="d-block">{{ account?.login }}</a>
+            </div>
+          </div>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-      </button>
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <li class="nav-item menu-open">
+                <a href="dashboard" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p><span jhiTranslate="dashboard.dashboard">Dashboard</span></p>
+                </a>
+              </li>
+              <li class="nav-header"><span jhiTranslate="dashboard.beneficiaries">BENEFICIARIES</span></li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
+                  <p>
+                    <span jhiTranslate="dashboard.families">Families</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/family" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfFamilies">List of Families</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/family/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addFamily">Add Family</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
+                  <p>
+                    <span jhiTranslate="dashboard.children">Children</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/child" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfChildren">List Of Chilfren</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="child/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addChild">Add Child</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
+                  <p>
+                    <span jhiTranslate="dashboard.establishments">Establishments</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/establishment" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfEstablishments">List Of Establishments</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/establishment/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
 
-      <button type="button" [routerLink]="['/nature', nature.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-      </button>
+                      <p><span jhiTranslate="dashboard.addEstablishment">Add Establishment</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.donations">DONATIONS</span></li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
+                  <p>
+                    <span jhiTranslate="dashboard.donationsIssued">Donations Issued</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/donations-issued" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfDonationsIssued">List of Donations Issued</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/donations-issued/add-any-donations" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addDonationsIssued">Add Donations Issued</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
+                  <p>
+                    <span jhiTranslate="dashboard.donationsReceived">Donations Received</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/donations-received" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfDonationsReceived">List Of Donations Received</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/donations-received/new" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addDonationsReceived">Add Donations Received</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.donationsItems">DONATIONS Items</span></li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon fas fa-circle"></i>
+                  <p>
+                    <span jhiTranslate="dashboard.items">Items</span>
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/item" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfItems">List of Items</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/item/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addItem">Add Item</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p><span jhiTranslate="dashboard.statusOfItem">Status Item</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.referenceTable">REFERENCE TABLE</span></li>
+
+              <li class="nav-item">
+                <a href="establishment-type" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.establishmentsTypes">Establishments Types</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/city" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.Citys">Citys</span></p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="pages/widgets.html" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.healthCategories">Health Categories</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/nature" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.natureOfDonOrItem">Nature</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/school-level" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.schoolLevels">School Level</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/educational-institution" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.educationInstitutions">Educational Institutions</span></p>
+                </a>
+              </li>
+
+              <li class="nav-header"><span jhiTranslate="dashboard.contributors">CONTRIBUTORS</span></li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
+                  <p>
+                    <span jhiTranslate="dashboard.authorizingOfficers">Authorizing Officers</span>
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a routerLink="/authorizing-officer" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfAuthorizingOfficers">List Of Authorizing Officers</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/authorizing-officer/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addAuthorizingOfficer">Add Authorizing Officer</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link" style="display: flex">
+                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
+                  <p>
+                    <span jhiTranslate="dashboard.tutors">Tutors</span>
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/tutor" class="nav-link">
+                      <i class="nav-icon fas fa-file"></i>
+                      <p><span jhiTranslate="dashboard.listOfTutors">List Of Tutors</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/tutor/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+                      <p><span jhiTranslate="dashboard.addTutor">Add Tutor</span></p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item"></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="content-wrapper" style="margin-top: -3rem">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6"></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+
+                  <li class="breadcrumb-item active"><span jhiTranslate="awtarApp.nature.detail.title">Nature</span></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="content">
+          <div class="container-fluid">
+            <div class="d-flex justify-content-center">
+              <div class="col-8">
+                <div *ngIf="nature">
+                  <h2 style="margin-top: 4rem; margin-bottom: 2rem" data-cy="natureDetailsHeading">
+                    <span jhiTranslate="awtarApp.nature.detail.title">Nature</span>
+                  </h2>
+
+                  <hr />
+
+                  <jhi-alert-error></jhi-alert-error>
+
+                  <jhi-alert></jhi-alert>
+
+                  <dl class="row-md jh-entity-details">
+                    <dt><span jhiTranslate="global.field.id">ID</span></dt>
+                    <dd>
+                      <span>{{ nature.id }}</span>
+                    </dd>
+                    <dt><span jhiTranslate="awtarApp.nature.name">Name</span></dt>
+                    <dd>
+                      <span>{{ nature.name }}</span>
+                    </dd>
+                    <dt><span jhiTranslate="awtarApp.nature.destinedTo">Destined To</span></dt>
+                    <dd>
+                      <span jhiTranslate="{{ 'awtarApp.Beneficiaries.' + nature.destinedTo }}">{{ nature.destinedTo }}</span>
+                    </dd>
+                    <dt><span jhiTranslate="awtarApp.nature.necessityValue">Necessity Value</span></dt>
+                    <dd>
+                      <span>{{ nature.necessityValue }}</span>
+                    </dd>
+                    <dt><span jhiTranslate="awtarApp.nature.archivated">Archivated</span></dt>
+                    <dd>
+                      <span>{{ nature.archivated }}</span>
+                    </dd>
+                  </dl>
+
+                  <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+                    <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                  </button>
+
+                  <button type="button" [routerLink]="['/nature', nature.id, 'edit']" class="btn btn-primary">
+                    <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="main-footer"></footer>
+
+      <aside class="control-sidebar control-sidebar-dark"></aside>
     </div>
-  </div>
-</div>
+
+    <script></script>
+  </body>
+</html>

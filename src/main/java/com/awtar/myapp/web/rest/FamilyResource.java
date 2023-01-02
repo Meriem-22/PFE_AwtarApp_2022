@@ -223,4 +223,17 @@ public class FamilyResource {
         List<FamilyDTO> familyDto = familyService.findFamilys();
         return ResponseEntity.ok().body(familyDto);
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of establishments in body.
+     */
+    @GetMapping("/families/place-of-residence/{id}")
+    public ResponseEntity<FamilyDTO> getEstablishmentsNumberByCity(@PathVariable Long id) {
+        log.debug("REST request to get  number of families in a city : {}");
+        FamilyDTO familyDto = familyService.getFamiliesNumberByCity(id);
+        return ResponseEntity.ok().body(familyDto);
+    }
 }

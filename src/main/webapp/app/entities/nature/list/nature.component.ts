@@ -11,6 +11,8 @@ import { NatureService } from '../service/nature.service';
 import { NatureDeleteDialogComponent } from '../delete/nature-delete-dialog.component';
 import { faCarSide } from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'primeng/table';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-nature',
@@ -25,6 +27,7 @@ export class NatureComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  account: Account | null = null;
 
   columns: { field: string; header: string; width: string }[] = [];
 
@@ -37,6 +40,7 @@ export class NatureComponent implements OnInit {
     protected natureService: NatureService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
+    private accountService: AccountService,
     protected modalService: NgbModal
   ) {}
 
@@ -63,6 +67,10 @@ export class NatureComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.handleNavigation();
     this.columns[0] = { field: 'Name', header: 'Name', width: '15%' };
     this.columns[1] = { field: 'Destined To', header: 'Destined To', width: '15%' };

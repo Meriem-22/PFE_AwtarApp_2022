@@ -5,6 +5,7 @@ import com.awtar.myapp.repository.CityRepository;
 import com.awtar.myapp.service.CityService;
 import com.awtar.myapp.service.dto.CityDTO;
 import com.awtar.myapp.service.mapper.CityMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,5 +81,11 @@ public class CityServiceImpl implements CityService {
     public void delete(Long id) {
         log.debug("Request to delete City : {}", id);
         cityRepository.deleteById(id);
+    }
+
+    @Override
+    public List<CityDTO> getAll() {
+        List<City> c = cityRepository.findAllCitys();
+        return cityMapper.toDto(c);
     }
 }

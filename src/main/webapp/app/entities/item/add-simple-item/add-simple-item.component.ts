@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { EventManager } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { ChildStatusItemService } from 'app/entities/child-status-item/service/child-status-item.service';
 import { ItemGender } from 'app/entities/enumerations/item-gender.model';
@@ -33,6 +35,7 @@ export class AddSimpleItemComponent implements OnInit {
   schoolItem?: boolean;
   SchoolLevelInfo?: any[];
   childStatusItem!: any[];
+  account: Account | null = null;
 
   nPrice!: number;
   nPriceDate!: Date;
@@ -59,10 +62,15 @@ export class AddSimpleItemComponent implements OnInit {
     protected messageService: MessageService,
     protected confirmationService: ConfirmationService,
     protected schoolLevelItemService: SchoolLevelItemService,
+    private accountService: AccountService,
     protected childStatusItemService: ChildStatusItemService
   ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.id = history.state.itemId;
     this.schoolItem = history.state.schoolItem === 'yes';
     console.log(history.state.itemId);
@@ -101,6 +109,10 @@ export class AddSimpleItemComponent implements OnInit {
   hideDialog(): void {
     this.itemDialog = false;
     this.submitted = false;
+  }
+
+  previousState(): void {
+    window.history.back();
   }
 
   save(): void {

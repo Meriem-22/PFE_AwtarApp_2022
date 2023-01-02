@@ -12,10 +12,12 @@ export type EntityResponseType = HttpResponse<IChild>;
 export type EntityArrayResponseType = HttpResponse<IChild[]>;
 export type EntityResponse = HttpResponse<IChildAllDetails>;
 export type EntityArrayResponse = HttpResponse<any[]>;
+export type EntityResponseTypeAny = HttpResponse<any>;
 
 @Injectable({ providedIn: 'root' })
 export class ChildService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/children');
+  protected resourceUrl2 = this.applicationConfigService.getEndpointFor('api/children/place-of-residence');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -66,8 +68,16 @@ export class ChildService {
       .pipe(map((res: EntityArrayResponse) => this.convertDateArrayFromServer(res)));
   }
 
+  getChildrenWithoutFamilyDetails2(): Observable<EntityArrayResponse> {
+    return this.http.get<any[]>(`${this.resourceUrl}` + '/without-family/details', { observe: 'response' });
+  }
+
   getSchoolChildrenDetails(beginningYear: string): Observable<EntityArrayResponse> {
     return this.http.get<any[]>(`${this.resourceUrl}/${beginningYear}` + '/school-details', { observe: 'response' });
+  }
+
+  findNumberOfChildrenByCity(id: number): Observable<EntityResponseTypeAny> {
+    return this.http.get<any>(`${this.resourceUrl2}/${id}`, { observe: 'response' });
   }
 
   addChildToCollectionIfMissing(childCollection: IChild[], ...childrenToCheck: (IChild | null | undefined)[]): IChild[] {

@@ -80,7 +80,7 @@ public interface ChildService {
     List<ChildDTO> getAllChildrenDetails(String beginningYear);
 
     /**
-     * Get the "id" profile.
+     *
      *
      *
      * @return the entity.
@@ -88,7 +88,7 @@ public interface ChildService {
     List<ChildDTO> getChildrenDetails();
 
     /**
-     * Get the "id" profile.
+     *
      *
      * @param year the entity to save.
      * @return the entity.
@@ -96,10 +96,18 @@ public interface ChildService {
     List<ChildDTO> getAllChildrenSchoolDetails(String beginningYear);
 
     /**
-     * Get the "id" profile.
+     *
      *
      *
      * @return the entity.
      */
     List<ChildDTO> getChildrenWithoutFamilyDetails();
+
+    /**
+     * Get the "id" city.
+     *
+     *@param id the id of the entity.
+     * @return the result.
+     */
+    ChildDTO getChildrenNumberByCity(Long id);
 }

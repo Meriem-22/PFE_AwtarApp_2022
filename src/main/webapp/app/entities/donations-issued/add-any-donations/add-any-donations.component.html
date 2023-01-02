@@ -94,44 +94,44 @@
               <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
             </div>
             <div class="info">
-              <a href="#" class="d-block"></a>
+              <a href="#" class="d-block">{{ account?.login }}</a>
             </div>
           </div>
 
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <li class="nav-item menu-open">
-                <a [routerLink]="['admin-dashboard/dashboard']" class="nav-link active">
+                <a href="dashboard" class="nav-link active">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Dashboard</p>
+                  <p><span jhiTranslate="dashboard.dashboard">Dashboard</span></p>
                 </a>
               </li>
-              <li class="nav-header">BENEFICIARIES</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.beneficiaries">BENEFICIARIES</span></li>
               <li class="nav-item">
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
                   <p>
-                    Families
+                    <span jhiTranslate="dashboard.families">Families</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a [routerLink]="['/family']" class="nav-link">
+                    <a href="/family" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Families</p>
+                      <p><span jhiTranslate="dashboard.listOfFamilies">List of Families</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a [routerLink]="['/family/add']" class="nav-link">
+                    <a href="/family/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Family</p>
+                      <p><span jhiTranslate="dashboard.addFamily">Add Family</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -140,27 +140,27 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
                   <p>
-                    Children
+                    <span jhiTranslate="dashboard.children">Children</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a [routerLink]="['admin-dashboard/children']" class="nav-link">
+                    <a href="/child" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Chilfren</p>
+                      <p><span jhiTranslate="dashboard.listOfChildren">List Of Chilfren</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="child/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Child</p>
+                      <p><span jhiTranslate="dashboard.addChild">Add Child</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -169,59 +169,59 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
                   <p>
-                    Establishments
+                    <span jhiTranslate="dashboard.establishments">Establishments</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/establishment" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Establishments</p>
+                      <p><span jhiTranslate="dashboard.listOfEstablishments">List Of Establishments</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/establishment/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
 
-                      <p>Add Establishment</p>
+                      <p><span jhiTranslate="dashboard.addEstablishment">Add Establishment</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">DONATIONS</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.donations">DONATIONS</span></li>
               <li class="nav-item">
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
                   <p>
-                    Donations Issued
+                    <span jhiTranslate="dashboard.donationsIssued">Donations Issued</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-issued" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Donations Issued</p>
+                      <p><span jhiTranslate="dashboard.listOfDonationsIssued">List of Donations Issued</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-issued/add-any-donations" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Donations Issued</p>
+                      <p><span jhiTranslate="dashboard.addDonationsIssued">Add Donations Issued</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -230,123 +230,123 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
                   <p>
-                    Donations Received
+                    <span jhiTranslate="dashboard.donationsReceived">Donations Received</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-received" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Donations Received</p>
+                      <p><span jhiTranslate="dashboard.listOfDonationsReceived">List Of Donations Received</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-received/new" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Donations Received</p>
+                      <p><span jhiTranslate="dashboard.addDonationsReceived">Add Donations Received</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">DONATIONS Items</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.donationsItems">DONATIONS Items</span></li>
               <li class="nav-item">
                 <a class="nav-link">
                   <i class="nav-icon fas fa-circle"></i>
                   <p>
-                    Items
+                    <span jhiTranslate="dashboard.items">Items</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/item" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Items</p>
+                      <p><span jhiTranslate="dashboard.listOfItems">List of Items</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/item/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Item</p>
+                      <p><span jhiTranslate="dashboard.addItem">Add Item</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Status Item</p>
+                      <p><span jhiTranslate="dashboard.statusOfItem">Status Item</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">REFERENCE TABLE</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.referenceTable">REFERENCE TABLE</span></li>
+
+              <li class="nav-item">
+                <a href="establishment-type" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.establishmentsTypes">Establishments Types</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/city" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.Citys">Citys</span></p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="pages/widgets.html" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                  <p>Establishments Types</p>
+                  <p><span jhiTranslate="dashboard.healthCategories">Health Categories</span></p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
+                <a href="/nature" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                  <p>Citys</p>
+                  <p><span jhiTranslate="dashboard.natureOfDonOrItem">Nature</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/school-level" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.schoolLevels">School Level</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/educational-institution" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.educationInstitutions">Educational Institutions</span></p>
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Health Categories</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Nature</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>School Level</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Educational Institutions</p>
-                </a>
-              </li>
-
-              <li class="nav-header">CONTRIBUTORS</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.contributors">CONTRIBUTORS</span></li>
               <li class="nav-item">
                 <a href="#" class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
                   <p>
-                    Authorizing Officers
+                    <span jhiTranslate="dashboard.authorizingOfficers">Authorizing Officers</span>
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
+                    <a routerLink="/authorizing-officer" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Authorizing Officers</p>
+                      <p><span jhiTranslate="dashboard.listOfAuthorizingOfficers">List Of Authorizing Officers</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                    <a href="/authorizing-officer/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Authorizing Officer</p>
+                      <p><span jhiTranslate="dashboard.addAuthorizingOfficer">Add Authorizing Officer</span></p>
                     </a>
                   </li>
                 </ul>
@@ -355,49 +355,27 @@
                 <a href="#" class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
                   <p>
-                    Tutors
+                    <span jhiTranslate="dashboard.tutors">Tutors</span>
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
+                    <a href="/tutor" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Tutors</p>
+                      <p><span jhiTranslate="dashboard.listOfTutors">List Of Tutors</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                    <a href="/tutor/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Tutor</p>
+                      <p><span jhiTranslate="dashboard.addTutor">Add Tutor</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link" style="display: flex">
-                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
-                  <p>
-                    Tutors
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
-                      <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Tutors</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                      <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Tutor</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              <li class="nav-item"></li>
             </ul>
           </nav>
         </div>
@@ -408,14 +386,22 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Add Donation</h1>
+                <h1 class="m-0"><span jhiTranslate="awtarApp.donationsIssued.addDonationIssued">Add Donation</span></h1>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                  <li class="breadcrumb-item"><a href="#">Donations Issued</a></li>
-                  <li class="breadcrumb-item active">Add Donation</li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.home">Home</span></a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.dashboard">Dashboard</span></a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="awtarApp.donationsIssued.donationsIssued">Donations Issued</span></a>
+                  </li>
+                  <li class="breadcrumb-item active">
+                    <span jhiTranslate="awtarApp.donationsIssued.addDonationIssued">Add Donation</span>
+                  </li>
                 </ol>
               </div>
             </div>
@@ -507,7 +493,7 @@
                         </div>
 
                         <div class="row mb-3">
-                          <label style="margin-left: 1rem" class="form-label" for="field_beneficiaryType">Beneficiary Type</label>
+                          <label style="margin-left: 1rem" class="form-label" for="field_beneficiaryType">Type bénéficiare</label>
                           <select
                             class="form-control"
                             name="beneficiaryType"
@@ -540,12 +526,15 @@
                       </div>
 
                       <div style="display: flex">
-                        <p-checkbox
+                        <input
+                          type="checkbox"
+                          class="form-check"
                           name="recurringDonations"
                           id="field_recurringDonations"
-                          value="true"
+                          data-cy="recurringDonations"
                           formControlName="recurringDonations"
-                        ></p-checkbox>
+                          style="width: 1.5rem; height: 1.5rem"
+                        />
                         <label
                           style="margin-left: 1rem"
                           class="form-label"
@@ -594,8 +583,15 @@
                       </div>
 
                       <div style="display: flex; margin-bottom: 2rem">
-                        <p-checkbox name="isValidated" id="field_isValidated" value="true" formControlName="isValidated"></p-checkbox>
-
+                        <input
+                          type="checkbox"
+                          class="form-check"
+                          name="isValidated"
+                          id="field_isValidated"
+                          data-cy="isValidated"
+                          formControlName="isValidated"
+                          style="width: 1.5rem; height: 1.5rem"
+                        />
                         <label
                           class="form-label"
                           style="margin-left: 1rem"
@@ -611,7 +607,7 @@
                           pButton
                           pRipple
                           type="button"
-                          label="Reset"
+                          label="Annuler"
                           class="p-button-secondary"
                         ></button>
                         <button
@@ -621,7 +617,7 @@
                           pButton
                           pRipple
                           type="submit"
-                          label="Next"
+                          label="Suivant"
                           class="p-button-help"
                         ></button>
                       </div>
@@ -672,7 +668,7 @@
                                                   data-toggle="tab"
                                                   class="nav-item nav-link has-icon nav-link-faded active"
                                                 >
-                                                  Children
+                                                  Enfants
                                                 </a>
                                               </nav>
                                             </div>
@@ -684,7 +680,7 @@
                                         <button
                                           pButton
                                           pRipple
-                                          label="New"
+                                          label="Ajouter Détail Don"
                                           icon="pi pi-plus"
                                           class="p-button-success mr-2"
                                           (click)="donationDescription()"
@@ -693,7 +689,7 @@
                                     </p-toolbar>
 
                                     <p-table
-                                      #dt
+                                      #dt1
                                       [value]="allchildren"
                                       [(selection)]="selectedChildren"
                                       dataKey="id"
@@ -715,7 +711,7 @@
                                               <i class="pi pi-search"></i>
                                               <input
                                                 type="text"
-                                                (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                                (input)="dt1.filterGlobal($any($event.target).value!, 'contains')"
                                                 placeholder="Recherche Globale"
                                                 style="height: 3rem; width: 17rem; border-color: gainsboro; text-align: center"
                                               />
@@ -776,7 +772,7 @@
                                             </div>
                                           </th>
 
-                                          <th>Child details</th>
+                                          <th>Détails Enfant</th>
                                         </tr>
                                       </ng-template>
 
@@ -851,14 +847,14 @@
                                     <p-dialog header="Détails" [(visible)]="display" [style]="{ width: '50vw' }">
                                       <h4 style="color: gray">{{ selectedCID }}</h4>
 
-                                      <h6 style="font-size: 20px; color: #447de8">Donation</h6>
+                                      <h6 style="font-size: 20px; color: #447de8">Dons</h6>
                                       <div style="display: flex">
                                         <dt style="margin-right: 1rem">Nombre de dons émis total</dt>
                                         <dd>
                                           <span>{{ df }}</span>
                                         </dd>
                                       </div>
-                                      <h6 style="font-size: 20px; color: #447de8">Education</h6>
+                                      <h6 style="font-size: 20px; color: #447de8">Éducation</h6>
                                       <div *ngIf="childEducation!">
                                         <dl>
                                           <div style="display: flex">
@@ -910,7 +906,7 @@
                                         <p-button
                                           icon="pi pi-check"
                                           (click)="submit()"
-                                          label="Confirm Donations"
+                                          label="Confirmer Don"
                                           styleClass="p-button-text"
                                         ></p-button>
                                       </div>
@@ -929,7 +925,7 @@
                                                   data-toggle="tab"
                                                   class="nav-item nav-link has-icon nav-link-faded active"
                                                 >
-                                                  Families
+                                                  Familles
                                                 </a>
                                               </nav>
                                             </div>
@@ -941,7 +937,7 @@
                                         <button
                                           pButton
                                           pRipple
-                                          label="New"
+                                          label="Ajouter Detail Don"
                                           icon="pi pi-plus"
                                           class="p-button-success mr-2"
                                           (click)="donationDescription()"
@@ -950,7 +946,7 @@
                                     </p-toolbar>
 
                                     <p-table
-                                      #dt
+                                      #dt2
                                       [value]="familys!"
                                       [(selection)]="selectedFamilys"
                                       dataKey="id"
@@ -967,14 +963,13 @@
                                     >
                                       <ng-template pTemplate="caption">
                                         <div class="table-header">
-                                          Choisir parmet la liste de Famille
                                           <div class="flex" style="text-align: right">
                                             <span class="p-input-icon-left ml-auto">
                                               <i class="pi pi-search" style="margin-left: 12rem"></i>
                                               <input
                                                 pInputText
                                                 type="text"
-                                                (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                                (input)="dt2.filterGlobal($any($event.target).value!, 'contains')"
                                                 placeholder="Recherche Globale"
                                               />
                                             </span>
@@ -1032,8 +1027,8 @@
                                             </div>
                                           </th>
 
-                                          <th>Membre Details</th>
-                                          <th>Children Donations</th>
+                                          <th>Membres Détails</th>
+                                          <th>Dons Enfants</th>
                                         </tr>
                                       </ng-template>
 
@@ -1086,7 +1081,7 @@
                                     <p-dialog header="Détails" [(visible)]="display" [style]="{ width: '50vw' }">
                                       <h4 style="color: gray">{{ selectedCID }}</h4>
 
-                                      <h6 style="font-size: 20px; color: #447de8">Donation</h6>
+                                      <h6 style="font-size: 20px; color: #447de8">Dons</h6>
                                       <div style="display: flex">
                                         <dt style="margin-right: 1rem">Nombre de dons émis total</dt>
                                         <dd>
@@ -1110,7 +1105,7 @@
                                       <h6 style="font-size: 20px; color: #447de8">{{ nbChild }} Enfants :</h6>
                                       <div *ngIf="children && children.length > 0">
                                         <h6 style="font-size: 20px; color: #447de8">
-                                          Nombre des dons des enfants de cette famille est: {{ nbDonCTot }}
+                                          Nombre de dons des enfants de cette famille est: {{ nbDonCTot }}
                                         </h6>
                                         <div *ngFor="let child of children">
                                           <div style="display: flex">
@@ -1136,7 +1131,7 @@
                                         <button
                                           pButton
                                           pRipple
-                                          label="Children Donation"
+                                          label="Don Enfants"
                                           icon="pi pi-plus"
                                           class="p-button-primary mr-2"
                                           (click)="showMaximizableDialog()"
@@ -1222,7 +1217,7 @@
                                     </p-sidebar>
 
                                     <p-dialog
-                                      header="Donation Item Details"
+                                      header="Détails Articles de Don"
                                       [(visible)]="displayMaximizable"
                                       [modal]="true"
                                       [style]="{ width: '68vw' }"
@@ -1249,15 +1244,15 @@
                                           <p-pickList
                                             [source]="items!"
                                             [target]="targetProducts"
-                                            sourceHeader="Available"
-                                            targetHeader="Selected"
+                                            sourceHeader="Disponible"
+                                            targetHeader="Choisi"
                                             [dragdrop]="true"
                                             [responsive]="true"
                                             [sourceStyle]="{ height: '22.2rem' }"
                                             [targetStyle]="{ height: '22.2rem' }"
                                             filterBy="name"
-                                            sourceFilterPlaceholder="Search by name"
-                                            targetFilterPlaceholder="Search by name"
+                                            sourceFilterPlaceholder="Recherche avec le nom"
+                                            targetFilterPlaceholder="Recherche avec le nom"
                                           >
                                             <ng-template let-item pTemplate="item">
                                               <div class="product-item">
@@ -1292,7 +1287,7 @@
 
                                                 <form name="QuantityForm" role="form" novalidate [formGroup]="QuantityForm">
                                                   <div *ngIf="target(item)">
-                                                    <label for="quantity" style="margin-left: 1rem"> Quantity</label>
+                                                    <label for="quantity" style="margin-left: 1rem"> Quantité</label>
                                                     <input
                                                       type="number"
                                                       class="form-control"
@@ -1314,7 +1309,7 @@
                                         <p-button
                                           icon="pi pi-check"
                                           (click)="addDonationDetailsOfFamilyChildren()"
-                                          label="Add Items Donation"
+                                          label="Ajouter Articles de don"
                                           styleClass="p-button-text"
                                         ></p-button>
                                       </ng-template>
@@ -1326,7 +1321,7 @@
                                         <p-button
                                           icon="pi pi-check"
                                           (click)="submit()"
-                                          label="Confirm Donations"
+                                          label="Confirmer Don"
                                           styleClass="p-button-text"
                                         ></p-button>
                                       </div>
@@ -1345,7 +1340,7 @@
                                                   data-toggle="tab"
                                                   class="nav-item nav-link has-icon nav-link-faded active"
                                                 >
-                                                  Establishments
+                                                  Établissements
                                                 </a>
                                               </nav>
                                             </div>
@@ -1357,7 +1352,7 @@
                                         <button
                                           pButton
                                           pRipple
-                                          label="New"
+                                          label="Ajouter Détail Don"
                                           icon="pi pi-plus"
                                           class="p-button-success mr-2"
                                           (click)="donationDescription()"
@@ -1366,7 +1361,7 @@
                                     </p-toolbar>
 
                                     <p-table
-                                      #dt
+                                      #dt3
                                       [value]="establishments!"
                                       [(selection)]="selectedEstablishments"
                                       dataKey="id"
@@ -1383,14 +1378,13 @@
                                     >
                                       <ng-template pTemplate="caption">
                                         <div class="table-header">
-                                          Choisir parmet la liste des établissements
                                           <div class="flex" style="text-align: right">
                                             <span class="p-input-icon-left ml-auto">
                                               <i class="pi pi-search" style="margin-left: 12rem"></i>
                                               <input
                                                 pInputText
                                                 type="text"
-                                                (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                                (input)="dt3.filterGlobal($any($event.target).value!, 'contains')"
                                                 placeholder="Recherche Globale"
                                               />
                                             </span>
@@ -1503,7 +1497,7 @@
                                     <p-dialog header="Détails" [(visible)]="display" [style]="{ width: '50vw' }">
                                       <h4 style="color: gray">{{ selectedEID }}</h4>
 
-                                      <h6 style="font-size: 20px; color: #447de8">Donation</h6>
+                                      <h6 style="font-size: 20px; color: #447de8">Dons</h6>
                                       <div style="display: flex">
                                         <dt style="margin-right: 1rem">Nombre de dons émis total</dt>
                                         <dd>
@@ -1527,7 +1521,7 @@
                                         <p-button
                                           icon="pi pi-check"
                                           (click)="submit()"
-                                          label="Confirm Donations"
+                                          label="Confirmer Don"
                                           styleClass="p-button-text"
                                         ></p-button>
                                       </div>
@@ -1547,17 +1541,17 @@
                                                     data-toggle="tab"
                                                     class="nav-item nav-link has-icon nav-link-faded active"
                                                   >
-                                                    Children
+                                                    Enfants
                                                   </a>
                                                   <a href="#families" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
-                                                    Families
+                                                    Familles
                                                   </a>
                                                   <a
                                                     href="#establishments"
                                                     data-toggle="tab"
                                                     class="nav-item nav-link has-icon nav-link-faded"
                                                   >
-                                                    Establishments
+                                                    Établissements
                                                   </a>
                                                 </nav>
                                               </div>
@@ -1569,7 +1563,7 @@
                                           <button
                                             pButton
                                             pRipple
-                                            label="New"
+                                            label="Ajouter Détail Don"
                                             icon="pi pi-plus"
                                             class="p-button-success mr-2"
                                             (click)="donationDescription()"
@@ -1582,10 +1576,8 @@
                                           <div class="card">
                                             <div class="card-body tab-content">
                                               <div class="tab-pane active" id="children">
-                                                <h6>YOUR CHILDREN BENEFICIARYS INFORMATION</h6>
-
                                                 <p-table
-                                                  #dt
+                                                  #dt4
                                                   [value]="allchildren!"
                                                   [(selection)]="selectedChildren"
                                                   dataKey="id"
@@ -1608,7 +1600,7 @@
                                                           <input
                                                             pInputText
                                                             type="text"
-                                                            (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                                            (input)="dt4.filterGlobal($any($event.target).value!, 'contains')"
                                                             placeholder="Recherche Globale"
                                                           />
                                                         </span>
@@ -1683,7 +1675,7 @@
                                                         </div>
                                                       </th>
 
-                                                      <th>Child details</th>
+                                                      <th>Détails Enfant</th>
                                                     </tr>
                                                   </ng-template>
 
@@ -1760,14 +1752,14 @@
                                                 <p-dialog header="Détails" [(visible)]="display" [style]="{ width: '50vw' }">
                                                   <h4 style="color: gray">{{ selectedCID }}</h4>
 
-                                                  <h6 style="font-size: 20px; color: #447de8">Donation</h6>
+                                                  <h6 style="font-size: 20px; color: #447de8">Dons</h6>
                                                   <div style="display: flex">
                                                     <dt style="margin-right: 1rem">Nombre de dons émis total</dt>
                                                     <dd>
                                                       <span>{{ df }}</span>
                                                     </dd>
                                                   </div>
-                                                  <h6 style="font-size: 20px; color: #447de8">Education</h6>
+                                                  <h6 style="font-size: 20px; color: #447de8">Éducation</h6>
                                                   <div *ngIf="childEducation!">
                                                     <dl>
                                                       <div style="display: flex">
@@ -1817,10 +1809,8 @@
                                               </div>
 
                                               <div class="tab-pane" id="families">
-                                                <h6>YOUR FAMILIES BENEFICIARIES INFORMATION</h6>
-
                                                 <p-table
-                                                  #dt
+                                                  #dt5
                                                   [value]="familys!"
                                                   [(selection)]="selectedFamilys"
                                                   dataKey="id"
@@ -1849,7 +1839,7 @@
                                                           <input
                                                             pInputText
                                                             type="text"
-                                                            (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                                            (input)="dt5.filterGlobal($any($event.target).value!, 'contains')"
                                                             placeholder="Recherche Globale"
                                                           />
                                                         </span>
@@ -1924,8 +1914,8 @@
                                                         </div>
                                                       </th>
 
-                                                      <th>Membre Details</th>
-                                                      <th>Children Donations</th>
+                                                      <th>Détails Membres</th>
+                                                      <th>Dons Enfants</th>
                                                     </tr>
                                                   </ng-template>
 
@@ -1978,7 +1968,7 @@
                                                 <p-dialog header="Détails" [(visible)]="display" [style]="{ width: '50vw' }">
                                                   <h4 style="color: gray">{{ selectedCID }}</h4>
 
-                                                  <h6 style="font-size: 20px; color: #447de8">Donation</h6>
+                                                  <h6 style="font-size: 20px; color: #447de8">Dons</h6>
                                                   <div style="display: flex">
                                                     <dt style="margin-right: 1rem">Nombre de dons émis total</dt>
                                                     <dd>
@@ -2032,7 +2022,7 @@
                                                     <button
                                                       pButton
                                                       pRipple
-                                                      label="Children Donation"
+                                                      label="Don Enfants"
                                                       icon="pi pi-plus"
                                                       class="p-button-primary mr-2"
                                                       (click)="showMaximizableDialog()"
@@ -2124,7 +2114,7 @@
                                                 </p-sidebar>
 
                                                 <p-dialog
-                                                  header="Donation Item Details"
+                                                  header="Détails Article Don"
                                                   [(visible)]="displayMaximizable"
                                                   [modal]="true"
                                                   [style]="{ width: '68vw' }"
@@ -2153,15 +2143,15 @@
                                                       <p-pickList
                                                         [source]="items!"
                                                         [target]="targetProducts"
-                                                        sourceHeader="Available"
-                                                        targetHeader="Selected"
+                                                        sourceHeader="Disponible"
+                                                        targetHeader="Choisi"
                                                         [dragdrop]="true"
                                                         [responsive]="true"
                                                         [sourceStyle]="{ height: '22.2rem' }"
                                                         [targetStyle]="{ height: '22.2rem' }"
                                                         filterBy="name"
-                                                        sourceFilterPlaceholder="Search by name"
-                                                        targetFilterPlaceholder="Search by name"
+                                                        sourceFilterPlaceholder="Rechercher avec le nom"
+                                                        targetFilterPlaceholder="Rechercher avec le nom"
                                                       >
                                                         <ng-template let-item pTemplate="item">
                                                           <div class="product-item">
@@ -2191,12 +2181,12 @@
                                                             </div>
                                                             <div class="product-list-action">
                                                               <h6 class="mb-2">{{ item.price }} DT</h6>
-                                                              <span class="product-badge">{{ item.availableStockQuantity }}</span>
+                                                              <span class="product-badge"> ST. {{ item.availableStockQuantity }}</span>
                                                             </div>
 
                                                             <form name="QuantityForm" role="form" novalidate [formGroup]="QuantityForm">
                                                               <div *ngIf="target(item)">
-                                                                <label for="quantity" style="margin-left: 1rem"> Quantity</label>
+                                                                <label for="quantity" style="margin-left: 1rem"> Quantité</label>
                                                                 <input
                                                                   type="number"
                                                                   class="form-control"
@@ -2218,8 +2208,8 @@
                                                   <ng-template pTemplate="footer">
                                                     <p-button
                                                       icon="pi pi-check"
-                                                      (click)="displayMaximizable = false"
-                                                      label="Ok"
+                                                      (click)="addDonationDetailsOfFamilyChildren()"
+                                                      label="Ajouter Articles de don"
                                                       styleClass="p-button-text"
                                                     ></p-button>
                                                   </ng-template>
@@ -2227,10 +2217,8 @@
                                               </div>
 
                                               <div class="tab-pane" id="establishments">
-                                                <h6>YOUR ESTABLISHMENTS BENEFICIARYS INFORMATION</h6>
-
                                                 <p-table
-                                                  #dt
+                                                  #dt6
                                                   [value]="establishments!"
                                                   [(selection)]="selectedEstablishments"
                                                   dataKey="id"
@@ -2260,7 +2248,7 @@
                                                           <input
                                                             pInputText
                                                             type="text"
-                                                            (input)="dt.filterGlobal($any($event.target).value!, 'contains')"
+                                                            (input)="dt6.filterGlobal($any($event.target).value!, 'contains')"
                                                             placeholder="Recherche Globale"
                                                           />
                                                         </span>
@@ -2400,7 +2388,7 @@
                                                 <p-dialog header="Détails" [(visible)]="display" [style]="{ width: '50vw' }">
                                                   <h4 style="color: gray">{{ selectedEID }}</h4>
 
-                                                  <h6 style="font-size: 20px; color: #447de8">Donation</h6>
+                                                  <h6 style="font-size: 20px; color: #447de8">Dons</h6>
                                                   <div style="display: flex">
                                                     <dt style="margin-right: 1rem">Nombre de dons émis total</dt>
                                                     <dd>
@@ -2429,7 +2417,7 @@
                                         <p-button
                                           icon="pi pi-check"
                                           (click)="submit()"
-                                          label="Confirm Donations"
+                                          label="Confirmer Don"
                                           styleClass="p-button-text"
                                         ></p-button>
                                       </div>
@@ -2438,8 +2426,8 @@
 
                                   <p-dialog
                                     [(visible)]="productDialog"
-                                    [style]="{ width: '450px' }"
-                                    header="Donation Details"
+                                    [style]="{ height: '550px' }"
+                                    header="Détail Don"
                                     [modal]="true"
                                     styleClass="p-fluid"
                                   >
@@ -2502,7 +2490,7 @@
                                       <button
                                         pButton
                                         pRipple
-                                        label="Cancel"
+                                        label="Annuler"
                                         icon="pi pi-times"
                                         class="p-button-text"
                                         (click)="hideDialog()"
@@ -2510,7 +2498,7 @@
                                       <button
                                         pButton
                                         pRipple
-                                        label="Save"
+                                        label="Sauvegarder"
                                         icon="pi pi-check"
                                         class="p-button-text"
                                         [disabled]="editForm.invalid || isSaving"
@@ -2549,7 +2537,7 @@
                             <p-button icon="pi pi-check" (click)="search()"></p-button>
                           </ng-template>
                           <ng-template pTemplate="right">
-                            <button (click)="addDonationDetails()" pButton icon="pi pi-check" label="Add Donation Items"></button>
+                            <button (click)="addDonationDetails()" pButton icon="pi pi-check" label="Ajouter Articles de don"></button>
                           </ng-template>
                         </p-toolbar>
                       </div>
@@ -2558,15 +2546,15 @@
                         <p-pickList
                           [source]="items!"
                           [target]="targetProducts"
-                          sourceHeader="Available"
-                          targetHeader="Selected"
+                          sourceHeader="Disponible"
+                          targetHeader="Choisi"
                           [dragdrop]="true"
                           [responsive]="true"
                           [sourceStyle]="{ height: '30rem' }"
                           [targetStyle]="{ height: '30rem' }"
                           filterBy="name"
-                          sourceFilterPlaceholder="Search by name"
-                          targetFilterPlaceholder="Search by name"
+                          sourceFilterPlaceholder="Rechercher avec le nom"
+                          targetFilterPlaceholder="Rechercher avec le nom"
                         >
                           <ng-template let-item pTemplate="item">
                             <div class="product-item">
@@ -2593,12 +2581,12 @@
                               </div>
                               <div class="product-list-action">
                                 <h6 class="mb-2">{{ item.price }} DT</h6>
-                                <span class="product-badge">{{ item.availableStockQuantity }}</span>
+                                <span class="product-badge">ST. {{ item.availableStockQuantity }}</span>
                               </div>
 
                               <form name="QuantityForm" role="form" novalidate [formGroup]="QuantityForm">
                                 <div *ngIf="target(item)">
-                                  <label for="quantity" style="margin-left: 1rem"> Quantity</label>
+                                  <label for="quantity" style="margin-left: 1rem"> Quantité</label>
                                   <input
                                     type="number"
                                     class="form-control"

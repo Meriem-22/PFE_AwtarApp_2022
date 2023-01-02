@@ -180,4 +180,17 @@ public class CityResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the cityDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/cities/all")
+    public ResponseEntity<List<CityDTO>> getAllCitys() {
+        log.debug("REST request to get all Citys : {}");
+        List<CityDTO> cityDTO = cityService.getAll();
+        return ResponseEntity.ok().body(cityDTO);
+    }
 }

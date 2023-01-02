@@ -260,4 +260,17 @@ public class ChildResource {
         List<ChildDTO> childDTOC = childService.getChildrenWithoutFamilyDetails();
         return ResponseEntity.ok().body(childDTOC);
     }
+
+    /**
+     *
+     *
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the childDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/children/place-of-residence/{id}")
+    public ResponseEntity<ChildDTO> getChildrenNumberByCity(@PathVariable Long id) {
+        log.debug("REST request to get  number of children in a city : {}");
+        ChildDTO childDTOC = childService.getChildrenNumberByCity(id);
+        return ResponseEntity.ok().body(childDTOC);
+    }
 }

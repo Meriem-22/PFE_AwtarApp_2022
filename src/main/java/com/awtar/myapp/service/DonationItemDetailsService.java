@@ -72,4 +72,28 @@ public interface DonationItemDetailsService {
      * @return the entity.
      */
     List<DonationItemDetailsDTO> findAllOfOneDonation(Long id);
+
+    /**
+     * Get the "id" donationItemDetails.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    List<DonationItemDetailsDTO> getAllDonationItemDetailsOfFamilies(Long id);
+
+    /**
+     * Get the "id" donationItemDetails.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    List<DonationItemDetailsDTO> getAllDonationItemDetailsOfChildren(Long id);
+
+    /**
+     * Get the "id" donationItemDetails.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    List<DonationItemDetailsDTO> getAllDonationItemDetailsOfEstablishments(Long id);
 }

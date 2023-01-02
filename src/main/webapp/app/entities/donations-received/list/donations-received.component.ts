@@ -10,6 +10,8 @@ import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants
 import { DonationsReceivedService } from '../service/donations-received.service';
 import { DonationsReceivedDeleteDialogComponent } from '../delete/donations-received-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-donations-received',
@@ -24,12 +26,14 @@ export class DonationsReceivedComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  account: Account | null = null;
 
   constructor(
     protected donationsReceivedService: DonationsReceivedService,
     protected activatedRoute: ActivatedRoute,
     protected dataUtils: DataUtils,
     protected router: Router,
+    private accountService: AccountService,
     protected modalService: NgbModal
   ) {}
 
@@ -57,6 +61,10 @@ export class DonationsReceivedComponent implements OnInit {
 
   ngOnInit(): void {
     this.handleNavigation();
+
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
   }
 
   trackId(_index: number, item: IDonationsReceived): number {

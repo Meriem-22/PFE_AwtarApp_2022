@@ -38,37 +38,37 @@
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <li class="nav-item menu-open">
-                <a [routerLink]="['admin-dashboard/dashboard']" class="nav-link active">
+                <a href="dashboard" class="nav-link active">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Dashboard</p>
+                  <p><span jhiTranslate="dashboard.dashboard">Dashboard</span></p>
                 </a>
               </li>
-              <li class="nav-header">BENEFICIARIES</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.beneficiaries">BENEFICIARIES</span></li>
               <li class="nav-item">
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
                   <p>
-                    Families
+                    <span jhiTranslate="dashboard.families">Families</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a [routerLink]="['/family']" class="nav-link">
+                    <a href="/family" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Families</p>
+                      <p><span jhiTranslate="dashboard.listOfFamilies">List of Families</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a [routerLink]="['/family/add']" class="nav-link">
+                    <a href="/family/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Family</p>
+                      <p><span jhiTranslate="dashboard.addFamily">Add Family</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -77,27 +77,27 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
                   <p>
-                    Children
+                    <span jhiTranslate="dashboard.children">Children</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a [routerLink]="['admin-dashboard/children']" class="nav-link">
+                    <a href="/child" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Chilfren</p>
+                      <p><span jhiTranslate="dashboard.listOfChildren">List Of Chilfren</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="child/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Child</p>
+                      <p><span jhiTranslate="dashboard.addChild">Add Child</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -106,59 +106,59 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
                   <p>
-                    Establishments
+                    <span jhiTranslate="dashboard.establishments">Establishments</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/establishment" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Establishments</p>
+                      <p><span jhiTranslate="dashboard.listOfEstablishments">List Of Establishments</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/establishment/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
 
-                      <p>Add Establishment</p>
+                      <p><span jhiTranslate="dashboard.addEstablishment">Add Establishment</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">DONATIONS</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.donations">DONATIONS</span></li>
               <li class="nav-item">
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
                   <p>
-                    Donations Issued
+                    <span jhiTranslate="dashboard.donationsIssued">Donations Issued</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-issued" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Donations Issued</p>
+                      <p><span jhiTranslate="dashboard.listOfDonationsIssued">List of Donations Issued</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-issued/add-any-donations" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Donations Issued</p>
+                      <p><span jhiTranslate="dashboard.addDonationsIssued">Add Donations Issued</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -167,123 +167,123 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
                   <p>
-                    Donations Received
+                    <span jhiTranslate="dashboard.donationsReceived">Donations Received</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-received" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Donations Received</p>
+                      <p><span jhiTranslate="dashboard.listOfDonationsReceived">List Of Donations Received</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-received/new" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Donations Received</p>
+                      <p><span jhiTranslate="dashboard.addDonationsReceived">Add Donations Received</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">DONATIONS Items</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.donationsItems">DONATIONS Items</span></li>
               <li class="nav-item">
                 <a class="nav-link">
                   <i class="nav-icon fas fa-circle"></i>
                   <p>
-                    Items
+                    <span jhiTranslate="dashboard.items">Items</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/item" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Items</p>
+                      <p><span jhiTranslate="dashboard.listOfItems">List of Items</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/item/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Item</p>
+                      <p><span jhiTranslate="dashboard.addItem">Add Item</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Status Item</p>
+                      <p><span jhiTranslate="dashboard.statusOfItem">Status Item</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">REFERENCE TABLE</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.referenceTable">REFERENCE TABLE</span></li>
+
+              <li class="nav-item">
+                <a href="establishment-type" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.establishmentsTypes">Establishments Types</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/city" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.Citys">Citys</span></p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="pages/widgets.html" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                  <p>Establishments Types</p>
+                  <p><span jhiTranslate="dashboard.healthCategories">Health Categories</span></p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
+                <a href="/nature" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                  <p>Citys</p>
+                  <p><span jhiTranslate="dashboard.natureOfDonOrItem">Nature</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/school-level" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.schoolLevels">School Level</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/educational-institution" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.educationInstitutions">Educational Institutions</span></p>
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Health Categories</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Nature</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>School Level</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Educational Institutions</p>
-                </a>
-              </li>
-
-              <li class="nav-header">CONTRIBUTORS</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.contributors">CONTRIBUTORS</span></li>
               <li class="nav-item">
                 <a href="#" class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
                   <p>
-                    Authorizing Officers
+                    <span jhiTranslate="dashboard.authorizingOfficers">Authorizing Officers</span>
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
+                    <a routerLink="/authorizing-officer" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Authorizing Officers</p>
+                      <p><span jhiTranslate="dashboard.listOfAuthorizingOfficers">List Of Authorizing Officers</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                    <a href="/authorizing-officer/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Authorizing Officer</p>
+                      <p><span jhiTranslate="dashboard.addAuthorizingOfficer">Add Authorizing Officer</span></p>
                     </a>
                   </li>
                 </ul>
@@ -292,49 +292,27 @@
                 <a href="#" class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
                   <p>
-                    Tutors
+                    <span jhiTranslate="dashboard.tutors">Tutors</span>
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
+                    <a href="/tutor" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Tutors</p>
+                      <p><span jhiTranslate="dashboard.listOfTutors">List Of Tutors</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                    <a href="/tutor/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Tutor</p>
+                      <p><span jhiTranslate="dashboard.addTutor">Add Tutor</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link" style="display: flex">
-                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
-                  <p>
-                    Tutors
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
-                      <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Tutors</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                      <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Tutor</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              <li class="nav-item"></li>
             </ul>
           </nav>
         </div>
@@ -345,14 +323,22 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Edit Authorizing Officer</h1>
+                <h1 class="m-0"><span jhiTranslate="awtarApp.authorizingOfficer.editAuthorizingOfficer">Edit Authorizing Officer</span></h1>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                  <li class="breadcrumb-item"><a href="#">Contributor</a></li>
-                  <li class="breadcrumb-item active">Edit Authorizing Officer</li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.home">Home</span></a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.dashboard">Dashboard</span></a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="awtarApp.authorizingOfficer.contributor">Contributor</span></a>
+                  </li>
+                  <li class="breadcrumb-item active">
+                    <span jhiTranslate="awtarApp.authorizingOfficer.editAuthorizingOfficer">Edit Authorizing Officer</span>
+                  </li>
                 </ol>
               </div>
             </div>
@@ -361,6 +347,8 @@
 
         <section class="content">
           <div class="container-fluid">
+            <jhi-alert></jhi-alert>
+
             <div class="container mt-3 mb-4">
               <div class="col-lg-12 mt-4 mt-lg-0">
                 <div class="row">
@@ -394,7 +382,11 @@
                                         >{{ Ordonnateur.lastName }} {{ Ordonnateur.firstName }}</a
                                       >
                                     </h6>
-                                    <span class="badge" style="background-color: #fc00ff">Current Authorizing Officer</span>
+                                    <span class="badge" style="background-color: #fc00ff"
+                                      ><span jhiTranslate="awtarApp.authorizingOfficer.currentAuthorizingOfficer"
+                                        >Current Authorizing Officer</span
+                                      ></span
+                                    >
                                   </div>
                                   <div class="candidate-list-option">
                                     <ul class="list-unstyled">
@@ -427,7 +419,11 @@
                           <ng-template pTemplate="caption">
                             <div class="flex align-items-center justify-content-between" style="display: flex">
                               <h5 class="m-0" style="color: rgb(219, 28, 158)">
-                                There are {{ profiles ? profiles.length : 0 }} Other Authorizing Officers
+                                <span jhiTranslate="awtarApp.authorizingOfficer.thereAre">There are</span>
+                                {{ profiles ? profiles.length : 0 }}
+                                <span jhiTranslate="awtarApp.authorizingOfficer.otherAuthorizingOfficers">
+                                  Other Authorizing Officers
+                                </span>
                               </h5>
                             </div>
                           </ng-template>
@@ -531,6 +527,16 @@
                 </div>
               </div>
             </div>
+            <button
+              style="margin-bottom: 1rem"
+              type="button"
+              id="cancel-save"
+              data-cy="entityCreateCancelButton"
+              class="btn btn-secondary"
+              (click)="previousState()"
+            >
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+            </button>
           </div>
         </section>
       </div>

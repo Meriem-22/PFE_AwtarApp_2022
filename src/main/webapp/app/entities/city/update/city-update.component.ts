@@ -7,6 +7,8 @@ import { finalize } from 'rxjs/operators';
 
 import { ICity, City } from '../city.model';
 import { CityService } from '../service/city.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-city-update',
@@ -14,6 +16,7 @@ import { CityService } from '../service/city.service';
 })
 export class CityUpdateComponent implements OnInit {
   isSaving = false;
+  account: Account | null = null;
 
   editForm = this.fb.group({
     id: [],
@@ -23,9 +26,17 @@ export class CityUpdateComponent implements OnInit {
     archivated: [],
   });
 
-  constructor(protected cityService: CityService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected cityService: CityService,
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService,
+    protected fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
     this.activatedRoute.data.subscribe(({ city }) => {
       this.updateForm(city);
     });

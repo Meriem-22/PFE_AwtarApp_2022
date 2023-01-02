@@ -22,11 +22,25 @@
       "cnss": "Cnss",
       "maritalStatus": "État civil",
       "occupation": "Profession",
-      "deceased": "Défunt",
+      "deceased": "Décédé",
       "dateOfDeath": "Date de décès",
       "familyHead": "Chef de famille",
       "parentProfile": "Profil des parents",
-      "family": "Famille"
+      "family": "Famille",
+      "profileSettings": "Réglages Profil",
+      "healthSettings": "Réglages Santé",
+      "profileInformation": "Informations Profil",
+      "settings": "Réglages",
+      "parentInfo": "INFORMATIONS SUR LE PARENT",
+      "parentSettings": "PARAMÈTRES PARENTS",
+      "report": "Rapport",
+      "parentReport": "RAPPORT PARENT",
+      "generateReport": "Générer un rapport",
+      "familyMembers": "Membres De Famille",
+      "child": "Enfant",
+      "profilParent": "Profil Parent",
+      "deadParent": "Parent Décédé",
+      "dead": "Décédé"
     }
   }
 }

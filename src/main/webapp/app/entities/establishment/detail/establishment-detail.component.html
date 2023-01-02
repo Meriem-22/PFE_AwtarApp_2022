@@ -310,7 +310,7 @@
               <img src="../../content/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
             </div>
             <div class="info">
-              <a href="#" class="d-block">admin</a>
+              <a href="#" class="d-block">{{ account?.login }}</a>
             </div>
           </div>
 
@@ -319,15 +319,15 @@
               <li class="nav-item menu-open">
                 <a href="dashboard" class="nav-link active">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Dashboard</p>
+                  <p><span jhiTranslate="dashboard.dashboard">Dashboard</span></p>
                 </a>
               </li>
-              <li class="nav-header">BENEFICIARIES</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.beneficiaries">BENEFICIARIES</span></li>
               <li class="nav-item">
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">family_restroom</span>
                   <p>
-                    Families
+                    <span jhiTranslate="dashboard.families">Families</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -335,19 +335,19 @@
                   <li class="nav-item">
                     <a href="/family" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Families</p>
+                      <p><span jhiTranslate="dashboard.listOfFamilies">List of Families</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="/family/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Family</p>
+                      <p><span jhiTranslate="dashboard.addFamily">Add Family</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -356,7 +356,7 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">girl</span>
                   <p>
-                    Children
+                    <span jhiTranslate="dashboard.children">Children</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -364,19 +364,19 @@
                   <li class="nav-item">
                     <a href="/child" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Chilfren</p>
+                      <p><span jhiTranslate="dashboard.listOfChildren">List Of Chilfren</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="child/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Child</p>
+                      <p><span jhiTranslate="dashboard.addChild">Add Child</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -385,7 +385,7 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">holiday_village</span>
                   <p>
-                    Establishments
+                    <span jhiTranslate="dashboard.establishments">Establishments</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -393,51 +393,51 @@
                   <li class="nav-item">
                     <a href="/establishment" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Establishments</p>
+                      <p><span jhiTranslate="dashboard.listOfEstablishments">List Of Establishments</span></p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/establishment/add" class="nav-link">
+                      <i class="nav-icon far fa-plus-square"></i>
+
+                      <p><span jhiTranslate="dashboard.addEstablishment">Add Establishment</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
-                      <i class="nav-icon far fa-plus-square"></i>
-
-                      <p>Add Establishment</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/establishment/new" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">DONATIONS</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.donations">DONATIONS</span></li>
               <li class="nav-item">
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">volunteer_activism</span>
                   <p>
-                    Donations Issued
+                    <span jhiTranslate="dashboard.donationsIssued">Donations Issued</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-issued" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Donations Issued</p>
+                      <p><span jhiTranslate="dashboard.listOfDonationsIssued">List of Donations Issued</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-issued/add-any-donations" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Donations Issued</p>
+                      <p><span jhiTranslate="dashboard.addDonationsIssued">Add Donations Issued</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
@@ -446,123 +446,123 @@
                 <a class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">inventory</span>
                   <p>
-                    Donations Received
+                    <span jhiTranslate="dashboard.donationsReceived">Donations Received</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-received" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Donations Received</p>
+                      <p><span jhiTranslate="dashboard.listOfDonationsReceived">List Of Donations Received</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/donations-received/new" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Donations Received</p>
+                      <p><span jhiTranslate="dashboard.addDonationsReceived">Add Donations Received</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Statistic</p>
+                      <p><span jhiTranslate="dashboard.statistic">Statistic</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">DONATIONS Items</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.donationsItems">DONATIONS Items</span></li>
               <li class="nav-item">
                 <a class="nav-link">
                   <i class="nav-icon fas fa-circle"></i>
                   <p>
-                    Items
+                    <span jhiTranslate="dashboard.items">Items</span>
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/item" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List of Items</p>
+                      <p><span jhiTranslate="dashboard.listOfItems">List of Items</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/item/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Item</p>
+                      <p><span jhiTranslate="dashboard.addItem">Add Item</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>Status Item</p>
+                      <p><span jhiTranslate="dashboard.statusOfItem">Status Item</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-header">REFERENCE TABLE</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.referenceTable">REFERENCE TABLE</span></li>
+
+              <li class="nav-item">
+                <a href="establishment-type" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.establishmentsTypes">Establishments Types</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/city" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.Citys">Citys</span></p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="pages/widgets.html" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                  <p>Establishments Types</p>
+                  <p><span jhiTranslate="dashboard.healthCategories">Health Categories</span></p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
+                <a href="/nature" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
-                  <p>Citys</p>
+                  <p><span jhiTranslate="dashboard.natureOfDonOrItem">Nature</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/school-level" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.schoolLevels">School Level</span></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/educational-institution" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p><span jhiTranslate="dashboard.educationInstitutions">Educational Institutions</span></p>
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Health Categories</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Nature</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>School Level</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>Educational Institutions</p>
-                </a>
-              </li>
-
-              <li class="nav-header">CONTRIBUTORS</li>
+              <li class="nav-header"><span jhiTranslate="dashboard.contributors">CONTRIBUTORS</span></li>
               <li class="nav-item">
                 <a href="#" class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">groups</span>
                   <p>
-                    Authorizing Officers
+                    <span jhiTranslate="dashboard.authorizingOfficers">Authorizing Officers</span>
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
+                    <a routerLink="/authorizing-officer" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Authorizing Officers</p>
+                      <p><span jhiTranslate="dashboard.listOfAuthorizingOfficers">List Of Authorizing Officers</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                    <a href="/authorizing-officer/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Authorizing Officer</p>
+                      <p><span jhiTranslate="dashboard.addAuthorizingOfficer">Add Authorizing Officer</span></p>
                     </a>
                   </li>
                 </ul>
@@ -571,49 +571,27 @@
                 <a href="#" class="nav-link" style="display: flex">
                   <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
                   <p>
-                    Tutors
+                    <span jhiTranslate="dashboard.tutors">Tutors</span>
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
+                    <a href="/tutor" class="nav-link">
                       <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Tutors</p>
+                      <p><span jhiTranslate="dashboard.listOfTutors">List Of Tutors</span></p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                    <a href="/tutor/add" class="nav-link">
                       <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Tutor</p>
+                      <p><span jhiTranslate="dashboard.addTutor">Add Tutor</span></p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link" style="display: flex">
-                  <span class="material-icons-sharp" style="margin-right: 0.5rem">visibility</span>
-                  <p>
-                    Tutors
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
-                      <i class="nav-icon fas fa-file"></i>
-                      <p>List Of Tutors</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                      <i class="nav-icon far fa-plus-square"></i>
-                      <p>Add Tutor</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              <li class="nav-item"></li>
             </ul>
           </nav>
         </div>
@@ -624,14 +602,22 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1>Establishment Profile</h1>
+                <h1><span jhiTranslate="awtarApp.establishment.establishmentInterface">Establishment Interface</span></h1>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                  <li class="breadcrumb-item"><a href="#">Establishment</a></li>
-                  <li class="breadcrumb-item active">Establishment Profile</li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.home">Home</span></a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="dashboard.dashboard">Dashboard</span></a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><span jhiTranslate="awtarApp.establishment.establishment">Establishment</span></a>
+                  </li>
+                  <li class="breadcrumb-item active">
+                    <span jhiTranslate="awtarApp.establishment.establishmentInterface">Establishment Interface</span>
+                  </li>
                 </ol>
               </div>
             </div>
@@ -675,7 +661,7 @@
 
                 <div class="card social-timeline-card" *ngIf="establishment">
                   <div class="card-body">
-                    <h5 class="card-title">Contributors</h5>
+                    <h5 class="card-title"><span jhiTranslate="awtarApp.family.contributors">Contributors</span></h5>
                     <p><span class="material-icons-sharp" style="margin-left: 0.5rem">groups</span></p>
                     <ul class="friend-list">
                       <div>
@@ -725,15 +711,19 @@
                               <i class="fa fa-ellipsis-h"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop11">
-                              <div class="h6 dropdown-header">Settings</div>
-                              <a class="dropdown-item" href="#">View</a>
+                              <div class="h6 dropdown-header"><span jhiTranslate="awtarApp.family.settings">Settings</span></div>
+                              <a class="dropdown-item" href="#"
+                                ><span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span></a
+                              >
                               <a
                                 class="dropdown-item"
                                 [routerLink]="['/beneficiary', establishment.id, 'contributor', 'authorizing-officer']"
                               >
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                               </a>
-                              <a class="dropdown-item" (click)="removeAuthorizingOfficer(benef)">Delete</a>
+                              <a class="dropdown-item" (click)="removeAuthorizingOfficer(benef)"
+                                ><span jhiTranslate="entity.action.delete"> Delete </span></a
+                              >
                             </div>
                           </div>
                         </div>
@@ -785,12 +775,14 @@
                               <i class="fa fa-ellipsis-h"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop11">
-                              <div class="h6 dropdown-header">Settings</div>
-                              <a class="dropdown-item" href="#">View</a>
+                              <div class="h6 dropdown-header"><span jhiTranslate="awtarApp.family.settings">Settings</span></div>
+                              <a class="dropdown-item" href="#"> <span jhiTranslate="entity.action.view"> View </span></a>
                               <a class="dropdown-item" [routerLink]="['/beneficiary', establishment.id, 'contributor', 'tutor']">
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                               </a>
-                              <a class="dropdown-item" (click)="removeAuthorizingOfficer(benef)">Delete</a>
+                              <a class="dropdown-item" (click)="removeAuthorizingOfficer(benef)"
+                                ><span jhiTranslate="entity.action.delete">Delete</span></a
+                              >
                             </div>
                           </div>
                         </div>
@@ -804,9 +796,21 @@
                 <div class="card">
                   <div class="card-header p-2">
                     <ul class="nav nav-pills">
-                      <li class="nav-item"><a class="nav-link active" href="#about" data-toggle="tab">About</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#dons" data-toggle="tab">Donations</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                      <li class="nav-item">
+                        <a class="nav-link active" href="#about" data-toggle="tab"
+                          ><span jhiTranslate="awtarApp.family.about">About</span></a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#dons" data-toggle="tab"
+                          ><span jhiTranslate="awtarApp.family.donations">>Donations</span></a
+                        >
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#settings" data-toggle="tab"
+                          ><span jhiTranslate="awtarApp.family.settings">Settings</span></a
+                        >
+                      </li>
                     </ul>
                   </div>
                   <div class="card-body">
@@ -906,14 +910,14 @@
                                     <div class="col-sm-4 text-center">
                                       <div class="position-relative">
                                         <img src="../../../../content/images/Donations-family.jpg" alt="Photo 2" class="img-fluid" />
-                                        <h6 style="margin-top: 0.5rem">Donations Issued</h6>
-                                        <h6>{{ df }} Programed donations</h6>
+                                        <h6 style="margin-top: 0.5rem">Dons de l'établissement</h6>
+                                        <h6>{{ donationList!.length }} Dons en totale</h6>
 
-                                        <h6>{{ df }} validated / {{ donationList!.length }} not validated</h6>
+                                        <h6>{{ df }} validated / {{ donationList!.length - df }} not validated</h6>
                                       </div>
                                     </div>
                                     <div class="col-sm-4 text-center">
-                                      <div class="position-relative" *ngIf="benef">
+                                      <div class="position-relative">
                                         <img
                                           src="../../../../content/images/reference.jpg"
                                           alt="Photo 3"
@@ -942,12 +946,13 @@
                                     <div class="card">
                                       <div style="height: 3rem; margin-top: 1rem; margin-left: 1rem">
                                         <h5 class="m-0" style="color: rgb(219, 28, 158)">
-                                          In total there are {{ donationList ? donationList.length : 0 }} Donations
+                                          Il y'a {{ donationList ? donationList.length : 0 }}
+                                          <span jhiTranslate="awtarApp.family.donations">Donations</span> en totale
                                         </h5>
                                       </div>
 
                                       <div class="card-header">
-                                        <h3 class="card-title">Donation Settings</h3>
+                                        <h3 class="card-title"><span jhiTranslate="awtarApp.family.settings">Donation Settings</span></h3>
                                         <div class="text-right">
                                           <div class="dropdown">
                                             <button
@@ -961,10 +966,18 @@
                                               <i class="fa fa-ellipsis-h"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop11">
-                                              <div class="h6 dropdown-header">Settings</div>
-                                              <a class="dropdown-item" href="#">Add Donation</a>
-                                              <a class="dropdown-item" href="#">Delete</a>
-                                              <a class="dropdown-item" href="#">Report</a>
+                                              <div class="h6 dropdown-header">
+                                                <span jhiTranslate="awtarApp.family.settings">Settings</span>
+                                              </div>
+                                              <a class="dropdown-item" href="#"
+                                                ><span jhiTranslate="awtarApp.family.addDonation">Add Donation</span></a
+                                              >
+                                              <a class="dropdown-item" href="#"
+                                                ><span jhiTranslate="awtarApp.family.archive">Delete</span></a
+                                              >
+                                              <a class="dropdown-item" href="#"
+                                                ><span jhiTranslate="awtarApp.family.generateReport">Report</span></a
+                                              >
                                             </div>
                                           </div>
                                         </div>
@@ -979,7 +992,7 @@
                                           [rowHover]="true"
                                           [rows]="5"
                                           [showCurrentPageReport]="true"
-                                          [rowsPerPageOptions]="[10, 25, 50]"
+                                          [rowsPerPageOptions]="[5, 10, 20]"
                                           currentPageReportTemplate="{first} ---> {last} / {totalRecords}"
                                           [paginator]="true"
                                           styleClass="p-datatable-sm"
@@ -1103,7 +1116,9 @@
                                           </ng-template>
                                           <ng-template pTemplate="emptymessage">
                                             <tr>
-                                              <td colspan="8">No Donations found.</td>
+                                              <td colspan="8">
+                                                <span jhiTranslate="awtarApp.family.noDonationsFound">No Donations found.</span>
+                                              </td>
                                             </tr>
                                           </ng-template>
                                         </p-table>

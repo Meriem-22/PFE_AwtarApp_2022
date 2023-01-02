@@ -128,4 +128,12 @@ public interface BeneficiaryService {
      * @return the persisted entity.
      */
     BeneficiaryDTO removeTutor(BeneficiaryDTO beneficiaryDTO);
+
+    /**
+     *
+     *
+     *
+     * @return the persisted entity.
+     */
+    List<BeneficiaryDTO> TotalBeneficiaries();
 }

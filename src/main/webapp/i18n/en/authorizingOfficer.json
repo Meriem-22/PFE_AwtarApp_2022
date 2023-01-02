@@ -26,7 +26,24 @@
       "managerCin": "Manager Cin",
       "donations": "Donations",
       "beneficiary": "Beneficiary",
-      "authorizingOfficerProfile": "Authorizing Officer Profile"
+      "authorizingOfficerProfile": "Authorizing Officer Profile",
+      "currentAuthorizingOfficer": "Current Authorizing Officer",
+      "thereAre": "There are",
+      "otherAuthorizingOfficers": "Other Authorizing Officers",
+      "contributor": "Contributor",
+      "editAuthorizingOfficer": "Edit Authorizing Officer",
+      "profileSettings": "Profile Settings",
+      "listOfFamilies": "List Of Families",
+      "listOfChildren": "List Of Children",
+      "listOfEstablishments": "List Of Establishments",
+      "profileInformation": "Profile Informations",
+      "settings1": "Settings",
+      "info": "AUTHORIZING OFFICER PROFILE INFORMATION",
+      "settings2": "AUTHORIZING OFFICER SETTINGS",
+      "report": "Report",
+      "report2": "AUTHORIZING OFFICER REPORT",
+      "generateReport": "Generate Report",
+      "othersMembers": "OTHERS AUTHORIZING OFFICERS"
     }
   }
 }

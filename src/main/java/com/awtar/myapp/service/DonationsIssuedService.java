@@ -72,4 +72,43 @@ public interface DonationsIssuedService {
      * @return the persisted entity.
      */
     List<DonationsIssuedDTO> getLastValidatedDonations();
+
+    /**
+     *
+     *
+     *
+     * @return the persisted entity.
+     */
+    List<DonationsIssuedDTO> Upcomingscheduleddonations();
+    /**
+     *
+     *
+     *
+     * @return the persisted entity.
+     */
+    List<DonationsIssuedDTO> UpcomingDonationsValidated();
+
+    /**
+     *
+     *
+     *
+     * @return the persisted entity.
+     */
+    List<DonationsIssuedDTO> IssuedDonationsOfCurrentYearByMonth();
+
+    /**
+     *
+     *
+     *
+     * @return the persisted entity.
+     */
+    List<DonationsIssuedDTO> CanceledDonationsOfCurrentYearByMonth();
+
+    /**
+     *
+     *
+     *
+     * @return the persisted entity.
+     */
+    List<DonationsIssuedDTO> GetAll();
 }

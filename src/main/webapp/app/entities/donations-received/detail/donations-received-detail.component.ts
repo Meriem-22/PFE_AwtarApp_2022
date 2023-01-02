@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IDonationsReceived } from '../donations-received.model';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-donations-received-detail',
@@ -10,12 +12,17 @@ import { DataUtils } from 'app/core/util/data-util.service';
 })
 export class DonationsReceivedDetailComponent implements OnInit {
   donationsReceived: IDonationsReceived | null = null;
+  account: Account | null = null;
 
-  constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute) {}
+  constructor(protected dataUtils: DataUtils, private accountService: AccountService, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ donationsReceived }) => {
       this.donationsReceived = donationsReceived;
+    });
+
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
     });
   }
 

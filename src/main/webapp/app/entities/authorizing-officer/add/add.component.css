@@ -54,13 +54,8 @@ body {
   box-shadow: none !important;
 }
 
-input {
-  border-width: 0.2rem;
-  border-color: rgb(226, 223, 223);
-  height: 2.5rem;
-}
+input,
 select {
-  border-width: 0.2rem;
-  border-color: rgb(226, 223, 223);
-  height: 2.5rem;
+  border-left-width: 0.08rem;
+  border-left-color: #d4d1d1;
 }

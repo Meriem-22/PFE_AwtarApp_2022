@@ -78,4 +78,12 @@ public interface FamilyService {
      * @return the {@link List} of entities.
      */
     List<FamilyDTO> findFamilys();
+
+    /**
+     * Get the "id" city.
+     *
+     *@param id the id of the entity.
+     * @return the result.
+     */
+    FamilyDTO getFamiliesNumberByCity(Long id);
 }

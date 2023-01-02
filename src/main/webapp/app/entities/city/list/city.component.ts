@@ -9,6 +9,8 @@ import { ICity } from '../city.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { CityService } from '../service/city.service';
 import { CityDeleteDialogComponent } from '../delete/city-delete-dialog.component';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-city',
@@ -23,11 +25,13 @@ export class CityComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  account: Account | null = null;
 
   constructor(
     protected cityService: CityService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
+    private accountService: AccountService,
     protected modalService: NgbModal
   ) {}
 
@@ -54,6 +58,10 @@ export class CityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.handleNavigation();
   }
 

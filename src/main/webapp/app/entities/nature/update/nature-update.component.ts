@@ -8,6 +8,8 @@ import { finalize } from 'rxjs/operators';
 import { INature, Nature } from '../nature.model';
 import { NatureService } from '../service/nature.service';
 import { Beneficiaries } from 'app/entities/enumerations/beneficiaries.model';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-nature-update',
@@ -16,6 +18,7 @@ import { Beneficiaries } from 'app/entities/enumerations/beneficiaries.model';
 export class NatureUpdateComponent implements OnInit {
   isSaving = false;
   beneficiariesValues = Object.keys(Beneficiaries);
+  account: Account | null = null;
 
   editForm = this.fb.group({
     id: [],
@@ -25,9 +28,18 @@ export class NatureUpdateComponent implements OnInit {
     archivated: [],
   });
 
-  constructor(protected natureService: NatureService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected natureService: NatureService,
+    private accountService: AccountService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.activatedRoute.data.subscribe(({ nature }) => {
       this.updateForm(nature);
     });

@@ -12,6 +12,8 @@ import { EventManager, EventWithContent } from 'app/core/util/event-manager.serv
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { IAuthorizingOfficer } from 'app/entities/authorizing-officer/authorizing-officer.model';
 import { AuthorizingOfficerService } from 'app/entities/authorizing-officer/service/authorizing-officer.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-donations-received-update',
@@ -21,6 +23,7 @@ export class DonationsReceivedUpdateComponent implements OnInit {
   isSaving = false;
 
   authorizingOfficersSharedCollection: IAuthorizingOfficer[] = [];
+  account: Account | null = null;
 
   editForm = this.fb.group({
     id: [],
@@ -37,6 +40,7 @@ export class DonationsReceivedUpdateComponent implements OnInit {
     protected authorizingOfficerService: AuthorizingOfficerService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService,
     protected fb: FormBuilder
   ) {}
 
@@ -45,6 +49,10 @@ export class DonationsReceivedUpdateComponent implements OnInit {
       this.updateForm(donationsReceived);
 
       this.loadRelationshipsOptions();
+    });
+
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
     });
   }
 

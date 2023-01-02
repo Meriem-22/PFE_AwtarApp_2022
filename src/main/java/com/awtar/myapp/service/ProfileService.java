@@ -125,4 +125,28 @@ public interface ProfileService {
      * @return the entity.
      */
     List<ProfileDTO> findOthersTutors(Long id);
+
+    /**
+     * Get the "id" profile.
+     *
+     *
+     * @return the entity.
+     */
+    List<ProfileDTO> findallchildren();
+
+    /**
+     * Get the "id" profile.
+     *
+     *
+     * @return the entity.
+     */
+    List<ProfileDTO> findAllAuthorizingOfficers();
+
+    /**
+     * Get the "id" profile.
+     *
+     *
+     * @return the entity.
+     */
+    List<ProfileDTO> findAllTutors();
 }

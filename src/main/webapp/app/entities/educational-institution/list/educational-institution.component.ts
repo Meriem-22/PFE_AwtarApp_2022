@@ -9,6 +9,8 @@ import { IEducationalInstitution } from '../educational-institution.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { EducationalInstitutionService } from '../service/educational-institution.service';
 import { EducationalInstitutionDeleteDialogComponent } from '../delete/educational-institution-delete-dialog.component';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-educational-institution',
@@ -23,11 +25,13 @@ export class EducationalInstitutionComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  account: Account | null = null;
 
   constructor(
     protected educationalInstitutionService: EducationalInstitutionService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
+    private accountService: AccountService,
     protected modalService: NgbModal
   ) {}
 
@@ -54,6 +58,9 @@ export class EducationalInstitutionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
     this.handleNavigation();
   }
 

@@ -10,6 +10,8 @@ import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants
 import { ItemService } from '../service/item.service';
 import { ItemDeleteDialogComponent } from '../delete/item-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-item',
@@ -24,12 +26,14 @@ export class ItemComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  account: Account | null = null;
 
   constructor(
     protected itemService: ItemService,
     protected activatedRoute: ActivatedRoute,
     protected dataUtils: DataUtils,
     protected router: Router,
+    private accountService: AccountService,
     protected modalService: NgbModal
   ) {}
 
@@ -56,6 +60,10 @@ export class ItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.handleNavigation();
   }
 

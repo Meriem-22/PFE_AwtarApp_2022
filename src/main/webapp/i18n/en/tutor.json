@@ -24,7 +24,24 @@
       "manager": "Manager",
       "managerCin": "Manager Cin",
       "beneficiary": "Beneficiary",
-      "tutorProfile": "Tutor Profile"
+      "tutorProfile": "Tutor Profile",
+      "currentTutor": "Current Tutor",
+      "thereAre": "There are",
+      "otherTutors": "Other Tutors",
+      "contributor": "Contributor",
+      "editTutor": "Edit Tutor",
+      "profileSettings": "Profile Settings",
+      "listOfFamilies": "List Of Families",
+      "listOfChildren": "List Of Children",
+      "listOfEstablishments": "List Of Establishments",
+      "profileInformation": "Profile Informations",
+      "settings1": "Settings",
+      "info": "TUTOR PROFILE INFORMATION",
+      "settings2": "TUTOR SETTINGS",
+      "report": "Report",
+      "report2": "TUTOR REPORT",
+      "generateReport": "Generate Report",
+      "othersMembers": "OTHERS TUTORS"
     }
   }
 }

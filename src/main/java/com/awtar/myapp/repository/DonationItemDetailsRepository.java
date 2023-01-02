@@ -43,7 +43,22 @@ public interface DonationItemDetailsRepository extends JpaRepository<DonationIte
     Optional<DonationItemDetails> findOneWithToOneRelationships(@Param("id") Long id);
 
     @Query(
-        "select donationItemDetails from DonationItemDetails donationItemDetails left join fetch donationItemDetails.item where donationItemDetails.donationDetails.donationsIssued  = :donationsIssued"
+        "select distinct new com.awtar.myapp.service.dto.DonationItemDetailsDTO (did.quantity, i.name, i.urlPhoto, i.urlPhotoContentType, iv.price, iv.availableStockQuantity, dd.id AS detailsId, dd.description)  from DonationItemDetails did, Item i, ItemValue iv, DonationDetails dd  where did.donationDetails.donationsIssued  = :donationsIssued and did.donationDetails.id = dd.id and i.id = did.item.id and i.id= iv.item.id and (did.archivated = null or did.archivated = false)"
     )
     List<DonationItemDetailsDTO> findAllDetailsItemDonations(@Param("donationsIssued") DonationsIssued donationsIssued);
+
+    @Query(
+        "select  new com.awtar.myapp.service.dto.DonationItemDetailsDTO (did.quantity, i.name, i.urlPhoto, i.urlPhotoContentType, iv.price, iv.availableStockQuantity, dd.beneficiary.id AS bId, dd.description)  from DonationItemDetails did, Item i, ItemValue iv, DonationDetails dd  where did.donationDetails.donationsIssued  = :donationsIssued and did.donationDetails.id = dd.id and dd.beneficiary.beneficiaryType = 'FAMILY' and i.id = did.item.id and i.id= iv.item.id and (did.archivated = null or did.archivated = false)"
+    )
+    List<DonationItemDetailsDTO> findAllFamiliesDonationItemsDetails(@Param("donationsIssued") DonationsIssued donationsIssued);
+
+    @Query(
+        "select  new com.awtar.myapp.service.dto.DonationItemDetailsDTO (did.quantity, i.name, i.urlPhoto, i.urlPhotoContentType, iv.price, iv.availableStockQuantity, dd.beneficiary.id AS bId, dd.description)  from DonationItemDetails did, Item i, ItemValue iv, DonationDetails dd  where did.donationDetails.donationsIssued  = :donationsIssued and did.donationDetails.id = dd.id and dd.beneficiary.beneficiaryType = 'CHILD' and i.id = did.item.id and i.id= iv.item.id and (did.archivated = null or did.archivated = false)"
+    )
+    List<DonationItemDetailsDTO> findAllChildrenDonationItemsDetails(@Param("donationsIssued") DonationsIssued donationsIssued);
+
+    @Query(
+        "select  new com.awtar.myapp.service.dto.DonationItemDetailsDTO (did.quantity, i.name, i.urlPhoto, i.urlPhotoContentType, iv.price, iv.availableStockQuantity, dd.beneficiary.id AS bId, dd.description)  from DonationItemDetails did, Item i, ItemValue iv, DonationDetails dd  where did.donationDetails.donationsIssued  = :donationsIssued and did.donationDetails.id = dd.id and dd.beneficiary.beneficiaryType = 'ESTABLISHMENT' and i.id = did.item.id and i.id= iv.item.id and (did.archivated = null or did.archivated = false)"
+    )
+    List<DonationItemDetailsDTO> findAllEstablishmentsDonationItemsDetails(@Param("donationsIssued") DonationsIssued donationsIssued);
 }

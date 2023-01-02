@@ -9,6 +9,8 @@ import { ISchoolLevel } from '../school-level.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { SchoolLevelService } from '../service/school-level.service';
 import { SchoolLevelDeleteDialogComponent } from '../delete/school-level-delete-dialog.component';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-school-level',
@@ -23,11 +25,13 @@ export class SchoolLevelComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  account: Account | null = null;
 
   constructor(
     protected schoolLevelService: SchoolLevelService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
+    private accountService: AccountService,
     protected modalService: NgbModal
   ) {}
 
@@ -54,6 +58,9 @@ export class SchoolLevelComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
     this.handleNavigation();
   }
 

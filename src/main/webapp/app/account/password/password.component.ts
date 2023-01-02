@@ -14,6 +14,7 @@ export class PasswordComponent implements OnInit {
   doNotMatch = false;
   error = false;
   success = false;
+  account: Account | null = null;
   account$?: Observable<Account | null>;
   passwordForm = this.fb.group({
     currentPassword: ['', [Validators.required]],
@@ -21,10 +22,18 @@ export class PasswordComponent implements OnInit {
     confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
   });
 
-  constructor(private passwordService: PasswordService, private accountService: AccountService, private fb: FormBuilder) {}
+  constructor(
+    private passwordService: PasswordService,
+
+    private accountService: AccountService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.account$ = this.accountService.identity();
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
   }
 
   changePassword(): void {

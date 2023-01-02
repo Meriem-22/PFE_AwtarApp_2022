@@ -98,6 +98,9 @@ export class AddComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
     this.activatedRoute.data.subscribe(({ profile }) => {
       this.updateForm(profile);
 

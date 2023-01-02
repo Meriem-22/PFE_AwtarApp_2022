@@ -73,6 +73,10 @@ export class BeneficiaryService {
     return this.http.get<any[]>(`${this.UrlE}/${id}`, { observe: 'response' });
   }
 
+  getAllBeneficiaires(): Observable<EntityArrayResponseType> {
+    return this.http.get<IBeneficiary[]>(this.resourceUrl + '/all', { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IBeneficiary[]>(this.resourceUrl, { params: options, observe: 'response' });

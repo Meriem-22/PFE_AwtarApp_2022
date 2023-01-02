@@ -100,6 +100,10 @@ export class AddComponent {
   }
 
   ngOnInit(): void {
+    this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
+
     this.FamilyDetails = this.formBuilder.group({
       familyName: [null, [Validators.required]],
       dwelling: [null, [Validators.required]],
